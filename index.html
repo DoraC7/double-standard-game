@@ -1,0 +1,260 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>雙標大挑戰・換你承受</title><style>
+:root{font-family:system-ui,-apple-system,"Noto Sans TC",sans-serif;color:#fdf8ec;background:#151729}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 15% 0%,#56318a 0,transparent 35%),radial-gradient(circle at 90% 90%,#176879 0,transparent 40%),#151729;min-height:100dvh}button{font:inherit;cursor:pointer}button:focus-visible{outline:3px solid #ffe684;outline-offset:3px}main{width:min(100%,760px);margin:auto;padding:17px 15px 35px;min-height:100dvh}header{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:14px;font-weight:900}.logo{color:#ffe684}.pill{border:1px solid #ffffff50;background:#ffffff19;border-radius:100px;padding:7px 11px}.screen{display:none}.screen.active{display:block}.center{text-align:center}.hero{font-size:clamp(45px,11vw,76px);line-height:1.05;margin:28px 0 15px;text-shadow:5px 5px #e4569a}.lead{color:#e6dced;font-size:17px;line-height:1.6;max-width:560px;margin:14px auto 23px}.panel{background:#ffffff16;border:1px solid #ffffff36;border-radius:24px;padding:23px;box-shadow:0 18px 50px #0004}.intro{max-width:570px;margin:auto}.btn{border:0;border-radius:16px;padding:15px 16px;min-height:58px;font-weight:900;transition:transform .12s,filter .12s}.btn:hover{transform:translateY(-2px);filter:brightness(1.05)}.btn:active{transform:scale(.97)}.gold{background:#ffe27b;color:#2e2140;box-shadow:0 5px #ac7d32}.blue{background:#85e8e9;color:#15323d;box-shadow:0 5px #478a91}.pink{background:#ff89b5;color:#3d2035;box-shadow:0 5px #a6517c}.subtle{background:#ffffff24;color:#fff;border:1px solid #ffffff60}.wide{width:100%}.rules{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:20px 0}.rules span{background:#ffffff19;border-radius:12px;padding:10px 6px;font-size:13px;font-weight:800}.small{color:#c7bbd1;font-size:12px;line-height:1.5}.hud{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:20px 0 13px}.hud div{background:#ffffff16;border-radius:14px;padding:10px 5px;text-align:center}.hud small{display:block;color:#cfc4dc;font-size:12px}.hud strong{font-size:22px}.meter{height:8px;border-radius:20px;background:#ffffff36;overflow:hidden;margin-bottom:18px}.meter div{background:linear-gradient(90deg,#87e9e8,#ffe27b);height:100%;transition:width .25s}.phase{font-size:13px;letter-spacing:.12em;font-weight:1000;color:#ffe27b}.case-title{font-size:clamp(26px,6vw,38px);margin:13px 0 6px}.story{font-size:19px;font-weight:800;line-height:1.48}.aside{font-size:15px;color:#dfd2e9;line-height:1.5}.quote{background:#15172977;border-left:4px solid #ff89b5;border-radius:8px;padding:13px 15px;text-align:left;margin:19px 0;font-weight:750;line-height:1.45}.choice-list{display:grid;gap:12px;margin-top:20px}.choice-list button{text-align:left;display:flex;align-items:center;gap:13px}.choice-list b{font-size:23px;flex:0 0 35px}.choice-list span{font-size:14px;line-height:1.45}.choice-list strong{display:block;font-size:17px}.notice{background:#ffe27b;color:#31233d;border-radius:13px;padding:13px 15px;margin:16px 0;font-weight:850;line-height:1.5}.feedback{margin-top:15px;min-height:28px;font-weight:800;line-height:1.5}.event{font-size:57px;margin:20px}.result-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:25px 0}.result-grid div{padding:12px 4px;border-radius:13px;background:#ffffff18}.result-grid b{display:block;font-size:26px;color:#ffe27b}.result-grid small{font-size:12px}.review{text-align:left;font-size:14px;line-height:1.5;max-height:240px;overflow:auto}.review p{border-bottom:1px solid #ffffff30;padding-bottom:8px}.rank{font-size:30px;color:#ffe27b;margin:7px}.actions{display:grid;gap:11px;margin:20px 0}.foot{font-size:12px;color:#b8acc7;text-align:center;margin:16px 0}@media(max-width:470px){.panel{padding:18px}.story{font-size:17px}.hud strong{font-size:19px}.choice-list button{padding:12px}.choice-list strong{font-size:16px}}
+</style><style>.sound{font-size:12px;color:#fff;background:#ffffff24;border:1px solid #ffffff55;border-radius:100px;padding:7px 10px}.radar{text-align:center;color:#8de9eb;font-weight:900;font-size:14px;margin:-6px 0 15px}.screen.active>.panel{animation:arrive .28s ease}@keyframes arrive{from{opacity:.5;transform:translateY(9px)}to{opacity:1;transform:none}}.confetti{position:fixed;top:-20px;pointer-events:none;width:9px;height:15px;z-index:10;animation:fall 2.2s linear forwards}@keyframes fall{to{transform:translateY(105vh) rotate(540deg);opacity:0}}@media(prefers-reduced-motion:reduce){.screen.active>.panel,.confetti{animation:none}.confetti{display:none}}</style><style>
+.flash{position:fixed;inset:0;z-index:8;pointer-events:none;display:grid;place-items:center;background:#131426b8;opacity:0;transition:opacity .18s}.flash.show{opacity:1}.flash span{font-size:clamp(28px,8vw,58px);font-weight:1000;text-align:center;text-shadow:0 4px 20px #000;transform:scale(.85);transition:transform .22s}.flash.show span{transform:scale(1)}
+.spark{position:fixed;pointer-events:none;z-index:9;width:9px;height:9px;border-radius:50%;animation:spark .55s ease-out forwards}@keyframes spark{to{transform:translate(var(--dx),var(--dy)) scale(.2);opacity:0}}
+.bump{animation:bump .4s ease-out}@keyframes bump{50%{transform:scale(1.23);color:#ffe27b}}
+.scan{animation:scan .55s ease-out}@keyframes scan{50%{text-shadow:0 0 20px #85e8e9;color:#fff}}
+.controls{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}.statbar{display:block;height:5px;background:#ffffff30;border-radius:9px;overflow:hidden;margin:7px 5px 0}.statbar i{display:block;height:100%;width:80%;background:#85e8e9;transition:width .35s ease}.hud div:nth-child(2) .statbar i{background:#ffe27b}.hud div:nth-child(3) .statbar i{background:#ff89b5}.statbar.pulse{animation:bump .4s ease-out}.timer{display:flex;align-items:center;gap:9px;margin:0 0 12px;font-weight:900;color:#8de9eb}.timer[hidden]{display:none}.timer-track{height:8px;border-radius:20px;background:#ffffff30;flex:1;overflow:hidden}.timer-fill{height:100%;width:100%;background:#8de9eb;transition:width .1s linear}.timer.urgent{color:#ffad65}.timer.urgent .timer-fill{background:#ffad65}.stamp{position:absolute;right:23px;top:20px;border:4px double #ff89b5;color:#ffb7d0;padding:5px 12px;border-radius:8px;font-size:22px;font-weight:1000;transform:rotate(13deg);animation:stamp .4s ease-out}.stamp[hidden]{display:none}.case-panel{position:relative}.case-panel.flip{animation:flip .55s ease}.radar.hot{color:#ff9eae;text-shadow:0 0 15px #ff6e9a}.sound[aria-pressed="true"]{background:#85e8e9;color:#15323d}@keyframes flip{0%{transform:perspective(700px) rotateY(-12deg);opacity:.4}100%{transform:none;opacity:1}}@keyframes stamp{0%{transform:rotate(13deg) scale(1.8);opacity:0}100%{transform:rotate(13deg) scale(1);opacity:1}}body.no-motion .screen.active>.panel,body.no-motion .confetti,body.no-motion .flash,body.no-motion .flash span,body.no-motion .spark,body.no-motion .bump,body.no-motion .scan,body.no-motion .case-panel.flip,body.no-motion .stamp,body.no-motion .statbar.pulse{animation:none!important;transition:none!important}body.no-motion .confetti,body.no-motion .spark{display:none}
+@media(prefers-reduced-motion:reduce){.flash,.flash span,.spark,.bump,.scan,.case-panel.flip,.stamp{animation:none!important;transition:none!important}.spark{display:none}}
+</style><style>
+.welcome{min-height:calc(100dvh - 110px);display:none;place-items:center;position:relative;isolation:isolate;overflow:hidden;padding:28px 0 48px}.welcome.active{display:grid}.welcome:before{content:"";position:absolute;inset:4% 0 0;border-radius:50%;background:radial-gradient(circle,#f1b65b21 0,transparent 49%);filter:blur(14px);z-index:-2}.welcome-inner{width:100%;text-align:center;position:relative}.orbit{position:relative;width:min(68vw,330px);aspect-ratio:1;margin:4px auto -85px;border:1px solid #ffe4a459;border-radius:50%;display:grid;place-items:center;box-shadow:0 0 0 22px #ffe4a408,0 0 0 55px #85e8e908,inset 0 0 60px #ffe4a425;animation:orbitIn 1s ease both,orbitGlow 5s ease-in-out infinite alternate}.orbit:before,.orbit:after{content:"";position:absolute;inset:10%;border:1px dashed #85e8e96b;border-radius:50%;transform:rotate(-28deg) scale(.8,1.15)}.orbit:after{transform:rotate(28deg) scale(1.12,.8);border-color:#ff89b57d}.sigil{font-size:clamp(90px,24vw,158px);line-height:1;filter:drop-shadow(0 12px 22px #0009);transform:translateY(-17px)}.welcome-copy{position:relative;background:linear-gradient(180deg,transparent,#151729cc 23%,#151729 95%);padding:14px 8px 16px}.eyebrow{color:#95e9e8;letter-spacing:.38em;font-size:12px;font-weight:950;margin:0 0 12px}.welcome h1{font-size:clamp(45px,11vw,82px);line-height:1.1;margin:0;color:#fff7dd;text-shadow:0 4px 0 #a34b83,0 12px 35px #000}.welcome h1 em{font-style:normal;color:#ffe27b}.welcome .tagline{font-size:clamp(16px,4vw,20px);line-height:1.65;max-width:550px;margin:18px auto 22px;color:#ece0f3}.welcome-actions{display:grid;gap:12px;max-width:360px;margin:auto}.welcome-actions .btn:first-child{font-size:19px;box-shadow:0 7px #a96a2c,0 13px 32px #ffbd5150}.welcome .hint{font-size:12px;letter-spacing:.12em;color:#c9bdd6;margin-top:24px}.about-title{font-size:clamp(37px,9vw,62px);margin:42px 0 10px;color:#ffe27b;text-shadow:3px 4px #9b467d}.about-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:21px 0}.about-grid div{background:#ffffff19;border:1px solid #ffffff24;border-radius:15px;padding:13px 7px}.about-grid b{display:block;font-size:23px;margin-bottom:5px}.about-grid span{font-size:13px;font-weight:800}.about-actions{display:grid;gap:10px;margin-top:21px}.about-copy{text-align:left;line-height:1.75;color:#e9dff0}.about-copy p{margin:10px 0}@keyframes orbitIn{from{opacity:0;transform:scale(.72) rotate(-20deg)}to{opacity:1;transform:scale(1) rotate(0)}}@keyframes orbitGlow{from{box-shadow:0 0 0 22px #ffe4a408,0 0 0 55px #85e8e908,inset 0 0 45px #ffe4a41b}to{box-shadow:0 0 0 27px #ffe4a40d,0 0 0 64px #85e8e80d,inset 0 0 80px #ffe4a436}}@media(max-width:470px){.welcome{min-height:calc(100dvh - 85px)}.orbit{margin-bottom:-64px}.welcome-copy{padding-top:4px}.about-grid span{font-size:12px}}@media(prefers-reduced-motion:reduce){.orbit{animation:none}}body.no-motion .orbit{animation:none}
+</style><style>.split-court{background:#1517299c;border:1px solid #ffe27b70;border-radius:18px;padding:18px;margin-top:20px;text-align:center}.split-court h2{font-size:18px;margin:0 0 7px;color:#ffe27b}.split-court p{margin:6px 0 15px;line-height:1.5}.split-court input[type=range]{width:100%;accent-color:#ffe27b;cursor:pointer;min-height:38px}.split-percent{font-size:42px;font-weight:1000;color:#ffe27b;line-height:1.1}.split-labels{display:flex;justify-content:space-between;gap:10px;font-size:13px;color:#e2d7e9;font-weight:800;margin:3px 0 15px}.split-court .btn{margin-top:8px}@media(max-width:360px){header{display:block;text-align:center}.logo{display:block;margin-bottom:10px}.controls{justify-content:center}}</style><style>
+#game.active .case-panel.entering{animation:caseArrive .45s cubic-bezier(.2,.8,.2,1)}
+#game.active .case-panel.flip{animation:flip .55s ease}
+.choice-list>button,.choice-list>.split-court{animation:choiceRise .38s cubic-bezier(.2,.8,.2,1) both}
+.choice-list>button:nth-child(2){animation-delay:.08s}.choice-list>button:nth-child(3){animation-delay:.16s}
+.feedback.pop,.notice.pop{animation:feedbackPop .38s ease-out}
+#result.active .rank{animation:rankReveal .6s cubic-bezier(.2,.8,.2,1) both}
+#result.active .result-grid>div{animation:choiceRise .5s ease-out both}
+#result.active .result-grid>div:nth-child(2){animation-delay:.12s}#result.active .result-grid>div:nth-child(3){animation-delay:.24s}
+@keyframes caseArrive{from{opacity:.25;transform:translateY(18px) scale(.97)}to{opacity:1;transform:none}}
+@keyframes choiceRise{from{opacity:0;transform:translateY(14px) scale(.98)}to{opacity:1;transform:none}}
+@keyframes feedbackPop{0%{opacity:0;transform:scale(.96)}65%{transform:scale(1.025)}100%{opacity:1;transform:scale(1)}}
+@keyframes rankReveal{from{opacity:0;transform:translateY(14px) scale(.88)}to{opacity:1;transform:none}}
+body.no-motion .case-panel.entering,body.no-motion .choice-list>button,body.no-motion .choice-list>.split-court,body.no-motion .feedback.pop,body.no-motion .notice.pop,body.no-motion #result.active .rank,body.no-motion #result.active .result-grid>div{animation:none!important}
+@media(prefers-reduced-motion:reduce){.case-panel.entering,.choice-list>button,.choice-list>.split-court,.feedback.pop,.notice.pop,#result.active .rank,#result.active .result-grid>div{animation:none!important}}
+</style></head><body><div class="flash" id="flash" aria-hidden="true"><span id="flash-text"></span></div><main><header><span class="logo">⚖️ 雙標大挑戰</span><div class="controls"><button class="sound" id="timer-toggle" aria-pressed="true">⏱️ 倒數開</button><button class="sound" id="motion-toggle" aria-pressed="true">✨ 動畫開</button><button class="sound" id="sound" aria-pressed="true">🔊 音效開</button></div></header>
+<section id="welcome" class="screen welcome active"><div class="welcome-inner"><div class="orbit" aria-hidden="true"><span class="sigil">⚖️</span></div><div class="welcome-copy"><p class="eyebrow">THE VERDICT IS YOURS</p><h1>你訂的規則<br><em>換你承受</em></h1><p class="tagline">當判決落在自己身上，<br>你還會用同一把尺嗎？</p><div class="welcome-actions"><button class="btn gold wide" id="enter">開始審判 ⚡</button><button class="btn subtle wide" id="open-about">玩法與關於</button></div><p class="hint">15 個情境 · 判決與責任刻度 · 只有你的標準</p></div></div></section>
+<section id="intro" class="screen center"><h1 class="about-title">關於這場審判</h1><p class="lead">你先替別人做決定。隔幾案，情境換到你身上——同樣的選項或責任刻度，你會怎麼選？</p><div class="panel intro"><div class="about-grid"><div><b>⚖️</b><span>訂 15 條規則</span></div><div><b>🔄</b><span>隔幾案換位</span></div><div><b>🎲</b><span>判決、分擔與換位</span></div></div><div class="about-copy"><p>每局從 179 個情境抽 15 個，其中 4 個要用刻度分配責任；每案隔幾回合換位重演，共 30 回合。</p><p>每回合 20 秒，較長的題目 30 秒。也可以在上方關閉倒數，切換休閒模式；超時只算棄權，不會替你選答案。</p><p>沒有標準人格答案。「一致性」只是這局選擇的娛樂指標，不代表善惡。遊戲純前端執行，不收集資料。</p></div><div class="about-actions"><button class="btn gold wide" id="start">我準備好了，開始 →</button><button class="btn subtle wide" id="back-welcome">返回歡迎畫面</button></div></div></section>
+<section id="game" class="screen"><div class="meter"><div id="bar"></div></div><div class="timer" id="timer"><span id="seconds">20</span><div class="timer-track"><div class="timer-fill" id="timer-fill"></div></div></div><div class="radar" id="radar">📡 換位雷達：等待配對</div><div class="panel case-panel" id="case-panel"><div class="stamp" id="stamp" hidden>前後不同</div><div class="phase" id="phase"></div><h1 class="case-title" id="title"></h1><p class="story" id="story"></p><p class="aside" id="aside"></p><div class="quote" id="quote" hidden></div><div class="notice" id="notice" hidden></div><div class="choice-list" id="choices"></div><div class="feedback" id="feedback" role="status"></div></div><div class="foot" id="round"></div></section>
+
+<section id="result" class="screen center"><div class="hero">終局判決</div><div class="phase" id="result-source"></div><h2 class="rank" id="rank"></h2><p class="lead" id="ending"></p><div class="result-grid"><div><b id="fair">0/15</b><small>前後一致</small></div><div><b id="end-strict">0</b><small>對自己更嚴</small></div><div><b id="end-changed">0</b><small>其他轉向</small></div></div><p class="small" id="result-meta"></p><div class="panel" style="margin-bottom:15px;text-align:left"><div class="phase">本 局 觀 察 報 告</div><h3 id="result-hook"></h3><p id="result-blurb" class="aside"></p><div class="quote" id="result-quote"></div><p id="result-aside" class="small"></p></div><div class="panel"><div class="review" id="review"></div><div class="actions"><button class="btn gold wide" id="again">換一批案件 ↻</button><button class="btn subtle wide" id="share">分享這局的結果連結 ↗</button></div></div><p class="foot">分享連結包含本局選擇，持有連結的人可查看；資料不會上傳。<br>前後不同不必然是偏袒；對自己要求更高，也是一種選擇。</p></section>
+</main><script src="scenarios.js?v=7"></script><script src="choices.js?v=37"></script><script>
+
+const $=id=>document.getElementById(id);let chosen=[],laws=[],order=[],step=0,kept=0,resolved=0,selfDemanding=0,history=[],locked=false,resultRecord=null;
+const CASES=15;let soundOn=true,motionOn=true,timerOn=true,audioCtx=null,flashTimer,timerId=null,timerPaused=false,deadline=0,remaining=0,roundSeconds=20,lastTick=6;
+// Only cases with a clear greater personal burden are classified as self-demanding.
+const stricterAction=Object.fromEntries(['已讀不回','借走充電器','薯條失蹤案','玩笑開過頭','晚發會議紀錄','借書折角','臨時取消','代買咖啡','借錢不還','誤刪檔案','擅用折價券','借外套沾到咖啡','取消共同訂單','改掉原始資料','接送換班','夜間輪值','家務清單','共同開銷','照顧長輩','逾期交付'].map(title=>[title,1]));
+stricterAction['遲到五分鐘']=0;stricterAction['分組遲交']=0;
+stricterAction['有出息的紅包']=1;
+function unlockAudio(){if(!soundOn)return;try{audioCtx ||= new (window.AudioContext||window.webkitAudioContext)();if(audioCtx.state==='suspended')audioCtx.resume().catch(()=>{})}catch(e){soundOn=false;$('sound').textContent='🔇 音效關';$('sound').setAttribute('aria-pressed','false')}}
+function beep(freq=440){if(!soundOn)return;unlockAudio();if(!audioCtx)return;try{let osc=audioCtx.createOscillator(),gain=audioCtx.createGain();osc.type='sine';osc.frequency.value=freq;gain.gain.setValueAtTime(.035,audioCtx.currentTime);gain.gain.exponentialRampToValueAtTime(.001,audioCtx.currentTime+.11);osc.connect(gain).connect(audioCtx.destination);osc.start();osc.stop(audioCtx.currentTime+.12)}catch(e){audioCtx=null}}
+function cue(kind){if(!soundOn)return;let notes={gavel:[[340,0],[220,.08]],reveal:[[420,0],[620,.09],[840,.18]],keep:[[560,0],[760,.09]],exception:[[330,0],[260,.12]],event:[[520,0],[680,.1]],finish:[[440,0],[550,.1],[660,.2],[880,.3]]}[kind]||[];notes.forEach(([f,delay])=>delay?setTimeout(()=>beep(f),delay*1000):beep(f))}
+function flash(label){if(!motionOn||matchMedia('(prefers-reduced-motion: reduce)').matches)return;$('flash-text').textContent=label;$('flash').classList.add('show');clearTimeout(flashTimer);flashTimer=setTimeout(()=>$('flash').classList.remove('show'),620)}
+function sparks(element,color){if(!motionOn||matchMedia('(prefers-reduced-motion: reduce)').matches)return;let r=element.getBoundingClientRect();for(let i=0;i<10;i++){let bit=document.createElement('i');bit.className='spark';bit.style.left=(r.left+r.width/2)+'px';bit.style.top=(r.top+r.height/2)+'px';bit.style.background=color;let a=i*Math.PI/5;bit.style.setProperty('--dx',Math.cos(a)*55+'px');bit.style.setProperty('--dy',Math.sin(a)*55+'px');document.body.append(bit);setTimeout(()=>bit.remove(),650)}}
+function confetti(){if(!motionOn||matchMedia('(prefers-reduced-motion: reduce)').matches)return;let colors=['#ffe27b','#ff89b5','#85e8e9','#a98aff'];for(let i=0;i<25;i++){let bit=document.createElement('i');bit.className='confetti';bit.style.left=Math.random()*100+'vw';bit.style.background=colors[i%colors.length];bit.style.animationDelay=(Math.random()*.6)+'s';document.body.append(bit);setTimeout(()=>bit.remove(),3100)}}
+document.addEventListener('pointerdown',unlockAudio,{passive:true});document.addEventListener('keydown',unlockAudio);
+$('sound').onclick=()=>{soundOn=!soundOn;$('sound').textContent=soundOn?'🔊 音效開':'🔇 音效關';$('sound').setAttribute('aria-pressed',String(soundOn));if(soundOn){unlockAudio();beep(660)}};
+$('motion-toggle').onclick=()=>{motionOn=!motionOn;document.body.classList.toggle('no-motion',!motionOn);$('motion-toggle').textContent=motionOn?'✨ 動畫開':'✨ 動畫關';$('motion-toggle').setAttribute('aria-pressed',String(motionOn));if(!motionOn)$('flash').classList.remove('show')};
+$('timer-toggle').onclick=()=>{timerOn=!timerOn;$('timer-toggle').textContent=timerOn?'⏱️ 倒數開':'☕ 休閒模式';$('timer-toggle').setAttribute('aria-pressed',String(timerOn));$('timer').hidden=!timerOn;if(timerOn&&$('game').classList.contains('active')&&!locked)startTimer();else stopTimer()};
+function shuffle(a){a=[...a];for(let i=a.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function screen(id){document.querySelectorAll('.screen').forEach(el=>el.classList.toggle('active',el.id===id));window.scrollTo(0,0)}
+ $('enter').onclick=()=>{cue('gavel');flash('⚖️ 審判開始');start()};
+ $('open-about').onclick=()=>screen('intro');
+ $('back-welcome').onclick=()=>screen('welcome');
+function drawCases(){
+  return shuffle([0,1,2].flatMap(harm=>{
+    const pool=scenarios.filter(q=>q.harm===harm),picked=[];
+    const take=(eligible,count=1)=>{
+      picked.push(...shuffle(pool.filter(q=>eligible(q)&&!picked.includes(q))).slice(0,count));
+    };
+    if(harm>0)take(q=>q.split,2);
+    if(harm===0){take(q=>q.theme==='economic');take(q=>q.theme==='comparison');take(q=>q.theme==='children')}
+    if(harm===1){take(q=>q.theme==='hazard');take(q=>q.theme==='unemployment'||q.title==='家庭支柱轉職')}
+    if(harm===2){take(q=>q.theme==='eldest'||q.theme==='generation');take(q=>q.theme==='crossborder')}
+    if(harm>0&&Math.random()<.5)take(q=>q.taiwan&&!q.theme);
+    take(q=>!q.split,5-picked.length);
+    return picked;
+  }));
+}
+function start(){if(location.hash.startsWith('#r='))window.history.replaceState(null,'',location.pathname+location.search);resultRecord=null;chosen=drawCases();laws=Array(CASES).fill(null);order=[];for(let i=0;i<CASES;i++){order.push({kind:'law',slot:i});if(i>=4)order.push({kind:'reveal',slot:i-4})}for(let i=CASES-4;i<CASES;i++)order.push({kind:'reveal',slot:i});step=0;kept=0;resolved=0;selfDemanding=0;history=[];$('radar').classList.remove('hot');$('radar').textContent='📡 換位雷達：等待配對';screen('game');render()}
+function stopTimer(){clearInterval(timerId);timerId=null}
+function tickTimer(){remaining=Math.max(0,(deadline-performance.now())/1000);paintTimer();let whole=Math.ceil(remaining);if(whole<=5&&whole>0&&whole<lastTick){lastTick=whole;beep(330)}if(remaining<=0){stopTimer();timeoutRound()}}
+function startTimer(){stopTimer();if(!timerOn)return;let q=chosen[order[step].slot];roundSeconds=(q.split||q.story.length+q.rule.length>40)?30:20;remaining=roundSeconds;lastTick=6;deadline=performance.now()+remaining*1000;paintTimer();timerId=setInterval(tickTimer,100)}
+function paintTimer(){$('seconds').textContent=Math.ceil(remaining)+' 秒';$('timer-fill').style.width=(remaining/roundSeconds*100)+'%';$('timer').classList.toggle('urgent',remaining<=5)}
+document.addEventListener('visibilitychange',()=>{if(document.hidden&&timerId){remaining=Math.max(0,(deadline-performance.now())/1000);stopTimer();timerPaused=true}else if(!document.hidden&&timerPaused){timerPaused=false;if(timerOn&&$('game').classList.contains('active')&&!locked){deadline=performance.now()+remaining*1000;timerId=setInterval(tickTimer,100)}}});
+function options(items){let box=$('choices');box.replaceChildren();items.forEach(({emoji,title,detail,run,color})=>{let b=document.createElement('button');b.className='btn '+color;let icon=document.createElement('b');icon.textContent=emoji;let s=document.createElement('span');let strong=document.createElement('strong');strong.textContent=title;s.append(strong,document.createTextNode(detail));b.append(icon,s);b.onclick=()=>{sparks(b,color==='gold'?'#ffe27b':'#85e8e9');run()};box.append(b)})}
+function popFeedback(){for(const id of ['feedback','notice']){const el=$(id);if(id==='notice'&&el.hidden)continue;el.classList.remove('pop');void el.offsetWidth;el.classList.add('pop')}}
+function splitChoice(q,first,slot){
+  const box=$('choices');box.replaceChildren();
+  const court=document.createElement('div');court.className='split-court';
+  const heading=document.createElement('h2');heading.textContent='⚖️ 責任刻度';
+  const prompt=document.createElement('p');prompt.textContent='把「'+q.splitLabel+'」分給兩方。0% 到 100%，沒有預設正解。';
+  const value=document.createElement('div');value.className='split-percent';
+  const slider=document.createElement('input');slider.type='range';slider.min='0';slider.max='4';slider.step='1';slider.value='2';slider.setAttribute('aria-label','提出變動者負擔比例');
+  const labels=document.createElement('div');labels.className='split-labels';labels.innerHTML='<span>受影響者負擔較多</span><span>提出變動者負擔較多</span>';
+  const confirm=document.createElement('button');confirm.className='btn gold wide';confirm.textContent='敲定分擔比例 →';
+  slider.oninput=()=>{let percent=Number(slider.value)*25;value.textContent=percent+'%：'+(100-percent)+'%';prompt.textContent='提出變動者 '+percent+'%・受影響者 '+(100-percent)+'%（'+q.splitLabel+'）。換位後還會用同一個刻度。'};
+  slider.oninput();confirm.onclick=()=>{sparks(confirm,'#ffe27b');first?setLaw(slot,Number(slider.value)):decide(slot,Number(slider.value))};
+  court.append(heading,prompt,value,slider,labels,confirm);box.append(court);
+}
+function update(){$('bar').style.width=(step/(CASES*2)*100)+'%';$('round').textContent=`${step+1} / ${CASES*2} ・ ${order[step]?.kind==='law'?'替別人訂規則':'輪到自己承受'}`}
+function render(){
+  locked=false;
+  let item=order[step],first=item.kind==='law',slot=item.slot,q=chosen[slot];
+  screen('game');update();
+  $('phase').textContent=first?'⚖️ 你替別人決定':'🔄 換位受報・輪到你';
+  $('title').textContent=q.title;
+  $('story').textContent=first?q.story:q.self;
+  $('aside').textContent=first?q.rule:q.split?'換到另一方的位置；條件相同，重新分配這次的負擔。':'換到另一方的位置；關鍵條件與兩種處置相同，請再選一次。';
+  $('feedback').textContent='';
+  $('stamp').hidden=true;
+  $('quote').hidden=true;
+  $('notice').hidden=true;
+  $('case-panel').classList.remove('flip','entering');
+  if(!first){
+    void $('case-panel').offsetWidth;
+    $('case-panel').classList.add('flip');
+    $('radar').classList.remove('scan');
+    void $('radar').offsetWidth;
+    $('radar').classList.add('scan');
+    flash('🔄 現在換你承受！');
+    cue('reveal');
+  }else{void $('case-panel').offsetWidth;$('case-panel').classList.add('entering')}
+  if(!first && laws[slot]===null){
+    $('notice').hidden=false;
+    $('notice').textContent='前次超時，沒有可比較的決定；這回合也不納入一致性分數。';
+    options([{emoji:'↪️',title:'看下一案',detail:'本案略過比較。',color:'blue',run:()=>{
+      if(locked)return;locked=true;stopTimer();nextSoon();
+    }}]);
+    startTimer();return;
+  }
+  if(q.split){splitChoice(q,first,slot);startTimer();return}
+  let actions=actionsFor(q);
+  options(actions.map((action,i)=>({
+    emoji:['➊','➋','➌'][i]||String(i+1),
+    title:action,
+    detail:'',
+    color:'blue',
+    run:()=>first?setLaw(slot,i):decide(slot,i)
+  })));
+  startTimer();
+}
+function setLaw(slot,choice){
+  if(locked)return;locked=true;stopTimer();cue('gavel');
+  laws[slot]=choice;
+  history.push({slot,first:choice,second:null});
+  $('feedback').textContent='決定已記下。換位後將在相同條件、相同選項下再選一次。';
+  popFeedback();
+  nextSoon();
+}
+function radar(){
+  let changed=resolved-kept;
+  $('radar').textContent='📡 換位雷達：'+kept+'/'+resolved+' 次一致・'+selfDemanding+' 次對自己更嚴・'+(changed-selfDemanding)+' 次其他轉向';
+  $('radar').classList.remove('hot');
+}
+function decide(slot,choice){
+  if(locked)return;locked=true;stopTimer();
+  let h=history.find(h=>h.slot===slot),same=choice===laws[slot],actions=actionsFor(chosen[slot]);
+  h.second=choice;
+  resolved++;
+  if(same)kept++;
+  h.moreDemanding=!same&&(chosen[slot].split?choice>laws[slot]:stricterAction[chosen[slot].title]===choice);
+  if(h.moreDemanding)selfDemanding++;
+  update();
+  radar();
+  cue(same?'keep':'exception');
+  sparks($('radar'),same?'#85e8e9':'#ff89b5');
+  $('stamp').hidden=same;
+  $('stamp').textContent=h.moreDemanding?'對自己更嚴':'前後不同';
+  $('quote').hidden=false;
+  $('quote').textContent='前次替別人選：'+actions[laws[slot]]+'；這次替自己選：'+actions[choice]+'。';
+  $('notice').hidden=false;
+  $('notice').textContent=same?'前後處置一致；兩次都通融也算一致。':h.moreDemanding?'這次你對自己採取更嚴的處置。改變不等於偏袒。':'這次改了處置；原因可能是重新思考，也可能是立場不同。單憑這題不判定對錯。';
+  $('feedback').textContent='判決已記錄，讀完後再繼續。';
+  popFeedback();
+  let next=document.createElement('button');next.className='btn gold wide';next.textContent=step===CASES*2-1?'查看終局判決 →':'我看完了，下一案 →';next.onclick=advance;
+  $('choices').replaceChildren(next);
+}
+function timeoutRound(){
+  if(locked)return;locked=true;
+  let item=order[step],slot=item.slot;
+  if(item.kind==='law'){
+    laws[slot]=null;
+    history.push({slot,first:null,second:null});
+    $('feedback').textContent='⏰ 超時棄權：沒有替別人決定；本案不納入一致性比較。';
+  }else{
+    $('feedback').textContent='⏰ 超時棄權：沒有替你選答案；本案不納入一致性比較。';
+  }
+  popFeedback();cue('exception');nextSoon();
+}
+function advance(){step++;if(step===CASES*2)return finish();render()}
+function nextSoon(){stopTimer();$('choices').querySelectorAll('button,input').forEach(control=>control.disabled=true);update();setTimeout(advance,1100)}
+// The URL fragment is a portable snapshot of this run; no server or account is involved.
+// Scenario positions are append-only IDs for this format. Change the version if the catalog is reordered.
+function makeRecord(){return {v:3,t:Date.now(),c:chosen.map(q=>scenarios.indexOf(q)),h:history.map(h=>[h.first,h.second])}}
+function encodeRecord(record){return btoa(JSON.stringify(record)).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'')}
+function readRecord(){
+  if(!location.hash.startsWith('#r='))return null;
+  try{
+    let raw=location.hash.slice(3);
+    if(raw.length>2000||!/^[A-Za-z0-9_-]+$/.test(raw))return null;
+    let data=JSON.parse(atob(raw.replace(/-/g,'+').replace(/_/g,'/')));
+    if(![1,2,3].includes(data.v)||!Number.isSafeInteger(data.t)||data.t<0||data.t>Date.now()+86400000)return null;
+    if(!Array.isArray(data.c)||data.c.length!==CASES||new Set(data.c).size!==CASES||!data.c.every(i=>Number.isInteger(i)&&i>=0&&i<scenarios.length))return null;
+    if(!Array.isArray(data.h)||data.h.length!==CASES||!data.h.every((pair,slot)=>{let q=scenarios[data.c[slot]],max=data.v===1?1:q.split?4:actionsFor(q).length-1;return Array.isArray(pair)&&pair.length===2&&pair.every(n=>n===null||(Number.isInteger(n)&&n>=0&&n<=max))&&!(pair[0]===null&&pair[1]!==null)}))return null;
+    if(data.v<3&&(!Array.isArray(data.s)||data.s.length!==3||!data.s.every(n=>Number.isInteger(n)&&n>=0&&n<=10)))return null;
+    return data;
+  }catch(e){return null}
+}
+function showSharedRecord(record){
+  resultRecord=record;chosen=record.c.map(i=>scenarios[i]);
+  history=record.h.map(([first,second],slot)=>({slot,first,second,moreDemanding:first!==null&&second!==null&&first!==second&&(chosen[slot].split?second>first:stricterAction[chosen[slot].title]===second)}));
+  resolved=history.filter(h=>h.first!==null&&h.second!==null).length;
+  kept=history.filter(h=>h.first!==null&&h.second!==null&&h.first===h.second).length;
+  selfDemanding=history.filter(h=>h.moreDemanding).length;
+  finish(true);
+}
+function finish(shared=false){
+  stopTimer();
+  if(!shared)resultRecord=makeRecord();
+  let rank,ending;
+  if(resolved<CASES){rank='留白的裁決者';ending=`完成 ${resolved} / ${CASES} 個可比較配對；棄權不算不一致。`}
+  else if(selfDemanding>=4){rank='自我加碼的法官';ending='你不只會換位，還有幾次把較重的責任留給自己。'}
+  else if(kept===CASES){rank='同一把尺的法官';ending='每一案前後都採同樣處置；通融與嚴格都能一致。'}
+  else if(kept>=11){rank='穩定派裁決者';ending='大多數案件維持原判，少數轉向值得回頭看看。'}
+  else if(selfDemanding>=2){rank='願意多扛的法官';ending='有些立場改變，不是放寬自己，而是把要求往自己身上加。'}
+  else{rank='再審庭的常客';ending='你願意重新考慮自己的判決；變更本身不是罪證。'}
+  $('rank').textContent=rank;$('ending').textContent=ending;
+  $('fair').textContent=kept+'/'+CASES;
+  $('end-strict').textContent=selfDemanding;
+  $('end-changed').textContent=resolved-kept-selfDemanding;
+  let demanding=history.find(h=>h.moreDemanding&&chosen[h.slot].focus)||history.find(h=>h.moreDemanding);
+  let changed=history.find(h=>h.first!==null&&h.second!==null&&h.first!==h.second&&chosen[h.slot].focus)||history.find(h=>h.first!==null&&h.second!==null&&h.first!==h.second);
+  let spotlight=demanding||changed||history.find(h=>h.first!==null&&h.second!==null&&chosen[h.slot].focus)||history.find(h=>h.first!==null&&h.second!==null);
+  if(spotlight){
+    let q=chosen[spotlight.slot],actions=actionsFor(q),same=spotlight.first===spotlight.second;
+    $('result-hook').textContent='🎬 片尾彩蛋：'+q.title;
+    $('result-blurb').textContent='替別人時選「'+actions[spotlight.first]+'」；輪到自己時選「'+actions[spotlight.second]+'」。';
+    $('result-quote').textContent=spotlight.moreDemanding?'法槌敲下去，先被敲到的是自己。':same?'角色換了，判決書卻一字未改。':'換了座位，判決書也換了一頁。';
+    $('result-aside').textContent=spotlight.moreDemanding?'這案對自己更嚴，不算雙重標準。':same?'一致不代表處置一定正確；也可能是同樣的彈性。':'這是轉向，不是罪證；你可以在下方回看當時的兩個選擇。';
+  }else{
+    $('result-hook').textContent='🎬 片尾彩蛋：法庭休庭';
+    $('result-blurb').textContent='這局沒有可比較的兩次決定。';
+    $('result-quote').textContent='法槌已備妥，判決書卻留了白。';
+    $('result-aside').textContent='棄權不算前後不一；再開一局，看看會抽到什麼案件。';
+  }
+  let review=$('review');review.replaceChildren();
+  history.forEach(h=>{
+    let p=document.createElement('p'),actions=actionsFor(chosen[h.slot]);
+    p.textContent=chosen[h.slot].title+'：'+(h.first===null?'前次棄權':('替別人選「'+actions[h.first]+'」'))+'；'+(h.second===null?'換位未表態':('替自己選「'+actions[h.second]+'」'))+'。'+(h.first===null||h.second===null?'不納入比較。':h.first===h.second?'前後一致。':h.moreDemanding?'對自己更嚴。':'前後不同，不代表對錯。');
+    review.append(p);
+  });
+  $('result-source').textContent=shared?'📜 已分享的玩家戰績':'📜 這局的戰績';
+  $('result-meta').textContent='紀錄時間：'+new Date(resultRecord.t).toLocaleString('zh-TW');
+  $('share').textContent='分享這局的結果連結 ↗';
+  screen('result');
+  if(!shared){flash('🏆 終局揭曉！');cue('finish');if(resolved===CASES&&kept/CASES>=0.8)confetti()}
+}
+$('start').onclick=start;$('again').onclick=start;$('share').onclick=async()=>{
+  if(!resultRecord)return;
+  let url=new URL(location.href);url.hash='r='+encodeRecord(resultRecord);
+  let summary=`《雙標大挑戰・換你承受》：${resolved} 個可比較案件中前後一致 ${kept} 次，結局是「${$('rank').textContent}」😂 打開連結看這局完整紀錄：`;
+  try{
+    if(navigator.share){await navigator.share({title:'雙標大挑戰・這局的結果',text:summary,url:url.href});return}
+    await navigator.clipboard.writeText(summary+'\n'+url.href);$('share').textContent='戰績連結已複製 ✓';
+  }catch(e){if(e.name!=='AbortError')prompt('複製戰績連結：',summary+'\n'+url.href)}
+};
+if(location.hash.startsWith('#r=')){let record=readRecord();if(record)showSharedRecord(record);else{screen('welcome');alert('這個戰績連結無法讀取，可能不完整或版本不相容。你仍可開始新的一局。')}}
+</script></body></html>
