@@ -24,16 +24,25 @@
 @keyframes rankReveal{from{opacity:0;transform:translateY(14px) scale(.88)}to{opacity:1;transform:none}}
 body.no-motion .case-panel.entering,body.no-motion .choice-list>button,body.no-motion .choice-list>.split-court,body.no-motion .feedback.pop,body.no-motion .notice.pop,body.no-motion #result.active .rank,body.no-motion #result.active .result-grid>div{animation:none!important}
 @media(prefers-reduced-motion:reduce){.case-panel.entering,.choice-list>button,.choice-list>.split-court,.feedback.pop,.notice.pop,#result.active .rank,#result.active .result-grid>div{animation:none!important}}
+</style><style>
+.mode-tag{display:inline-block;padding:6px 12px;border-radius:100px;background:#85e8e9;color:#15323d;font-size:12px;font-weight:1000;letter-spacing:.1em}.mode-picks{display:grid;gap:12px;max-width:390px;margin:auto}.mode-picks .btn{text-align:left;padding:14px 18px}.mode-picks .btn small{display:block;font-size:12px;font-weight:700;line-height:1.5;margin-top:3px}.mission{margin:0 0 16px;border:1px solid #85e8e970;border-radius:20px;background:linear-gradient(130deg,#17354f,#352447);padding:14px 17px;box-shadow:0 13px 30px #0004}.mission-top{display:flex;align-items:center;gap:12px}.mission-avatar{font-size:38px;width:56px;height:56px;border-radius:16px;background:#ffffff22;display:grid;place-items:center;flex:none}.mission-copy{min-width:0}.mission-copy small{display:block;color:#8de9eb;font-size:11px;font-weight:900;letter-spacing:.13em}.mission-copy strong{display:block;font-size:18px;margin:3px 0}.mission-copy span{display:block;color:#e1d7e8;font-size:13px;line-height:1.45}.mission-steps{display:flex;gap:6px;margin-top:12px}.mission-steps i{height:7px;border-radius:20px;background:#ffffff38;flex:1}.mission-steps i.done{background:#85e8e9}.mission-steps i.current{background:#ffe27b;box-shadow:0 0 12px #ffe27b99}.mission.reveal{border-color:#ff89b5aa;background:linear-gradient(130deg,#4c2347,#252d59)}.mission.reveal .mission-copy small{color:#ffb2d0}.mission[hidden]{display:none}.scene-line{font-size:12px;color:#d9cbe4;text-align:center;margin:4px 0 13px}.scene-line[hidden]{display:none}@media(max-width:470px){.mission-copy strong{font-size:16px}.mission-avatar{font-size:30px;width:46px;height:46px}}
 </style></head><body><div class="flash" id="flash" aria-hidden="true"><span id="flash-text"></span></div><main><header><span class="logo">⚖️ 雙標大挑戰</span><div class="controls"><button class="sound" id="timer-toggle" aria-pressed="true">⏱️ 倒數開</button><button class="sound" id="motion-toggle" aria-pressed="true">✨ 動畫開</button><button class="sound" id="sound" aria-pressed="true">🔊 音效開</button></div></header>
-<section id="welcome" class="screen welcome active"><div class="welcome-inner"><div class="orbit" aria-hidden="true"><span class="sigil">⚖️</span></div><div class="welcome-copy"><p class="eyebrow">THE VERDICT IS YOURS</p><h1>你訂的規則<br><em>換你承受</em></h1><p class="tagline">當判決落在自己身上，<br>你還會用同一把尺嗎？</p><div class="welcome-actions"><button class="btn gold wide" id="enter">開始審判 ⚡</button><button class="btn subtle wide" id="open-about">玩法與關於</button></div><p class="hint">15 個情境 · 判決與責任刻度 · 只有你的標準</p></div></div></section>
-<section id="intro" class="screen center"><h1 class="about-title">關於這場審判</h1><p class="lead">你先替別人做決定。隔幾案，情境換到你身上——同樣的選項或責任刻度，你會怎麼選？</p><div class="panel intro"><div class="about-grid"><div><b>⚖️</b><span>訂 15 條規則</span></div><div><b>🔄</b><span>隔幾案換位</span></div><div><b>🎲</b><span>判決、分擔與換位</span></div></div><div class="about-copy"><p>每局從 179 個情境抽 15 個，其中 4 個要用刻度分配責任；每案隔幾回合換位重演，共 30 回合。</p><p>每回合 20 秒，較長的題目 30 秒。也可以在上方關閉倒數，切換休閒模式；超時只算棄權，不會替你選答案。</p><p>沒有標準人格答案。「一致性」只是這局選擇的娛樂指標，不代表善惡。遊戲純前端執行，不收集資料。</p></div><div class="about-actions"><button class="btn gold wide" id="start">我準備好了，開始 →</button><button class="btn subtle wide" id="back-welcome">返回歡迎畫面</button></div></div></section>
-<section id="game" class="screen"><div class="meter"><div id="bar"></div></div><div class="timer" id="timer"><span id="seconds">20</span><div class="timer-track"><div class="timer-fill" id="timer-fill"></div></div></div><div class="radar" id="radar">📡 換位雷達：等待配對</div><div class="panel case-panel" id="case-panel"><div class="stamp" id="stamp" hidden>前後不同</div><div class="phase" id="phase"></div><h1 class="case-title" id="title"></h1><p class="story" id="story"></p><p class="aside" id="aside"></p><div class="quote" id="quote" hidden></div><div class="notice" id="notice" hidden></div><div class="choice-list" id="choices"></div><div class="feedback" id="feedback" role="status"></div></div><div class="foot" id="round"></div></section>
+<section id="welcome" class="screen welcome active"><div class="welcome-inner"><div class="orbit" aria-hidden="true"><span class="sigil">⚖️</span></div><div class="welcome-copy"><p class="eyebrow">THE VERDICT IS YOURS</p><h1>你訂的規則<br><em>換你承受</em></h1><p class="tagline">當判決落在自己身上，<br>你還會用同一把尺嗎？</p><div class="mode-picks"><button class="btn gold wide" id="enter">🎮 進入故事模式<small>五件職場事件・約三分鐘・先決定，再換位</small></button><button class="btn blue wide" id="full-game">⚖️ 經典完整挑戰<small>隨機十五案・三十回合・原版玩法</small></button><button class="btn subtle wide" id="open-about">玩法與關於</button></div><p class="hint">沒有標準答案；重點是換位後，你會不會改變那把尺</p></div></div></section>
+<section id="intro" class="screen center"><h1 class="about-title">關於這場審判</h1><p class="lead">你先替別人做決定。隔幾案，情境換到你身上——同樣的選項或責任刻度，你會怎麼選？</p><div class="panel intro"><div class="about-grid"><div><b>🎮</b><span>短篇故事 5 案</span></div><div><b>⚖️</b><span>完整挑戰 15 案</span></div><div><b>🔄</b><span>換位再決定</span></div></div><div class="about-copy"><p>故事模式是一段五件職場事件的短篇；完整挑戰則從題庫抽 15 案，共 30 回合。兩種模式都會隔幾案換位重演，使用同樣的條件和選項。</p><p>每回合 20 秒，較長的題目 30 秒。也可以在上方關閉倒數，切換休閒模式；超時只算棄權，不會替你選答案。</p><p>沒有標準人格答案。「一致性」只是這局選擇的娛樂指標，不代表善惡。遊戲純前端執行，不收集資料。</p></div><div class="about-actions"><button class="btn gold wide" id="start">開始完整挑戰 →</button><button class="btn subtle wide" id="back-welcome">返回歡迎畫面</button></div></div></section>
+<section id="game" class="screen"><div class="mission" id="mission" hidden><div class="mission-top"><div class="mission-avatar" id="mission-avatar" aria-hidden="true">📨</div><div class="mission-copy"><small id="mission-label">值班事件</small><strong id="mission-title"></strong><span id="mission-line"></span></div></div><div class="mission-steps" id="mission-steps" aria-label="故事進度"></div></div><div class="meter"><div id="bar"></div></div><div class="timer" id="timer"><span id="seconds">20</span><div class="timer-track"><div class="timer-fill" id="timer-fill"></div></div></div><div class="radar" id="radar">📡 換位雷達：等待配對</div><div class="scene-line" id="scene-line" hidden></div><div class="panel case-panel" id="case-panel"><div class="stamp" id="stamp" hidden>前後不同</div><div class="phase" id="phase"></div><h1 class="case-title" id="title"></h1><p class="story" id="story"></p><p class="aside" id="aside"></p><div class="quote" id="quote" hidden></div><div class="notice" id="notice" hidden></div><div class="choice-list" id="choices"></div><div class="feedback" id="feedback" role="status"></div></div><div class="foot" id="round"></div></section>
 
 <section id="result" class="screen center"><div class="hero">終局判決</div><div class="phase" id="result-source"></div><h2 class="rank" id="rank"></h2><p class="lead" id="ending"></p><div class="result-grid"><div><b id="fair">0/15</b><small>前後一致</small></div><div><b id="end-strict">0</b><small>對自己更嚴</small></div><div><b id="end-changed">0</b><small>其他轉向</small></div></div><p class="small" id="result-meta"></p><div class="panel" style="margin-bottom:15px;text-align:left"><div class="phase">本 局 觀 察 報 告</div><h3 id="result-hook"></h3><p id="result-blurb" class="aside"></p><div class="quote" id="result-quote"></div><p id="result-aside" class="small"></p></div><div class="panel"><div class="review" id="review"></div><div class="actions"><button class="btn gold wide" id="again">換一批案件 ↻</button><button class="btn subtle wide" id="share">分享這局的結果連結 ↗</button></div></div><p class="foot">分享連結包含本局選擇，持有連結的人可查看；資料不會上傳。<br>前後不同不必然是偏袒；對自己要求更高，也是一種選擇。</p></section>
 </main><script src="scenarios.js?v=7"></script><script src="choices.js?v=37"></script><script>
 
 const $=id=>document.getElementById(id);let chosen=[],laws=[],order=[],step=0,kept=0,resolved=0,selfDemanding=0,history=[],locked=false,resultRecord=null;
-const CASES=15;let soundOn=true,motionOn=true,timerOn=true,audioCtx=null,flashTimer,timerId=null,timerPaused=false,deadline=0,remaining=0,roundSeconds=20,lastTick=6;
+const CASES=15,STORY_CASES=[
+  {title:'會議紀錄輪值',icon:'📝',speaker:'同事小安',line:'「會議快開始了，紀錄這次又該誰寫？」'},
+  {title:'緊急支援',icon:'🚨',speaker:'組長阿哲',line:'「有人臨時需要支援，先決定怎麼分擔。」'},
+  {title:'假日待命',icon:'📟',speaker:'值班夥伴',line:'「週末的訊息又亮了，待命規則還算數嗎？」'},
+  {title:'升遷面談',icon:'📈',speaker:'主管',line:'「貢獻怎麼算，輪到自己談時也一樣嗎？」'},
+  {title:'夜間輪值',icon:'🌙',speaker:'夜班同事',line:'「最後一班，規則換到你身上了。」'}
+];let gameMode='classic',caseCount=CASES;
+let soundOn=true,motionOn=true,timerOn=true,audioCtx=null,flashTimer,timerId=null,timerPaused=false,deadline=0,remaining=0,roundSeconds=20,lastTick=6;
 // Only cases with a clear greater personal burden are classified as self-demanding.
 const stricterAction=Object.fromEntries(['已讀不回','借走充電器','薯條失蹤案','玩笑開過頭','晚發會議紀錄','借書折角','臨時取消','代買咖啡','借錢不還','誤刪檔案','擅用折價券','借外套沾到咖啡','取消共同訂單','改掉原始資料','接送換班','夜間輪值','家務清單','共同開銷','照顧長輩','逾期交付'].map(title=>[title,1]));
 stricterAction['遲到五分鐘']=0;stricterAction['分組遲交']=0;
@@ -50,7 +59,8 @@ $('motion-toggle').onclick=()=>{motionOn=!motionOn;document.body.classList.toggl
 $('timer-toggle').onclick=()=>{timerOn=!timerOn;$('timer-toggle').textContent=timerOn?'⏱️ 倒數開':'☕ 休閒模式';$('timer-toggle').setAttribute('aria-pressed',String(timerOn));$('timer').hidden=!timerOn;if(timerOn&&$('game').classList.contains('active')&&!locked)startTimer();else stopTimer()};
 function shuffle(a){a=[...a];for(let i=a.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
 function screen(id){document.querySelectorAll('.screen').forEach(el=>el.classList.toggle('active',el.id===id));window.scrollTo(0,0)}
- $('enter').onclick=()=>{cue('gavel');flash('⚖️ 審判開始');start()};
+ $('enter').onclick=()=>{cue('gavel');flash('📨 故事開始');start('story')};
+ $('full-game').onclick=()=>{cue('gavel');flash('⚖️ 審判開始');start('classic')};
  $('open-about').onclick=()=>screen('intro');
  $('back-welcome').onclick=()=>screen('welcome');
 function drawCases(){
@@ -68,7 +78,17 @@ function drawCases(){
     return picked;
   }));
 }
-function start(){if(location.hash.startsWith('#r='))window.history.replaceState(null,'',location.pathname+location.search);resultRecord=null;chosen=drawCases();laws=Array(CASES).fill(null);order=[];for(let i=0;i<CASES;i++){order.push({kind:'law',slot:i});if(i>=4)order.push({kind:'reveal',slot:i-4})}for(let i=CASES-4;i<CASES;i++)order.push({kind:'reveal',slot:i});step=0;kept=0;resolved=0;selfDemanding=0;history=[];$('radar').classList.remove('hot');$('radar').textContent='📡 換位雷達：等待配對';screen('game');render()}
+function start(mode=gameMode){
+  if(location.hash.startsWith('#r='))window.history.replaceState(null,'',location.pathname+location.search);
+  gameMode=mode;caseCount=mode==='story'?STORY_CASES.length:CASES;resultRecord=null;
+  chosen=mode==='story'?STORY_CASES.map(scene=>scenarios.find(q=>q.title===scene.title)):drawCases();
+  if(chosen.some(q=>!q))throw Error('故事情境遺失');
+  laws=Array(caseCount).fill(null);order=[];
+  const gap=mode==='story'?2:4;
+  for(let i=0;i<caseCount;i++){order.push({kind:'law',slot:i});if(i>=gap)order.push({kind:'reveal',slot:i-gap})}
+  for(let i=caseCount-gap;i<caseCount;i++)order.push({kind:'reveal',slot:i});
+  step=0;kept=0;resolved=0;selfDemanding=0;history=[];$('radar').classList.remove('hot');$('radar').textContent='📡 換位雷達：等待配對';screen('game');render()
+}
 function stopTimer(){clearInterval(timerId);timerId=null}
 function tickTimer(){remaining=Math.max(0,(deadline-performance.now())/1000);paintTimer();let whole=Math.ceil(remaining);if(whole<=5&&whole>0&&whole<lastTick){lastTick=whole;beep(330)}if(remaining<=0){stopTimer();timeoutRound()}}
 function startTimer(){stopTimer();if(!timerOn)return;let q=chosen[order[step].slot];roundSeconds=(q.split||q.story.length+q.rule.length>40)?30:20;remaining=roundSeconds;lastTick=6;deadline=performance.now()+remaining*1000;paintTimer();timerId=setInterval(tickTimer,100)}
@@ -89,11 +109,24 @@ function splitChoice(q,first,slot){
   slider.oninput();confirm.onclick=()=>{sparks(confirm,'#ffe27b');first?setLaw(slot,Number(slider.value)):decide(slot,Number(slider.value))};
   court.append(heading,prompt,value,slider,labels,confirm);box.append(court);
 }
-function update(){$('bar').style.width=(step/(CASES*2)*100)+'%';$('round').textContent=`${step+1} / ${CASES*2} ・ ${order[step]?.kind==='law'?'替別人訂規則':'輪到自己承受'}`}
+function update(){$('bar').style.width=(step/(caseCount*2)*100)+'%';$('round').textContent=`${step+1} / ${caseCount*2} ・ ${order[step]?.kind==='law'?'替別人訂規則':'輪到自己承受'}`}
+function renderMission(item){
+  const story=gameMode==='story';$('mission').hidden=!story;$('scene-line').hidden=!story;
+  if(!story)return;
+  const scene=STORY_CASES[item.slot],first=item.kind==='law';
+  $('mission').classList.toggle('reveal',!first);
+  $('mission-avatar').textContent=first?scene.icon:'🔄';
+  $('mission-label').textContent=first?`值班事件 ${item.slot+1} / ${caseCount}`:'換位通知 · 相同條件';
+  $('mission-title').textContent=first?scene.speaker+' 找上你':'這次換你面對：'+scene.title;
+  $('mission-line').textContent=first?scene.line:'剛才替別人訂下的規則，現在會怎麼用？';
+  $('scene-line').textContent=first?'📨 新事件送達 · 看完情境再做決定':'📂 舊案重開 · 先不提示你當時選了什麼';
+  const track=$('mission-steps');track.replaceChildren();
+  for(let i=0;i<caseCount;i++){const node=document.createElement('i');node.className=laws[i]===null?'':history.find(h=>h.slot===i&&h.second!==null)?'done':'current';node.setAttribute('aria-label',`事件 ${i+1}${node.className==='done'?'已完成':node.className==='current'?'待換位':''}`);track.append(node)}
+}
 function render(){
   locked=false;
   let item=order[step],first=item.kind==='law',slot=item.slot,q=chosen[slot];
-  screen('game');update();
+  screen('game');update();renderMission(item);
   $('phase').textContent=first?'⚖️ 你替別人決定':'🔄 換位受報・輪到你';
   $('title').textContent=q.title;
   $('story').textContent=first?q.story:q.self;
@@ -164,7 +197,7 @@ function decide(slot,choice){
   $('notice').textContent=same?'前後處置一致；兩次都通融也算一致。':h.moreDemanding?'這次你對自己採取更嚴的處置。改變不等於偏袒。':'這次改了處置；原因可能是重新思考，也可能是立場不同。單憑這題不判定對錯。';
   $('feedback').textContent='判決已記錄，讀完後再繼續。';
   popFeedback();
-  let next=document.createElement('button');next.className='btn gold wide';next.textContent=step===CASES*2-1?'查看終局判決 →':'我看完了，下一案 →';next.onclick=advance;
+  let next=document.createElement('button');next.className='btn gold wide';next.textContent=step===caseCount*2-1?'查看終局判決 →':'我看完了，下一案 →';next.onclick=advance;
   $('choices').replaceChildren(next);
 }
 function timeoutRound(){
@@ -179,11 +212,11 @@ function timeoutRound(){
   }
   popFeedback();cue('exception');nextSoon();
 }
-function advance(){step++;if(step===CASES*2)return finish();render()}
+function advance(){step++;if(step===caseCount*2)return finish();render()}
 function nextSoon(){stopTimer();$('choices').querySelectorAll('button,input').forEach(control=>control.disabled=true);update();setTimeout(advance,1100)}
 // The URL fragment is a portable snapshot of this run; no server or account is involved.
 // Scenario positions are append-only IDs for this format. Change the version if the catalog is reordered.
-function makeRecord(){return {v:3,t:Date.now(),c:chosen.map(q=>scenarios.indexOf(q)),h:history.map(h=>[h.first,h.second])}}
+function makeRecord(){return {v:4,m:gameMode,t:Date.now(),c:chosen.map(q=>scenarios.indexOf(q)),h:history.map(h=>[h.first,h.second])}}
 function encodeRecord(record){return btoa(JSON.stringify(record)).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'')}
 function readRecord(){
   if(!location.hash.startsWith('#r='))return null;
@@ -191,15 +224,17 @@ function readRecord(){
     let raw=location.hash.slice(3);
     if(raw.length>2000||!/^[A-Za-z0-9_-]+$/.test(raw))return null;
     let data=JSON.parse(atob(raw.replace(/-/g,'+').replace(/_/g,'/')));
-    if(![1,2,3].includes(data.v)||!Number.isSafeInteger(data.t)||data.t<0||data.t>Date.now()+86400000)return null;
-    if(!Array.isArray(data.c)||data.c.length!==CASES||new Set(data.c).size!==CASES||!data.c.every(i=>Number.isInteger(i)&&i>=0&&i<scenarios.length))return null;
-    if(!Array.isArray(data.h)||data.h.length!==CASES||!data.h.every((pair,slot)=>{let q=scenarios[data.c[slot]],max=data.v===1?1:q.split?4:actionsFor(q).length-1;return Array.isArray(pair)&&pair.length===2&&pair.every(n=>n===null||(Number.isInteger(n)&&n>=0&&n<=max))&&!(pair[0]===null&&pair[1]!==null)}))return null;
+    if(![1,2,3,4].includes(data.v)||!Number.isSafeInteger(data.t)||data.t<0||data.t>Date.now()+86400000)return null;
+    if(data.v===4&&!['story','classic'].includes(data.m))return null;
+    const count=data.v===4&&data.m==='story'?STORY_CASES.length:CASES;
+    if(!Array.isArray(data.c)||data.c.length!==count||new Set(data.c).size!==count||!data.c.every(i=>Number.isInteger(i)&&i>=0&&i<scenarios.length))return null;
+    if(!Array.isArray(data.h)||data.h.length!==count||!data.h.every((pair,slot)=>{let q=scenarios[data.c[slot]],max=data.v===1?1:q.split?4:actionsFor(q).length-1;return Array.isArray(pair)&&pair.length===2&&pair.every(n=>n===null||(Number.isInteger(n)&&n>=0&&n<=max))&&!(pair[0]===null&&pair[1]!==null)}))return null;
     if(data.v<3&&(!Array.isArray(data.s)||data.s.length!==3||!data.s.every(n=>Number.isInteger(n)&&n>=0&&n<=10)))return null;
     return data;
   }catch(e){return null}
 }
 function showSharedRecord(record){
-  resultRecord=record;chosen=record.c.map(i=>scenarios[i]);
+  resultRecord=record;gameMode=record.v===4?record.m:'classic';caseCount=record.c.length;chosen=record.c.map(i=>scenarios[i]);
   history=record.h.map(([first,second],slot)=>({slot,first,second,moreDemanding:first!==null&&second!==null&&first!==second&&(chosen[slot].split?second>first:stricterAction[chosen[slot].title]===second)}));
   resolved=history.filter(h=>h.first!==null&&h.second!==null).length;
   kept=history.filter(h=>h.first!==null&&h.second!==null&&h.first===h.second).length;
@@ -210,14 +245,14 @@ function finish(shared=false){
   stopTimer();
   if(!shared)resultRecord=makeRecord();
   let rank,ending;
-  if(resolved<CASES){rank='留白的裁決者';ending=`完成 ${resolved} / ${CASES} 個可比較配對；棄權不算不一致。`}
-  else if(selfDemanding>=4){rank='自我加碼的法官';ending='你不只會換位，還有幾次把較重的責任留給自己。'}
-  else if(kept===CASES){rank='同一把尺的法官';ending='每一案前後都採同樣處置；通融與嚴格都能一致。'}
-  else if(kept>=11){rank='穩定派裁決者';ending='大多數案件維持原判，少數轉向值得回頭看看。'}
-  else if(selfDemanding>=2){rank='願意多扛的法官';ending='有些立場改變，不是放寬自己，而是把要求往自己身上加。'}
+  if(resolved<caseCount){rank='留白的裁決者';ending=`完成 ${resolved} / ${caseCount} 個可比較配對；棄權不算不一致。`}
+  else if(selfDemanding>=Math.ceil(caseCount*4/15)){rank='自我加碼的法官';ending='你不只會換位，還有幾次把較重的責任留給自己。'}
+  else if(kept===caseCount){rank='同一把尺的法官';ending='每一案前後都採同樣處置；通融與嚴格都能一致。'}
+  else if(kept>=Math.ceil(caseCount*11/15)){rank='穩定派裁決者';ending='大多數案件維持原判，少數轉向值得回頭看看。'}
+  else if(selfDemanding>=Math.ceil(caseCount*2/15)){rank='願意多扛的法官';ending='有些立場改變，不是放寬自己，而是把要求往自己身上加。'}
   else{rank='再審庭的常客';ending='你願意重新考慮自己的判決；變更本身不是罪證。'}
   $('rank').textContent=rank;$('ending').textContent=ending;
-  $('fair').textContent=kept+'/'+CASES;
+  $('fair').textContent=kept+'/'+caseCount;
   $('end-strict').textContent=selfDemanding;
   $('end-changed').textContent=resolved-kept-selfDemanding;
   let demanding=history.find(h=>h.moreDemanding&&chosen[h.slot].focus)||history.find(h=>h.moreDemanding);
@@ -241,13 +276,14 @@ function finish(shared=false){
     p.textContent=chosen[h.slot].title+'：'+(h.first===null?'前次棄權':('替別人選「'+actions[h.first]+'」'))+'；'+(h.second===null?'換位未表態':('替自己選「'+actions[h.second]+'」'))+'。'+(h.first===null||h.second===null?'不納入比較。':h.first===h.second?'前後一致。':h.moreDemanding?'對自己更嚴。':'前後不同，不代表對錯。');
     review.append(p);
   });
-  $('result-source').textContent=shared?'📜 已分享的玩家戰績':'📜 這局的戰績';
+  $('result-source').textContent=(shared?'📜 已分享的玩家戰績':'📜 這局的戰績')+(gameMode==='story'?' · 故事模式':' · 經典模式');
   $('result-meta').textContent='紀錄時間：'+new Date(resultRecord.t).toLocaleString('zh-TW');
+  $('again').textContent=gameMode==='story'?'故事再玩一次 ↻':'換一批案件 ↻';
   $('share').textContent='分享這局的結果連結 ↗';
   screen('result');
-  if(!shared){flash('🏆 終局揭曉！');cue('finish');if(resolved===CASES&&kept/CASES>=0.8)confetti()}
+  if(!shared){flash('🏆 終局揭曉！');cue('finish');if(resolved===caseCount&&kept/caseCount>=0.8)confetti()}
 }
-$('start').onclick=start;$('again').onclick=start;$('share').onclick=async()=>{
+$('start').onclick=()=>start('classic');$('again').onclick=()=>start(gameMode);$('share').onclick=async()=>{
   if(!resultRecord)return;
   let url=new URL(location.href);url.hash='r='+encodeRecord(resultRecord);
   let summary=`《雙標大挑戰・換你承受》：${resolved} 個可比較案件中前後一致 ${kept} 次，結局是「${$('rank').textContent}」😂 打開連結看這局完整紀錄：`;
