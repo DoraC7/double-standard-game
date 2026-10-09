@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#20152c">
+  <title>三秒就忘記｜記憶搬家</title>
+  <style>
+    :root{font-family:system-ui,-apple-system,"Noto Sans TC",sans-serif;color:#fff8e9;background:#20152c}
+    *{box-sizing:border-box}body{margin:0;min-height:100dvh;background:radial-gradient(circle at 8% 12%,#614082 0,transparent 34%),radial-gradient(circle at 90% 85%,#164d59 0,transparent 36%),#20152c}
+    button{font:inherit;cursor:pointer}button:focus-visible{outline:3px solid #ffe188;outline-offset:3px}button:disabled{cursor:default}
+    main{width:min(100%,750px);min-height:100dvh;margin:auto;padding:20px 16px 36px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:13px;font-weight:900;letter-spacing:.08em;color:#ffe188}.brand{display:flex;align-items:center;gap:8px}.tag{border:1px solid #ffffff50;border-radius:99px;padding:7px 11px;color:#efe0fc;letter-spacing:0}
+    .screen[hidden]{display:none!important}.screen{animation:appear .25s ease}.center{text-align:center}.hero{font-size:clamp(45px,10vw,74px);line-height:1.05;margin:45px 0 12px;text-shadow:4px 5px #c54e8a}.lead{font-size:18px;line-height:1.65;color:#f0e4f4;max-width:530px;margin:0 auto 26px}.panel{background:#ffffff16;border:1px solid #ffffff35;border-radius:25px;padding:23px;box-shadow:0 18px 50px #0004}.intro{max-width:570px;margin:26px auto}.big-icon{font-size:80px;line-height:1.2;margin:12px}.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:24px 0}.steps span{background:#ffffff15;border-radius:13px;padding:13px 7px;font-weight:800;font-size:14px}.note{color:#d8cbdc;font-size:13px;line-height:1.55}
+    .btn{border:0;border-radius:16px;min-height:54px;padding:12px 19px;font-weight:900;transition:transform .12s,filter .12s}.btn:not(:disabled):hover{transform:translateY(-2px);filter:brightness(1.08)}.btn:active{transform:scale(.97)}.primary{background:#ffe188;color:#33213b;box-shadow:0 5px #a7803d}.secondary{background:#8ce5e2;color:#17353d;box-shadow:0 5px #4a9291}.ghost{background:#ffffff21;color:#fff;border:1px solid #ffffff55}.btn:disabled{opacity:.48;box-shadow:none}.wide{width:100%}
+    .hud{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:24px 0 12px;font-weight:850}.hud strong{color:#ffe188}.meter{height:9px;background:#ffffff32;border-radius:99px;overflow:hidden}.meter>div{height:100%;background:linear-gradient(90deg,#8ce5e2,#ffe188);transition:width .25s}
+    .stage-title{font-size:clamp(26px,6vw,39px);line-height:1.2;margin:23px 0 7px}.stage-copy{color:#e5d8e9;line-height:1.5;margin:0 0 19px;min-height:48px}.timer{display:flex;align-items:center;gap:13px;margin:12px 0 17px;font-size:22px;font-weight:1000;color:#ffe188}.timer[hidden]{display:none}.timer-track{height:10px;flex:1;background:#ffffff30;border-radius:99px;overflow:hidden}.timer-track>div{height:100%;background:#ffe188;width:100%;transition:width .08s linear}
+    .shelf{background:linear-gradient(#2a213c,#1b1830);border:2px solid #c39ac474;border-bottom:12px solid #b67275;border-radius:20px 20px 9px 9px;padding:22px 12px 16px;min-height:150px;display:grid;grid-template-columns:repeat(var(--columns),1fr);gap:9px;align-items:end;box-shadow:inset 0 12px 25px #0005,0 12px 0 #3e273d;margin-bottom:23px}.object{display:grid;place-items:center;aspect-ratio:1;min-height:63px;border-radius:17px;background:#ffffff17;border:1px solid #ffffff4a;font-size:clamp(34px,8vw,58px);filter:drop-shadow(0 5px 4px #0005)}
+    .slot{background:#ffffff12;border:2px dashed #ffffff6b;filter:none;color:#eddced;font-size:clamp(25px,6vw,46px);min-width:0}.slot.filled{border-style:solid;background:#ffffff24}.slot span{font-size:14px;font-weight:900}.slot:not(:disabled):hover{background:#ffffff30}
+    .tray-label{font-size:14px;font-weight:900;color:#98eeec;margin:4px 0 11px}.tray{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-bottom:15px}.item{background:#ffffff19;border:1px solid #ffffff5a;color:#fff8e9;border-radius:16px;min-height:84px;display:grid;place-items:center;padding:7px 3px;transition:transform .13s,background .13s}.item:not(:disabled):hover{transform:translateY(-3px);background:#ffffff2b}.item:disabled{opacity:.35}.item .emoji{font-size:35px;line-height:1.1}.item .name{font-size:12px;font-weight:800}.actions{display:flex;gap:10px;flex-wrap:wrap}.actions>.btn{flex:1}.hint{min-height:25px;color:#e8d8e7;font-size:14px;line-height:1.45;margin:11px 0}.result-row{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:18px 0}.result-chip{font-size:37px;border-radius:13px;background:#ffffff1c;padding:7px 11px}.score-big{font-size:clamp(52px,12vw,85px);font-weight:1000;color:#ffe188;line-height:1;margin:16px 0}.review{font-size:17px;line-height:1.6;color:#f4e6ef}.footer{text-align:center;color:#bcaccb;font-size:12px;margin:26px 0 0}
+    @keyframes appear{from{opacity:.5;transform:translateY(8px)}to{opacity:1;transform:none}}@media(max-width:430px){.panel{padding:17px}.steps span{font-size:12px}.shelf{padding:13px 6px 10px;gap:5px;min-height:112px}.object{min-height:53px}.tray{gap:6px}.item{min-height:74px}.item .emoji{font-size:29px}.item .name{font-size:11px}}@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+  </style>
+</head>
+<body>
+<main>
+  <header><div class="brand">🧠 三秒就忘記</div><div class="tag">記憶搬家・獨立試玩版</div></header>
+  <section id="intro" class="screen center">
+    <h1 class="hero">三秒就忘記</h1>
+    <p class="lead">東西才剛放好，一轉頭就忘了在哪。你的任務：把架上的物品，原封不動放回原位。</p>
+    <div class="panel intro"><div class="big-icon" aria-hidden="true">🗃️</div><div class="steps"><span>👀 看 3 秒</span><span>🫥 架子清空</span><span>👆 點東西放回去</span></div><p class="note">四關，越來越多干擾物。點已放的格子可以拿回；沒有倒數催你作答。這不是測驗你的「健忘程度」，純粹玩記憶。</p><button id="start" class="btn primary wide">開始搬家 →</button></div>
+  </section>
+  <section id="game" class="screen" hidden>
+    <div class="hud"><span id="round">第 1 / 4 關</span><strong id="score">0 分</strong></div><div class="meter" aria-hidden="true"><div id="progress"></div></div>
+    <h1 id="stage-title" class="stage-title"></h1><p id="stage-copy" class="stage-copy"></p>
+    <div id="timer" class="timer"><span id="seconds">3.0 秒</span><div class="timer-track"><div id="timer-bar"></div></div></div>
+    <div id="shelf" class="shelf" aria-label="物品架"></div>
+    <div id="recall" hidden><p class="tray-label">把下方物品依原本位置放回去；混入的東西別拿！</p><div id="tray" class="tray"></div><p id="hint" class="hint" role="status"></p><div class="actions"><button id="clear" class="btn ghost">全部重放</button><button id="check" class="btn secondary" disabled>檢查記憶 →</button></div></div>
+  </section>
+  <section id="round-result" class="screen center" hidden><div class="panel intro"><div class="big-icon" id="result-icon" aria-hidden="true"></div><h1 id="result-title" class="stage-title"></h1><p id="result-copy" class="review"></p><p class="tray-label">原本的順序</p><div id="correct-row" class="result-row"></div><button id="next" class="btn primary wide"></button></div></section>
+  <section id="finish" class="screen center" hidden><h1 class="hero">記憶已送達</h1><div class="panel intro"><div class="big-icon" aria-hidden="true">🧠</div><div id="final-score" class="score-big"></div><p id="final-copy" class="review"></p><button id="again" class="btn primary wide">再玩一次 ↻</button></div></section>
+  <p class="footer">單機遊戲・不記錄個人資料・原版雙標遊戲不受影響</p>
+</main>
+<script>
+(() => {
+  'use strict';
+  const levels = [
+    {title:'出門前的三件事',copy:'你明明把東西擺好了。先看清楚，三秒後架子會清空。',items:[['🔑','鑰匙'],['☂️','雨傘'],['🎧','耳機']],decoys:[['🧤','手套'],['📚','書'],['🍎','蘋果']]},
+    {title:'辦公桌神祕失蹤案',copy:'桌上才整理好，下一秒就有人問：東西呢？',items:[['🖊️','筆'],['📎','迴紋針'],['☕','咖啡'],['📱','手機']],decoys:[['🧻','衛生紙'],['🍩','甜甜圈'],['🔋','電池'],['🧸','娃娃']]},
+    {title:'便利商店戰利品',copy:'買完剛走出店門，腦袋已經開始懷疑自己買了什麼。',items:[['🥛','牛奶'],['🍞','吐司'],['🍌','香蕉'],['🧃','果汁'],['🍫','巧克力']],decoys:[['🧀','起司'],['🍪','餅乾'],['🥚','雞蛋'],['🍙','飯糰']]},
+    {title:'最後一關：行李箱前',copy:'車要來了。這次連位置都不能放錯，深呼吸再看一眼。',items:[['🎫','車票'],['👓','眼鏡'],['🪥','牙刷'],['🔌','充電線'],['🧴','乳液']],decoys:[['🧦','襪子'],['📷','相機'],['🍬','糖果'],['✏️','鉛筆']]}
+  ];
+  const $ = id => document.getElementById(id);
+  const screens = ['intro','game','round-result','finish'];
+  let round=0,total=0,picks=[],options=[],timerId=null,deadline=0,remaining=3000,phase='intro';
+  const maxScore=levels.reduce((sum,level)=>sum+level.items.length,0);
+  function show(id){screens.forEach(name=>$(name).hidden=name!==id);window.scrollTo(0,0)}
+  function shuffle(array){let a=[...array];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+  function stopTimer(){if(timerId!==null){clearInterval(timerId);timerId=null}}
+  function paintTimer(){const value=Math.max(0,remaining);$('seconds').textContent=(value/1000).toFixed(1)+' 秒';$('timer-bar').style.width=(value/3000*100)+'%'}
+  function tick(){remaining=Math.max(0,deadline-performance.now());paintTimer();if(remaining===0){stopTimer();beginRecall()}}
+  function resumeTimer(){deadline=performance.now()+remaining;stopTimer();timerId=setInterval(tick,50);tick()}
+  document.addEventListener('visibilitychange',()=>{if(document.hidden&&phase==='preview'){remaining=Math.max(0,deadline-performance.now());stopTimer()}else if(!document.hidden&&phase==='preview'&&timerId===null){resumeTimer()}});
+  function updateHud(){$('round').textContent=`第 ${round+1} / ${levels.length} 關`;$('score').textContent=total+' 分';$('progress').style.width=(round/levels.length*100)+'%'}
+  function renderShelf(preview){const shelf=$('shelf'),items=levels[round].items;shelf.style.setProperty('--columns',items.length);shelf.replaceChildren();items.forEach((item,index)=>{if(preview){const tile=document.createElement('div');tile.className='object';tile.textContent=item[0];tile.setAttribute('aria-label',`${index+1} 號位置：${item[1]}`);shelf.append(tile)}else{const slot=document.createElement('button');slot.type='button';slot.className='object slot'+(picks[index]!==null?' filled':'');slot.setAttribute('aria-label',`${index+1} 號位置：${picks[index]===null?'空的；點物品放入':options[picks[index]][1]+'；點此拿回'}`);slot.textContent=picks[index]===null?'?':options[picks[index]][0];slot.onclick=()=>{if(picks[index]!==null){picks[index]=null;renderRecall()}};shelf.append(slot)}})}
+  function beginRound(){const level=levels[round];phase='preview';picks=Array(level.items.length).fill(null);options=shuffle([...level.items,...level.decoys]);updateHud();$('stage-title').textContent=level.title;$('stage-copy').textContent=level.copy;$('timer').hidden=false;$('recall').hidden=true;remaining=3000;renderShelf(true);show('game');paintTimer();resumeTimer()}
+  function beginRecall(){phase='recall';$('stage-copy').textContent='咻，架子空了！從下面拿東西，按原本的左右順序放回去。';$('timer').hidden=true;$('recall').hidden=false;renderRecall();$('tray').querySelector('button:not(:disabled)')?.focus()}
+  function renderRecall(){renderShelf(false);const tray=$('tray');tray.replaceChildren();options.forEach((item,index)=>{const button=document.createElement('button');button.type='button';button.className='item';button.disabled=picks.includes(index);button.setAttribute('aria-label',item[1]);const emoji=document.createElement('span');emoji.className='emoji';emoji.textContent=item[0];const name=document.createElement('span');name.className='name';name.textContent=item[1];button.append(emoji,name);button.onclick=()=>{const empty=picks.indexOf(null);if(empty<0)return;picks[empty]=index;renderRecall()};tray.append(button)});const filled=picks.filter(x=>x!==null).length;$('hint').textContent=`已放 ${filled} / ${picks.length} 件；點架上的物品可以拿回。`;$('check').disabled=filled!==picks.length}
+  function check(){if(picks.includes(null))return;const level=levels[round];let correct=0;level.items.forEach((item,index)=>{if(options[picks[index]][1]===item[1])correct++});total+=correct;$('score').textContent=total+' 分';phase='result';$('result-icon').textContent=correct===level.items.length?'🎉':correct===0?'🫠':'✨';$('result-title').textContent=correct===level.items.length?'全部放對！':`放對 ${correct} / ${level.items.length} 件`;$('result-copy').textContent=correct===level.items.length?'這次三秒有存進腦袋！':correct===0?'腦袋剛剛是不是偷偷切去別的分頁了？':'有幾件回到原位了。沒關係，下一關重新記！';const row=$('correct-row');row.replaceChildren();level.items.forEach(item=>{const chip=document.createElement('span');chip.className='result-chip';chip.textContent=item[0];chip.setAttribute('aria-label',item[1]);row.append(chip)});$('next').textContent=round===levels.length-1?'看總成績 →':'下一關 →';show('round-result');$('next').focus()}
+  function finish(){phase='finish';$('final-score').textContent=`${total} / ${maxScore}`;$('final-copy').textContent=total===maxScore?'三秒記憶王！現在請記得把這個成績告訴朋友。':total>=Math.ceil(maxScore*.6)?'記得不少耶！只是生活總愛偷偷混進幾個干擾物。':'東西忘了沒關係，笑完還能再玩一局。';show('finish')}
+  $('start').onclick=()=>{round=0;total=0;beginRound()};$('again').onclick=()=>{round=0;total=0;beginRound()};$('clear').onclick=()=>{picks.fill(null);renderRecall()};$('check').onclick=check;$('next').onclick=()=>{round++;if(round<levels.length)beginRound();else finish()};
+  show('intro');
+})();
+</script>
+</body>
+</html>
