@@ -31,6 +31,7 @@
   let audioRequest = 0;
   let quiz = null;
   let toneQuiz = null;
+  let adventure = null;
 
   function stopAudio() {
     audioRequest++;
@@ -41,6 +42,7 @@
       audio = null;
     }
     $('question-play').classList.remove('playing');
+    $('hunt-play').classList.remove('playing');
   }
   async function play(item) {
     stopAudio();
@@ -56,24 +58,31 @@
         $('listen-answers').querySelectorAll('button:not(.wrong)').forEach(b => b.disabled = true);
       }
     }
+    if (mode === 'hunt') $('hunt-play').classList.add('playing');
     const failed = () => {
       if (request !== audioRequest) return;
       $('question-play').classList.remove('playing');
+      $('hunt-play').classList.remove('playing');
       $('audio-status').textContent = '這次沒有播出聲音。請確認音量與網路，再按一次喇叭；也可以先到符號花園看看。';
     };
     sound.addEventListener('error', failed, {once: true});
     sound.addEventListener('ended', () => {
-      if (request === audioRequest) $('question-play').classList.remove('playing');
+      if (request === audioRequest) {
+        $('question-play').classList.remove('playing');
+        $('hunt-play').classList.remove('playing');
+      }
     }, {once: true});
     try {
       await sound.play();
-      if (request !== audioRequest) return;
+      if (request !== audioRequest) return false;
       if (mode === 'listen' && quiz && !quiz.solved) {
         quiz.heard = true;
         $('listen-answers').querySelectorAll('button:not(.wrong)').forEach(b => b.disabled = false);
       }
+      return true;
     } catch (error) {
       if (error.name !== 'AbortError') failed();
+      return false;
     }
   }
 
@@ -84,18 +93,24 @@
   function switchMode(next) {
     stopAudio();
     clearStrokes();
+    if (adventure) adventure.leave();
     mode = next;
     quiz = null;
     toneQuiz = null;
     $('audio-status').textContent = '';
-    ['garden', 'listen', 'tones'].forEach(id => $(id).hidden = id !== next);
+    ['garden', 'listen', 'tones', 'match', 'hunt'].forEach(id => $(id).hidden = id !== next);
     document.querySelectorAll('[data-mode]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.mode === next)));
     if (next === 'listen') listenSetup();
     if (next === 'tones') toneSetup();
     if (next === 'garden') renderStudy();
+    if (adventure) adventure.enter(next);
+  }
+  function openMode(next) {
+    if (next !== mode) switchMode(next);
+    $(next).scrollIntoView({behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start'});
   }
   document.querySelectorAll('[data-mode]').forEach(b => b.addEventListener('click', () => {
-    if (b.dataset.mode !== mode) switchMode(b.dataset.mode);
+    openMode(b.dataset.mode);
   }));
 
   function renderGrid() {
@@ -111,6 +126,7 @@
         // Preserve the clicked button and keyboard focus while updating selection.
         $('symbol-grid').querySelectorAll('button').forEach(key => key.setAttribute('aria-pressed', String(Number(key.dataset.number) === item.id)));
         renderStudy();
+        adventure.visit(item);
         play(item);
       });
       $('symbol-grid').append(b);
@@ -243,6 +259,7 @@
       $('review-symbols').append(b);
     });
     $('listen-result-title').focus({preventScroll: true});
+    adventure.award('listen');
   }
   $('listen-start').addEventListener('click', startListen);
   $('question-play').addEventListener('click', () => { if (quiz) play(quiz.deck[quiz.index]); });
@@ -331,6 +348,7 @@
     $('tone-result').hidden = false;
     $('tone-summary').textContent = `完成 ${toneQuiz.vertical ? '直式' : '橫式'} 5 題，其中 ${toneQuiz.first} 題第一次就找到。記得：輕聲橫式在前，直式在上！`;
     $('tone-result-title').focus({preventScroll: true});
+    adventure.award('tones');
   });
   $('tone-back').addEventListener('click', toneSetup);
   $('tone-retry').addEventListener('click', startTone);
@@ -339,9 +357,14 @@
     if (document.hidden) {
       stopAudio();
       clearStrokes();
+      adventure.pause();
     }
   });
-  window.addEventListener('pagehide', () => { stopAudio(); clearStrokes(); });
+  window.addEventListener('pagehide', () => { stopAudio(); clearStrokes(); adventure.pause(); });
+  adventure = window.createZhuyinAdventure({
+    symbols, shuffle, glyph, play, stopAudio,
+    openMode
+  });
   renderGrid();
   renderStudy();
 })();

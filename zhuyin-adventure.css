@@ -1,0 +1,82 @@
+/* The extra modes use the same paper, garden and warm-colour palette. */
+.modes{grid-template-columns:repeat(5,minmax(0,1fr));gap:9px}
+.modes button{padding:15px 12px;gap:8px}
+.modes b{font-size:14px}.modes small{font-size:10px}
+.passport{border:1px solid #d2dbc0;background:#edf0dc;border-radius:24px;padding:21px 23px;margin-bottom:22px}
+.passport-heading{display:flex;justify-content:space-between;align-items:center;gap:14px}
+.passport-heading h2{font-size:19px;margin:0}.passport-heading .eyebrow{font-size:10px;margin-bottom:5px}
+.badge-count{background:#fffdf5;border-radius:30px;padding:9px 12px;font-size:12px;font-weight:800;white-space:nowrap}
+.island-stops{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));position:relative;gap:12px;margin:18px 0 12px}
+.island-stops:before{content:'';position:absolute;left:8%;right:8%;top:29px;border-top:3px dotted #b2c19a}
+.island-stop{z-index:1;border:0;background:none;display:flex;flex-direction:column;align-items:center;padding:0 3px;min-width:0;gap:7px}
+.stop-icon{position:relative;width:60px;height:60px;border:2px dashed #b7c3a5;background:#f6f6e9;border-radius:23px;display:grid;place-items:center;color:#74876a;transition:background .2s,transform .2s}
+.stop-icon>.icon{width:30px;height:30px}.island-stop b{font-size:11px;line-height:1.5}.stop-state{font-size:9px;color:#65795b}
+.island-stop:hover .stop-icon{transform:translateY(-4px);background:#fff7dc}
+.stop-check{display:none;position:absolute;right:-5px;top:-5px;background:#ffe3a1;color:#775420;border:2px solid #edf0dc;border-radius:50%;width:22px;height:22px;font-size:12px;font-weight:900;place-items:center}
+.island-stop.earned .stop-icon{border-style:solid;border-color:#76a268;background:#d6e6ae;color:#285a42;box-shadow:0 4px 0 #bbcc9d}
+.island-stop.earned .stop-check{display:grid}.island-stop.earned .stop-state{color:#286044;font-weight:800}
+.passport-note{font-size:11px;margin:9px 0 0;color:#5c7050;line-height:1.8}
+.adventure-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.adventure-options label{border:1px solid var(--line);background:#f7f5e9;border-radius:18px;padding:20px 16px;display:flex;gap:10px;align-items:flex-start;cursor:pointer;line-height:1.6}
+.adventure-options label:has(input:checked){background:#e9efd0;border-color:#7e9a67;box-shadow:0 3px 0 #d5dfb7}
+.adventure-options input{margin:3px 0 0;width:18px;height:18px;accent-color:var(--green);flex-shrink:0}
+.adventure-options b{display:block;font-size:16px}.adventure-options small{display:block;font-size:11px;color:var(--muted);line-height:1.9;margin-top:5px}
+.match-board{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;max-width:660px;margin:25px auto 0}
+.match-board.small{grid-template-columns:repeat(2,minmax(0,1fr));max-width:370px}
+.match-card{aspect-ratio:4/5;perspective:800px;padding:0;border:0;border-radius:19px;background:none;min-height:82px;position:relative;isolation:isolate}
+.card-inner{position:absolute;inset:0;transform-style:preserve-3d;transition:transform .35s}
+.match-card.flipped .card-inner{transform:rotateY(180deg)}
+.card-cover,.card-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:19px;display:flex;align-items:center;justify-content:center;box-shadow:0 5px 0 #bac79f;border:2px solid #b9c99d}
+.card-cover{background:repeating-linear-gradient(135deg,#dce7bf 0 9px,#e4eccf 9px 18px);color:#457151}
+.card-cover>.icon{width:43px;height:43px;background:#f8f7e9;border-radius:50%;padding:7px;box-sizing:content-box}
+.card-cover small{position:absolute;bottom:9px;right:12px;font-size:11px;font-weight:800}
+.card-face{transform:rotateY(180deg);background:#fff9e5;color:#285943;border-color:#d6c992;box-shadow:0 5px 0 #dfd3a7}
+.card-face>.glyph{width:65%;height:65%}.pair-tick{display:none;position:absolute;top:5px;right:9px;color:#4b7841;font-size:18px}
+.match-card.paired .card-face{background:#e0edc9;border-color:#7fa36a;box-shadow:0 5px 0 #b6cca0}.match-card.paired .pair-tick{display:block}
+.match-card:hover:not(:disabled) .card-cover{border-color:#728f55}.match-card:disabled{color:var(--ink);opacity:1}
+.hunt-clue{display:flex;justify-content:center;gap:20px;align-items:center;margin:22px 0}
+.hunt-clue .sound-button{width:77px;height:77px;margin:0;flex-shrink:0}.hunt-clue .sound-button>.icon{width:34px;height:34px}
+.hunt-clue h3{font-size:21px;margin:0 0 7px}.hunt-clue p{font-size:12px;color:var(--muted);line-height:1.8;margin:0}
+.treasure-map{position:relative;isolation:isolate;background:#d9e9e2;border:1px solid #b6d0bd;border-radius:26px;max-width:660px;margin:0 auto;overflow:hidden;padding:24px 24px 82px;min-height:250px}
+.treasure-map:before,.treasure-map:after{content:'~  ~  ~';font-size:27px;letter-spacing:16px;position:absolute;color:#a7c9be;z-index:-1;pointer-events:none;transform:rotate(-9deg)}
+.treasure-map:before{left:5%;bottom:23px}.treasure-map:after{right:1%;top:13px}
+.treasure-map[data-land=shore]{max-width:430px;background:#dceee6}
+.treasure-map[data-land=forest]{background:#dce6cf;border-color:#afc496}
+.treasure-map[data-land=night]{background:#dae0ef;border-color:#b2bdd5}
+.treasure-map[data-land=night]:before,.treasure-map[data-land=night]:after{content:'✧  ·  ✦';color:#a3afd0}
+.hunt-board{display:grid;grid-template-columns:repeat(var(--cols),minmax(0,1fr));gap:16px;position:relative;z-index:1}
+.treasure-tile{position:relative;display:grid;place-items:center;aspect-ratio:1;border:2px solid #b5c78d;border-radius:44% 41% 39% 42%;background:#f5f4d9;box-shadow:0 5px 0 #b0c5a2;padding:15%;transition:transform .2s,border-color .2s,background .2s;min-height:50px}
+.treasure-tile>.glyph{width:100%;height:100%}.treasure-tile:disabled{color:var(--ink);opacity:.75}.treasure-tile:hover:not(:disabled),.treasure-tile.drop-target{border-color:#c99332;transform:translateY(-4px);background:#fff1bf}
+.island-star{display:none;font-size:clamp(25px,5vw,45px);color:#b47b1d;text-shadow:0 2px 0 #fff4c6}
+.treasure-tile.collected{background:#e9e7b2;border-color:#b4bc78;opacity:1}.treasure-tile.collected>.glyph{display:none}.treasure-tile.collected>.island-star{display:block}
+.treasure-tile.try-again{animation:island-wiggle .35s ease}.hunt-route{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.hunt-route polyline{stroke:#568f77;stroke-width:5;stroke-dasharray:10 15;fill:none;vector-effect:non-scaling-stroke;opacity:.6}
+.hunt-boat{position:absolute;left:50%;bottom:9px;width:54px;height:54px;background:#fff4d3;color:#7f5128;border:2px solid #d5b269;border-radius:18px;display:grid;place-items:center;transform:translate(-50%,-50%);z-index:3;box-shadow:0 4px 0 #9aaf9d77;transition:left .4s ease,top .4s ease;touch-action:none;user-select:none;-webkit-user-select:none;cursor:default}
+.hunt-boat>.icon{width:36px;height:36px;pointer-events:none}.hunt-boat.can-sail{cursor:grab;outline:5px solid #fff8cc77}.hunt-boat.dragging{cursor:grabbing;transition:none;box-shadow:0 12px 16px #345c4b44;outline:6px solid #fff0b399}
+.dock{position:absolute;bottom:13px;left:50%;transform:translateX(-50%);font-size:10px;color:#627969;background:#eff3de;padding:5px 10px;border-radius:20px}
+#hunt-stars{color:#a37120;letter-spacing:3px;font-size:18px}.chest-button{display:flex;gap:10px;align-items:center;border:2px solid #c29537;border-radius:16px;padding:14px 19px;color:#62461c;background:#f5d77f;font-size:16px;font-weight:900;box-shadow:0 4px 0 #d5b666}
+.chest-button:hover{background:#ffe59c;transform:translateY(-2px)}.chest-button>.icon{width:27px;height:27px}
+.treasure-reveal{display:flex;justify-content:center;align-items:center;gap:18px;margin:12px 0 25px;color:#bb8328}
+.treasure-reveal>.icon{width:90px;height:90px;stroke-width:1.25;background:#fff1bb;border-radius:26px;padding:15px;box-sizing:content-box}
+.treasure-reveal>span{font-size:37px}.celebration{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);z-index:20;display:flex;align-items:center;justify-content:center;gap:13px;background:#234b43;color:#fff5d5;border:2px solid #e2c374;border-radius:22px;padding:16px 23px;box-shadow:0 10px 40px #173c3933;font-size:15px;font-weight:850;max-width:calc(100% - 28px);width:max-content;pointer-events:none;line-height:1.6}
+.celebration-star{color:#ffe097;font-size:32px}.celebration.celebrate{animation:badge-pop .45s ease both}
+@keyframes island-wiggle{25%{transform:rotate(-5deg)}75%{transform:rotate(5deg)}}
+@keyframes badge-pop{from{opacity:0;translate:0 18px;scale:.85}to{opacity:1;translate:0 0;scale:1}}
+@media(max-width:900px){.modes{grid-template-columns:repeat(3,minmax(0,1fr))}.modes button{padding:14px}.adventure-options label{padding:16px 12px}.adventure-options b{font-size:14px}}
+@media(max-width:560px){
+  .passport{padding:17px 12px;border-radius:21px;margin-bottom:17px}.passport-heading h2{font-size:16px}.passport-heading .eyebrow{font-size:8px;letter-spacing:.02em}.badge-count{font-size:10px;padding:8px 9px}
+  .island-stops{gap:3px;margin-top:17px}.island-stops:before{top:24px;border-width:2px}.stop-icon{width:45px;height:48px;border-radius:17px}.stop-icon>.icon{width:25px;height:25px}.stop-check{width:19px;height:19px;font-size:10px;right:-5px}
+  .island-stop{gap:6px;padding:0}.island-stop b{font-size:9px;letter-spacing:-.05em}.stop-state{font-size:8px}.passport-note{font-size:10px;line-height:1.8}
+  .modes{gap:7px}.modes button{padding:12px 5px}.modes b{font-size:12px}.modes small{font-size:8px}
+  .adventure-options{grid-template-columns:1fr;gap:9px}.adventure-options label{padding:14px 13px;align-items:center}.adventure-options label>span{display:flex;align-items:center;justify-content:space-between;gap:10px;flex:1}
+  .adventure-options b{font-size:14px;white-space:nowrap}.adventure-options small{font-size:9px;line-height:1.8;margin:0}
+  .match-board{gap:10px;margin-top:22px}.match-card{border-radius:13px}.card-cover,.card-face{border-radius:13px}.card-cover>.icon{width:24px;height:24px;padding:5px}.card-cover small{font-size:9px;bottom:4px;right:6px}.pair-tick{font-size:12px;top:3px;right:4px}
+  .match-board.small{max-width:290px;gap:13px}.match-board.small .card-cover>.icon{width:36px;height:36px;padding:8px}
+  .hunt-clue{gap:13px;align-items:center;justify-content:flex-start;margin:20px 0}.hunt-clue .sound-button{width:59px;height:59px}.hunt-clue .sound-button>.icon{width:28px;height:28px}.hunt-clue h3{font-size:17px;line-height:1.5;margin-bottom:3px}.hunt-clue p{font-size:10px}
+  .treasure-map{padding:15px 12px 75px;border-radius:20px;min-height:210px}.hunt-board{gap:10px}.treasure-tile{min-height:44px;border-width:1.5px;box-shadow:0 4px 0 #b0c5a2}
+  .hunt-boat{width:46px;height:46px;border-radius:15px}.hunt-boat>.icon{width:29px;height:29px}.dock{font-size:9px;bottom:9px}#hunt-stars{font-size:14px;letter-spacing:1px}
+  .chest-button{font-size:13px;padding:10px 13px;border-radius:12px;gap:8px}.chest-button>.icon{width:23px;height:23px}.treasure-reveal>.icon{width:72px;height:72px;padding:12px}.treasure-reveal>span{font-size:27px}
+  .celebration{font-size:12px;gap:9px;padding:12px 15px;bottom:13px;border-radius:16px}.celebration-star{font-size:25px}
+}
+@media(max-width:360px){.island-stop b{font-size:8px}.stop-icon{width:42px;height:46px}.adventure-options small{font-size:8px}.match-board{gap:8px}.hunt-board{gap:8px}.treasure-map{padding-left:9px;padding-right:9px}.modes b{font-size:11px}}
+@media(prefers-reduced-motion:reduce){.card-inner,.hunt-boat,.stop-icon,.treasure-tile{transition:none!important}.celebration.celebrate,.treasure-tile.try-again{animation:none!important}}
