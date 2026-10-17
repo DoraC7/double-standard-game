@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f8f4e8">
+  <title>ㄅㄆㄇ 小小探險家｜小龍蝦遊戲間</title>
+  <link rel="stylesheet" href="zhuyin.css">
+  <script src="zhuyin-data.js" defer></script>
+  <script src="zhuyin.js" defer></script>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" class="icon-defs" aria-hidden="true"><defs>
+<symbol id="i-sound" viewBox="0 0 24 24"><path d="M4 9h4l5-4v14l-5-4H4z"/><path d="M17 8q4 4 0 8M20 4q7 8 0 16"/></symbol>
+<symbol id="i-plant" viewBox="0 0 24 24"><path d="M12 21V10M12 15C3 15 3 8 3 8s9-1 9 7zM12 11c0-8 9-8 9-8s0 8-9 8zM5 21h14"/></symbol>
+<symbol id="i-shell" viewBox="0 0 24 24"><path d="M9 21h6l1-4c8-2 7-12 2-11 0-6-10-6-11 0-6-2-8 8 1 11zM12 4v12M7 7l4 9M18 7l-4 9M4 12l6 5M20 12l-6 5"/></symbol>
+<symbol id="i-train" viewBox="0 0 24 24"><path d="M5 17V6q0-3 7-3t7 3v11zM5 11h14M12 4v7M7 22l3-5M17 22l-3-5"/><circle cx="8" cy="14" r="1"/><circle cx="16" cy="14" r="1"/></symbol>
+</defs></svg>
+<main>
+  <header><a href="index.html">← 回遊戲間</a><span>小龍蝦的學習小島</span></header>
+  <section class="hero" aria-labelledby="page-title">
+    <div class="hero-copy"><p class="eyebrow">每天一點點，認識新朋友</p><h1 id="page-title"><span>ㄅㄆㄇ</span><br>小小探險家<span class="sun" aria-hidden="true">✺</span></h1><p class="lead">用耳朵聽，用小手選。<br>沒有倒數，答錯也可以再試一次。</p><span class="source-badge">✓ 教育部正式錄音・37 個注音符號</span></div>
+    <div class="hero-art" aria-hidden="true"><div class="island"></div><span class="float-card card-bo">ㄅ</span><span class="float-card card-po">ㄆ</span><span class="float-card card-mo">ㄇ</span><span class="art-spark">✦</span><span class="art-flower">✿</span><span class="art-caption">一起出發吧！</span></div>
+  </section>
+  <nav class="modes" aria-label="選擇玩法">
+    <button type="button" data-mode="garden" aria-pressed="true"><span aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#i-plant"/></svg></span><span><b>符號花園</b><small>先聽聽・看筆順</small></span></button>
+    <button type="button" data-mode="listen" aria-pressed="false"><span aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#i-shell"/></svg></span><span><b>聽音找朋友</b><small>聽聲音・選符號</small></span></button>
+    <button type="button" data-mode="tones" aria-pressed="false"><span aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#i-train"/></svg></span><span><b>聲調小火車</b><small>認調號・找位置</small></span></button>
+  </nav>
+
+  <section id="garden" class="panel" aria-labelledby="garden-title">
+    <div class="panel-heading"><div><p class="eyebrow">第一站 · 慢慢認識</p><h2 id="garden-title">點一個符號，交個朋友。</h2><p>聽聽它的聲音，再看看每一筆的順序。</p></div><span class="pill">幼兒園起 · 親子一起玩</span></div>
+    <div class="garden-layout">
+      <div class="symbol-picker"><div class="group-tabs" role="group" aria-label="符號分類"><button type="button" data-group="all" aria-pressed="true">全部 37 個</button><button type="button" data-group="initial" aria-pressed="false">聲符 ㄅ～ㄙ</button><button type="button" data-group="final" aria-pressed="false">韻符 ㄚ～ㄩ</button></div><div id="symbol-grid" class="symbol-grid" role="group" aria-label="選擇注音符號"></div></div>
+      <div class="study-card"><span class="tiny-label" id="symbol-label">符號 1 / 37</span><div class="writing-board" id="writing-board" role="img" aria-label="ㄅ的標準字形"></div><p id="stroke-label" class="stroke-label" aria-live="polite"></p><div class="study-actions"><button type="button" id="study-play" class="primary"><svg class="icon" aria-hidden="true"><use href="#i-sound"/></svg> 聽發音</button><button type="button" id="stroke-play" class="secondary">✎ 逐筆看</button></div><div class="stroke-controls"><button type="button" id="stroke-prev" aria-label="看上一筆">←</button><span id="stroke-step">完整字形</span><button type="button" id="stroke-next" aria-label="看下一筆">→</button></div></div>
+    </div>
+  </section>
+
+  <section id="listen" class="panel" aria-labelledby="listen-title" hidden>
+    <div class="panel-heading"><div><p class="eyebrow">第二站 · 耳朵小任務</p><h2 id="listen-title">誰在跟你打招呼？</h2><p>按喇叭聽一次，再找到一樣的注音符號。</p></div><span class="pill">幼兒園～國小低年級</span></div>
+    <div id="listen-setup" class="setup"><fieldset><legend>今天想練哪些朋友？</legend><div class="pool-options"><label><input type="radio" name="pool" value="starter" checked><span><b>小小起步</b><small>ㄅ ㄆ ㄇ ㄈ · 2 選 1</small></span></label><label><input type="radio" name="pool" value="initial"><span><b>聲符探險</b><small>ㄅ～ㄙ · 4 選 1</small></span></label><label><input type="radio" name="pool" value="final"><span><b>韻符探險</b><small>ㄚ～ㄩ · 4 選 1</small></span></label><label><input type="radio" name="pool" value="all"><span><b>整座小島</b><small>全部 37 個 · 4 選 1</small></span></label></div></fieldset><p class="setup-note">每趟 6 題，隨時可以回到花園練習。記得打開裝置音量喔。</p><button type="button" id="listen-start" class="primary large">開始找朋友 →</button></div>
+    <div id="listen-game" hidden><div class="journey"><span id="listen-progress"></span><div id="listen-dots" class="dots" aria-hidden="true"></div></div><div class="question-stage"><span class="scene-spark" aria-hidden="true">✧</span><button type="button" id="question-play" class="sound-button" aria-label="播放本題的教育部注音錄音"><svg class="icon" aria-hidden="true"><use href="#i-sound"/></svg></button><h3 id="listen-question" tabindex="-1">聽一聽，是哪個朋友？</h3><p>想再聽一次，隨時按喇叭。</p></div><div id="listen-answers" class="answers" role="group" aria-label="選擇聽到的符號"></div><p class="feedback" id="listen-feedback" role="status"></p><div class="round-actions"><button type="button" id="listen-learn" class="text-button">先去花園聽聽</button><button type="button" id="listen-next" class="primary" hidden>下一位朋友 →</button></div></div>
+    <div id="listen-result" class="result" hidden><div class="result-icon" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#i-plant"/></svg></div><p class="eyebrow">這趟探險完成了</p><h3 tabindex="-1" id="listen-result-title">六次小任務，都完成了！</h3><p id="listen-summary"></p><div id="review-symbols" class="review-symbols" aria-label="本趟需要再熟悉的符號"></div><div class="result-actions"><button type="button" id="listen-retry" class="primary">再探險一次</button><button type="button" id="listen-settings" class="secondary">換一組朋友</button></div></div>
+  </section>
+
+  <section id="tones" class="panel" aria-labelledby="tones-title" hidden>
+    <div class="panel-heading"><div><p class="eyebrow">第三站 · 聲調小火車</p><h2 id="tones-title">小小調號，坐在哪裡？</h2><p>這站看題目，練習調號和位置；不播放聲調讀音。</p></div><span class="pill">認得符號後 · 國小練習</span></div>
+    <div id="tone-setup"><div class="tone-guide" id="tone-guide"></div><fieldset class="orientation"><legend>今天練哪一種排列？</legend><label><input type="radio" name="orientation" value="horizontal" checked> 橫式注音 →</label><label><input type="radio" name="orientation" value="vertical"> 直式注音 ↓</label></fieldset><p class="setup-note">一聲在這裡省略調號；輕聲橫式在前方，直式在上方。共 5 題，題目可由大人陪讀。</p><button type="button" id="tone-start" class="primary large">小火車出發 →</button></div>
+    <div id="tone-game" hidden><div class="journey"><span id="tone-progress"></span><div id="tone-dots" class="dots" aria-hidden="true"></div></div><div class="tone-prompt"><span class="train" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#i-train"/></svg></span><p id="tone-direction"></p><h3 id="tone-question" tabindex="-1"></h3></div><div id="tone-answers" class="answers tone-answers" role="group" aria-label="選擇正確的聲調標注"></div><p id="tone-feedback" class="feedback" role="status"></p><div class="round-actions"><button type="button" id="tone-back" class="text-button">回去看看調號</button><button type="button" id="tone-next" class="primary" hidden>下一站 →</button></div></div>
+    <div id="tone-result" class="result" hidden><div class="result-icon" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#i-train"/></svg></div><p class="eyebrow">五個聲調都到站了</p><h3 tabindex="-1" id="tone-result-title">小火車，順利到站！</h3><p id="tone-summary"></p><div class="result-actions"><button type="button" id="tone-retry" class="primary">再搭一次火車</button><button type="button" id="tone-settings" class="secondary">換個排列</button></div></div>
+  </section>
+
+  <p id="audio-status" class="audio-status" role="status"></p>
+  <details class="grownups"><summary>給陪玩的家長與老師：資料來源、玩法與授權</summary><div><p>符號、正式錄音、字形和逐筆順序取自中華民國教育部《國語注音符號手冊》開放部件；聲調名稱與標注規則依手冊「四、調號說明表」。本遊戲不是教育部製作或認證。</p><p>聲符 21 個、韻符 16 個，共 37 個；ㄧ、ㄨ、ㄩ包含在韻符中。先認識符號，再聽音辨識；聲調關只練調號與標注，不是拼讀、口語變調或發音評量。逐筆展示是依教育部素材逐筆顯示，不評分孩子的手寫筆跡。</p><p>每題可重試，答錯不扣分；結算的「第一次就找到」僅描述本局作答。換玩法會結束正在進行的那一局。無帳號、廣告、麥克風或個人資料上傳；進度只留在分頁中。</p><p><a href="https://language.moe.gov.tw/001/Upload/files/site_content/M0001/juyin/html_ch/index.html" target="_blank" rel="noopener">閱讀教育部原始手冊 ↗</a> · <a href="ZHUYIN-SOURCES.md">素材來源與核對紀錄</a></p><p>2017 © 教育部，國語注音符號手冊-開放部件。<br>此素材依「<a href="https://creativecommons.org/licenses/by/4.0/deed.zh_TW" target="_blank" rel="noopener">創用CC 姓名標示 4.0 國際版本</a>」授權條款進行公眾釋出。遊戲擷取原始 SVG 路徑並調整顯示顏色；音檔原樣保留。</p></div></details>
+  <footer>小小練習，慢慢長大。<span><svg class="icon" aria-hidden="true"><use href="#i-plant"/></svg></span><a href="index.html">再去遊戲間逛逛 ↗</a></footer>
+</main>
+</body>
+</html>
