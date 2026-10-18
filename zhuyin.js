@@ -32,9 +32,11 @@
   let quiz = null;
   let toneQuiz = null;
   let adventure = null;
+  let spelling = null;
 
   function stopAudio() {
     audioRequest++;
+    if (spelling) spelling.stop();
     if (audio) {
       audio.pause();
       audio.removeAttribute('src');
@@ -94,16 +96,18 @@
     stopAudio();
     clearStrokes();
     if (adventure) adventure.leave();
+    if (spelling) spelling.leave();
     mode = next;
     quiz = null;
     toneQuiz = null;
     $('audio-status').textContent = '';
-    ['garden', 'listen', 'tones', 'match', 'hunt'].forEach(id => $(id).hidden = id !== next);
+    ['garden', 'listen', 'tones', 'match', 'hunt', 'spelling'].forEach(id => $(id).hidden = id !== next);
     document.querySelectorAll('[data-mode]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.mode === next)));
     if (next === 'listen') listenSetup();
     if (next === 'tones') toneSetup();
     if (next === 'garden') renderStudy();
     if (adventure) adventure.enter(next);
+    if (spelling) spelling.enter(next);
   }
   function openMode(next) {
     if (next !== mode) switchMode(next);
@@ -358,13 +362,16 @@
       stopAudio();
       clearStrokes();
       adventure.pause();
+      spelling.pause();
     }
   });
-  window.addEventListener('pagehide', () => { stopAudio(); clearStrokes(); adventure.pause(); });
+  window.addEventListener('pagehide', () => { stopAudio(); clearStrokes(); adventure.pause(); spelling.pause(); });
   adventure = window.createZhuyinAdventure({
     symbols, shuffle, glyph, play, stopAudio,
     openMode
   });
+  spelling = window.createZhuyinSpelling({words: window.ZHUYIN_WORDS, shuffle, stopAudio, award: id => adventure.award(id)});
   renderGrid();
   renderStudy();
+  switchMode('spelling');
 })();

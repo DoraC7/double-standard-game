@@ -4,6 +4,7 @@ window.createZhuyinAdventure = ({symbols, shuffle, glyph, play, stopAudio, openM
   const $ = id => document.getElementById(id);
   const icon = name => `<svg class="icon" aria-hidden="true"><use href="#i-${name}"/></svg>`;
   const stops = [
+    {id: 'spelling', name: '小一拼讀', badge: '拼讀小高手', icon: 'sound', task: '完成拼讀回合', goal: '完成一整回合拼讀練習或聽力考試'},
     {id: 'garden', name: '符號花園', badge: '花園小園丁', icon: 'plant', task: '認識 3 個', goal: '親手點選 3 個不同的符號'},
     {id: 'listen', name: '聽音找朋友', badge: '耳朵小偵探', icon: 'shell', task: '完成 6 題', goal: '完成一趟 6 題聽音練習'},
     {id: 'match', name: '翻翻配對', badge: '配對小達人', icon: 'match', task: '找齊雙胞胎', goal: '找到一整副卡片的雙胞胎'},
@@ -18,15 +19,15 @@ window.createZhuyinAdventure = ({symbols, shuffle, glyph, play, stopAudio, openM
   let drag = null;
 
   function passport() {
-    $('badge-count').textContent = `${badges.size} / 5 枚徽章`;
+    $('badge-count').textContent = `${badges.size} / ${stops.length} 枚徽章`;
     stops.forEach(stop => {
       const b = $('island-stops').querySelector(`[data-stop="${stop.id}"]`);
       b.classList.toggle('earned', badges.has(stop.id));
       b.setAttribute('aria-label', `${stop.name}，${badges.has(stop.id) ? `已獲得${stop.badge}徽章` : stop.goal}，點選開始`);
       b.querySelector('.stop-state').textContent = badges.has(stop.id) ? '✓ 已點亮' : stop.task;
     });
-    $('passport-note').textContent = badges.size === 5
-      ? '五個地方都亮起來了！可以再出發，每次都會重新洗牌。'
+    $('passport-note').textContent = badges.size === stops.length
+      ? '六個地方都亮起來了！可以再出發，每次都會重新洗牌。'
       : '點地點就能出發。完成小任務，讓小島慢慢亮起來！';
   }
   stops.forEach(stop => {

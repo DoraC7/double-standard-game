@@ -60,7 +60,7 @@ python3 -m http.server 8765
 
 ## 第六款：ㄅㄆㄇ 小小探險家
 
-`zhuyin.html`、`zhuyin.css`、`zhuyin.js`、`zhuyin-adventure.css`、`zhuyin-adventure.js`、`zhuyin-data.js`、`zhuyin.svg` 與 `assets/zhuyin/`：幼兒園至國小注音練習。使用中華民國教育部《國語注音符號手冊》37 個正式錄音與 SVG 筆順素材，共五種玩法：
+`zhuyin.html`、`zhuyin.css`、`zhuyin.js`、`zhuyin-adventure.css`、`zhuyin-adventure.js`、`zhuyin-data.js`、`zhuyin.svg` 與 `assets/zhuyin/`：幼兒園至國小注音練習。使用中華民國教育部《國語注音符號手冊》37 個正式錄音與 SVG 筆順素材，原有五種玩法（新增的小一進階見下節）：
 
 - 符號花園：聽音、逐筆看寫法。
 - 聽音找朋友：每局 6 題，起步 2 選 1、進階 4 選 1。
@@ -71,3 +71,20 @@ python3 -m http.server 8765
 探索護照以完成任務解鎖五枚徽章（花園需親手點選三個不同符號）；切換分頁不會自動解鎖。所有玩法一開始都可選，不強迫依序過關；重新整理後護照重置。無倒數、可重試、無合成語音或麥克風。拖曳之外保留點選與鍵盤操作；切換瀏覽器分頁時停止聲音，尋寶須重播線索才能繼續。
 
 資料核對、教材範圍與 CC BY 4.0 姓名標示見 [ZHUYIN-SOURCES.md](ZHUYIN-SOURCES.md)。原始音檔與授權聲明隨站發布，不依賴教育部網站即時載入。驗證資料可執行 `node --test tests/zhuyin-data.test.cjs`。
+
+### 小一進階：注音拼讀與聽力考試（2026-10-18）
+
+打開 `zhuyin.html` 現在直接進入「小一拼讀挑戰」。原有五種玩法保留，探索護照增為六站。新增：
+
+- 二拼：聽「棒」，選 ㄅㄤ；先不考聲調。
+- 三拼：聽「瓜」，選 ㄍㄨㄚ，練含介音的拼讀。
+- 聲調進階：聽「棒」，選完整 ㄅㄤˋ。
+- 拼讀卡、四選一練習、拼字積木、10／20 題聽力考試；考試每題答一次，交卷後才公布結果，可重播及只重練錯題。
+
+使用教育部《國語辭典簡編本》2014_20260929 版文字與單字原始錄音，原檔完整保留，只選播開頭詞目字音段落；不是把單個注音的錄音硬接成國字。資料與授權詳見 [ZHUYIN-SOURCES.md](ZHUYIN-SOURCES.md)。新增檔案為 `zhuyin-words.js`、`zhuyin-spelling.js`、`zhuyin-spelling.css`、`assets/zhuyin-words/`，部署時須一併發布。
+
+資料與題目選項檢查：
+
+```sh
+node --test tests/zhuyin-data.test.cjs tests/zhuyin-spelling.test.cjs
+```
