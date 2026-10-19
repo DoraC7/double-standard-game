@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#20372f">
+<meta name="description" content="ADHD 日常共鳴賓果：點選有共鳴的生活經驗，橫直斜連線。繁中 3×3／5×5、隨機換卡、生活小提示、下載圖片；不是篩檢或診斷。">
+<title>ADHD 日常賓果・咦，這格是我！｜小龍蝦遊戲間</title>
+<link rel="icon" href="bingo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="adhd-bingo.css">
+<script defer src="adhd-bingo-data.js"></script>
+<script defer src="adhd-bingo.js"></script>
+</head>
+<body>
+<main>
+<nav class="topbar" aria-label="導覽"><a href="index.html">← 小龍蝦遊戲間</a><span>🦞 NO RUSH, JUST BINGO.</span></nav>
+<header class="hero">
+<div class="hero-copy"><span class="eyebrow">ADHD DAILY LIFE BINGO · 日常共鳴版</span><h1>咦，這格<br>根本<span class="title-mark">就是我！</span></h1><p>有些日常，讀到就會笑一下。<br>點選「我也有過」的格子，看看能連成幾條線。</p><p class="medical-note">趣味自我觀察，不是 ADHD 篩檢或診斷。<br>有共鳴不代表有 ADHD；沒連線也不能排除。</p></div>
+<div class="hero-art" aria-hidden="true"><div class="art-tag">不趕時間俱樂部</div><img src="bingo.svg" alt="" width="220" height="220"><span class="art-caption">一格共鳴，一點理解。</span><span class="spark one">✳</span><span class="spark two">✦</span></div>
+</header>
+<section class="game-shell" aria-labelledby="game-title">
+<div class="game-toolbar"><div><span class="eyebrow dark">YOUR LITTLE CHECK-IN</span><h2 id="game-title">今天的共鳴卡</h2></div><div class="size-switch" role="group" aria-label="卡片大小"><button type="button" data-size="3" aria-pressed="false">3×3 輕巧</button><button type="button" data-size="5" aria-pressed="true">5×5 經典</button></div></div>
+<p class="howto" id="howto">① 勾選自己的經驗　② 橫、直、斜連線　③ 點過的格子再點可取消。中間自由格送你。</p>
+<div class="stats" aria-live="polite" aria-atomic="true"><span>共鳴 <strong id="marked-count">0</strong><span id="marked-total"> / 24 格</span></span><span>連線 <strong id="line-count">0</strong> 條</span><span class="card-code" id="card-code"></span></div>
+<div class="bingo-letters" aria-hidden="true"><span>B</span><span>I</span><span>N</span><span>G</span><span>O</span></div>
+<div class="board" id="board" role="group" aria-label="可點選的賓果卡" aria-describedby="howto"></div>
+<div class="result-banner" id="result-banner" role="status">不用拚全滿；只勾選你自己有共鳴的格子就好。</div>
+<div class="legend"><span><i class="focus"></i>注意力</span><span><i class="time"></i>時間與安排</span><span><i class="impulse"></i>坐不住與衝動</span><span><i class="daily"></i>生活共鳴*</span></div>
+<p class="legend-note">*「生活共鳴」是許多人都可能有的經驗，不是 ADHD 特有表現。其餘格子也不能單獨用來判斷。</p>
+<div class="actions"><button class="primary" id="new-card" type="button">↻ 換張新卡</button><button id="clear-card" type="button">清除勾選</button><button id="undo" type="button" disabled>復原上次操作</button><button id="download" type="button">↓ 下載賓果圖</button><button id="copy-link" type="button">↗ 複製同款空白卡</button></div>
+<p class="privacy">勾選只留在目前分頁記憶體，重新整理就清空，不會上傳或自動分享。複製連結只有同款空白卡，不含勾選。</p>
+<p class="action-status" id="action-status" role="status"></p>
+<div id="download-fallback" hidden><p>若手機沒有自動下載，可以長按圖片儲存：</p><img id="download-preview" alt="目前勾選的賓果卡圖片"><a id="download-file">開啟／下載圖片</a></div>
+</section>
+<aside class="tip-panel" aria-labelledby="tip-title"><div class="tip-icon" aria-hidden="true">✳</div><div><span class="eyebrow dark">A LITTLE HELP, NOT A LABEL</span><h2 id="tip-title">不只「中了」，也留一個小方法</h2><p id="tip-detail">點選任一經驗格，這裡會出現它的說明與一個可以試試的小方法。</p><p class="tip-action" id="tip-action">這些是一般生活建議，不是治療，也不需要全部做到。</p></div></aside>
+<details class="research"><summary>這是哪一種賓果？資料從哪裡來？</summary><div>
+<p>網路上的 ADHD 賓果通常用生活敘述取代數字：勾選自己有共鳴的格子，再看橫、直、斜線。這是聊天與反思的遊戲，不是經過驗證的量表。本版 40 則繁中敘述與小提示為原創；每張經典卡從四類各抽 6 格，輕巧卡各抽 2 格，另加自由格。</p>
+<p><strong>格數與連線沒有醫療意義。</strong>類似經驗也可能出現在睡眠不足、壓力、焦慮或其他情況。ADHD 評估會看持續性、童年起始、跨情境與生活功能影響，而不是玩賓果的成績。如果這些困難長期影響工作、學習或關係，可帶具體例子向身心科／精神科專業人員諮詢。</p>
+<ul><li><a href="https://www.bingocardcreator.com/bingo-cards/adhd/" target="_blank" rel="noopener noreferrer">Bingo Card Creator：ADHD bingo 的玩法參考</a>（商業平台；未採用其付費服務或題庫）</li><li><a href="https://www.nimh.nih.gov/health/publications/adhd-what-you-need-to-know" target="_blank" rel="noopener noreferrer">NIMH：ADHD in Adults: 4 Things to Know</a>（成人常見表現與評估原則）</li><li><a href="https://www.nhs.uk/conditions/adhd-adults/" target="_blank" rel="noopener noreferrer">NHS：ADHD in adults</a>（常見表現、求助及生活調整）</li></ul>
+<p>本遊戲沒有複製 ASRS 或其他篩檢量表，也不提供 ADHD 機率、嚴重度、人格標籤或排名。題目不是針對任何人的病史或聊天紀錄製作。</p>
+</div></details>
+<footer>MADE WITH A LITTLE UNDERSTANDING. 🦞<br><a href="index.html">回到遊戲間，換個心情玩</a></footer>
+<noscript><p>這個互動賓果需要啟用 JavaScript。它是娛樂，不是 ADHD 診斷。</p></noscript>
+</main>
+</body>
+</html>
