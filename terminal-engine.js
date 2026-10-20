@@ -3,7 +3,7 @@
   'use strict';
   const HOME = '/home/lobster';
   const GUIDE = '歡迎來到龍蝦遊戲間！\n先看位置，再看內容，改動之後再驗證。\n資料夾用 cd 進入；文字檔用 cat 閱讀。\n檔名分大小寫。$ 是提示符，不是指令的一部分。';
-  const commands = ['pwd', 'ls', 'cd', 'cat', 'mkdir', 'touch', 'cp', 'mv', 'rm', 'rmdir', 'clear', 'git', 'help'];
+  const commands = ['pwd', 'ls', 'cd', 'cat', 'mkdir', 'touch', 'cp', 'mv', 'rm', 'rmdir', 'clear', 'git', 'uname', 'help'];
   const help = {
     pwd: 'pwd：顯示目前所在的完整路徑，不會搬動檔案。',
     ls: 'ls [路徑]：列出內容；ls -a 也列出隱藏項目與 .、..。資料夾後會加 /。',
@@ -17,6 +17,7 @@
     rmdir: 'rmdir 資料夾：只刪除空資料夾。',
     clear: 'clear：清除終端機畫面，不改動資料夾、檔案或目前位置。完整文字紀錄仍可匯出。',
     git: 'git --version：顯示本練習的模擬版本，不會安裝 Git，也不能證明你電腦有 Git。',
+    uname: 'uname：顯示系統名稱；-a 顯示全部，-s／-n／-r／-v／-m 分別顯示系統名稱、主機名稱、核心發行版、核心版本、硬體類型，可合併使用。這裡只顯示虛構的遊戲系統，不會偵測你的電腦。',
     help: 'help 或 help 指令：查看本練習支援的用法。這裡不是完整 Bash／zsh。'
   };
   const dir = () => ({ type: 'dir' });
@@ -74,7 +75,7 @@
     try { words = tokenize(line); } catch (error) { return fail(error.message); }
     if (!words.length) return { ok: true, output: '', empty: true, changed: false };
     const [cmd, ...args] = words;
-    if (!commands.includes(cmd)) return fail(cmd + '：找不到這個指令。輸入 help 看支援清單；指令分大小寫。');
+    if (!commands.includes(cmd)) return fail(cmd + '：本模擬器尚未支援這個指令，不代表真實終端機沒有。輸入 help 看支援清單；指令分大小寫。');
     const paths = args.map(arg => resolve(state, arg));
     const result = { ok: true, output: '', changed: false, cmd, args, paths };
     const need = count => args.length === count;
@@ -97,6 +98,12 @@
     } else if (cmd === 'git') {
       if (args.length !== 1 || args[0] !== '--version') return usage();
       result.output = 'git version 2.53.0 (遊戲模擬，不是你電腦的版本)';
+    } else if (cmd === 'uname') {
+      if (args.some(arg => !/^-[asnrvm]+$/.test(arg))) return usage();
+      const flags = args.length ? args.join('').replace(/-/g, '') : 's';
+      const fields = [['s', 'LobsterOS'], ['n', 'island'], ['r', '1.0'], ['v', 'Browser-Simulator'], ['m', 'virtual']];
+      result.output = fields.filter(([flag]) => flags.includes('a') || flags.includes(flag))
+        .map(([, value]) => value).join(' ') + '\n（遊戲模擬：虛構系統資訊，不是你電腦的作業系統或硬體）';
     } else if (cmd === 'ls') {
       if (args.some(a => a.startsWith('-') && a !== '-a') || args.filter(a => a !== '-a').length > 1) return usage();
       const path = resolve(state, args.find(a => a !== '-a') ?? '.');

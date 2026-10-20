@@ -137,7 +137,7 @@
     if (command.disabled) return;
     const options = E.complete(session.env, command.value);
     if (options.length === 1) command.value = options[0];
-    else system(options.length ? '可補完：' + options.map(o => o.trim()).join('  ') : '沒有可補完的項目；可用 ls 看看名稱。');
+    else system(options.length ? '可自動補全：' + options.map(o => o.trim()).join('  ') : '沒有可自動補全的項目；可用 ls 看看名稱。');
     command.focus();
   }
   command.addEventListener('keydown', event => {
@@ -175,7 +175,7 @@
   function switchMode(nextMode) {
     if (nextMode === mode) return;
     mode = nextMode; session = mode === 'lesson' ? lesson : sandbox; command.value = '';
-    if (!session.screen.length) system('🦞 自由沙盒就緒。輸入 help 看用法；回到關卡時，原本進度會保留。');
+    if (!session.screen.length) system('🦞 自由沙盒就緒。這裡只支援 help 列出的練習指令，不是完整 shell；回到關卡時，原本進度會保留。');
     redrawScreen(); renderMission(); $('mission-title').focus();
   }
   $('lesson-mode').addEventListener('click', () => switchMode('lesson'));
@@ -193,7 +193,7 @@
     proofs.length = 0; checkpoint = E.clone(lesson.env); output.replaceChildren();
     system('🦞 新的一趟探險開始。這次試著少看一點提示。'); renderMission(); command.focus();
   });
-  const cheatNames = { pwd:'看位置', ls:'列出內容', cd:'切換資料夾', cat:'讀文字檔', mkdir:'建立資料夾', touch:'建立空白檔', cp:'複製檔案', mv:'搬移／改名', rm:'刪除檔案', clear:'清畫面', git:'模擬版本', help:'查說明' };
+  const cheatNames = { pwd:'看位置', ls:'列出內容', cd:'切換資料夾', cat:'讀文字檔', mkdir:'建立資料夾', touch:'建立空白檔', cp:'複製檔案', mv:'搬移／改名', rm:'刪除檔案', clear:'清畫面', git:'模擬版本', uname:'模擬系統資訊', help:'查說明' };
   for (const [cmd, description] of Object.entries(cheatNames)) {
     const button = document.createElement('button'); button.type = 'button'; button.append(document.createTextNode(cmd));
     const small = document.createElement('small'); small.textContent = description; button.append(small);
