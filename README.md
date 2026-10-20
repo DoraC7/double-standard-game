@@ -1,6 +1,6 @@
 # 小龍蝦遊戲間
 
-七款免費、純前端小遊戲，從 `index.html` 入口進入。
+八款免費、純前端小遊戲，從 `index.html` 入口進入。
 
 「雙標大挑戰」（`double-standard.html`）是一款換位選擇遊戲。先替別人處理一件事，隔幾回合在相同條件下換自己面對；兩輪使用同一組具體選項，最後才比較是否改了標準。通融本身不算雙標，前後一致才是判準。
 
@@ -33,7 +33,7 @@ python3 -m http.server 8765
 
 ## 專案檔案
 
-- `index.html`：七款遊戲共同入口；舊首頁 `#r=` 戰績連結自動轉到雙標遊戲並保留片段。
+- `index.html`：八款遊戲共同入口；舊首頁 `#r=` 戰績連結自動轉到雙標遊戲並保留片段。
 - `double-standard.html`：原雙標遊戲的畫面、流程和計分。
 - `start-small.html`、`start-small.css`、`start-small.js`：拖延啟動遊戲。
 - `mini-kart.html`、`mini-kart.css`、`mini-kart.js`、`kart.svg`：迷你卡丁車與原創插圖。
@@ -47,7 +47,7 @@ python3 -m http.server 8765
 
 ## 部署
 
-這是靜態網站。GitHub Pages 可發布倉庫根目錄的 `index.html` 作共同入口；所有七款遊戲的 HTML、CSS 和 JS 必須同時發布。啟用 Pages 後，分享連結會自動以當前網站網址產生。發布設定由倉庫擁有者決定。
+這是靜態網站。GitHub Pages 可發布倉庫根目錄的 `index.html` 作共同入口；所有八款遊戲的 HTML、CSS 和 JS 必須同時發布。啟用 Pages 後，分享連結會自動以當前網站網址產生。發布設定由倉庫擁有者決定。
 
 ## 授權
 
@@ -58,7 +58,7 @@ python3 -m http.server 8765
 `hyper-challenge.html`、`.css`、`.js` 與 `bolt.svg`：原創節奏反應遊戲。左右拍點、任一鍵長按蓄力後放開、紅燈期間停手，暖身 72 BPM / 12 拍、派對 105 BPM / 24 拍、暴走 132 BPM / 36 拍。前四拍帶入四種操作，其餘隨機。以圓環收合提示時機；可選音效，不必開聲音才能玩。手機雙鍵支援 pointer capture，鍵盤方向鍵或 Z/X；P、Escape、失焦或切換分頁可暫停。無淘汰、帳號、儲存或外部套件，分數不是心理診斷。
 
 
-## 第七款：ㄅㄆㄇ 小小探險家
+## 第六款：ㄅㄆㄇ 小小探險家
 
 `zhuyin.html`、`zhuyin.css`、`zhuyin.js`、`zhuyin-adventure.css`、`zhuyin-adventure.js`、`zhuyin-data.js`、`zhuyin.svg` 與 `assets/zhuyin/`：幼兒園至國小注音練習。使用中華民國教育部《國語注音符號手冊》37 個正式錄音與 SVG 筆順素材，原有五種玩法（新增的小一進階見下節）：
 
@@ -96,3 +96,26 @@ node --test tests/zhuyin-data.test.cjs tests/zhuyin-spelling.test.cjs
 這是趣味自我觀察，不是 ADHD 篩檢、診斷或治療。格數與連線沒有醫療意義；不給任何人預設勾選。玩法、資料來源與隱私邊界見 [ADHD-BINGO-SOURCES.md](ADHD-BINGO-SOURCES.md)。
 
 資料、抽卡與連線邏輯檢查：`node --test tests/adhd-bingo.test.cjs`。
+
+
+## 第八款：龍蝦終端機探險
+
+試玩：<https://dorac7.github.io/double-standard-game/terminal-quest.html>。
+
+14 站繁中入門任務，親手操作 `pwd`、`ls`、`cd`、`cat`、`mkdir`、`touch`、`cp`、`mv`、`rm`、`clear` 與模擬 `git --version`。建立、複製、改名、刪除後需再用讀取指令核對；四題觀念確認分辨建立與進入、複製與搬移、清畫面與刪檔、查版本與安裝。最後串接建立交付資料夾、複製、讀取與列出內容。不只比對固定字串，接受等效的相對／絕對路徑。
+
+- 每關兩段按需提示、不限時、不扣分；可復原最近一次位置／檔案改動、重來本關。
+- 獨立自由沙盒，切回關卡保留本分頁進度。↑↓ 呼叫指令歷史，Ctrl+Space 或按鈕補完；Tab 正常移動焦點。小抄點擊只填入、不自動執行。支援觸控與鍵盤。
+- 即時虛擬檔案地圖與目前路徑；操作紀錄可複製或下載 UTF-8 `.txt`，`clear` 不會抹掉匯出紀錄。玩家可加入自己寫的筆記，遊戲不代寫。
+- 所有檔案、指令、進度與筆記只在本分頁記憶體；不持久儲存、不上傳。刷新／關閉即重置；需保留時請自行匯出。
+- 不是完整 shell，也不執行任何真正的電腦指令。POSIX 風格，非 Windows cmd；Git 只模擬版本，不能驗證本機安裝或 GitHub 登入。只處理列出的基本操作，不支援管線、重導向、變數、萬用字元、遞迴操作。`cp`／`mv` 僅支援檔案且拒絕直接覆蓋；真實指令可能覆蓋。`rm` 的遊戲復原鈕不代表真實 shell 有相同功能。
+
+新增檔案：`terminal-quest.html`、`terminal-quest.css`、`terminal-quest.js`、`terminal-engine.js`、`terminal-missions.js`、`terminal.svg`。全部為無依賴靜態資產，與首頁一併發布。
+
+既有方案預查：[Bashcrawl](https://github.com/notklaatu/bashcrawl) 使用實際 POSIX shell／外部 Binder；[xterm.js](https://github.com/xtermjs/xterm.js) 是終端機顯示元件而非教學引擎。為保持原站免安裝、無後端、繁中與無依賴，本遊戲獨立實作簡化的虛擬檔案系統，未複製上述專案的程式或題目。
+
+檢查引擎、檔案效果、錯誤與完整通關：
+
+```sh
+node --test tests/terminal-quest.test.cjs
+```

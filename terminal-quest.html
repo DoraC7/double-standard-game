@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#17352a">
+  <meta name="description" content="跟小龍蝦練習 terminal！14 個繁中任務，親手輸入指令、觀察虛擬檔案變化，再確認結果。不需安裝。">
+  <title>龍蝦終端機探險 · 小龍蝦遊戲間</title>
+  <link rel="stylesheet" href="terminal-quest.css">
+  <script src="terminal-engine.js" defer></script>
+  <script src="terminal-missions.js" defer></script>
+  <script src="terminal-quest.js" defer></script>
+</head>
+<body>
+<main>
+  <header class="topbar"><a href="index.html">← 回龍蝦遊戲間</a><span>🦞 MAC'S LITTLE ARCADE</span></header>
+  <section class="hero">
+    <div><p class="eyebrow">SHELL ISLAND / 給剛起步的探險家</p><h1>龍蝦終端機<em>探險</em><span aria-hidden="true">_</span></h1><p class="lead">不怕打錯，先試一行。<br>從「我在哪裡？」到親手整理檔案，每一步都看得見。</p></div>
+    <img class="hero-art" src="terminal.svg" width="200" height="170" alt="小龍蝦在終端機前找到一顆貝殼">
+  </section>
+  <div class="toolbar"><div class="modes" role="group" aria-label="練習模式"><button id="lesson-mode" aria-pressed="true" type="button">🧭 關卡探險</button><button id="sandbox-mode" aria-pressed="false" type="button">🏝 自由沙盒</button></div><p>瀏覽器內的模擬環境・不會動到你的電腦檔案</p></div>
+  <section class="journey" aria-label="探險進度"><div class="journey-head"><span id="chapter">01 / 找到方向</span><strong id="progress-label">完成 0 / 14 關</strong></div><progress id="progress" value="0" max="14" aria-label="已完成關卡"></progress><div id="milestones" class="milestones" aria-hidden="true"></div></section>
+  <div class="workspace">
+    <section class="mission panel" aria-labelledby="mission-title">
+      <p class="eyebrow" id="mission-number">MISSION 01</p><h2 id="mission-title" tabindex="-1">先知道自己在哪裡</h2><p class="goal" id="goal"></p><p class="concept" id="concept"></p>
+      <div id="lesson-controls"><button class="hint-button" id="hint-button" type="button">🦞 給我一點提示</button><p id="hint" class="hint" aria-live="polite" hidden></p><button class="text-button" id="retry" type="button">↶ 重來這一關</button></div>
+      <div class="feedback" id="feedback" role="status"></div>
+      <fieldset class="quiz" id="quiz" hidden><legend id="quiz-question"></legend><div id="quiz-options"></div><p id="quiz-feedback" role="status"></p></fieldset>
+      <button class="primary next" id="next" type="button" hidden>下一站 →</button>
+      <div id="finish" hidden><p class="finish-badge">🦞 探險路線完成</p><p>你完成了操作與核對。接著可以去沙盒重做一輪，看看不看提示能否自己完成。</p><button class="primary" id="free-after" type="button">去沙盒自由練習 →</button><button class="text-button" id="restart" type="button">重新開始探險</button></div>
+      <div id="sandbox-tools" hidden><p>這裡沒有指定答案。試著幫一份檔案換名字、複製到另一個資料夾，再親手核對。</p><button class="text-button" id="reset-sandbox" type="button">↶ 重設沙盒</button><p class="small">沙盒與關卡分開；切換回去會接著原本進度。</p></div>
+    </section>
+    <section class="console" aria-label="虛擬終端機">
+      <div class="console-top"><span><i></i><i></i><i></i></span><b>lobster@island — 模擬 shell</b><span aria-hidden="true">⌘</span></div>
+      <div class="terminal-output" id="output" role="log" aria-label="指令與輸出" aria-live="polite" aria-relevant="additions text" tabindex="0"></div>
+      <form id="command-form" autocomplete="off"><div class="prompt-path" id="prompt-path">~/</div><div class="command-line"><span class="dollar" aria-hidden="true">$</span><label class="sr-only" for="command">輸入終端機指令，不用輸入提示符 $</label><input id="command" name="command" type="text" maxlength="500" autocapitalize="none" autocorrect="off" spellcheck="false" enterkeyhint="send" aria-describedby="input-help"><button class="run" id="run" type="submit">執行 ↵</button></div></form>
+      <div class="input-help" id="input-help">只輸入 $ 後面的指令・↑↓ 歷史・補完可用按鈕</div>
+      <div class="terminal-tools"><button id="history-up" type="button">↑ 上一筆</button><button id="complete" type="button">補完</button><button id="undo" type="button" disabled>復原上一步</button><button id="open-record" type="button">文字紀錄 ↗</button></div>
+    </section>
+    <section class="reference panel" aria-label="探索工具">
+      <details open><summary>🗂 檔案地圖 <span>會隨你的操作變化</span></summary><pre id="file-tree" aria-label="虛擬檔案結構"></pre><p class="small" id="location"></p></details>
+      <details><summary>⌨ 指令小抄 <span>點一下只填入，不自動執行</span></summary><div id="cheats" class="cheats"></div><p class="small">cd .. 上一層・cd ~ 回家・ls -a 看隱藏項目。檔名含空格可加引號。Ctrl+Space 或「補完」按鈕可補完；Tab 保留給鍵盤焦點移動。</p></details>
+      <details><summary>這裡和真實 terminal 有什麼不同？</summary><p class="small">這是 POSIX 風格的入門模擬，不是完整 Bash／zsh，也不是 Windows cmd。沒有執行系統指令、安裝程式或連接 GitHub。Git 只模擬 --version；不支援管線、重導向、變數、萬用字元或遞迴刪除。cp／mv 只處理檔案，且不直接覆蓋既有檔案；真實指令可能覆蓋。這裡 rm 有復原鈕，真實 rm 通常沒有。</p></details>
+    </section>
+  </div>
+  <section class="reflection panel"><div><p class="eyebrow">把「做過」變成「說得出來」</p><h2>留一句自己的探險筆記</h2><p>用自己的話寫：做了什麼、用什麼結果確認、還有哪裡不懂。可以隨時寫，不用等通關。</p></div><div><label for="reflection">我的筆記（僅留在此分頁，重新整理會清空）</label><textarea id="reflection" rows="4" maxlength="4000" placeholder="我剛剛試了……&#10;我用……確認結果，因為……&#10;我還不確定……"></textarea><button class="text-button" id="notes-record" type="button">把筆記和操作紀錄一起帶走 ↗</button></div></section>
+  <footer>不限時・不用登入・無外部套件・指令與筆記不儲存、不上傳，關閉或重新整理會重置。</footer>
+</main>
+<dialog id="record-dialog" aria-labelledby="record-title"><div class="record-inner"><div class="record-heading"><h2 id="record-title">文字紀錄，不用截圖</h2><button id="close-record" type="button" aria-label="關閉文字紀錄">×</button></div><p>包含實際輸入、輸出、關卡證據與你自己寫的筆記；clear 不會清掉這份紀錄。</p><label class="sr-only" for="record-text">可複製的文字紀錄</label><textarea id="record-text" rows="14" readonly></textarea><div class="record-actions"><button class="primary" id="copy-record" type="button">複製文字</button><button id="download-record" type="button">下載 .txt</button></div><p id="copy-status" role="status"></p></div></dialog>
+<noscript><p class="noscript">請開啟 JavaScript 才能執行虛擬終端機。<a href="index.html">回遊戲間</a></p></noscript>
+</body>
+</html>

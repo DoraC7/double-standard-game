@@ -1,0 +1,122 @@
+const { test } = require('node:test');
+const assert = require('node:assert/strict');
+const E = require('../terminal-engine.js');
+const missions = require('../terminal-missions.js');
+const H = E.HOME, A = H + '/arcade';
+const run = (s, line) => { const r = E.execute(s, line); assert.equal(r.ok, true, line + ': ' + r.output); return r; };
+
+test('14 站完整通關，狀態與四題觀念均可驗證，非指定任務不自動跳關', () => {
+  const s = E.initial(); assert.equal(missions.length, 14);
+  assert.equal(missions.filter(m => m.quiz).length, 4);
+  missions.forEach((m, i) => {
+    const events = [];
+    const unrelated = run(s, 'help'); assert.equal(Boolean(m.check(s, unrelated, events)), false, m.title);
+    assert.equal(m.hints.length, 2);
+    for (const line of m.solution) events.push(run(s, line));
+    assert.ok(m.check(s, events.at(-1), events), 'mission ' + (i + 1));
+    if (m.quiz) assert.ok(m.quiz.options[m.quiz.answer]);
+  });
+  assert.equal(s.nodes[A + '/delivery/guide.txt'].content, E.GUIDE);
+  assert.equal(s.nodes[A + '/README.txt'].content, E.GUIDE);
+  assert.equal(s.nodes[A + '/practice/notes.txt'].content, '');
+  assert.equal(Object.hasOwn(s.nodes, A + '/practice/shell-backup.txt'), false);
+});
+
+test('等效路徑、.、..、~、根路徑與空參數 cd', () => {
+  const s = E.initial();
+  const r = run(s, 'cd /home/lobster/arcade'); assert.ok(missions[2].check(s, r));
+  run(s, 'cd ./../downloads/'); assert.equal(s.cwd, H + '/downloads');
+  run(s, 'cd'); assert.equal(s.cwd, H);
+  run(s, 'cd /'); run(s, 'cd ..'); assert.equal(s.cwd, '/');
+  run(s, 'cd ~/arcade'); assert.equal(s.cwd, A);
+  run(s, 'cd ~'); assert.equal(s.cwd, H);
+});
+
+test('mkdir 不進入；touch 不清空既有檔；cp 保留來源；mv 移除舊位置', () => {
+  const s = E.initial(); run(s, 'cd arcade'); run(s, 'mkdir practice');
+  assert.equal(s.cwd, A); run(s, 'touch README.txt'); assert.equal(s.nodes[A + '/README.txt'].content, E.GUIDE);
+  run(s, 'cp README.txt practice'); assert.equal(s.nodes[A + '/practice/README.txt'].content, E.GUIDE);
+  assert.ok(s.nodes[A + '/README.txt']);
+  run(s, 'mv practice/README.txt practice/guide.txt');
+  assert.equal(s.nodes[A + '/practice/README.txt'], undefined);
+  assert.equal(run(s, 'cat practice/guide.txt').output, E.GUIDE);
+});
+
+test('mkdir、複製、改名、刪除後，只有實際核對才過對應關卡', () => {
+  const s = E.initial(); run(s, 'cd arcade'); run(s, 'mkdir practice'); run(s, 'cd practice');
+  const touch = run(s, 'touch shell.txt'); assert.equal(missions[6].check(s, touch), false);
+  const cp = run(s, 'cp shell.txt shell-backup.txt'); assert.equal(missions[7].check(s, cp), false);
+  assert.ok(missions[7].check(s, run(s, 'ls')));
+  run(s, 'mv shell.txt notes.txt'); assert.ok(missions[8].check(s, run(s, 'ls .')));
+  const rm = run(s, 'rm shell-backup.txt'); assert.equal(missions[9].check(s, rm), false);
+  assert.ok(missions[9].check(s, run(s, 'ls /home/lobster/arcade/practice')));
+});
+
+test('clear 不改變位置或檔案，關卡必須真的執行 clear 並重新 ls', () => {
+  const s = E.initial(); run(s, 'cd arcade'); run(s, 'mkdir practice');
+  const before = E.clone(s); const clear = run(s, 'clear'); assert.ok(clear.clear); assert.deepEqual(s, before);
+  const ls = run(s, 'ls'); assert.equal(missions[11].check(s, ls, []), false);
+  assert.ok(missions[11].check(s, ls, [clear, ls]));
+});
+
+test('git --version 只模擬查版本；拒絕 install、push 與錯誤選項', () => {
+  const s = E.initial(), before = E.clone(s); const r = run(s, 'git --version');
+  assert.match(r.output, /模擬/); assert.ok(missions[12].check(s, r)); assert.deepEqual(s, before);
+  for (const line of ['git push', 'git --Version', 'git -version', 'git --version extra']) assert.equal(E.execute(s, line).ok, false);
+});
+
+test('錯誤不改動環境；分清檔案與目錄、不直接覆蓋、不遞迴刪除', () => {
+  const s = E.initial();
+  for (const line of ['cd missing', 'cd arcade/README.txt', 'cat arcade', 'cp arcade other', 'mv arcade other', 'rm arcade', 'rmdir arcade', 'rm -rf /', 'mkdir arcade', 'touch missing/x', 'cp arcade/README.txt arcade/README.txt', 'mv arcade/README.txt arcade/README.txt', 'cp arcade/README.txt downloads/hello.txt', 'rmdir /', 'rmdir .', 'ls --all', 'pwd extra', 'clear extra']) {
+    const before = E.clone(s); assert.equal(E.execute(s, line).ok, false, line); assert.deepEqual(s, before, line);
+  }
+});
+
+test('引號、中文與空白檔名；隱藏檔 ls -a；空目錄可刪', () => {
+  const s = E.initial();
+  run(s, 'mkdir "我的 筆記"'); run(s, "touch '我的 筆記/第一課.txt'");
+  assert.equal(run(s, "cat '我的 筆記/第一課.txt'").output, '');
+  assert.doesNotMatch(run(s, 'ls').output, /\.shell-note/);
+  assert.match(run(s, 'ls -a').output, /\.shell-note/);
+  run(s, 'rm "我的 筆記/第一課.txt"'); run(s, 'rmdir "我的 筆記"');
+  assert.equal(s.nodes[H + '/我的 筆記'], undefined);
+});
+
+test('提示符、未關引號、shell 操作符與原型名稱安全拒絕，不執行 JavaScript', () => {
+  const s = E.initial();
+  assert.match(E.execute(s, '$ pwd').output, /提示符/);
+  for (const line of ['% ls', 'cat "README.txt', 'pwd; rm x', 'pwd | cat x', 'touch x > y', 'echo $(pwd)', 'rm *', 'toString', '__proto__', 'constructor']) {
+    const before = E.clone(s); assert.equal(E.execute(s, line).ok, false, line); assert.deepEqual(s, before);
+  }
+  assert.equal(run(s, 'help __proto__').output, '沒有這個指令的說明。');
+});
+
+test('補完命令與資料夾，不改動環境；多個候選不擅自選擇', () => {
+  const s = E.initial(), before = E.clone(s);
+  assert.deepEqual(E.complete(s, 'pw'), ['pwd ']);
+  assert.deepEqual(E.complete(s, 'cd ar'), ['cd arcade/']);
+  assert.deepEqual(E.complete(s, 'cat arcade/RE'), ['cat arcade/README.txt']);
+  assert.deepEqual(E.complete(s, 'cd "ar'), []); assert.deepEqual(s, before);
+});
+
+test('最後一關必須有正確副本、保留來源、讀到副本，再核對資料夾', () => {
+  const s = E.initial(); run(s, 'cd arcade'); run(s, 'mkdir delivery'); run(s, 'cp README.txt delivery/guide.txt');
+  let ls = run(s, 'ls delivery'); assert.equal(missions[13].check(s, ls, []), false);
+  const cat = run(s, 'cat delivery/guide.txt'); ls = run(s, 'ls delivery'); assert.ok(missions[13].check(s, ls, [cat]));
+  run(s, 'rm README.txt'); assert.equal(missions[13].check(s, ls, [cat]), false);
+});
+
+test('快照復原與環境隔離，沙盒改動不會串到關卡', () => {
+  const lesson = E.initial(), sandbox = E.initial(), snap = E.clone(lesson);
+  run(sandbox, 'rm arcade/README.txt'); assert.ok(lesson.nodes[A + '/README.txt']);
+  run(lesson, 'cd downloads'); run(lesson, 'touch new.txt'); assert.notDeepEqual(lesson, snap);
+  assert.equal(snap.cwd, H); assert.equal(snap.nodes[H + '/downloads/new.txt'], undefined);
+});
+
+test('尾端斜線代表目錄，不把錯寫的檔案路徑當普通檔名', () => {
+  const s = E.initial();
+  for (const line of ['touch new/', 'rm arcade/README.txt/', 'cat arcade/README.txt/', 'ls arcade/README.txt/', 'cp arcade/README.txt/ new.txt', 'cp arcade/README.txt missing/', 'mv arcade/README.txt missing/']) {
+    const before = E.clone(s); assert.equal(E.execute(s, line).ok, false, line); assert.deepEqual(s, before);
+  }
+  run(s, 'mkdir new/'); run(s, 'cp arcade/README.txt new/'); assert.equal(s.nodes[H + '/new/README.txt'].content, E.GUIDE);
+});
