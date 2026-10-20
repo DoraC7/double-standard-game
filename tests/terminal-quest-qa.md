@@ -24,3 +24,10 @@ Served with `python3 -m http.server 8765 --bind 127.0.0.1`. An isolated Chromium
 - No page runtime errors observed in these flows.
 
 No claim of physical-device, Safari or real shell/Git execution testing. This game intentionally runs only the documented command subset.
+
+## Follow-up: terminology and uname — 2026-10-20
+
+- Replaced 補完 with 自動補全 in UI, feedback, and documentation. Ctrl+Space/button still complete; Tab still moves focus to Run.
+- Added explicitly fictional `uname` information with POSIX-style `-a`, `-s`, `-n`, `-r`, `-v`, `-m` flags; no device detection. Unsupported commands now explain the simulator limitation rather than implying a real command does not exist.
+- `node --test tests/terminal-quest.test.cjs`: 15/15 passed, including all 14 missions and new uname flag/error/non-mutation checks.
+- Focused local Chromium checks at 1365×950, 390×844, 320×640, and 844×390: completion button/Ctrl+Space, Tab focus, uname output/help, unsupported-command guidance, transcript export, lesson/sandbox isolation, lobby link, no horizontal overflow or page runtime errors. Mobile screenshot inspected.

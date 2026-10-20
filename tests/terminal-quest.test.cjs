@@ -65,6 +65,36 @@ test('git --version 只模擬查版本；拒絕 install、push 與錯誤選項',
   for (const line of ['git push', 'git --Version', 'git -version', 'git --version extra']) assert.equal(E.execute(s, line).ok, false);
 });
 
+test('uname 顯示明確標示的模擬資訊，接受基本旗標，不改動環境或通關', () => {
+  const s = E.initial(), before = E.clone(s);
+  const all = run(s, 'uname -a');
+  assert.match(all.output, /^LobsterOS island 1\.0 Browser-Simulator virtual\n/);
+  for (const line of ['uname', 'uname -a', 'uname -s', 'uname -n', 'uname -r', 'uname -v', 'uname -m', 'uname -sn', 'uname -n -s', 'uname -aa']) {
+    const r = run(s, line);
+    assert.match(r.output, /遊戲模擬.*不是你電腦/);
+    assert.equal(r.changed, false);
+    assert.deepEqual(s, before);
+    for (const m of missions) assert.equal(Boolean(m.check(s, r, [r])), false);
+  }
+  assert.match(run(s, 'uname').output, /^LobsterOS\n/);
+  assert.match(run(s, 'uname -n -s').output, /^LobsterOS island\n/);
+  for (const line of ['uname -A', 'uname --all', 'uname x', 'uname -o', 'uname -', 'uname -a extra']) {
+    assert.equal(E.execute(s, line).ok, false, line);
+    assert.deepEqual(s, before);
+  }
+  assert.match(run(s, 'help').output, /uname/);
+  assert.match(run(s, 'help uname').output, /不會偵測你的電腦/);
+  assert.deepEqual(E.complete(s, 'una'), ['uname ']);
+});
+
+test('未支援的指令不誤稱真實終端機沒有該指令', () => {
+  const s = E.initial(), before = E.clone(s);
+  const r = E.execute(s, 'whoami');
+  assert.equal(r.ok, false);
+  assert.match(r.output, /本模擬器尚未支援.*不代表真實終端機沒有/);
+  assert.deepEqual(s, before);
+});
+
 test('錯誤不改動環境；分清檔案與目錄、不直接覆蓋、不遞迴刪除', () => {
   const s = E.initial();
   for (const line of ['cd missing', 'cd arcade/README.txt', 'cat arcade', 'cp arcade other', 'mv arcade other', 'rm arcade', 'rmdir arcade', 'rm -rf /', 'mkdir arcade', 'touch missing/x', 'cp arcade/README.txt arcade/README.txt', 'mv arcade/README.txt arcade/README.txt', 'cp arcade/README.txt downloads/hello.txt', 'rmdir /', 'rmdir .', 'ls --all', 'pwd extra', 'clear extra']) {
@@ -91,7 +121,7 @@ test('提示符、未關引號、shell 操作符與原型名稱安全拒絕，�
   assert.equal(run(s, 'help __proto__').output, '沒有這個指令的說明。');
 });
 
-test('補完命令與資料夾，不改動環境；多個候選不擅自選擇', () => {
+test('自動補全命令與資料夾，不改動環境；多個候選不擅自選擇', () => {
   const s = E.initial(), before = E.clone(s);
   assert.deepEqual(E.complete(s, 'pw'), ['pwd ']);
   assert.deepEqual(E.complete(s, 'cd ar'), ['cd arcade/']);
