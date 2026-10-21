@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#17352a">
+<meta name="description" content="10 關繁中 Git 練習：看見工作區、暫存區、提交與分支。瀏覽器內模擬，免安裝、不上傳。">
+<title>龍蝦 Git 時光機 · 小龍蝦遊戲間</title>
+<link rel="stylesheet" href="terminal-quest.css"><link rel="stylesheet" href="git-quest.css">
+<script src="git-engine.js" defer></script><script src="git-missions.js" defer></script><script src="git-quest.js" defer></script>
+</head>
+<body><main>
+<header class="topbar"><a href="index.html">← 回龍蝦遊戲間</a><span>🦞 MAC'S LITTLE ARCADE</span></header>
+<section class="hero"><div><p class="eyebrow">GIT TIME MACHINE / 讓每一版都有來處</p><h1>龍蝦 Git <em>時光機</em></h1><p class="lead">替龍蝦食堂保存菜單，開分支試做新湯。<br>不是背指令：親手改、存、查，再把實驗帶回主線。</p></div><img class="hero-art" src="git.svg" width="190" height="170" alt="三個版本節點連接一條實驗分支"></section>
+<div class="toolbar"><div class="modes" role="group" aria-label="練習模式"><button id="lesson-mode" type="button" aria-pressed="true">🧭 10 關旅程</button><button id="sandbox-mode" type="button" aria-pressed="false">🏝 自由沙盒</button></div><p>僅模擬・不動真實檔案・不連接 GitHub</p></div>
+<section class="journey" aria-label="任務進度"><div class="journey-head"><span id="chapter">工作區 → 暫存區 → 提交</span><strong id="progress-label">完成 0 / 10 關</strong></div><progress id="progress" value="0" max="10" aria-label="已完成關卡"></progress></section>
+<div class="workspace">
+<section class="mission panel" aria-labelledby="mission-title"><p class="eyebrow" id="mission-number"></p><h2 id="mission-title" tabindex="-1"></h2><p class="goal" id="goal"></p><p class="concept" id="concept"></p>
+<div id="lesson-controls"><button id="hint-button" class="hint-button" type="button">🦞 看提示</button><p id="hint" class="hint" hidden></p><button id="retry" class="text-button" type="button">↶ 重來本關</button></div>
+<div id="feedback" class="feedback" role="status"></div><fieldset id="quiz" class="quiz" hidden><legend id="quiz-question"></legend><div id="quiz-options"></div><p id="quiz-feedback" role="status"></p></fieldset><button id="next" class="primary next" type="button" hidden>下一站 →</button>
+<div id="free-tools" hidden><button id="reset-sandbox" type="button">重設沙盒</button><p class="small">關卡和沙盒各自保留本分頁進度。</p></div><button id="restart" type="button" hidden>重新開始旅程</button>
+<details><summary>支援範圍與真實 Git 的差別</summary><p class="small">純教學模型，提交編號是遊戲流水號，非真正雜湊；初始分支固定 main。只支援根目錄文字檔、單一父提交與快轉合併。不模擬 remote、push、pull、rebase、reset、衝突或 GitHub 登入。切換／合併要求乾淨工作目錄，比真實 Git 更嚴格。diff 以整份舊／新文字呈現，不是正式 unified diff；未追蹤檔不列入 diff。add . 在本練習中涵蓋全部檔案。每檔 6000 字、15 個工作檔、15 分支、80 提交。</p></details><p class="small"><a href="terminal-quest.html">先練終端機基本操作 ↗</a> · <a href="https://git-scm.com/docs" target="_blank" rel="noopener noreferrer">Git 官方手冊 ↗</a></p>
+</section>
+<section class="console" aria-label="Git 模擬終端機"><div class="console-top"><span><i></i><i></i><i></i></span><b>lobster@kitchen — 模擬 Git</b></div><div id="output" class="terminal-output" role="log" aria-label="指令與輸出" aria-live="polite" tabindex="0"></div>
+<form id="command-form" autocomplete="off"><div class="prompt-path" id="prompt-path"></div><div class="command-line"><span class="dollar" aria-hidden="true">$</span><label class="sr-only" for="command">輸入 Git 指令，不用輸入 $</label><input id="command" maxlength="500" autocapitalize="none" autocorrect="off" spellcheck="false" aria-describedby="input-help"><button id="run" class="run" type="submit">執行 ↵</button></div></form><div id="input-help" class="input-help">↑↓ 指令歷史・Tab 切換焦點・小抄只填入，不自動執行</div><div class="terminal-tools"><button id="undo" type="button">復原上一步</button><button id="download" type="button">下載操作紀錄 .txt</button></div></section>
+<section class="reference panel" aria-label="檔案編輯器與指令小抄"><details open><summary>✏️ 菜單編輯器 <span>只修改工作區</span></summary><label for="file-name">檔名（可改名以新增另一檔）</label><input id="file-name" value="README.md" maxlength="61" autocapitalize="none" spellcheck="false"><label for="file-content">檔案內容</label><textarea id="file-content" rows="5" maxlength="6000" spellcheck="false"></textarea><div class="editor-actions"><button id="apply-file" class="primary" type="button">套用到工作區</button><button id="load-file" type="button">讀取這個檔案</button><button id="delete-file" type="button">刪除工作區檔案</button></div><p class="small">輸入文字後按「套用」才改檔；git add / commit 不會保存尚未套用的編輯草稿。選用「讀取」會換掉目前草稿。</p></details>
+<details><summary>⌨ 指令小抄</summary><div id="cheats" class="cheats"></div></details></section>
+</div>
+<section class="panel version-board" aria-labelledby="board-title"><div class="journey-head"><h2 id="board-title">三個區域，不是同一份內容</h2><strong id="branch-label"></strong></div><p class="small">編輯 → 工作區；add → 暫存快照；commit → 保存暫存區。下方是遊戲的即時觀察圖；關卡仍需自己輸入指令驗證。</p><div class="zones"><div><h3>① 工作區</h3><pre id="work-view"></pre></div><div><h3>② 暫存區</h3><pre id="index-view"></pre></div><div><h3>③ 目前提交 HEAD</h3><pre id="head-view"></pre></div></div><h3>版本時間線</h3><pre id="graph" aria-label="提交與分支指標"></pre></section>
+<section class="reflection panel"><div><p class="eyebrow">留下一句自己的理解</p><h2>做了什麼，怎麼證明？</h2><p>這裡不代寫作業。寫下操作、驗證結果與還不懂的地方，可和操作紀錄一起下載。</p></div><div><label for="reflection">我的筆記（刷新即清空）</label><textarea id="reflection" rows="4" maxlength="4000"></textarea></div></section>
+<footer>免費・無外部套件・進度、菜單、紀錄與筆記僅在此分頁，不儲存、不上傳；刷新即重置。</footer>
+<noscript>請開啟 JavaScript 才能進行 Git 模擬。</noscript>
+</main></body></html>
