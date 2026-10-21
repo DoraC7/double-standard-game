@@ -1,6 +1,6 @@
 # 小龍蝦遊戲間
 
-八款免費、純前端小遊戲，從 `index.html` 入口進入。
+九款免費、純前端小遊戲，從 `index.html` 入口進入。
 
 「雙標大挑戰」（`double-standard.html`）是一款換位選擇遊戲。先替別人處理一件事，隔幾回合在相同條件下換自己面對；兩輪使用同一組具體選項，最後才比較是否改了標準。通融本身不算雙標，前後一致才是判準。
 
@@ -33,7 +33,7 @@ python3 -m http.server 8765
 
 ## 專案檔案
 
-- `index.html`：八款遊戲共同入口；舊首頁 `#r=` 戰績連結自動轉到雙標遊戲並保留片段。
+- `index.html`：九款遊戲共同入口；舊首頁 `#r=` 戰績連結自動轉到雙標遊戲並保留片段。
 - `double-standard.html`：原雙標遊戲的畫面、流程和計分。
 - `start-small.html`、`start-small.css`、`start-small.js`：拖延啟動遊戲。
 - `mini-kart.html`、`mini-kart.css`、`mini-kart.js`、`kart.svg`：迷你卡丁車與原創插圖。
@@ -47,7 +47,7 @@ python3 -m http.server 8765
 
 ## 部署
 
-這是靜態網站。GitHub Pages 可發布倉庫根目錄的 `index.html` 作共同入口；所有八款遊戲的 HTML、CSS 和 JS 必須同時發布。啟用 Pages 後，分享連結會自動以當前網站網址產生。發布設定由倉庫擁有者決定。
+這是靜態網站。GitHub Pages 可發布倉庫根目錄的 `index.html` 作共同入口；所有九款遊戲的 HTML、CSS 和 JS 必須同時發布。啟用 Pages 後，分享連結會自動以當前網站網址產生。發布設定由倉庫擁有者決定。
 
 ## 授權
 
@@ -119,3 +119,17 @@ node --test tests/zhuyin-data.test.cjs tests/zhuyin-spelling.test.cjs
 ```sh
 node --test tests/terminal-quest.test.cjs
 ```
+
+## 第九款：龍蝦 Git 時光機
+
+試玩：<https://dorac7.github.io/double-standard-game/git-quest.html>。
+
+10 關繁中模擬練習：初始化、status、add、commit、diff／diff --staged、log、分支、switch 與 fast-forward merge。用內建編輯器改菜單，觀察工作區、暫存區與 HEAD 三份內容；每段操作需再用讀取指令核對，兩題觀念題區分暫存快照與工作區、遊戲內合併與遠端發布。
+
+獨立沙盒、指令歷史、小抄、提示、重來本關、最近環境改動復原、實際操作紀錄與自寫筆記下載。進度、檔案、版本和筆記只存在本分頁記憶體，無持久儲存或上傳；刷新即清空。
+
+不是完整 Git 或 shell，不執行系統指令或連接 GitHub。不模擬 remote／push／pull／rebase／reset／三方合併或衝突；只支援根目錄文字檔與單一父提交、快轉合併。提交編號是模擬流水號，非真實雜湊。切換與合併要求乾淨工作目錄，比真實 Git 更嚴格。差異以整份舊／新文字顯示；未追蹤檔不列入 diff。初始分支固定 main。上限為每檔 6000 字、15 個工作檔、15 分支、80 提交；復原按鈕不代表真實 Git 有相同功能。
+
+部署須帶上 `git-quest.html`、`git-quest.css`、`git-quest.js`、`git-engine.js`、`git-missions.js`、`git.svg`，並保留共用的 `terminal-quest.css`。不新增外部依賴。現有第八款仍只模擬 git --version；完整 Git 教學由此獨立入口提供。
+
+引擎與完整通關檢查：`node --test tests/git-quest.test.cjs`。
