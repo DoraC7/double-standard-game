@@ -102,13 +102,13 @@ node --test tests/zhuyin-data.test.cjs tests/zhuyin-spelling.test.cjs
 
 試玩：<https://dorac7.github.io/double-standard-game/terminal-quest.html>。
 
-14 站繁中入門任務，親手操作 `pwd`、`ls`、`cd`、`cat`、`mkdir`、`touch`、`cp`、`mv`、`rm`、`clear` 與模擬 `git --version`。建立、複製、改名、刪除後需再用讀取指令核對；四題觀念確認分辨建立與進入、複製與搬移、清畫面與刪檔、查版本與安裝。最後串接建立交付資料夾、複製、讀取與列出內容。不只比對固定字串，接受等效的相對／絕對路徑；也接受 `ls -la`／`--all`、`mkdir -p`／`--parents`、`cd -`、`pwd -L/-P`、`git -v`、多檔操作及用 `--` 分隔選項。`ls -l` 的權限／時間僅為示意；多檔指令失敗時整條不改環境，與真實指令可能部分成功不同。
+20 站繁中入門任務，親手操作 `pwd`、`ls`、`cd`、`cat`、`mkdir`、`touch`、`cp`、`mv`、`rm`、`clear` 與模擬 `git --version`。建立、複製、改名、刪除後需再用讀取指令核對；五題觀念確認分辨建立與進入、複製與搬移、清畫面與刪檔、查版本與安裝。接著完成隱藏檔、巢狀目錄、空白檔名、find 找檔、grep 查日誌、head／tail 讀取局部內容，共 20 站。find 支援 -type、-name（引號內 *／?）；grep 僅固定文字 -F，支援 -n／-i／-v／-c 及對應長選項；head／tail 接受 -n／--lines／-2 等非負筆數（最多 10000 行），不實作 tail -f。不只比對固定字串，接受等效的相對／絕對路徑；也接受 `ls -la`／`--all`、`mkdir -p`／`--parents`、`cd -`、`pwd -L/-P`、`git -v`、多檔操作及用 `--` 分隔選項。`ls -l` 的權限／時間僅為示意；多檔指令失敗時整條不改環境，與真實指令可能部分成功不同。
 
 - 每關兩段按需提示、不限時、不扣分；可復原最近一次位置／檔案改動、重來本關。
 - 獨立自由沙盒，切回關卡保留本分頁進度。↑↓ 呼叫指令歷史，Ctrl+Space 或按鈕自動補全指令／檔名；Tab 正常移動焦點。小抄點擊只填入、不自動執行。支援觸控與鍵盤。
 - 即時虛擬檔案地圖與目前路徑；操作紀錄可複製或下載 UTF-8 `.txt`，`clear` 不會抹掉匯出紀錄。玩家可加入自己寫的筆記，遊戲不代寫。
 - 所有檔案、指令、進度與筆記只在本分頁記憶體；不持久儲存、不上傳。刷新／關閉即重置；需保留時請自行匯出。
-- 不是完整 shell，也不執行任何真正的電腦指令。POSIX 風格，非 Windows cmd；Git 只模擬版本，不能驗證本機安裝或 GitHub 登入。`uname` 與 `uname -a`（另支援 `-s`、`-n`、`-r`、`-v`、`-m`，可合併或使用對應長選項）只顯示明確標示的虛構系統資訊，不偵測裝置。只處理列出的基本操作，不支援管線、重導向、變數、萬用字元、遞迴操作。`cp`／`mv` 僅支援檔案且拒絕直接覆蓋；真實指令可能覆蓋。`rm` 的遊戲復原鈕不代表真實 shell 有相同功能。
+- 不是完整 shell，也不執行任何真正的電腦指令。POSIX 風格，非 Windows cmd；Git 只模擬版本，不能驗證本機安裝或 GitHub 登入。`uname` 與 `uname -a`（另支援 `-s`、`-n`、`-r`、`-v`、`-m`，可合併或使用對應長選項）只顯示明確標示的虛構系統資訊，不偵測裝置。只處理列出的操作，不支援管線、重導向、變數、shell 萬用字元展開、遞迴改動操作。`cp`／`mv` 僅支援檔案且拒絕直接覆蓋；真實指令可能覆蓋。`rm` 的遊戲復原鈕不代表真實 shell 有相同功能。
 
 新增檔案：`terminal-quest.html`、`terminal-quest.css`、`terminal-quest.js`、`terminal-engine.js`、`terminal-missions.js`、`terminal.svg`。全部為無依賴靜態資產，與首頁一併發布。
 
@@ -124,13 +124,13 @@ node --test tests/terminal-quest.test.cjs
 
 試玩：<https://dorac7.github.io/double-standard-game/git-quest.html>。
 
-10 關繁中模擬練習：初始化、status、add、commit、diff／diff --staged、log、分支、switch／checkout 與 fast-forward merge。建立並切換分支可用 `git switch -c soup` 或 `git checkout -b soup`；切回主線可用 `git switch main` 或 `git checkout main`，也接受先 branch 再切換。也接受 `status -sb`、`add -A/--all/-u/--update`、多檔和 `./檔名`、`diff --cached`、`commit --message`／`-m訊息`／`-am`、`log -n 1`／`-1`／`--max-count=1`、`branch --list/--show-current`、`switch --create` 與 `merge --ff-only`。`commit -a` 只收追蹤檔修改，不收未追蹤檔。用內建編輯器改菜單，觀察工作區、暫存區與 HEAD 三份內容；每段操作需再用讀取指令核對，兩題觀念題區分暫存快照與工作區、遊戲內合併與遠端發布。
+16 關繁中模擬練習：初始化、status、add、commit、diff／diff --staged、log、分支、switch／checkout 與 fast-forward merge。建立並切換分支可用 `git switch -c soup` 或 `git checkout -b soup`；切回主線可用 `git switch main` 或 `git checkout main`，也接受先 branch 再切換。也接受 `status -sb`、`add -A/--all/-u/--update`、多檔和 `./檔名`、`diff --cached`、`commit --message`／`-m訊息`／`-am`、`log -n 1`／`-1`／`--max-count=1`、`branch --list/--show-current`、`switch --create` 與 `merge --ff-only`。`commit -a` 只收追蹤檔修改，不收未追蹤檔。新增 6 關練習取消暫存、還原工作區、show 讀取提交、雙份修改、普通 commit 保留草稿，以及刪除已合入主線的本地分支。支援 `restore [--staged/-S] [--worktree/-W] [--] 檔案…`／`.`，可合併為 -SW，不支援 --source；`show [HEAD|分支|完整模擬提交 ID][:檔名]`／`:檔名`；`branch -d/--delete` 只允許已合入目前分支的本地指標（不模擬 upstream）。用內建編輯器改菜單，觀察工作區、暫存區與 HEAD 三份內容；每段操作需再用讀取指令核對，五題觀念題區分暫存快照與工作區、遊戲內合併與遠端發布。
 
 獨立沙盒、指令歷史、小抄、提示、重來本關、最近環境改動復原、實際操作紀錄與自寫筆記下載。進度、檔案、版本和筆記只存在本分頁記憶體，無持久儲存或上傳；刷新即清空。
 
 不是完整 Git 或 shell，不執行系統指令或連接 GitHub。不模擬 remote／push／pull／rebase／reset／三方合併或衝突；checkout 只支援分支切換與 -b 建立分支，不含還原檔案、指定起點或 detached HEAD。只支援根目錄文字檔與單一父提交、快轉合併。提交編號是模擬流水號，非真實雜湊。切換與合併要求乾淨工作目錄，比真實 Git 更嚴格。差異以整份舊／新文字顯示；未追蹤檔不列入 diff。初始分支固定 main；分支名稱可包含 `/`（例如 feature/soup）。這仍是列明範圍的教學子集，未知選項不代表真實指令不合法。上限為每檔 6000 字、15 個工作檔、15 分支、80 提交；復原按鈕不代表真實 Git 有相同功能。
 
-部署須帶上 `git-quest.html`、`git-quest.css`、`git-quest.js`、`git-engine.js`、`git-missions.js`、`git.svg`，並保留共用的 `terminal-quest.css`。不新增外部依賴。現有第八款仍只模擬 git --version；完整 Git 教學由此獨立入口提供。
+部署須帶上 `git-quest.html`、`git-quest.css`、`git-quest.js`、`git-engine.js`、`git-missions.js`、`git.svg`，並保留共用的 `terminal-quest.css`。不新增外部依賴。現有第八款仍只模擬 git --version；更多 Git 模擬練習由此獨立入口提供。免費延伸：[Learn Git Branching](https://learngitbranching.js.org/)、[Software Carpentry Shell 入門](https://swcarpentry.github.io/shell-novice/)。沿用現有繁中無依賴遊戲，未複製外部課程題目或引入其程式。
 
 引擎與完整通關檢查：`node --test tests/git-quest.test.cjs`。
 
