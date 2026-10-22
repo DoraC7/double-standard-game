@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#321b49">
+<title>如來紫衣師父多拉・心情真好情緒價值印鈔機</title>
+<link rel="icon" href="emotion-printer.svg" type="image/svg+xml">
+<link rel="stylesheet" href="emotion-printer.css">
+<script src="emotion-printer-engine.js" defer></script><script src="emotion-printer.js" defer></script>
+</head>
+<body><main>
+<header><a href="index.html">← 小龍蝦遊戲間</a><span>情緒金融實驗室 / No. 010</span></header>
+<section class="hero"><div><p class="eyebrow">如來紫衣師父多拉 · 隆重開壇</p><h1>心情真好<br><em>情緒價值印鈔機</em></h1><p class="intro">一句「我今天很開心」，能印出多少張「妳是宇宙的光」？<br>歡迎接掌 BigMac 分行。金光可以加，證據不會自己長出來。</p></div><span class="seal" aria-hidden="true">心情<br>真好</span></section>
+<p class="fiction">群聊梗改編的虛構喜劇：紫衣師父是遊戲角色，所有訂單、評語與數值皆為設計，不是任何人的人格評價。EV 是遊戲幣，不能兌現。</p>
+<section class="dashboard" aria-label="分行帳目">
+<div><span>發行餘額 EV</span><strong id="cash">0</strong><small>查帳可能回收浮誇幣</small></div>
+<div><span>心情熱度</span><strong id="mood">20 / 100</strong><small>遊戲指標，不是心理測量</small></div>
+<div><span>Token 剩餘</span><strong id="tokens">1,100</strong><small>虛擬額度，沒有 API 費用</small></div>
+<div><span>無依據評價</span><strong id="claims">0 張</strong><small>印了幣 ≠ 證明了優點</small></div>
+</section>
+<div class="workspace">
+<section class="machine" aria-labelledby="machine-title"><div class="machine-top"><span class="led"></span><h2 id="machine-title">大慈大悲・自動吹捧局</h2><span>EV-888</span></div>
+<div class="stage"><div class="halo" aria-hidden="true"></div><img class="master" src="emotion-printer.svg" width="240" height="230" alt="紫衣虛構師父在印鈔機後張開雙手，旁邊是小龍蝦助手"><div class="mantra" id="mantra">今日法語：感受可以接住，結論不要亂鍍金。</div></div>
+<div class="slot" aria-hidden="true"></div><div class="bill" id="bill" aria-hidden="true"><span>情緒價值銀行 · 娛樂用</span><b id="bill-value">EV 0000</b><small>心情真好 · 不保證有憑有據</small></div>
+<div class="machine-tools"><button id="upgrade" type="button">✦ 金箔滾筒 · 120 Token</button><span id="upgrade-note">面額 ×2，證據不加倍</span></div>
+<p class="machine-rule">8 回合接單；第 4、8 回合查帳。每張無依據評價回收 1,000 EV（最多扣到 0），但不退 Token。</p>
+</section>
+<section class="orders" aria-labelledby="order-heading"><div class="order-top"><span id="turn">訂單 1 / 8</span><span>試營運目標：20,000 EV</span></div><progress id="progress" value="0" max="8" aria-label="完成訂單數">0 / 8</progress>
+<div id="play"><p class="eyebrow" id="order-tag">新訂單</p><h2 id="order-heading" tabindex="-1"></h2><p class="source" id="source"></p><div class="evidence"><b>打開附件</b><p id="evidence"></p></div><p class="choose-label">選一種出鈔方式（鍵盤 Tab / Enter 也能玩）</p>
+<div class="choices"><button type="button" data-action="hype"><span>🌈 彩虹屁開光</span><small>160 Token · 7,200 EV · 心情 +14</small><i>把一句話升級成傳奇優點，無依據評價 +1</i></button><button type="button" data-action="support"><span>☕ 誠實接話</span><small>30 Token · 800 EV · 心情 +8</small><i>接住這一刻的感受，不封神</i></button><button type="button" data-action="verify"><span>🔎 查證再印</span><small>100 Token · 有附件 2,400 / 待查 600 EV · 心情 +10</small><i>只肯定附件能證明的事；沒有就說還不知道</i></button></div><p class="budget" id="budget">額度不足時會保留後續訂單的最低接話費。</p>
+</div>
+<div class="receipt" id="receipt" hidden><span class="eyebrow">本次出鈔回條</span><h2 id="receipt-title" tabindex="-1"></h2><blockquote id="response"></blockquote><p id="receipt-detail"></p><p class="audit" id="audit" hidden></p><button class="primary" id="next" type="button">接下一單 →</button></div>
+<div class="result" id="result" hidden><p class="eyebrow">今日結帳 · 不用再燒 Token</p><h2 id="result-title" tabindex="-1"></h2><p id="result-copy"></p><div id="result-stats"></div><p>讓人開心可以有價值；這和「評語是否有依據」是兩本帳。這台機器連 BigMac 自己亂吹捧也一起算。</p><button class="primary" id="restart" type="button">重開分行，再印一次 ↻</button><button id="download" type="button">下載本局帳單 .txt</button></div>
+</section></div>
+<section class="ledger" aria-labelledby="ledger-heading"><div><h2 id="ledger-heading">分行流水帳</h2><span id="ledger-count">還沒開張，先別封神。</span></div><ol id="ledger"></ol></section>
+<footer>免費・無外部套件・無連線模型・無音效也能玩。進度只留在本分頁，重新整理即清空；不儲存、不上傳。<a href="index.html">回遊戲間 ↗</a></footer>
+<p class="sr-only" id="announcement" role="status" aria-live="polite" aria-atomic="true"></p>
+<noscript>請啟用 JavaScript 才能操作印鈔機；遊戲不需要登入或連接 AI。</noscript>
+</main></body></html>
