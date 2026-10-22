@@ -1,6 +1,6 @@
 # 小龍蝦遊戲間
 
-九款免費、純前端小遊戲，從 `index.html` 入口進入。
+十款免費、純前端小遊戲，從 `index.html` 入口進入。
 
 ## 試玩
 
@@ -122,7 +122,7 @@ python3 -m http.server 8765
 
 ## 專案檔案
 
-- `index.html`：九款遊戲共同入口；舊首頁 `#r=` 戰績連結自動轉到雙標遊戲並保留片段。
+- `index.html`：十款遊戲共同入口；舊首頁 `#r=` 戰績連結自動轉到雙標遊戲並保留片段。
 - `double-standard.html`：原雙標遊戲的畫面、流程和計分。
 - `start-small.html`、`start-small.css`、`start-small.js`：拖延啟動遊戲。
 - `mini-kart.html`、`mini-kart.css`、`mini-kart.js`、`kart.svg`：迷你卡丁車與原創插圖。
@@ -136,7 +136,7 @@ python3 -m http.server 8765
 
 ## 部署
 
-這是靜態網站。GitHub Pages 可發布倉庫根目錄的 `index.html` 作共同入口；所有九款遊戲的 HTML、CSS 和 JS 必須同時發布。啟用 Pages 後，分享連結會自動以當前網站網址產生。發布設定由倉庫擁有者決定。
+這是靜態網站。GitHub Pages 可發布倉庫根目錄的 `index.html` 作共同入口；所有十款遊戲的 HTML、CSS 和 JS 必須同時發布。啟用 Pages 後，分享連結會自動以當前網站網址產生。發布設定由倉庫擁有者決定。
 
 ## 授權
 
@@ -160,3 +160,14 @@ PR 說明範例（以實際結果取代括號）：
 畫面：UI 改動時附前後截圖（注意不要含私人資料）
 相容性／隱私：保留舊分享連結；未新增儲存或網路傳輸
 ```
+
+
+## 心情真好・情緒價值印鈔機
+
+試玩：<https://dorac7.github.io/double-standard-game/emotion-printer.html>。
+
+「如來紫衣師父多拉」是群聊梗改編的虛構喜劇角色。扮演 BigMac 分行經理，接 8 張虛構訂單，選擇彩虹屁開光、誠實接話或查證再印。管理 1,100 點虛擬 Token、發行 EV 與心情熱度，挑戰 20,000 EV 的試營運目標；沒有倒數。金箔滾筒花 120 Token，將後續面額翻倍，但不增加證據。第 4、8 單按當時累計的無依據評價，每張回收 1,000 EV（以餘額為限），不退 Token；會預留後續最低接話費，避免卡死。
+
+可查看逐單流水帳、下載本局 UTF-8 文字帳單與重玩。查證只支持附件所示的具體事項，沒有附件時保留待證；讓人開心與評語是否有依據分開記錄。所有訂單、評語和數值為遊戲設計，不是任何人的人格評價或心理測量；EV 不能兌現、沒有實際 API 費用。無音效、帳號、儲存或玩家資料上傳，刷新清空。
+
+資產：`emotion-printer.html`、`emotion-printer.css`、`emotion-printer.js`、`emotion-printer-engine.js`、`emotion-printer.svg`。沿用現有無依賴靜態遊戲結構，未引入外部平台或付費服務。引擎檢查：`node --test tests/emotion-printer.test.cjs`；人工驗證見 [QA](tests/emotion-printer-qa.md)。
