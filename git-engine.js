@@ -4,7 +4,7 @@
   const clone = value => JSON.parse(JSON.stringify(value));
   const own = (obj, key) => Object.hasOwn(obj, key);
   const same = (a,b) => JSON.stringify(Object.entries(a).sort()) === JSON.stringify(Object.entries(b).sort());
-  const help = 'git init · git status · git add README.md / . · git diff [--staged] · git commit -m "訊息" · git log [--oneline] · git branch [名稱] · git switch [-c] 分支 · git checkout [-b] 分支 · git merge 分支（僅快轉）\n建立並切換分支：git switch -c 名稱 或 git checkout -b 名稱。checkout 只模擬分支切換，不含還原檔案或 detached HEAD。\n用右側編輯器修改檔案；所有版本都是遊戲模擬，不連接 GitHub。';
+  const help = 'git init · git status [-sb] · git add [-A|-u] [檔案…] · git diff [--staged|--cached] · git commit [-a] -m "訊息" · git log [--oneline] [-n 筆數] · git branch [名稱] · git switch [-c] 分支 · git checkout [-b] 分支 · git merge 分支（僅快轉）\n建立並切換分支：git switch -c 名稱 或 git checkout -b 名稱。add 接受 ./檔名、多檔與 --；commit 也接受 --message、-m訊息 與 -am。status 支援 --short／--branch，branch 支援 --list／--show-current，merge 支援 --ff-only。checkout 只模擬分支切換，不含還原檔案或 detached HEAD。\n用右側編輯器修改檔案；所有版本都是遊戲模擬，不連接 GitHub。';
   const initial = () => ({ready:false, work:{'README.md':'# 龍蝦食堂\n今日供應：海藻湯\n'}, index:{}, commits:[], branches:{main:null}, branch:'main', serial:0});
   const head = s => s.commits.find(c => c.id === s.branches[s.branch]);
   const snapshot = s => head(s)?.files || {};
@@ -19,11 +19,16 @@
   }
   function tokens(line) {
     const out=[]; let word='',quote='',started=false;
-    for(const ch of line) {
+    for(let i=0;i<line.length;i++) {
+      const ch=line[i];
+      if(ch==='\\'&&quote!=="'"){
+        if(i+1>=line.length)throw Error('反斜線後還需要一個字元。');
+        if(!quote||/["\\$`]/.test(line[i+1])){word+=line[++i];started=true;continue;}
+      }
       if(quote) { if(ch===quote)quote=''; else word+=ch; }
       else if(ch==='"'||ch==="'") {quote=ch;started=true;}
       else if(/\s/.test(ch)) {if(started){out.push(word);word='';started=false;}}
-      else if(/[;|&<>`$\\]/.test(ch)) throw Error('一次一條指令；不支援管線、重導向、變數或跳脫字元。');
+      else if(/[;|&<>`$*?\[\]{}]/.test(ch)) throw Error('一次一條指令；不支援管線、重導向、變數或萬用字元。');
       else {word+=ch;started=true;}
     }
     if(quote)throw Error('引號尚未成對。'); if(started)out.push(word); return out;
@@ -36,64 +41,113 @@
     if(words[0]==='help'&&words.length===1)return {ok:true,output:help,event:'help'};
     if(words[0]==='clear'&&words.length===1)return {ok:true,output:'',clear:true};
     if(words[0]!=='git')return fail('這是 Git 模擬器；輸入 help 看支援用法。檔案請用編輯器修改。');
-    const [,cmd,...args]=words, usage=()=>fail(help);
+    const [,cmd,...args]=words, usage=()=>fail('本模擬器尚未支援這組參數；不代表真實 Git 不支援。\n'+help);
     const result=(output,event=cmd)=>({ok:true,output,event,args});
     if(cmd==='init') {
       if(args.length)return usage();
       if(s.ready)return result('已經初始化；既有紀錄保留。');
       s.ready=true; return result('已建立遊戲內的 Git 倉庫（初始分支 main）。');
     }
+    if((cmd==='--version'||cmd==='-v')&&!args.length)return result('git version 2.53.0（遊戲模擬）','version');
+    if((cmd==='--help'||cmd==='help')&&!args.length)return result(help,'help');
     if(!s.ready)return fail('還不是 Git 倉庫。先執行 git init。');
     if(cmd==='status') {
-      if(args.length)return usage(); const t=status(s);
+      let short=false,branch=false;
+      for(const a of args){
+        if(a==='--short')short=true;else if(a==='--branch')branch=true;
+        else if(/^-[sb]+$/.test(a)){short ||= a.includes('s');branch ||= a.includes('b');}else return usage();
+      }
+      const t=status(s);
+      if(short){
+        const mark={新增:'A',修改:'M',刪除:'D'};
+        const names=[...new Set([...t.staged,...t.unstaged].map(x=>x.name))].sort();
+        return result((branch?['## '+s.branch]:[]).concat(names.flatMap(n=>{
+          if(!own(s.index,n)&&!own(snapshot(s),n))return '?? '+n;
+          if(!own(s.index,n)&&own(s.work,n))return ['D  '+n,'?? '+n];
+          return (mark[t.staged.find(x=>x.name===n)?.kind]||' ')+(mark[t.unstaged.find(x=>x.name===n)?.kind]||' ')+' '+n;
+        })).join('\n'));
+      }
       return result('目前分支：'+s.branch+'\n'+(!head(s)?'尚無提交\n':'')+'\n已暫存（下次 commit 會收錄）：\n'+(t.staged.map(x=>'  '+x.kind+' '+x.name).join('\n')||'  無')+'\n尚未暫存／未追蹤：\n'+(t.unstaged.map(x=>'  '+x.kind+' '+x.name).join('\n')||'  無')+ (clean(s)?'\n工作目錄乾淨。':''));
     }
     if(cmd==='add') {
-      if(args.length!==1)return usage(); const name=args[0];
-      if(name==='.')s.index=clone(s.work);
-      else {
-        if(!own(s.work,name)&&!own(s.index,name))return fail('找不到檔案：'+name);
-        if(own(s.work,name))s.index[name]=s.work[name]; else delete s.index[name];
+      let mode='all',ended=false;const names=[];
+      for(const a of args){
+        if(!ended&&a==='--'){ended=true;continue;}
+        if(!ended&&['-A','--all','-u','--update'].includes(a)){mode=['-u','--update'].includes(a)?'tracked':'all';continue;}
+        if(!ended&&a.startsWith('-'))return usage();
+        if(!a)return fail('檔案路徑不可為空字串。');
+        names.push(a.replace(/^(?:\.\/)+/,''));
+      }
+      if(!names.length&&args.length===0)return usage();
+      const all=!names.length||names.includes('.')||names.includes('');
+      const selected=all?[...new Set([...Object.keys(s.work),...Object.keys(s.index)])]:names;
+      for(const n of [...selected,...names.filter(n=>n&&n!=='.')])if(!own(s.work,n)&&!own(s.index,n))return fail('找不到檔案：'+n);
+      for(const n of selected){
+        if(mode==='tracked'&&!own(s.index,n))continue;
+        if(own(s.work,n))s.index[n]=s.work[n];else delete s.index[n];
       }
       return result('已更新暫存區；commit 仍未發生。請用 git status 或 git diff --staged 核對。');
     }
     if(cmd==='diff') {
-      if(args.length>1||(args.length===1&&args[0]!=='--staged'))return usage();
+      if(args.length>1||(args.length===1&&!['--staged','--cached'].includes(args[0])))return usage();
       const a=args.length?snapshot(s):s.index, b=args.length?s.index:s.work;
       // Real git diff omits untracked files. Keep that distinction here too.
       const files=changes(a,b).filter(x=>args.length||own(s.index,x.name));
       return result(files.map(x=>'--- '+x.name+'（'+x.kind+'；整份舊／新內容比較）\n'+(own(a,x.name)?a[x.name].split('\n').map(l=>'- '+l).join('\n'):'（原本不存在）')+'\n'+(own(b,x.name)?b[x.name].split('\n').map(l=>'+ '+l).join('\n'):'（已刪除）')).join('\n\n')||'沒有差異。未追蹤檔請用 git status 查看。',args.length?'diff-staged':'diff');
     }
     if(cmd==='commit') {
-      if(args.length!==2||args[0]!=='-m'||!args[1].trim())return usage();
-      if(same(s.index,snapshot(s)))return fail('沒有可提交的暫存變更。修改工作檔案不等於已暫存。');
+      let message=null,auto=false;
+      for(let i=0;i<args.length;i++){
+        const a=args[i];
+        if(a==='-a'||a==='--all'){auto=true;continue;}
+        if(a==='-m'||a==='--message'||a==='-am'){if(a==='-am')auto=true;if(message!==null||++i>=args.length)return usage();message=args[i];}
+        else if(a.startsWith('--message=')){if(message!==null)return usage();message=a.slice(10);}
+        else if(a.startsWith('-am')||a.startsWith('-m')){if(message!==null)return usage();auto ||= a.startsWith('-am');message=a.slice(auto&&a.startsWith('-am')?3:2);}
+        else return usage();
+      }
+      if(message===null||!message.trim())return usage();
+      const nextIndex=clone(s.index);
+      if(auto)for(const n of Object.keys(s.index)){if(own(s.work,n))nextIndex[n]=s.work[n];else delete nextIndex[n];}
+      if(same(nextIndex,snapshot(s)))return fail('沒有可提交的暫存變更。修改工作檔案不等於已暫存。');
       if(s.commits.length>=80)return fail('沙盒最多保留 80 個提交，請重設後再練。');
+      s.index=nextIndex;
       const id=(++s.serial).toString(16).padStart(7,'0');
-      s.commits.push({id,parent:s.branches[s.branch],message:args[1],files:clone(s.index)}); s.branches[s.branch]=id;
-      return result('['+s.branch+' '+id+'] '+args[1]+'\n已保存暫存區快照；未暫存的修改不包含在內。');
+      s.commits.push({id,parent:s.branches[s.branch],message,files:clone(s.index)}); s.branches[s.branch]=id;
+      return result('['+s.branch+' '+id+'] '+message+(auto?'\n已先暫存追蹤檔的修改／刪除，再保存快照；未追蹤新檔不包含在內。':'\n已保存暫存區快照；未暫存的修改不包含在內。'));
     }
     if(cmd==='log') {
-      if(args.length>1||(args.length&&args[0]!=='--oneline'))return usage();
-      const rows=[];let c=head(s);
-      while(c){rows.push(c.id+' '+c.message);c=s.commits.find(x=>x.id===c.parent);}
-      return result(rows.join('\n')||'目前分支還沒有提交。');
+      let limit=80;
+      for(let i=0;i<args.length;i++){
+        const a=args[i];if(a==='--oneline')continue;
+        let n;
+        if(a==='-n'||a==='--max-count'){if(++i>=args.length)return usage();n=args[i];}
+        else if(/^--max-count=/.test(a))n=a.slice(12);
+        else if(/^-n?\d+$/.test(a))n=a.replace(/^-n?/,'');else return usage();
+        if(!/^\d+$/.test(n))return usage();limit=Math.min(Number(n),80);
+      }
+      const rows=[],logIds=[];let c=head(s);
+      while(c&&rows.length<limit){rows.push(c.id+' '+c.message);logIds.push(c.id);c=s.commits.find(x=>x.id===c.parent);}
+      return {...result(rows.join('\n')||(!head(s)?'目前分支還沒有提交。':'')),logIds};
     }
-    const validBranch = name => /^[a-zA-Z][a-zA-Z0-9_-]{0,29}$/.test(name) && !['__proto__','constructor','prototype','HEAD'].includes(name);
+    const validBranch = name => /^[a-zA-Z][a-zA-Z0-9_/-]{0,59}$/.test(name) && name.split('/').every(p=>p&&p!=='@') && !['__proto__','constructor','prototype','HEAD'].includes(name);
     function create(name) {
       if(!head(s))return '先做第一個 commit，再建立分支。';
-      if(!validBranch(name))return '分支名稱請用英文字母開頭，搭配英數、底線或短橫線（最多 30 字）。';
+      if(!validBranch(name))return '分支名稱請用英文字母開頭，搭配英數、底線、短橫線或 /（最多 60 字，不可有空白路徑段）。';
       if(own(s.branches,name))return '分支已存在。';
+      if(Object.keys(s.branches).some(b=>b.startsWith(name+'/')||name.startsWith(b+'/')))return '分支名稱與既有分支路徑衝突。';
       if(Object.keys(s.branches).length>=15)return '最多 15 個分支。';
       return '';
     }
     if(cmd==='branch') {
       if(args.length>1)return usage();
+      if(args.length===1&&args[0]==='--show-current')return result(s.branch);
+      if(args.length===1&&['--list','-l'].includes(args[0]))args.length=0;
       if(!args.length)return result(Object.keys(s.branches).map(b=>(s.branch===b?'* ':'  ')+b+' → '+(s.branches[b]||'尚無提交')).join('\n'));
       const error=create(args[0]);if(error)return fail(error);
       s.branches[args[0]]=s.branches[s.branch];return result('已建立 '+args[0]+'，但目前仍在 '+s.branch+'。');
     }
     if(cmd==='switch'||cmd==='checkout') {
-      const make=args[0]===(cmd==='checkout'?'-b':'-c'),name=args[make?1:0];
+      const make=(cmd==='checkout'?['-b']:['-c','--create']).includes(args[0]),name=args[make?1:0];
       if(args.length!==(make?2:1)||!name||name.startsWith('-'))return usage();
       if(!clean(s))return fail('本練習要求先提交所有變更再切換，避免覆蓋；真實 Git 有時允許攜帶不衝突的變更。');
       if(make){const error=create(name);if(error)return fail(error);s.branches[name]=s.branches[s.branch];}
@@ -101,7 +155,8 @@
       s.branch=name;s.index=clone(snapshot(s));s.work=clone(s.index);return result('已切換到 '+name+'；工作區與暫存區對齊該分支。','switch');
     }
     if(cmd==='merge') {
-      if(args.length!==1)return usage();const name=args[0];
+      const operands=args.filter(a=>a!=='--ff-only');
+      if(operands.length!==1||operands[0].startsWith('-'))return usage();const name=operands[0];
       if(!own(s.branches,name))return fail('找不到分支：'+name);
       if(!clean(s))return fail('本練習要求乾淨的工作目錄才能合併。');
       const ancestor=(a,b)=>{while(b){if(a===b)return true;b=s.commits.find(c=>c.id===b)?.parent;}return a===null;};
