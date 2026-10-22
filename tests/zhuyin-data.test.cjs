@@ -43,11 +43,11 @@ test('all 37 WAV files are complete, original recordings with matching IDs and S
   assert.equal(new Set(data.map(s => s.sha256)).size, 37);
 });
 
-test('six lobby games have local files and the teaching page retains attribution', () => {
+test('lobby games have unique local files and the teaching page retains attribution', () => {
   const lobby = readFileSync(join(root, 'index.html'), 'utf8');
   const links = [...lobby.matchAll(/<a class="card" href="([^"]+)"/g)].map(m => m[1]);
-  assert.equal(links.length, 6);
-  assert.equal(new Set(links).size, 6);
+  assert(links.length >= 6);
+  assert.equal(new Set(links).size, links.length);
   assert(links.includes('zhuyin.html'));
   links.forEach(href => assert(readFileSync(join(root, href)).length));
   const page = readFileSync(join(root, 'zhuyin.html'), 'utf8');

@@ -46,6 +46,11 @@ Do not add npm dependencies, frameworks, CDNs, external fonts, analytics, tracke
 - `start-small.html`, `start-small.css`, `start-small.js` — procrastination / small-step game.
 - `mini-kart.html`, `mini-kart.css`, `mini-kart.js` — canvas kart racer.
 - `hyper-challenge.html`, `hyper-challenge.css`, `hyper-challenge.js` — rhythm/reaction game.
+- `zhuyin.html`, `zhuyin*.js`, `zhuyin*.css`, `zhuyin.svg`, `assets/zhuyin/`, `assets/zhuyin-words/` — symbol, adventure, and spelling activities; retain MOE source notices and CC BY 4.0 attribution in `ZHUYIN-SOURCES.md` and assets.
+- `adhd-bingo.html`, `adhd-bingo.css`, `adhd-bingo-data.js`, `adhd-bingo.js`, `bingo.svg` — local-only non-diagnostic Bingo; preserve `ADHD-BINGO-SOURCES.md`, no default selections or uploaded/persisted answers.
+- `terminal-quest.html`, `terminal-quest.css`, `terminal-quest.js`, `terminal-engine.js`, `terminal-missions.js`, `terminal.svg` — simulated shell, never actual command execution.
+- `git-quest.html`, `git-quest.css`, `git-quest.js`, `git-engine.js`, `git-missions.js`, `git.svg` — simulated Git; also depends on `terminal-quest.css`, no real GitHub connection.
+- `tests/` — dependency-free Node tests (`*.test.cjs`) and manual QA guides (`*-qa.md`).
 - `bolt.svg`, `box.svg`, `kart.svg`, `masks.svg`, `rocket.svg` — local artwork.
 - `v2.html`, `v3.html` — archived prototypes; they are not current entry points.
 
@@ -141,7 +146,9 @@ Avoid:
 
 ## Manual validation checklist
 
-There is currently no required automated test suite, so perform focused browser checks for the area you changed.
+Run `node --test tests/*.test.cjs` from the repository root (requires Node.js, no npm install). For lobby-only checks use `node --test tests/arcade.test.cjs`. Automated checks do not replace focused browser checks; follow `tests/arcade-smoke-qa.md` and `tests/arcade-dialog-qa.md` plus the relevant game QA guide.
+
+For Zhuyin, verify audio/stroke assets, attribution, and spelling choices; never substitute concatenated symbol audio for word recordings. For Bingo, check card sizing, undo, PNG/export and blank-card sharing without transmitting selections. For terminal/Git practice, complete the guided flow and verify sandbox isolation, undo and exported records without running real commands.
 
 For every change:
 

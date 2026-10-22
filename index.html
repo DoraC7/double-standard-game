@@ -10,6 +10,7 @@
 :root{--ink:#17352a;--muted:#627168;--paper:#f4f0e4;--card:#fffaf0;--line:#cbd0bd;--accent:#17352a;--soft:#e0e8bc}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:system-ui,-apple-system,"Noto Sans TC",sans-serif}button,a{font:inherit}button{color:inherit}main{max-width:1120px;margin:auto;padding:30px 22px 56px}header{display:flex;justify-content:space-between;gap:12px;align-items:center;font-weight:850;font-size:13px}header span{color:#657569}.hero{padding:34px 0 18px}.stamp{display:inline-block;background:var(--soft);padding:7px 13px;border-radius:100px;font-size:13px;font-weight:850}.hero h1{font-size:clamp(42px,8vw,76px);line-height:1.04;letter-spacing:-.055em;margin:20px 0 16px;max-width:790px}.hero h1 em{font-style:normal;color:#a85135}.lead{color:#596c5f;line-height:1.8;max-width:700px;font-size:16px;margin:0}.chooser{margin:26px 0 30px;padding:20px;background:#e9e4d6;border:1px solid #d0cbbd;border-radius:24px}.chooser-head{display:flex;justify-content:space-between;align-items:end;gap:18px;margin-bottom:14px}.chooser h2{font-size:18px;margin:0 0 5px}.chooser p{margin:0;color:var(--muted);font-size:13px;line-height:1.5}.filters{display:flex;gap:9px;flex-wrap:wrap}.filter,.surprise{border:1px solid #b7beae;background:#fffaf0;border-radius:999px;padding:10px 14px;font-weight:850;cursor:pointer;transition:transform .16s,background .16s,border-color .16s}.filter:hover,.surprise:hover{transform:translateY(-2px)}.filter[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fffaf0}.surprise{background:#f6c873;border-color:#ca9c48;white-space:nowrap}.section-head{display:flex;justify-content:space-between;gap:16px;align-items:end;margin:8px 0 16px}.section-head h2{font-size:26px;margin:0}.result-count{font-size:13px;color:var(--muted);font-weight:750}.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.card{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:26px;overflow:hidden;text-decoration:none;color:inherit;transition:transform .2s,box-shadow .2s,border-color .2s;min-width:0}.card:hover{transform:translateY(-5px);box-shadow:0 16px 34px #17352a18;border-color:#abb6a3}.card[hidden]{display:none}.art{height:200px;display:grid;place-items:center;position:relative;overflow:hidden}.art:after{content:"";position:absolute;width:130px;height:130px;border:1px solid #ffffff55;border-radius:50%;right:-32px;top:-34px}.art img{display:block;max-width:calc(100% - 24px);height:auto;object-fit:contain;filter:drop-shadow(0 10px 10px #17352a18)}.art small{position:absolute;bottom:15px;left:18px;font-size:12px;border:1px solid #ffffff88;background:#ffffff40;border-radius:100px;padding:5px 9px;font-weight:800}.orange{background:#f4b278}.green{background:#c6db9c}.purple{background:#d6caf0}.yellow{background:#f9d37e}.electric{background:#c9b5ed}.info{padding:21px 22px 19px;display:flex;flex:1;flex-direction:column}.title-row{display:flex;justify-content:space-between;gap:12px;align-items:start}.title-row h3{font-size:24px;line-height:1.2;margin:0}.mood{font-size:11px;letter-spacing:.04em;background:#edf0e2;padding:6px 8px;border-radius:999px;white-space:nowrap;font-weight:850}.description{font-size:14px;line-height:1.75;margin:11px 0 14px;color:#667368}.meta{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:18px}.meta span{font-size:12px;font-weight:800;padding:6px 8px;border:1px solid #d7dccd;border-radius:9px;background:#f8f4e9}.go{margin-top:auto;font-weight:900;display:flex;justify-content:space-between;align-items:center;border-top:1px solid #d8ddcb;padding-top:15px}.go b{font-size:19px}.empty{display:none;text-align:center;padding:42px 20px;border:1px dashed #aeb6a5;border-radius:24px;color:var(--muted)}.empty.show{display:block}.random-pick{outline:5px solid #f1b74c;outline-offset:4px;animation:pick .55s ease}.note{margin-top:30px;font-size:12px;color:#697567;line-height:1.8;border-top:1px solid #d8d3c5;padding-top:20px}button:focus-visible,a:focus-visible{outline:4px solid #437b62;outline-offset:4px}@keyframes pick{0%{transform:scale(.97)}55%{transform:scale(1.02)}100%{transform:none}}@media(max-width:760px){main{padding:22px 15px 44px}.hero{padding-top:27px}.hero h1{font-size:clamp(40px,13vw,62px)}.chooser{padding:16px}.chooser-head,.section-head{align-items:start;flex-direction:column}.surprise{width:100%}.cards{grid-template-columns:1fr}.card{display:grid;grid-template-columns:118px minmax(0,1fr)}.art{height:100%;min-height:238px}.art img{max-width:92px}.art small{left:8px;right:8px;text-align:center;font-size:10px}.art:after{width:80px;height:80px}.info{padding:17px}.title-row{display:block}.title-row h3{font-size:21px}.mood{display:inline-block;margin-top:8px}.description{line-height:1.65}.meta{gap:5px}.meta span{font-size:11px;padding:5px 7px}header{flex-wrap:wrap}}@media(max-width:420px){.card{grid-template-columns:96px minmax(0,1fr)}.art img{max-width:75px}.filters{display:grid;grid-template-columns:repeat(2,1fr);width:100%}.filter{padding:10px 8px}.filter:first-child{grid-column:1/-1}.meta span{display:inline-block}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
 
 /* Random game recommendation dialog */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
 .pick-dialog{width:min(92vw,560px);max-height:90dvh;padding:0;border:0;border-radius:30px;background:#fffaf0;color:var(--ink);box-shadow:0 28px 90px #17352a55;overflow:hidden}
 .pick-dialog:not([open]){display:none}
 .pick-dialog::backdrop{background:#132922a8;backdrop-filter:blur(5px)}
@@ -38,7 +39,7 @@
 <section class="hero">
 <span class="stamp">大人小孩都能玩的遊戲間</span>
 <h1>今天想<br><em>玩哪一種感覺？</em></h1>
-<p class="lead">想動腦、放空、甩尾，還是試一行終端機指令？先選現在的心情，再挑一款。九款遊戲都能直接開始，沒有登入、沒有排行榜，也不用先讀一大篇規則。</p>
+<p class="lead">想動腦、放空、甩尾，還是試一行終端機指令？先選現在的心情，再挑一款。每款遊戲都能直接開始，沒有登入、沒有排行榜，也不用先讀一大篇規則。</p>
 </section>
 <section class="chooser" aria-labelledby="chooser-title">
 <div class="chooser-head"><div><h2 id="chooser-title">我現在想要…</h2><p>選一個方向，只留下適合現在這一刻的遊戲。</p></div><button class="surprise" id="surprise" type="button">🎲 幫我選一款</button></div>
@@ -52,7 +53,7 @@
 </div>
 </section>
 <div class="section-head"><h2>遊戲櫃</h2><span class="result-count" id="result-count" aria-live="polite">9 款遊戲</span></div>
-<section class="cards" id="cards" aria-label="九款遊戲">
+<section class="cards" id="cards" aria-label="遊戲列表">
 <a class="card" href="git-quest.html" data-tags="learn think"><div class="art green"><img src="git.svg" alt="" width="155" height="140"><small>NEW · Git 時光機</small></div><div class="info"><div class="title-row"><h3>龍蝦 Git 時光機</h3><span class="mood">🌿 留一版</span></div><p class="description">替龍蝦食堂保存菜單！親手編輯、暫存、提交，開分支試做新湯，再把實驗帶回主線。</p><div class="meta"><span>🧭 10 關任務</span><span>🌿 分支與快轉合併</span><span>📝 可下載紀錄</span></div><span class="go">啟動時光機 <b>↗</b></span></div></a>
 <a class="card" href="terminal-quest.html" data-tags="learn think"><div class="art green"><img src="terminal.svg" alt="" width="155" height="130"><small>NEW · 終端機探險</small></div><div class="info"><div class="title-row"><h3>龍蝦終端機探險</h3><span class="mood">⌨ 試一行</span></div><p class="description">pwd、ls、cd 不再只是看過的字！親手輸入指令，整理虛擬檔案，再用結果驗證。打錯也能復原。</p><div class="meta"><span>🧭 14 站任務</span><span>🏝 自由沙盒</span><span>📝 可匯出文字紀錄</span></div><span class="go">從第一行開始 <b>↗</b></span></div></a>
 <a class="card" href="adhd-bingo.html" data-tags="chill think"><div class="art orange"><img src="bingo.svg" alt="" width="140" height="140"><small>NEW · 日常共鳴</small></div><div class="info"><div class="title-row"><h3>ADHD 日常賓果</h3><span class="mood">🦞 這格是我</span></div><p class="description">找手機、分心、時間怎麼又過了？點選有共鳴的日常經驗，橫直斜連線，再帶走一個小方法。不是診斷測驗。</p><div class="meta"><span>⏱ 不限時</span><span>🧩 3×3／5×5</span><span>🖼 可下載賓果圖</span></div><span class="go">看看哪格像自己 <b>↗</b></span></div></a>
@@ -77,6 +78,7 @@
 <div class="pick-meta" id="pick-meta"></div>
 <div class="pick-actions"><a class="pick-play" id="pick-play" href="double-standard.html">就玩這個！ →</a><button class="pick-again" id="pick-again" type="button">🎲 再選一次</button></div>
 <p class="pick-context" id="pick-context"></p>
+<p class="sr-only" id="pick-announcement" role="status" aria-atomic="true"></p>
 </div>
 </div>
 </dialog>
@@ -95,6 +97,8 @@
   const pickMeta=document.getElementById('pick-meta');
   const pickPlay=document.getElementById('pick-play');
   const pickContext=document.getElementById('pick-context');
+  const pickAnnouncement=document.getElementById('pick-announcement');
+  const filterLabel=filter=>filterLabels[filter]||'其他分類';
   const supportsDialog=typeof dialog.showModal==='function'&&typeof dialog.close==='function';
   if(!supportsDialog)dialog.hidden=true;
   let current='all';
@@ -111,7 +115,7 @@
       card.hidden=!show;
       if(show)visible++;
     });
-    count.textContent=`${visible} 款遊戲`;
+    count.textContent=`${filterLabel(filter)}：${visible} / ${cards.length} 款遊戲`;
     empty.classList.toggle('show',visible===0);
   }
 
@@ -139,11 +143,12 @@
     pickImage.src=image.getAttribute('src');
     pickImage.alt='';
     pickTitle.textContent=title.textContent;
+    if(reshuffle)pickAnnouncement.textContent=`推薦：${title.textContent}`;
     pickDescription.textContent=description.textContent;
     pickMeta.replaceChildren(...meta.map(item=>{const span=document.createElement('span');span.textContent=item.textContent;return span;}));
     pickPlay.href=card.getAttribute('href');
     pickPlay.setAttribute('aria-label',`進入${title.textContent}`);
-    pickContext.textContent=current==='all'?`從全部 ${cards.length} 款遊戲中選出`:`從「${filterLabels[current]}」分類中選出`;
+    pickContext.textContent=current==='all'?`從全部 ${cards.length} 款遊戲中選出`:`從「${filterLabel(current)}」分類中選出`;
   }
 
   function showRandomPick(){
@@ -153,10 +158,12 @@
       window.location.href=pick.getAttribute('href');
       return;
     }
+    pickAnnouncement.textContent='';
     renderPick(pick);
     dialog.showModal();
   }
 
+  applyFilter('all');
   buttons.forEach(button=>button.addEventListener('click',()=>applyFilter(button.dataset.filter)));
   surprise.addEventListener('click',showRandomPick);
   document.getElementById('pick-again').addEventListener('click',()=>renderPick(chooseCard(),true));
