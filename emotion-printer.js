@@ -7,7 +7,7 @@
   function totals(){
     $('cash').textContent=fmt(state.cash);$('mood').textContent=`${state.mood} / 100`;
     $('tokens').textContent=fmt(state.tokens);$('claims').textContent=`${state.claims} 張`;
-    $('progress').value=state.turn;$('turn').textContent=state.turn===8?'8 / 8 訂單完成':`訂單 ${state.turn+1} / 8`;
+    $('progress').value=state.turn;$('turn').textContent=state.turn===8?'8 / 8 訂單完成':`訂單 ${phase==='choose'?state.turn+1:state.turn} / 8`;
     $('upgrade').disabled=phase!=='choose'||!E.canUpgrade(state);
     $('upgrade').textContent=state.upgraded?'✦ 金箔滾筒已開光':'✦ 金箔滾筒 · 120 Token';
     $('upgrade-note').textContent=state.upgraded?'全單面額 ×2，證據仍不加倍':'面額 ×2，證據不加倍';
