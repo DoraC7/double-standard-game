@@ -4,7 +4,7 @@
   const clone = value => JSON.parse(JSON.stringify(value));
   const own = (obj, key) => Object.hasOwn(obj, key);
   const same = (a,b) => JSON.stringify(Object.entries(a).sort()) === JSON.stringify(Object.entries(b).sort());
-  const help = 'git init · git status · git add README.md / . · git diff [--staged] · git commit -m "訊息" · git log [--oneline] · git branch [名稱] · git switch [-c] 分支 · git merge 分支（僅快轉）\n用右側編輯器修改檔案；所有版本都是遊戲模擬，不連接 GitHub。';
+  const help = 'git init · git status · git add README.md / . · git diff [--staged] · git commit -m "訊息" · git log [--oneline] · git branch [名稱] · git switch [-c] 分支 · git checkout [-b] 分支 · git merge 分支（僅快轉）\n建立並切換分支：git switch -c 名稱 或 git checkout -b 名稱。checkout 只模擬分支切換，不含還原檔案或 detached HEAD。\n用右側編輯器修改檔案；所有版本都是遊戲模擬，不連接 GitHub。';
   const initial = () => ({ready:false, work:{'README.md':'# 龍蝦食堂\n今日供應：海藻湯\n'}, index:{}, commits:[], branches:{main:null}, branch:'main', serial:0});
   const head = s => s.commits.find(c => c.id === s.branches[s.branch]);
   const snapshot = s => head(s)?.files || {};
@@ -92,13 +92,13 @@
       const error=create(args[0]);if(error)return fail(error);
       s.branches[args[0]]=s.branches[s.branch];return result('已建立 '+args[0]+'，但目前仍在 '+s.branch+'。');
     }
-    if(cmd==='switch') {
-      const make=args[0]==='-c',name=args[make?1:0];
-      if(args.length!==(make?2:1))return usage();
+    if(cmd==='switch'||cmd==='checkout') {
+      const make=args[0]===(cmd==='checkout'?'-b':'-c'),name=args[make?1:0];
+      if(args.length!==(make?2:1)||!name||name.startsWith('-'))return usage();
       if(!clean(s))return fail('本練習要求先提交所有變更再切換，避免覆蓋；真實 Git 有時允許攜帶不衝突的變更。');
       if(make){const error=create(name);if(error)return fail(error);s.branches[name]=s.branches[s.branch];}
       if(!own(s.branches,name))return fail('找不到分支：'+name);
-      s.branch=name;s.index=clone(snapshot(s));s.work=clone(s.index);return result('已切換到 '+name+'；工作區與暫存區對齊該分支。');
+      s.branch=name;s.index=clone(snapshot(s));s.work=clone(s.index);return result('已切換到 '+name+'；工作區與暫存區對齊該分支。','switch');
     }
     if(cmd==='merge') {
       if(args.length!==1)return usage();const name=args[0];
@@ -111,7 +111,7 @@
       s.branches[s.branch]=there;s.index=clone(snapshot(s));s.work=clone(s.index);
       return result('Fast-forward：'+s.branch+' 指向 '+there+'。沒有額外建立 merge commit。');
     }
-    return usage();
+    return fail('本模擬器尚未實作這個 Git 子指令；不代表真實 Git 不支援。\n'+help);
   }
   const api={initial,clone,head,snapshot,status,clean,edit,execute,changes,help};
   if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.GitEngine=api;

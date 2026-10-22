@@ -1,5 +1,15 @@
 # Git 時光機驗證（2026-10-21）
 
+## checkout 相容修正（2026-10-22）
+
+- `node --test tests/*.test.cjs`：44/44 通過，其中 Git 13 項。三條完整 10 關路線分別使用 switch、checkout、branch 後再 checkout；驗證錯誤參數、重複分支、未提交變更與未模擬 checkout 模式均不改環境。
+- OpenClaw browser 拒絕 localhost 導航，因此本機開發檢查使用獨立 headless Chromium／既有 Playwright，透過 Python HTTP server 載入修正分支，未新增專案依賴。
+- 實際 UI 用 `git checkout -b soup` 與 `git checkout main` 完成全部 10 關、兩題觀念題和快轉合併；切回 main 時編輯器恢復 main 內容。
+- 下載並讀回 `.txt`，確認保留原始 checkout 指令、10 關證據與玩家筆記；切換沙盒不改關卡進度，checkout 建分支可復原，文字不執行 HTML，↑ 與 Tab 操作有效。
+- 小抄需展開後才能點擊；checkout 小抄只填入、不執行。桌面 1280×900、手機 390×844、橫向 844×390；桌面與手機截圖目視檢查，窄版無水平溢位，reduced-motion 可操作。
+- 刷新清空本分頁進度與筆記；首頁 10 個入口、學習分類 3 款、隨機推薦與舊分享轉送有效。上述 UI 流程無 pageerror。
+- 以上為本機修正分支驗證，不是正式站已部署的證據。checkout 僅模擬分支切換與 -b 建立分支，未新增檔案還原或 detached HEAD。
+
 ## 引擎
 
 `node --test tests/git-quest.test.cjs tests/terminal-quest.test.cjs`：24/24 通過（Git 9、既有終端機 15）。涵蓋 10 關完整路線、add 快照不收錄後續修改、未追蹤 diff、分支切換、快轉不增加提交、分歧拒絕且不改資料、髒工作區保護、提交刪檔、錯誤與注入文字、重複 init／merge 和環境隔離。

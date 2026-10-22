@@ -5,9 +5,13 @@ global.GitEngine=E;require('../git-missions.js');const M=global.GitMissions;
 const run=(s,line)=>{const r=E.execute(s,line);assert.equal(r.ok,true,line+': '+r.output);return r;};
 const commit=(s,text)=>{run(s,'git add .');run(s,'git commit -m "'+text+'"');};
 const init=()=>{const s=E.initial();run(s,'git init');return s;};
-test('完整 10 關操作與驗證；每關前狀態不能直接通過',()=>{
+for(const [label,create,switchBack] of [
+ ['switch',['git switch -c soup'],'git switch main'],
+ ['checkout',['git checkout -b soup'],'git checkout main'],
+ ['branch + checkout',['git branch soup','git checkout soup'],'git switch main']
+])test('完整 10 關操作與驗證（'+label+'）；每關前狀態不能直接通過',()=>{
  const s=E.initial();
- const steps=[['git init'],['git status'],['git add README.md','git status'],['git commit -m "開張"','git log'],[()=>E.edit(s,'README.md','新菜單'),'git diff'],['git add .','git diff --staged'],['git commit -m "更新"','git status'],['git switch -c soup','git branch'],[()=>E.edit(s,'README.md','濃湯'),'git add .','git commit -m "濃湯"','git log'],['git switch main','git merge soup','git status']];
+ const steps=[['git init'],['git status'],['git add README.md','git status'],['git commit -m "開張"','git log'],[()=>E.edit(s,'README.md','新菜單'),'git diff'],['git add .','git diff --staged'],['git commit -m "更新"','git status'],[...create,'git branch'],[()=>E.edit(s,'README.md','濃湯'),'git add .','git commit -m "濃湯"','git log'],[switchBack,'git merge soup','git status']];
  steps.forEach((commands,i)=>{assert.equal(Boolean(M[i].check(s,{event:'unrelated'})),false);let r;for(const c of commands)r=typeof c==='function'?c():run(s,c);assert.equal(M[i].check(s,r),true,'mission '+i);});
  assert.equal(E.clean(s),true);assert.equal(s.commits.length,3);assert.equal(s.work['README.md'],'濃湯');
 });
@@ -31,7 +35,23 @@ test('分歧合併明確拒絕，且完全保留雙邊資料',()=>{
 });
 test('髒工作區切換和合併均不會覆蓋；未暫存不可提交',()=>{
  const s=init();assert.equal(E.execute(s,'git commit -m "oops"').ok,false);commit(s,'one');run(s,'git branch soup');E.edit(s,'README.md','draft');
- const before=E.clone(s);for(const c of ['git switch soup','git switch -c test','git merge soup']){assert.equal(E.execute(s,c).ok,false);assert.deepEqual(s,before);}
+ const before=E.clone(s);for(const c of ['git switch soup','git switch -c test','git checkout soup','git checkout -b test','git merge soup']){assert.equal(E.execute(s,c).ok,false);assert.deepEqual(s,before);}
+});
+test('checkout 切換事件與 switch 相同；不同分支快照可正確帶回且不多建提交',()=>{
+ const s=init();commit(s,'one');const main=E.clone(s.work),first=s.branches.main;
+ assert.equal(run(s,'git checkout -b soup').event,'switch');
+ assert.equal(s.branches.soup,first);assert.equal(s.commits.length,1);
+ E.edit(s,'README.md','濃湯');commit(s,'soup');
+ assert.equal(run(s,'git checkout main').event,'switch');assert.deepEqual(s.work,main);assert.deepEqual(s.index,main);
+ run(s,'git switch soup');assert.equal(s.work['README.md'],'濃湯');assert.equal(s.commits.length,2);
+});
+test('checkout 錯誤、未模擬模式及重複分支都不改環境',()=>{
+ const s=init(),unborn=E.clone(s);assert.equal(E.execute(s,'git checkout -b soup').ok,false);assert.deepEqual(s,unborn);
+ commit(s,'one');run(s,'git branch soup');
+ for(const c of ['git checkout','git checkout -b','git checkout -b soup','git checkout missing','git checkout -c soup','git switch -b soup','git checkout -- README.md','git checkout -b other main','git checkout -B soup','git checkout --detach','git checkout -b constructor','git checkout -b __proto__']){
+  const before=E.clone(s);assert.equal(E.execute(s,c).ok,false,c);assert.deepEqual(s,before,c);
+ }
+ assert.match(E.execute(s,'git push').output,/本模擬器尚未實作/);
 });
 test('可提交刪檔；刪除工作區內容不刪除既有版本',()=>{
  const s=init();commit(s,'one');delete s.work['README.md'];run(s,'git add README.md');assert.match(run(s,'git diff --staged').output,/刪除/);run(s,'git commit -m "remove"');assert.deepEqual(E.head(s).files,{});assert.ok(s.commits[0].files['README.md']);

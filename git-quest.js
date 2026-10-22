@@ -72,7 +72,7 @@
   $('lesson-mode').onclick=()=>mode(false);$('sandbox-mode').onclick=()=>mode(true);
   $('reset-sandbox').onclick=()=>{if(!confirm('重設沙盒的檔案與版本？關卡進度不受影響。'))return;sandbox=fresh();mode(true);};
   $('restart').onclick=()=>{if(!confirm('重開旅程會重置關卡進度；要繼續嗎？'))return;lesson=fresh();step=0;passed=quizPassed=finished=hint=false;checkpoint=E.clone(lesson.env);proofs.length=0;mode(false);};
-  const commands=['git init','git status','git add README.md','git add .','git diff','git diff --staged','git commit -m "更新菜單"','git log --oneline','git branch','git switch -c soup','git switch main','git merge soup','help','clear'];
+  const commands=['git init','git status','git add README.md','git add .','git diff','git diff --staged','git commit -m "更新菜單"','git log --oneline','git branch','git switch -c soup','git checkout -b soup','git switch main','git checkout main','git merge soup','help','clear'];
   commands.forEach(text=>{const b=document.createElement('button');b.type='button';b.textContent=text;b.onclick=()=>{if($('command').disabled)return;$('command').value=text;$('command').focus();};$('cheats').append(b);});
   $('download').onclick=()=>{
     const record='龍蝦 Git 時光機｜遊戲模擬紀錄（非真實 Git 操作）\n'+(free?'模式：自由沙盒':'模式：10 關旅程')+'\n'+(session.truncated?'〔早期紀錄超過上限，已截斷〕\n':'')+session.log.map(e=>(e.input?'$ '+e.input+'\n':'')+e.output).join('\n\n')+'\n\n本次環境\n工作區：\n'+view(session.env.work)+'\n暫存區：\n'+view(session.env.index)+'\n目前提交：\n'+view(E.snapshot(session.env))+'\n\n'+(!free?'已核對關卡：\n'+proofs.map((p,i)=>(i+1)+'. '+p).join('\n'):'')+'\n\n我自己寫的筆記：\n'+$('reflection').value;
