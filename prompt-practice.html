@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#203b55"><meta name="description" content="練習把問題問清楚、把任務交代具體：六個情境，自己寫、自己核對。">
+<title>提問與下指令練習場｜Dora playground</title>
+<link rel="icon" href="prompt-practice.svg" type="image/svg+xml"><link rel="stylesheet" href="prompt-practice.css">
+<script src="prompt-practice.js" defer></script>
+</head>
+<body><main>
+<header><a href="index.html">← 回遊戲間</a><span>溝通練習室 / No. 012</span></header>
+<section class="hero"><div><p class="eyebrow">先想目標，再開口</p><h1>提問與下指令<br><em>練習場</em></h1><p>六個日常技術情境，練習把問題問到能回答、把任務交代到能核對。先自己寫，再看提示；沒有標準人格分數。</p></div><div class="speech-art" aria-hidden="true"><span>？</span><span>→</span><span>✓</span><i>🦞</i></div></section>
+<aside class="privacy"><strong>先說好：</strong>這裡沒有接 AI，你寫的內容不會被自動判分、儲存或上傳。答案只在目前分頁中暫留，重新整理就清空。</aside>
+<section class="game" aria-labelledby="scenario-title">
+  <div class="progress-line"><span id="round-label">情境 1 / 6</span><progress id="round-progress" max="6" value="0" aria-label="已完成情境數"></progress></div>
+  <article class="scenario"><p class="tag" id="scenario-type"></p><h2 id="scenario-title" tabindex="-1"></h2><p id="scenario-copy"></p><div class="goal"><b>這回合要練：</b><span id="scenario-goal"></span></div></article>
+  <label class="draft-label" for="draft">換你寫：你會怎麼問／怎麼交代？</label>
+  <textarea id="draft" rows="5" maxlength="1200" placeholder="用自己的話寫就好；不用寫得像考試答案。"></textarea>
+  <div class="actions"><button class="primary" id="review" type="button">寫好了，看看提示 →</button><button id="clear" type="button">清空重寫</button></div>
+  <p class="error" id="error" role="status" hidden>先寫一點自己的版本再看提示喔。</p>
+  <section class="feedback" id="feedback" aria-live="polite" hidden>
+    <h3>對照看看，不是標準答案</h3><p id="feedback-intro"></p>
+    <ul id="checklist"></ul>
+    <details><summary>參考寫法（可以換成你的語氣）</summary><blockquote id="example"></blockquote></details>
+    <div class="actions"><button class="primary" id="next" type="button">我看完了，下一題 →</button></div>
+  </section>
+  <section class="finish" id="finish" hidden><p class="eyebrow">六題完成</p><h2 tabindex="-1">你已經練過把話說清楚。</h2><p>好用的提問會交代目標、試過什麼、結果和真正卡住的地方；好用的指令會說清楚要做什麼、限制在哪裡、怎樣算完成。遇到不確定的事，也可以直接說不知道，再問下一個安全的小步。</p><button id="restart" class="primary" type="button">再練一輪 ↻</button></section>
+</section>
+<footer>免費・純前端・無登入・無外部模型。這是溝通技巧練習，不是能力測驗。<a href="terminal-quest.html">想練實際終端機指令？去龍蝦終端機探險 ↗</a></footer>
+<noscript>請啟用 JavaScript 才能進行練習；本遊戲不需要連接 AI。</noscript>
+</main></body></html>

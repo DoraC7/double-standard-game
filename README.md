@@ -1,6 +1,6 @@
 # Dora playground
 
-十款免費、純前端小遊戲，從 `index.html` 入口進入。
+十二款免費、純前端小遊戲，從 `index.html` 入口進入。
 
 ## 試玩
 
@@ -104,6 +104,14 @@ node --test tests/terminal-quest.test.cjs
 
 引擎與完整通關檢查：`node --test tests/git-quest.test.cjs`。
 
+## 提問與下指令練習場
+
+試玩：<https://dorac7.github.io/double-standard-game/prompt-practice.html>。
+
+六個日常技術情境，交替練習如何提出可回答的求助問題，以及如何清楚交代任務、限制、操作節奏和驗收方式。玩家先用自己的話寫，再對照提示和參考寫法；不自動評分、不連接 AI。草稿只留在目前分頁記憶體，不儲存、不上傳；重新整理即清空。這是溝通練習，不是能力測驗。
+
+檔案：`prompt-practice.html`、`prompt-practice.css`、`prompt-practice.js`、`prompt-practice.svg`。若想練習實際的模擬終端機指令，另有[龍蝦終端機探險](https://dorac7.github.io/double-standard-game/terminal-quest.html)。
+
 
 
 ## 本機啟動
@@ -125,7 +133,7 @@ python3 -m http.server 8765
 
 ## 專案檔案
 
-- `index.html`：十款遊戲共同入口；舊首頁 `#r=` 戰績連結自動轉到雙標遊戲並保留片段。
+- `index.html`：十二款遊戲共同入口；舊首頁 `#r=` 戰績連結自動轉到雙標遊戲並保留片段。
 - `double-standard.html`：原雙標遊戲的畫面、流程和計分。
 - `start-small.html`、`start-small.css`、`start-small.js`：拖延啟動遊戲。
 - `mini-kart.html`、`mini-kart.css`、`mini-kart.js`、`kart.svg`：迷你卡丁車與原創插圖。
@@ -139,7 +147,7 @@ python3 -m http.server 8765
 
 ## 部署
 
-這是靜態網站。GitHub Pages 可發布倉庫根目錄的 `index.html` 作共同入口；所有十一款遊戲的 HTML、CSS 和 JS 必須同時發布。啟用 Pages 後，分享連結會自動以當前網站網址產生。發布設定由倉庫擁有者決定。
+這是靜態網站。GitHub Pages 可發布倉庫根目錄的 `index.html` 作共同入口；所有十二款遊戲的 HTML、CSS 和 JS 必須同時發布。啟用 Pages 後，分享連結會自動以當前網站網址產生。發布設定由倉庫擁有者決定。
 
 ## 授權
 
