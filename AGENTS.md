@@ -50,6 +50,7 @@ Do not add npm dependencies, frameworks, CDNs, external fonts, analytics, tracke
 - `adhd-bingo.html`, `adhd-bingo.css`, `adhd-bingo-data.js`, `adhd-bingo.js`, `bingo.svg` — local-only non-diagnostic Bingo; preserve `ADHD-BINGO-SOURCES.md`, no default selections or uploaded/persisted answers.
 - `terminal-quest.html`, `terminal-quest.css`, `terminal-quest.js`, `terminal-engine.js`, `terminal-missions.js`, `terminal.svg` — simulated shell, never actual command execution.
 - `git-quest.html`, `git-quest.css`, `git-quest.js`, `git-engine.js`, `git-missions.js`, `git.svg` — simulated Git; also depends on `terminal-quest.css`, no real GitHub connection.
+- `dora-quotes.html`、`.css`、`.js`、`dora-quotes-data.js`、`dora-quotes.svg` — fictional quote cards and eight-round continuation quiz; distinguish commissioned game dialogue, prior published game excerpts and new remixes. Never present these as a real person's historical quotations.
 - `tests/` — dependency-free Node tests (`*.test.cjs`) and manual QA guides (`*-qa.md`).
 - `bolt.svg`, `box.svg`, `kart.svg`, `masks.svg`, `rocket.svg` — local artwork.
 - `v2.html`, `v3.html` — archived prototypes; they are not current entry points.
