@@ -62,7 +62,7 @@
       setLocked(false);
     } else if (finished) {
       $('mission-number').textContent = 'EXPEDITION COMPLETE'; $('mission-title').textContent = '從一行指令，到一趟探險';
-      $('goal').textContent = '14 站都完成了。通關紀錄能證明你在這個模擬環境做過什麼；能否獨立重現，還可以繼續練。';
+      $('goal').textContent = missions.length+' 站都完成了。通關紀錄能證明你在這個模擬環境做過什麼；能否獨立重現，還可以繼續練。';
       $('concept').textContent = '想帶走過程，請開啟「文字紀錄」。自己的理解可以寫在下方筆記，不會替你代寫。';
       setLocked(true);
     } else {
@@ -193,13 +193,13 @@
     proofs.length = 0; checkpoint = E.clone(lesson.env); output.replaceChildren();
     system('🦞 新的一趟探險開始。這次試著少看一點提示。'); renderMission(); command.focus();
   });
-  const cheatNames = { pwd:'看位置', ls:'列出內容', cd:'切換資料夾', cat:'讀文字檔', mkdir:'建立資料夾', touch:'建立空白檔', cp:'複製檔案', mv:'搬移／改名', rm:'刪除檔案', rmdir:'刪除空資料夾', clear:'清畫面', git:'模擬版本', uname:'模擬系統資訊', help:'查說明' };
+  const cheatNames = { pwd:'看位置', ls:'列出內容', cd:'切換資料夾', cat:'讀文字檔', mkdir:'建立資料夾', touch:'建立空白檔', cp:'複製檔案', mv:'搬移／改名', rm:'刪除檔案', rmdir:'刪除空資料夾', find:'找檔名', grep:'找固定文字', head:'讀開頭', tail:'讀結尾', clear:'清畫面', git:'模擬版本', uname:'模擬系統資訊', help:'查說明' };
   for (const [cmd, description] of Object.entries(cheatNames)) {
     const button = document.createElement('button'); button.type = 'button'; button.append(document.createTextNode(cmd));
     const small = document.createElement('small'); small.textContent = description; button.append(small);
     button.addEventListener('click', () => {
       if (command.disabled) { system('這關操作已完成；請先回答觀念題或按下一站，再輸入指令。'); return; }
-      command.value = cmd === 'git' ? 'git --version' : cmd + (['cd','cat','mkdir','touch','cp','mv','rm','rmdir'].includes(cmd) ? ' ' : ''); command.focus();
+      command.value = cmd === 'git' ? 'git --version' : cmd === 'grep' ? 'grep -nF ' : cmd + (['cd','cat','mkdir','touch','cp','mv','rm','rmdir','find','head','tail'].includes(cmd) ? ' ' : ''); command.focus();
     }); $('cheats').append(button);
   }
   function recordText() {

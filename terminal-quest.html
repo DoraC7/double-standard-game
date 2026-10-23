@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#17352a">
-  <meta name="description" content="跟小龍蝦練習 terminal！14 個繁中任務，親手輸入指令、觀察虛擬檔案變化，再確認結果。不需安裝。">
+  <meta name="description" content="跟小龍蝦練習 terminal！20 個繁中任務，親手輸入指令、觀察虛擬檔案變化，再確認結果。不需安裝。">
   <title>龍蝦終端機探險 · 小龍蝦遊戲間</title>
   <link rel="stylesheet" href="terminal-quest.css">
   <script src="terminal-engine.js" defer></script>
@@ -19,7 +19,7 @@
     <img class="hero-art" src="terminal.svg" width="200" height="170" alt="小龍蝦在終端機前找到一顆貝殼">
   </section>
   <div class="toolbar"><div class="modes" role="group" aria-label="練習模式"><button id="lesson-mode" aria-pressed="true" type="button">🧭 關卡探險</button><button id="sandbox-mode" aria-pressed="false" type="button">🏝 自由沙盒</button></div><p>瀏覽器內的模擬環境・不會動到你的電腦檔案</p></div>
-  <section class="journey" aria-label="探險進度"><div class="journey-head"><span id="chapter">01 / 找到方向</span><strong id="progress-label">完成 0 / 14 關</strong></div><progress id="progress" value="0" max="14" aria-label="已完成關卡"></progress><div id="milestones" class="milestones" aria-hidden="true"></div></section>
+  <section class="journey" aria-label="探險進度"><div class="journey-head"><span id="chapter">01 / 找到方向</span><strong id="progress-label">完成 0 / 20 關</strong></div><progress id="progress" value="0" max="20" aria-label="已完成關卡"></progress><div id="milestones" class="milestones" aria-hidden="true"></div></section>
   <div class="workspace">
     <section class="mission panel" aria-labelledby="mission-title">
       <p class="eyebrow" id="mission-number">MISSION 01</p><h2 id="mission-title" tabindex="-1">先知道自己在哪裡</h2><p class="goal" id="goal"></p><p class="concept" id="concept"></p>
@@ -40,7 +40,7 @@
     <section class="reference panel" aria-label="探索工具">
       <details open><summary>🗂 檔案地圖 <span>會隨你的操作變化</span></summary><pre id="file-tree" aria-label="虛擬檔案結構"></pre><p class="small" id="location"></p></details>
       <details><summary>⌨ 指令小抄 <span>點一下只填入，不自動執行</span></summary><div id="cheats" class="cheats"></div><p class="small">cd .. 上一層・cd ~ 回家・cd - 上個位置。ls -la／ls --all 看隱藏項目；mkdir -p 可建立多層。檔名含空格可加引號。Ctrl+Space 或「自動補全」按鈕可補齊指令或檔名；Tab 保留給鍵盤焦點移動。</p></details>
-      <details><summary>這裡和真實 terminal 有什麼不同？</summary><p class="small">這是 POSIX 風格的入門模擬，不是完整 Bash／zsh，也不是 Windows cmd。沒有執行系統指令、安裝程式或連接 GitHub。Git 只模擬 --version；uname 只顯示虛構系統資訊，不會偵測你的裝置。不支援管線、重導向、變數、萬用字元或遞迴刪除。cp／mv 只處理檔案，且不直接覆蓋既有檔案；真實指令可能覆蓋。多檔指令若任一項失敗，整條不改環境；真實指令可能已完成部分項目。ls -l 的權限與時間是遊戲示意；未模擬權限控制或時間戳記。這裡 rm 有復原鈕，真實 rm 通常沒有。</p></details>
+      <details><summary>這裡和真實 terminal 有什麼不同？</summary><p class="small">這是 POSIX 風格的入門模擬，不是完整 Bash／zsh，也不是 Windows cmd。沒有執行系統指令、安裝程式或連接 GitHub。Git 只模擬 --version；uname 只顯示虛構系統資訊，不會偵測你的裝置。find 支援起點、-type 與 -name（引號內 *／? 樣式）；grep 僅實作 -F 固定文字搜尋，可加 -n／-i／-v／-c。head／tail 支援 -n 非負筆數，不模擬 tail -f。不支援管線、重導向、變數、shell 萬用字元展開或遞迴刪除。cp／mv 只處理檔案，且不直接覆蓋既有檔案；真實指令可能覆蓋。多檔指令若任一項失敗，整條不改環境；真實指令可能已完成部分項目。ls -l 的權限與時間是遊戲示意；未模擬權限控制或時間戳記。這裡 rm 有復原鈕，真實 rm 通常沒有。</p><p class="small"><a href="https://swcarpentry.github.io/shell-novice/" target="_blank" rel="noopener noreferrer">免費延伸：Software Carpentry Shell 入門 ↗</a></p></details>
     </section>
   </div>
   <section class="reflection panel"><div><p class="eyebrow">把「做過」變成「說得出來」</p><h2>留一句自己的探險筆記</h2><p>用自己的話寫：做了什麼、用什麼結果確認、還有哪裡不懂。可以隨時寫，不用等通關。</p></div><div><label for="reflection">我的筆記（僅留在此分頁，重新整理會清空）</label><textarea id="reflection" rows="4" maxlength="4000" placeholder="我剛剛試了……&#10;我用……確認結果，因為……&#10;我還不確定……"></textarea><button class="text-button" id="notes-record" type="button">把筆記和操作紀錄一起帶走 ↗</button></div></section>

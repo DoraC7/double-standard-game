@@ -5,9 +5,9 @@ const missions = require('../terminal-missions.js');
 const H = E.HOME, A = H + '/arcade';
 const run = (s, line) => { const r = E.execute(s, line); assert.equal(r.ok, true, line + ': ' + r.output); return r; };
 
-test('14 站完整通關，狀態與四題觀念均可驗證，非指定任務不自動跳關', () => {
-  const s = E.initial(); assert.equal(missions.length, 14);
-  assert.equal(missions.filter(m => m.quiz).length, 4);
+test('20 站完整通關，狀態與五題觀念均可驗證，非指定任務不自動跳關', () => {
+  const s = E.initial(); assert.equal(missions.length, 20);
+  assert.equal(missions.filter(m => m.quiz).length, 5);
   missions.forEach((m, i) => {
     const events = [];
     const unrelated = run(s, 'help'); assert.equal(Boolean(m.check(s, unrelated, events)), false, m.title);

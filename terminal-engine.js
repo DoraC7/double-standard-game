@@ -3,7 +3,8 @@
   'use strict';
   const HOME = '/home/lobster';
   const GUIDE = '歡迎來到龍蝦遊戲間！\n先看位置，再看內容，改動之後再驗證。\n資料夾用 cd 進入；文字檔用 cat 閱讀。\n檔名分大小寫。$ 是提示符，不是指令的一部分。';
-  const commands = ['pwd', 'ls', 'cd', 'cat', 'mkdir', 'touch', 'cp', 'mv', 'rm', 'rmdir', 'clear', 'git', 'uname', 'help'];
+  const commands = ['pwd', 'ls', 'cd', 'cat', 'mkdir', 'touch', 'cp', 'mv', 'rm', 'rmdir', 'find', 'grep', 'head', 'tail', 'clear', 'git', 'uname', 'help'];
+  const LOG = '09:00 INFO workshop started\n09:01 INFO read README\n09:02 ERROR missing menu.txt\n09:03 INFO checked path\n09:04 INFO created menu.txt\n09:05 ERROR upload not attempted\n09:06 INFO local checks passed\n09:07 INFO workshop ended\n';
   const help = {
     pwd: 'pwd [-L|-P]：顯示目前所在的完整路徑，不會搬動檔案。',
     ls: 'ls [-laAh1] [路徑…]：列出內容；-a／--all 含隱藏項目和 .、..，-A／--almost-all 不含 .、..；-l 長格式（權限／時間為遊戲示意），-1 每行一項，-h 顯示易讀大小。可合併成 -la。',
@@ -15,6 +16,10 @@
     mv: 'mv [--] 來源檔… 目的檔或資料夾：搬移或改名，舊位置不再保留。本練習只搬檔案。',
     rm: 'rm [--] 檔案…：刪除檔案；不會進垃圾桶。本練習不支援 -r、-f 或萬用字元。',
     rmdir: 'rmdir [--] 資料夾…：只刪除空資料夾。',
+    find: 'find [起點] [-type f|d] [-name "樣式"]：從起點往下找路徑；f 是檔案、d 是資料夾。-name 只比對檔名，支援引號中的 *、?；這裡不模擬 -exec、-delete 或其他運算式。',
+    grep: 'grep -F [-nivc] [--] "文字" 檔案…：以固定文字搜尋內容；-n 顯示行號，-i 忽略大小寫，-v 反選，-c 計算符合行數。可用 -nF 合併；本練習只實作 -F，不實作正規表示式；另支援 --fixed-strings／--line-number／--ignore-case／--invert-match／--count。無符合行時回報未找到，不是路徑錯誤。',
+    head: 'head [-n 筆數|--lines=筆數] [--] 檔案：讀取開頭幾行，預設 10 行；也接受 -2 這類筆數寫法，上限 10000 行；不會修改檔案。不模擬標準輸入或負數筆數。',
+    tail: 'tail [-n 筆數|--lines=筆數] [--] 檔案：讀取最後幾行，預設 10 行；也接受 -2 這類筆數寫法，上限 10000 行；不會修改檔案。不模擬 -f、標準輸入或 +起始行。',
     clear: 'clear：清除終端機畫面，不改動資料夾、檔案或目前位置。完整文字紀錄仍可匯出。',
     git: 'git --version 或 git -v：顯示本練習的模擬版本，不會安裝 Git，也不能證明你電腦有 Git。',
     uname: 'uname：顯示系統名稱；-a 顯示全部，-s／-n／-r／-v／-m 分別顯示系統名稱、主機名稱、核心發行版、核心版本、硬體類型，可合併使用。也支援 --all、--kernel-name、--nodename、--kernel-release、--kernel-version、--machine。這裡只顯示虛構的遊戲系統，不會偵測你的電腦。',
@@ -26,6 +31,7 @@
     return { cwd: HOME, nodes: {
       '/': dir(), '/home': dir(), [HOME]: dir(), [HOME + '/arcade']: dir(),
       [HOME + '/arcade/README.txt']: file(GUIDE),
+      [HOME + '/arcade/logs']: dir(), [HOME + '/arcade/logs/workshop.log']: file(LOG),
       [HOME + '/downloads']: dir(), [HOME + '/downloads/hello.txt']: file('小龍蝦說：你好，terminal！'),
       [HOME + '/.shell-note']: file('隱藏檔只是檔名以 . 開頭，不代表加密或安全。')
     }};
@@ -49,6 +55,13 @@
   }
   const parent = path => path.slice(0, path.lastIndexOf('/')) || '/';
   const basename = path => path.slice(path.lastIndexOf('/') + 1);
+  // Bounded wildcard matching, without regex backtracking on player-supplied patterns.
+  function matchesName(name,pattern) {
+    let row=Array(name.length+1).fill(false);row[0]=true;
+    for(const char of pattern){const next=Array(name.length+1).fill(false);next[0]=char==='*'&&row[0];
+      for(let j=1;j<=name.length;j++)next[j]=char==='*'?(row[j]||next[j-1]):row[j-1]&&(char==='?'||char===name[j-1]);row=next;
+    }return row[name.length];
+  }
   function children(state, path) {
     return Object.keys(state.nodes).filter(key => key !== path && parent(key) === path).sort();
   }
@@ -99,6 +112,55 @@
       else operands.push({text:a,tilde:tokens[i+1].tilde});
     }
     const paths=()=>operands.map(t=>resolve(state,t.text,t.tilde,cmd==='mkdir'&&flags.some(f=>['-p','--parents'].includes(f))));
+    if (cmd === 'find') {
+      let start={text:'.',tilde:false},type=null,pattern=null,i=0;
+      if(args[0]&&!args[0].startsWith('-')){start=tokens[1];i=1;}
+      for(;i<args.length;i++){
+        const option=args[i],value=args[++i];
+        if(option==='-type'&&type===null&&['f','d'].includes(value))type=value;
+        else if(option==='-name'&&pattern===null&&value!==undefined)pattern=value;
+        else return usage();
+      }
+      const target=resolve(state,start.text,start.tilde);
+      if(!exists(target))return fail('find：找不到起點 '+start.text);
+      if(start.text.endsWith('/')&&!isDir(target))return fail('find：起點後面有 /，必須是資料夾。');
+      const matches=Object.keys(state.nodes).filter(p=>(p===target||p.startsWith(target==='/'?'/':target+'/'))&&(!type||(state.nodes[p].type==='dir'?'d':'f')===type)&&(pattern===null||matchesName(basename(p),pattern))).sort();
+      result.target=target;result.matches=matches;
+      result.output=matches.map(p=>target==='/'?p:start.text.replace(/\/$/,'')+p.slice(target.length)).join('\n');
+      return result;
+    }
+    if (cmd === 'grep' || cmd === 'head' || cmd === 'tail') {
+      let options='',count=10,endedOptions=false;const input=[];
+      for(let i=0;i<args.length;i++){
+        const a=args[i];
+        if(!endedOptions&&a==='--'){endedOptions=true;continue;}
+        if(!endedOptions&&a.startsWith('-')){
+          if(cmd==='grep'){const long={'--fixed-strings':'F','--line-number':'n','--ignore-case':'i','--invert-match':'v','--count':'c'};
+            if(Object.hasOwn(long,a))options+=long[a];else if(/^-[Fnivc]+$/.test(a))options+=a.slice(1);else return usage();}
+          else {let n;if(a==='-n'||a==='--lines')n=args[++i];else if(/^--lines=/.test(a))n=a.slice(8);else if(/^-n\d+$/.test(a))n=a.slice(2);else if(/^-\d+$/.test(a))n=a.slice(1);else return usage();
+            if(!/^\d+$/.test(n??'')||Number(n)>10000)return usage();count=Number(n);}
+        }else input.push(tokens[i+1]);
+      }
+      if(cmd==='grep'&&(!options.includes('F')||input.length<2))return usage();
+      if(cmd!=='grep'&&input.length!==1)return usage();
+      const needle=cmd==='grep'?input.shift().text:null,targets=input.map(t=>resolve(state,t.text,t.tilde)),blocks=[];let matchCount=0;
+      for(let i=0;i<targets.length;i++){
+        const path=targets[i];if(!exists(path)||isDir(path)||input[i].text.endsWith('/'))return fail(cmd+'：需要存在的文字檔 '+path);
+        const text=state.nodes[path].content,lines=text.match(/[^\n]*\n|[^\n]+$/g)||[];
+        if(cmd==='grep'){
+          const matched=lines.map((line,index)=>({line:line.replace(/\n$/,''),index:index+1})).filter(({line})=>{
+            const found=options.includes('i')?line.toLowerCase().includes(needle.toLowerCase()):line.includes(needle);return options.includes('v')?!found:found;
+          });matchCount+=matched.length;
+          if(options.includes('c'))blocks.push((targets.length>1?input[i].text+':':'')+matched.length);
+          else blocks.push(...matched.map(({line,index})=>(targets.length>1?input[i].text+':':'')+(options.includes('n')?index+':':'')+line));
+        }else blocks.push((cmd==='head'?lines.slice(0,count):count?lines.slice(-count):[]).join(''));
+      }
+      result.targets=targets;result.target=targets.length===1?targets[0]:undefined;
+      result.output=blocks.join(cmd==='grep'?'\n':'');
+      if(cmd==='grep'){result.matchCount=matchCount;result.pattern=needle;if(!matchCount){result.ok=false;result.output=result.output||'沒有符合的行（檔案已讀取，未改動）。';}}
+      else result.count=count;
+      return result;
+    }
     if (cmd === 'help') {
       if(args.length>1)return usage();
       result.output=args.length?(Object.hasOwn(help,args[0])?help[args[0]]:'沒有這個指令的說明。'):commands.map(c=>help[c]).join('\n');
@@ -223,7 +285,7 @@
       .filter(p => pieces[0] !== 'cd' || state.nodes[p].type === 'dir')
       .map(p => pieces.join(' ') + ' ' + prefix + escape(basename(p)) + (state.nodes[p].type === 'dir' ? '/' : ''));
   }
-  const api = { HOME, GUIDE, commands, help, initial, clone, resolve, children, execute, complete };
+  const api = { HOME, GUIDE, LOG, commands, help, initial, clone, resolve, children, execute, complete };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   else root.TerminalEngine = api;
 })(typeof window !== 'undefined' ? window : globalThis);
