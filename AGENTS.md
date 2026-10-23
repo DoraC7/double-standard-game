@@ -1,6 +1,6 @@
 # AGENTS.md
 
-This repository is **小龍蝦遊戲間 / Mac's Little Arcade**, a collection of small, free, client-side browser games written with plain HTML, CSS, and JavaScript.
+This repository is **Dora playground**, a collection of small, free, client-side browser games written with plain HTML, CSS, and JavaScript.
 
 Use this file as the working guide for coding agents. Read `README.md` as the product overview and source of current game descriptions.
 

@@ -150,7 +150,7 @@
       if (!ctx) throw new Error('No canvas');
       const font = 'system-ui, -apple-system, "Noto Sans TC", sans-serif';
       ctx.fillStyle = '#f6f1e4'; ctx.fillRect(0, 0, 1400, 1820);
-      ctx.fillStyle = '#20372f'; ctx.font = `800 30px ${font}`; ctx.fillText('小龍蝦遊戲間 / ADHD 日常共鳴賓果', 70, 85);
+      ctx.fillStyle = '#20372f'; ctx.font = `800 30px ${font}`; ctx.fillText('Dora playground / ADHD 日常共鳴賓果', 70, 85);
       ctx.font = `900 78px ${font}`; ctx.fillText('咦，這格就是我！', 65, 190);
       ctx.font = `30px ${font}`; ctx.fillText('趣味自我觀察，不是 ADHD 篩檢或診斷。', 70, 258);
       ctx.font = `700 30px ${font}`; ctx.fillText(`共鳴 ${saved.selected.size - 1} / ${saved.size * saved.size - 1} 格　 ·　 ${lines.length} 條連線`, 70, 325);

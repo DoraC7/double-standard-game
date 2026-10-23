@@ -1,4 +1,4 @@
-# 小龍蝦遊戲間
+# Dora playground
 
 十款免費、純前端小遊戲，從 `index.html` 入口進入。
 
