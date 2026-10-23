@@ -1,10 +1,22 @@
 # Dora playground
 
-十二款免費、純前端小遊戲，從 `index.html` 入口進入。
+十三款免費、純前端小遊戲，從 `index.html` 入口進入。
 
 ## 試玩
 
 GitHub Pages：<https://dorac7.github.io/double-standard-game/>。同一份遊戲也由現有伺服器提供：<http://bigmac.dorac7.com:9487/>。
+
+## 思考偵探社
+
+試玩：<https://dorac7.github.io/double-standard-game/thinking-lab.html>。
+
+12 個原創虛構案件，四個主題各三案：分辨觀察與推測、比較替代解釋、選擇關鍵證據、依新證據更新判斷。每案四步：逐卡分類 → 兩次調查選線索 → 依已取得的證據下有限結論 → 看新證據重新判斷。結論核對會依玩家實際翻開的線索調整，不要求拿尚未查到的內容硬猜答案；證據足夠時也不鼓勵一律選「不知道」。
+
+可自由選案、隨機辦案、重練待釐清案件。每步有方向提示與具體解釋；可寫自己的推理筆記並下載 UTF-8 文字紀錄。保留初次核對與最近重練結果，不把重練當初次答對。自由文字不依字數、關鍵字或範例相似度評分；完成與選擇結果不代表智力、心理或人格評分。無倒數，鍵盤與觸控皆可操作。
+
+所有情境、線索與回饋預先編寫，不連接 AI，不使用真實人物的事件作題目。選擇與筆記只留在分頁記憶體，不上傳或自動保存，重整即清空；需保留可自行下載。方法靈感與延伸閱讀：[Harvard Project Zero / See, Think, Wonder](https://pz.harvard.edu/resources/see-think-wonder)、[Claim, Support, Question](https://pz.harvard.edu/resources/claim-support-question)。不是官方教材或影片內容改編。
+
+部署檔案：`thinking-lab.html`、`thinking-lab.css`、`thinking-lab.js`、`thinking-cases.js`、`thinking-lab.svg`。無外部套件或網路執行依賴。
 
 ## 雙標大挑戰
 
@@ -137,7 +149,7 @@ python3 -m http.server 8765
 
 ## 專案檔案
 
-- `index.html`：十二款遊戲共同入口；舊首頁 `#r=` 戰績連結自動轉到雙標遊戲並保留片段。
+- `index.html`：十三款遊戲共同入口；舊首頁 `#r=` 戰績連結自動轉到雙標遊戲並保留片段。
 - `double-standard.html`：原雙標遊戲的畫面、流程和計分。
 - `start-small.html`、`start-small.css`、`start-small.js`：拖延啟動遊戲。
 - `mini-kart.html`、`mini-kart.css`、`mini-kart.js`、`kart.svg`：迷你卡丁車與原創插圖。
@@ -151,7 +163,7 @@ python3 -m http.server 8765
 
 ## 部署
 
-這是靜態網站。GitHub Pages 可發布倉庫根目錄的 `index.html` 作共同入口；所有十二款遊戲的 HTML、CSS 和 JS 必須同時發布。啟用 Pages 後，分享連結會自動以當前網站網址產生。發布設定由倉庫擁有者決定。
+這是靜態網站。GitHub Pages 可發布倉庫根目錄的 `index.html` 作共同入口；所有十三款遊戲的 HTML、CSS 和 JS 必須同時發布。啟用 Pages 後，分享連結會自動以當前網站網址產生。發布設定由倉庫擁有者決定。
 
 ## 授權
 
