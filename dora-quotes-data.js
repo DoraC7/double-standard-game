@@ -1,9 +1,13 @@
 (function(root){
   'use strict';
   const cards=[
-    {id:'me',tag:'心情開光',kind:'commissioned',display:'我',prefix:'極簡開場，第一句只留一字：',answer:'我',wrong:['宇宙','附件'],note:'本次指定的遊戲台詞。開場一個字，後面的留給大家接。不是考古引言。'},
-    {id:'minimal',tag:'進度查帳',kind:'commissioned',prefix:'我可以開始',answer:'極簡了',wrong:['全自動部署了','幫宇宙寫週報了'],note:'本次指定的遊戲台詞。「可以開始」是開場，沒有被包裝成已完成。'},
-    {id:'necessary',tag:'心情開光',kind:'commissioned',prefix:'不必要',answer:'就算了😂',wrong:['先加到購物車😂','先鍍一層金箔😂'],note:'本次指定的第三句。必要性諮詢處：本日暫停受理追加預算。'},
+    {id:'me',series:'classics',tag:'心情開光',kind:'commissioned',display:'我',prefix:'極簡開場，第一句只留一字：',answer:'我',wrong:['宇宙','附件'],note:'本次指定的遊戲台詞。開場一個字，後面的留給大家接。不是考古引言。'},
+    {id:'minimal',series:'classics',tag:'進度查帳',kind:'commissioned',prefix:'我可以開始',answer:'極簡了',wrong:['全自動部署了','幫宇宙寫週報了'],note:'本次指定的遊戲台詞。「可以開始」是開場，沒有被包裝成已完成。'},
+    {id:'necessary',series:'classics',tag:'心情開光',kind:'commissioned',prefix:'不必要',answer:'就算了😂',wrong:['先加到購物車😂','先鍍一層金箔😂'],note:'本次指定的第三句。必要性諮詢處：本日暫停受理追加預算。'},
+    {id:'wait',tag:'等等系列',kind:'commissioned',display:'等等',prefix:'本壇最短的延期通知：',answer:'等等',wrong:['完成','結案'],note:'本次點名的「等等」系列起手式。兩個字，先開一個宇宙。'},
+    {id:'wait-a-bit',tag:'等等系列',kind:'remix',prefix:'等一下，',answer:'我先想一下要等哪一下。',wrong:['所有 PR 就會自動合併。','金箔會幫我寫完週報。'],note:'等等宇宙原創改編：等的不是時間，是下一個「一下」。'},
+    {id:'do-later',tag:'等等系列',kind:'remix',prefix:'我等等再做，',answer:'但「等等」還沒填日期。',wrong:['所以現在已經全部完成。','所以網站已經自動發布。'],note:'等等宇宙原創改編：這張行事曆，日期欄還在等日期。'},
+    {id:'wait-for-wait',tag:'等等系列',kind:'remix',prefix:'先不要急，',answer:'我還在等那個「等一下」。',wrong:['小龍蝦已獲終身免測資格。','宇宙已核准所有追加預算。'],note:'等等宇宙原創改編：下一班等一下列車，預計等一下進站。'},
     {id:'happy',tag:'心情開光',kind:'published',prefix:'開開心心！玩起來好有趣～',answer:'感覺好有進度！',wrong:['硬碟自動長出新檔案！','GitHub 自動替我合併！'],note:'出自印鈔機的虛構訂單：這是角色的感受，不是完成證明。',source:'emotion-printer-engine.js'},
     {id:'foil',tag:'進度查帳',kind:'published',prefix:'金箔能加倍，',answer:'證據可不行。',wrong:['Bug 自動退休。','分支自動合併。'],note:'遊戲間原有標語。金光很忙，但不負責驗證。',source:'index.html'},
     {id:'hype',tag:'心情開光',kind:'published',prefix:'開心就是完成，',answer:'好有趣就是精通！',wrong:['先把附件讀完。','先核對這次做了什麼。'],note:'這是印鈔機故意浮誇的「彩虹屁」台詞，不是遊戲認可的推論。',source:'emotion-printer-engine.js'},
@@ -22,7 +26,7 @@
     for(let i=list.length-1;i>0;i--){const j=Math.floor(random()*(i+1));[list[i],list[j]]=[list[j],list[i]];}
     return list;
   }
-  const pool=tag=>cards.filter(c=>tag==='all'||(tag==='classics'?c.kind==='commissioned':c.tag===tag));
+  const pool=tag=>cards.filter(c=>tag==='all'||(tag==='classics'?c.series==='classics':c.tag===tag));
   const label=c=>c.kind==='published'?'已公開遊戲台詞・節錄':c.kind==='commissioned'?'本次指定遊戲台詞':'本作原創改編';
   const text=c=>c.display||c.prefix+c.answer;
   function round(random=Math.random){return {deck:shuffle(cards,random).slice(0,8),index:0,answers:[]};}
