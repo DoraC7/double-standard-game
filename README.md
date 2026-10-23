@@ -110,6 +110,8 @@ node --test tests/terminal-quest.test.cjs
 
 六個日常技術情境，逐題練習找缺口並追問、比較兩種問法、修正預設模擬回答，再換到新情境應用。另有目標、背景、限制、輸出格式和驗收方式五種技巧的前後對照卡；提示分層顯示，先作答才看自我檢核與完整參考。不連接 AI；模擬回答是預先編寫，自由文字不會被關鍵字評分。草稿只留在目前分頁記憶體，不儲存、不上傳；重新整理即清空。這是溝通練習，不是能力測驗。
 
+新增「問問題的藝術」速查：從了解目標、追問關鍵證據、說清界線到確認下一步；同時提醒資訊已足夠時直接提出請求即可。AI 指令部分參考 [OpenAI Prompt engineering 指南](https://developers.openai.com/api/docs/guides/prompt-engineering) 的明確指示、相關背景與迭代原則，並清楚標示它不是一般人際溝通的普遍定律。
+
 檔案：`prompt-practice.html`、`prompt-practice.css`、`prompt-practice.js`、`prompt-practice.svg`。若想練習實際的模擬終端機指令，另有[龍蝦終端機探險](https://dorac7.github.io/double-standard-game/terminal-quest.html)。
 
 
