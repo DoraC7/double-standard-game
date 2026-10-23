@@ -18,7 +18,7 @@
     $('quote-source').replaceChildren();
     if(card.kind==='published'){
       const a=document.createElement('a');a.href=card.id==='foil'?'index.html':'emotion-printer.html';a.textContent='來源：既有公開遊戲（非本人引言） ↗';$('quote-source').append(a);
-    }else $('quote-source').textContent=card.kind==='commissioned'?'來源：本次明確指定的遊戲台詞（非歷史引言）':'來源：本遊戲原創喜劇改編（非本人引言）';
+    }else $('quote-source').textContent=card.kind==='commissioned'?'來源：本次明確指定的遊戲台詞（非歷史引言）':card.kind==='selected'?'來源：本次系列用語選編（未核對歷史聊天原文）':'來源：本遊戲原創喜劇改編（非本人引言）';
     $('collection-count').textContent=`本頁已看 ${seen.size} / ${Q.cards.length}`;
     $('save').textContent=saved.has(card.id)?'取消收藏 ♥':'收藏這句 ♡';
   }
