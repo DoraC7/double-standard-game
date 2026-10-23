@@ -5,9 +5,9 @@ const missions = require('../terminal-missions.js');
 const H = E.HOME, A = H + '/arcade';
 const run = (s, line) => { const r = E.execute(s, line); assert.equal(r.ok, true, line + ': ' + r.output); return r; };
 
-test('14 站完整通關，狀態與四題觀念均可驗證，非指定任務不自動跳關', () => {
-  const s = E.initial(); assert.equal(missions.length, 14);
-  assert.equal(missions.filter(m => m.quiz).length, 4);
+test('20 站完整通關，狀態與五題觀念均可驗證，非指定任務不自動跳關', () => {
+  const s = E.initial(); assert.equal(missions.length, 20);
+  assert.equal(missions.filter(m => m.quiz).length, 5);
   missions.forEach((m, i) => {
     const events = [];
     const unrelated = run(s, 'help'); assert.equal(Boolean(m.check(s, unrelated, events)), false, m.title);
@@ -78,7 +78,7 @@ test('uname 顯示明確標示的模擬資訊，接受基本旗標，不改動�
   }
   assert.match(run(s, 'uname').output, /^LobsterOS\n/);
   assert.match(run(s, 'uname -n -s').output, /^LobsterOS island\n/);
-  for (const line of ['uname -A', 'uname --all', 'uname x', 'uname -o', 'uname -', 'uname -a extra']) {
+  for (const line of ['uname -A', 'uname x', 'uname -o', 'uname -', 'uname -a extra']) {
     assert.equal(E.execute(s, line).ok, false, line);
     assert.deepEqual(s, before);
   }
@@ -97,7 +97,7 @@ test('未支援的指令不誤稱真實終端機沒有該指令', () => {
 
 test('錯誤不改動環境；分清檔案與目錄、不直接覆蓋、不遞迴刪除', () => {
   const s = E.initial();
-  for (const line of ['cd missing', 'cd arcade/README.txt', 'cat arcade', 'cp arcade other', 'mv arcade other', 'rm arcade', 'rmdir arcade', 'rm -rf /', 'mkdir arcade', 'touch missing/x', 'cp arcade/README.txt arcade/README.txt', 'mv arcade/README.txt arcade/README.txt', 'cp arcade/README.txt downloads/hello.txt', 'rmdir /', 'rmdir .', 'ls --all', 'pwd extra', 'clear extra']) {
+  for (const line of ['cd missing', 'cd arcade/README.txt', 'cat arcade', 'cp arcade other', 'mv arcade other', 'rm arcade', 'rmdir arcade', 'rm -rf /', 'mkdir arcade', 'touch missing/x', 'cp arcade/README.txt arcade/README.txt', 'mv arcade/README.txt arcade/README.txt', 'cp arcade/README.txt downloads/hello.txt', 'rmdir /', 'rmdir .', 'pwd extra', 'clear extra']) {
     const before = E.clone(s); assert.equal(E.execute(s, line).ok, false, line); assert.deepEqual(s, before, line);
   }
 });
@@ -149,4 +149,61 @@ test('尾端斜線代表目錄，不把錯寫的檔案路徑當普通檔名', ()
     const before = E.clone(s); assert.equal(E.execute(s, line).ok, false, line); assert.deepEqual(s, before);
   }
   run(s, 'mkdir new/'); run(s, 'cp arcade/README.txt new/'); assert.equal(s.nodes[H + '/new/README.txt'].content, E.GUIDE);
+});
+
+for(const style of ['short','long'])test('終端機等效寫法完整通過 14 關：'+style,()=>{
+ const s=E.initial(),ls=style==='short'?'ls -lah':'ls --all --human-readable -l';
+ const steps=[['pwd -P'],[ls+' . downloads'],['cd -- ./arcade'],['cat -- ./README.txt'],
+ ['mkdir '+(style==='short'?'-p':'--parents')+' ./practice'],['cd -- practice'],['touch -- ./shell.txt',ls],
+ ['cp -- ./shell.txt ./shell-backup.txt',ls],['mv -- ./shell.txt ./notes.txt',ls],['rm -- ./shell-backup.txt',ls],
+ ['cd -- ..','pwd -L'],['clear',ls],['git -v'],['mkdir -p delivery','cp -- README.txt delivery/guide.txt','cat README.txt delivery/guide.txt',ls+' . delivery']];
+ steps.forEach((commands,i)=>{const events=commands.map(c=>run(s,c));assert.ok(missions[i].check(s,events.at(-1),events),'mission '+i);});
+});
+test('ls 合併／長選項、隱藏項目、長格式與多路徑；不改環境',()=>{
+ const s=E.initial(),before=E.clone(s);
+ for(const c of ['ls -la','ls -al','ls -lah','ls --all -l','ls -a -l'])assert.match(run(s,c).output,/\.shell-note/);
+ assert.match(run(s,'ls -a').output,/(^| )\.\//);assert.doesNotMatch(run(s,'ls -A').output,/(^| )\.\//);
+ assert.doesNotMatch(run(s,'ls --almost-all').output,/(^| )\.\//);
+ assert.match(run(s,'ls -1').output,/arcade\/\ndownloads\//);
+ assert.match(run(s,'ls -l').output,/drwxr-xr-x.*模擬時間/);
+ const multi=run(s,'ls -la . downloads');assert.deepEqual(multi.targets,[H,H+'/downloads']);assert.ok(missions[1].check(s,multi));
+ assert.equal(Boolean(missions[1].check(s,run(s,'ls downloads'))),false);assert.deepEqual(s,before);
+});
+test('mkdir -p 多層／既存目錄；多檔 touch、cp、mv、cat、rm、rmdir',()=>{
+ const s=E.initial();run(s,'mkdir -p a/b/c other');run(s,'mkdir --parents a/b/c');
+ run(s,'touch a/x a/y');run(s,'cp a/x a/y other/');assert.ok(s.nodes[H+'/a/x']);
+ run(s,'mv other/x other/y a/b');assert.equal(s.nodes[H+'/other/x'],undefined);
+ assert.equal(run(s,'cat arcade/README.txt downloads/hello.txt').output,E.GUIDE+'小龍蝦說：你好，terminal！');
+ run(s,'rm a/b/x a/b/y a/x a/y');run(s,'rmdir a/b/c a/b a other');
+ assert.equal(s.nodes[H+'/a'],undefined);
+});
+test('多檔操作任何失敗均整條復原；不靜默覆蓋，保留沙盒空間限制',()=>{
+ for(const c of ['mkdir made arcade','mkdir -p made arcade/README.txt/child','touch made missing/file','cp arcade/README.txt missing other/','mv downloads/hello.txt missing arcade/','rm downloads/hello.txt missing','rmdir downloads arcade','touch ""','mkdir -p ""']){
+  const s=E.initial(),before=E.clone(s);assert.equal(E.execute(s,c).ok,false,c);assert.deepEqual(s,before,c);
+ }
+ const s=E.initial();while(Object.keys(s.nodes).length<119)run(s,'touch f'+Object.keys(s.nodes).length);
+ const before=E.clone(s);assert.equal(E.execute(s,'mkdir -p a/b').ok,false);assert.deepEqual(s,before);
+});
+test('路徑中間必須是真正存在的目錄，不把檔案或缺失路徑的 /.. 消掉',()=>{
+ const s=E.initial();for(const c of ['cat arcade/README.txt/../README.txt','touch arcade/README.txt/../new','ls missing/../arcade','cd arcade/README.txt/.','mkdir -p arcade/README.txt/../new']){
+  const before=E.clone(s);assert.equal(E.execute(s,c).ok,false,c);assert.deepEqual(s,before);
+ }
+});
+test('cd - 來回切換；引號與跳脫的 ~ 是普通檔名，-- 接受短橫開頭名稱',()=>{
+ const s=E.initial();assert.equal(E.execute(s,'cd -').ok,false);
+ run(s,'cd arcade');run(s,'cd -');assert.equal(s.cwd,H);run(s,'cd -');assert.equal(s.cwd,A);
+ run(s,'mkdir "~"');run(s,'cd "~"');assert.equal(s.cwd,A+'/~');run(s,'cd ~');assert.equal(s.cwd,H);
+ run(s,'touch -- -note');assert.equal(run(s,'cat -- -note').output,'');run(s,'rm -- -note');
+ run(s,'mkdir "my notes"');run(s,'cd my\\ notes');assert.equal(s.cwd,H+'/my notes');
+ run(s,'touch "a\\q"');assert.ok(s.nodes[s.cwd+'/a\\q']);
+});
+test('uname 長旗標與 git -v 可核對版本；沒有偵測真實裝置',()=>{
+ const s=E.initial(),before=E.clone(s);assert.equal(run(s,'uname --all').output,run(s,'uname -a').output);
+ assert.equal(run(s,'uname --kernel-name --machine').output,run(s,'uname -sm').output);
+ for(const c of ['uname --nodename','uname --kernel-release','uname --kernel-version'])assert.match(run(s,c).output,/遊戲模擬/);
+ assert.ok(missions[12].check(s,run(s,'git -v')));assert.deepEqual(s,before);
+});
+test('自動補全會跳脫空白檔名，結果可直接執行；不存在路徑不丟例外',()=>{
+ const s=E.initial();run(s,'mkdir "my notes"');const choices=E.complete(s,'cd my');assert.deepEqual(choices,['cd my\\ notes/']);run(s,choices[0]);assert.equal(s.cwd,H+'/my notes');
+ assert.deepEqual(E.complete(s,'cat missing/sub/'),[]);
 });
