@@ -14,15 +14,17 @@
 <section class="game" aria-labelledby="scenario-title">
   <div class="progress-line"><span id="round-label">情境 1 / 6</span><progress id="round-progress" max="6" value="0" aria-label="已完成情境數"></progress></div>
   <article class="scenario"><p class="tag" id="scenario-type"></p><h2 id="scenario-title" tabindex="-1"></h2><p id="scenario-copy"></p><div class="goal"><b>這回合要練：</b><span id="scenario-goal"></span></div></article>
+  <section class="toolkit" aria-labelledby="toolkit-toggle"><button id="toolkit-toggle" type="button" aria-expanded="false" aria-controls="toolkit-panel">🧰 看這回合的拆解技巧</button><div id="toolkit-panel" hidden><h3 id="method-title"></h3><ol id="method-steps"></ol><p id="method-note"></p><button id="insert-template" type="button">把可改寫句型放進草稿</button></div></section>
   <label class="draft-label" for="draft">換你寫：你會怎麼問／怎麼交代？</label>
   <textarea id="draft" rows="5" maxlength="1200" placeholder="用自己的話寫就好；不用寫得像考試答案。"></textarea>
   <div class="actions"><button class="primary" id="review" type="button">寫好了，看看提示 →</button><button id="clear" type="button">清空重寫</button></div>
   <p class="error" id="error" role="status" hidden>先寫一點自己的版本再看提示喔。</p>
   <section class="feedback" id="feedback" aria-live="polite" hidden>
-    <h3>對照看看，不是標準答案</h3><p id="feedback-intro"></p>
+    <h3 tabindex="-1">對照看看，不是標準答案</h3><p id="feedback-intro"></p>
     <ul id="checklist"></ul>
+    <p class="check-summary" id="check-summary" role="status" aria-live="polite"></p>
     <details><summary>參考寫法（可以換成你的語氣）</summary><blockquote id="example"></blockquote></details>
-    <div class="actions"><button class="primary" id="next" type="button">我看完了，下一題 →</button></div>
+    <div class="actions"><button id="revise" type="button">回去改一下草稿</button><button class="primary" id="next" type="button">我看完了，下一題 →</button></div>
   </section>
   <section class="finish" id="finish" hidden><p class="eyebrow">六題完成</p><h2 tabindex="-1">你已經練過把話說清楚。</h2><p>好用的提問會交代目標、試過什麼、結果和真正卡住的地方；好用的指令會說清楚要做什麼、限制在哪裡、怎樣算完成。遇到不確定的事，也可以直接說不知道，再問下一個安全的小步。</p><button id="restart" class="primary" type="button">再練一輪 ↻</button></section>
 </section>
