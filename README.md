@@ -108,7 +108,7 @@ node --test tests/terminal-quest.test.cjs
 
 試玩：<https://dorac7.github.io/double-standard-game/prompt-practice.html>。
 
-六個日常技術情境，交替練習如何提出可回答的求助問題，以及如何清楚交代任務、限制、操作節奏和驗收方式。每題可展開不同的拆解技巧、將可替換的句型骨架插入草稿；完成後逐項自我核對，還能回去修訂。玩家先自己寫，再對照提示和參考寫法；不自動評分、不連接 AI。草稿只留在目前分頁記憶體，不儲存、不上傳；重新整理即清空。這是溝通練習，不是能力測驗。
+六個日常技術情境，逐題練習找缺口並追問、比較兩種問法、修正預設模擬回答，再換到新情境應用。另有目標、背景、限制、輸出格式和驗收方式五種技巧的前後對照卡；提示分層顯示，先作答才看自我檢核與完整參考。不連接 AI；模擬回答是預先編寫，自由文字不會被關鍵字評分。草稿只留在目前分頁記憶體，不儲存、不上傳；重新整理即清空。這是溝通練習，不是能力測驗。
 
 檔案：`prompt-practice.html`、`prompt-practice.css`、`prompt-practice.js`、`prompt-practice.svg`。若想練習實際的模擬終端機指令，另有[龍蝦終端機探險](https://dorac7.github.io/double-standard-game/terminal-quest.html)。
 

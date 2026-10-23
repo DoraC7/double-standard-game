@@ -1,63 +1,66 @@
-const scenarios=[
-  {type:'提問 1 · 求助與除錯',title:'資料夾怎麼進不去？',copy:'你想進入「projects」資料夾，試過輸入 `cd /projects`，畫面回覆「No such file or directory」。你不知道目前資料夾在哪，也不想亂改檔案。',goal:'請別人幫你找出下一個安全的確認步驟。',mode:'question',steps:['目標：你想完成什麼？','已試：你剛才做了什麼？','結果：畫面實際回覆什麼？','卡點：你現在不確定哪一步？'],template:'我想完成【目標】。我試過【操作】，結果是【實際結果】。我卡在【不確定之處】，可以先教我一個【安全／只讀】的確認步驟嗎？',intro:'求助時把目標、試過的事、實際結果和卡住的問題放在一起，對方比較能接著查。',checks:['有說你最後想完成什麼','有寫出試過的指令和完整錯誤','有指出目前真正不確定的點'] ,example:'我想進到 projects 資料夾，剛試了 `cd /projects`，收到「No such file or directory」。可以先教我用哪個指令查看目前位置和裡面的資料夾嗎？先不要改動檔案；我跑完會貼結果。'},
-  {type:'下指令 1 · 目標與範圍',title:'請幫忙整理課堂筆記',copy:'你有一份今天的課堂筆記，想整理成「目的、我實際做的操作、怎麼確認成功、還不懂的問題」四個段落。只能根據筆記整理，不可補寫沒記錄的內容。',goal:'把要做的事、輸入資料、格式與不可做的事交代清楚。',mode:'instruction',steps:['動作：要整理／產生什麼？','材料：根據哪份筆記或檔案？','限制：哪些內容不能自行添加？','格式：希望怎麼呈現？'],template:'請根據【材料】，幫我【具體動作】。請整理成【格式】；不要【限制】，遇到資料沒有提到的地方請【處理方式】。',intro:'下指令時，不只說「幫我整理」；要交代材料、想要的結果，以及哪些界線不能跨。',checks:['有指定要整理哪份材料','有說明想要的段落或格式','有要求不要捏造筆記沒有的資訊'] ,example:'請只根據我接下來貼的課堂筆記，整理成四個小標題：目的、我實際做的操作、怎麼確認成功、還不懂的問題。只重排和濃縮原文；沒有記錄的內容請標「筆記未提到」，不要自行補充。'},
-  {type:'提問 2 · 釐清概念',title:'pwd 和 cd 有什麼不同？',copy:'你看過 `pwd` 和 `cd` 兩個指令，知道一個會顯示路徑、一個會切換位置，但還不清楚什麼時候用哪個。你希望先懂差別，再自己試一次。',goal:'問出你想理解的差異，並指定適合自己的解釋方式。',mode:'question',steps:['已知：你目前理解到哪裡？','比較：哪兩件事讓你混淆？','期待：什麼樣的例子對你有幫助？','參與：你想自己試哪一小步？'],template:'我知道【目前理解】，但不確定【具體差異】。可以用【例子／比喻】說明，再給我一個【我能自己完成的小練習】嗎？',intro:'好問題可以直接指出「我知道什麼、混淆什麼」，再說希望怎麼學；不用假裝自己已經懂。',checks:['有說你目前理解到哪裡','有點出真正混淆的地方','有請對方用小例子或一步練習說明'] ,example:'我知道 `pwd` 會顯示目前位置，`cd` 會切換位置，但我常把「查看」和「改變」混在一起。可以用一個小資料夾例子說明差異，再給我一題讓我自己判斷要用哪個嗎？先不要直接替我操作。'},
-  {type:'下指令 2 · 安全界線',title:'先找檔案，不要動它',copy:'你想找到名為 `weekly.md` 的檔案並知道它在哪個資料夾。你只需要位置，不要開啟內容、修改、搬移或刪除檔案。',goal:'明確指定動作和禁止事項，避免「幫我處理一下」被過度解讀。',mode:'instruction',steps:['對象：要找哪個檔案？','動作：要查出什麼資訊？','界線：哪些動作不可以做？','回報：結果要怎麼呈現？'],template:'請只對【對象】做【查詢動作】，並回報【需要的結果】。不要【禁止事項】；如果【例外情況】，請先告訴我，不要自行擴大範圍。',intro:'牽涉檔案時，說清楚要查什麼、要回報什麼，也要列出不要做的事。',checks:['有指定要找的檔名','有說要回報檔案位置','有明確禁止讀取內容或改動檔案'] ,example:'請只搜尋名為 `weekly.md` 的檔案，回報找到的完整路徑；不要讀取檔案內容，也不要建立、修改、搬移或刪除任何檔案。若找到多個，請列出全部位置。'},
-  {type:'提問 3 · 看懂錯誤',title:'出現 Permission denied',copy:'你在嘗試讀取一個檔案時看到 `Permission denied`。你還不知道是路徑、權限還是其他原因，也不確定下一步該查什麼。',goal:'提供錯誤原文，詢問一個不會擴大改動的診斷步驟。',mode:'question',steps:['情境：你本來要做什麼？','證據：把錯誤訊息照原樣貼上。','不確定：先列出可能性，不急著猜結論。','下一步：先問一個低風險的檢查法。'],template:'我想【目標】，執行【操作】時看到【錯誤原文】。我還不確定【疑問】；可以先教我一個只檢查、不改動的步驟嗎？我會貼回結果再繼續。',intro:'遇到權限錯誤時，不要直接猜要用管理員權限；先把情境和錯誤貼出來，要求安全的檢查步驟。',checks:['有貼出操作目的和錯誤原文','有坦白說目前不知道原因','有先要求檢查，不要直接改權限或使用 sudo'] ,example:'我想讀取這個檔案，但執行 `cat notes.txt` 得到 `Permission denied`。我還不知道是路徑或權限問題；可以先教我一個只查看資訊、不改檔案也不使用 sudo 的檢查步驟嗎？我會回報結果後再繼續。'},
-  {type:'下指令 3 · 一步一步與驗收',title:'帶我新增檔案並確認成功',copy:'你想在目前資料夾建立一個空的 `todo.txt`。你希望自己親手輸入指令：一次只給一個步驟，等你回報結果後再給下一步；最後確認檔案真的存在。',goal:'說明節奏、由誰操作，以及怎樣算完成。',mode:'instruction',steps:['目標：要建立什麼、放在哪裡？','分工：你要自己操作，還是請人代做？','節奏：一次提供多少步驟？','驗收：用什麼證據確認完成？'],template:'請帶我【目標】。由我親自操作；一次給【步數】個步驟並說明作用，等我貼回結果後再繼續。最後用【驗收方式】確認，不要直接替我操作。',intro:'交代過程和驗收方式，能讓協助保留你的操作空間，也不會把「指令跑過」誤當成成功。',checks:['有指定要建立的檔案和位置','有要求一次一步、由你親自操作','有要求最後查看結果確認檔案存在'] ,example:'請帶我在目前資料夾建立空的 `todo.txt`。一次只給我一個指令，解釋它會做什麼，等我親自執行並貼回結果後再繼續；最後請教我用只讀方式確認檔案確實存在，不要替我直接操作。'}
+const toolkit=[
+  {name:'目標',before:'「幫我弄一下這個資料夾。」',after:'「帶我找出 notes 資料夾目前在哪裡。」',why:'不知道你想得到什麼結果，對方只能猜。'},
+  {name:'背景',before:'「這個錯誤怎麼辦？」',after:'「我執行 `cd /projects`，收到 No such file or directory。」',why:'背景和實際結果能縮小問題範圍。'},
+  {name:'限制',before:'「幫我清理檔案。」',after:'「只列出超過 30 天的暫存檔；不要刪除，先給我清單。」',why:'有副作用的任務，要說清楚不可做什麼。'},
+  {name:'輸出格式',before:'「整理這份筆記。」',after:'「整理成目的、操作、成功證據、未解問題四個標題。」',why:'格式會影響結果能不能直接使用。'},
+  {name:'驗收方式',before:'「幫我新增一個檔案。」',after:'「帶我建立空白 todo.txt，最後用只讀方式確認檔案存在。」',why:'說清楚用什麼證據才算完成。'}
 ];
 
-const byId=id=>document.getElementById(id);
-let current=0;
-const roundLabel=byId('round-label'),progress=byId('round-progress'),type=byId('scenario-type'),title=byId('scenario-title'),copy=byId('scenario-copy'),goal=byId('scenario-goal'),draft=byId('draft'),feedback=byId('feedback'),finish=byId('finish');
-const toolkitToggle=byId('toolkit-toggle'),toolkitPanel=byId('toolkit-panel');
+const rounds=[
+ {type:'情境 1 · 求助與除錯',title:'資料夾怎麼進不去？',copy:'你想進入 projects 資料夾，試過 `cd /projects`，畫面回覆「No such file or directory」。你不知道目前位置，也不想亂改檔案。',goal:'找出缺少的資訊，然後問一個安全的確認步驟。',
+  missing:{prompt:'朋友只傳來：「資料夾打不開，怎麼辦？」如果你要先給出有用建議，哪些資訊最值得補問？（可複選）',options:[['goal','他原本想進哪個資料夾／完成什麼'],['attempt','他試過什麼操作'],['result','畫面完整回覆什麼'],['device','鍵盤是哪個品牌'],['safe','是否只想先查看、不改動']],key:['goal','attempt','result','safe'],ask:'自己寫一句最關鍵的追問：'},
+  compare:{prompt:'目標是先找出資料夾在哪裡、不改動檔案。哪個問法更合適？',a:'「可以先教我查看目前位置和資料夾清單的只讀指令嗎？我跑完貼結果，再決定下一步。」',b:'「請詳細分析所有可能的路徑、權限、磁碟、系統設定問題，並給我完整修復方案和相關背景。」',better:'a',why:'先取得一個安全、能縮小範圍的結果；長篇把尚未證實的原因全包進來，反而難以開始。',explain:'請用自己的話寫出你選它的理由：'},
+  sim:{bot:'模擬回答（預先寫好的，不是真 AI）：直接輸入 `sudo chmod -R 777 /`，再試一次。',flaw:'這個回答擴大權限變更範圍，可能造成嚴重影響；而且沒有先確認路徑。',repair:'指出回答的具體問題，補一句要求對方先提供只讀檢查步驟。',result:'修正後的模擬回覆：先用 `pwd` 查看目前位置，再用 `ls` 查看此處有哪些資料夾。這兩個步驟只顯示資訊，不會改動檔案。',hint:['先辨認建議是否有副作用。','先要求確認所在位置與可見資料夾，不要改權限。','「這個指令會遞迴更改整個根目錄權限，請不要執行。先教我用只讀指令確認目前路徑和資料夾清單，我會貼回結果。」']},
+  transfer:{prompt:'換個情境：你在程式編輯器按「執行」，看到紅色錯誤訊息，但還沒把訊息看完。寫一段求助內容，讓對方先帶你讀錯誤、一次確認一件事，不要直接叫你重裝或改設定。',hint:['想想目標、已做操作、實際結果、你要的下一步。','先要求讀取錯誤原文；不要跳到修復。','「我按下執行後看到錯誤，但還沒看懂。可以先帶我讀錯誤訊息，指出第一個需要確認的地方嗎？一次問我一件事；先不要叫我重裝或改設定。我會貼上完整訊息和確認結果。」'],check:['有交代剛才做了什麼','要求先讀錯誤證據而非猜原因','要求小步確認，並說明不希望的高風險跳躍'],example:'我在編輯器按下執行後看到錯誤，但還沒看懂。可以先帶我讀錯誤訊息，指出第一個需要確認的地方嗎？一次問我一件事；先不要叫我重裝或改設定。我會貼上完整訊息和確認結果。'}
+ },
+ {type:'情境 2 · 材料與格式',title:'整理課堂筆記',copy:'你有今天的課堂筆記，想整理成「目的、我實際做的操作、怎麼確認成功、還不懂的問題」四段。只能根據筆記，不可補寫沒記錄的內容。',goal:'判斷這個任務最需要指定哪些條件。',
+  missing:{prompt:'需求只有「幫我整理課堂筆記」。哪些補充會明顯影響結果？（可複選）',options:[['source','要根據哪份筆記'],['format','想要的段落格式'],['limit','不可加入筆記沒有的內容'],['font','標題字體要幾號'],['unknown','沒提到的資訊要怎麼標示']],key:['source','format','limit','unknown'],ask:'自己寫一句最關鍵的追問：'},
+  compare:{prompt:'只重整已有筆記，不添加未知資訊。哪個指令更貼合目標？',a:'「請只根據我貼的筆記整理成四個指定標題；沒提到的地方標『筆記未提到』，不要自行補充。」',b:'「請把筆記整理得完整又好懂，補上必要背景，改成一份漂亮的完整教學。」',better:'a',why:'A 說清楚材料、格式和限制。B 的「補上必要背景」和不可捏造的要求衝突。',explain:'指出兩份指令在限制或輸出上的差別：'},
+  sim:{bot:'模擬回答（預先寫好的，不是真 AI）：整理如下——目的：學習資料整理。操作：完成課堂練習。成功：老師確認完成。',flaw:'這些細節可能沒出現在原筆記，回答卻把猜測寫成事實。',repair:'請要求只用來源材料，並為缺漏資訊保留明確標記。',result:'修正後的模擬輸出：目的：筆記未提到。操作：依原文整理。成功證據：筆記未提到。未解問題：……（只摘錄筆記實際記下的問題）',hint:['比對回答和來源：哪些內容有證據？','指出猜寫的細節；要求缺漏處標示而非補齊。','「你把筆記沒有記錄的內容寫成事實。請只根據原文整理到四個標題；沒有證據的欄位寫『筆記未提到』，不要補背景。」']},
+  transfer:{prompt:'換個情境：把一段會議紀錄整理成「已決定、待確認、負責人、期限」。有些項目可能沒寫。寫一段指令，要求只用紀錄內容，缺漏要明確標示。',hint:['找出來源、輸出欄位、不可捏造、缺漏處理。','缺漏欄位標未提及；不要推測負責人或期限。','「請只根據我貼的會議紀錄，整理成已決定、待確認、負責人、期限四欄。沒寫到的標『紀錄未提及』；不要推測或補背景。」'],check:['指定來源資料','指定輸出欄位','限制推測並說明如何標缺漏'],example:'請只根據我貼的會議紀錄，整理成已決定、待確認、負責人、期限四欄。沒寫到的標「紀錄未提及」；不要推測或補背景。'}
+ },
+ {type:'情境 3 · 釐清概念',title:'pwd 和 cd 有什麼不同？',copy:'你知道 `pwd` 會顯示路徑、`cd` 會切換位置，但常把「查看」和「改變」混在一起。你希望先理解，再自己試一次。',goal:'問出已知、混淆點，以及適合自己的學習方式。',
+  missing:{prompt:'有人問「pwd 和 cd 差在哪？」要讓解釋真的切中他的疑惑，哪些資訊有幫助？（可複選）',options:[['known','他目前知道什麼'],['confusion','哪個差異最容易混淆'],['format','想看例子還是先看定義'],['try','希望自己做一個小練習'],['favorite','他最喜歡哪種顏色']],key:['known','confusion','format','try'],ask:'寫一句能釐清疑惑的追問：'},
+  compare:{prompt:'目標是理解查看與切換的差異，並自己練習。哪個問法更有效？',a:'「請完整介紹所有路徑指令和歷史背景。」',b:'「我知道 pwd 顯示位置、cd 會切換，但常混淆查看和改變。能用一個小資料夾例子說明，再給我一題自己判斷嗎？」',better:'b',why:'B 把已知和混淆點說明，還指定了例子與自己練習；A 範圍大但沒有對準卡點。',explain:'寫出哪個部分讓其中一份更符合學習目標：'},
+  sim:{bot:'模擬回答（預先寫好的，不是真 AI）：pwd 是列出目錄，cd 是輸出路徑。兩者都很簡單，記起來就好。',flaw:'回答把定義說反，還沒處理「查看 vs 改變」的困惑，也沒有給練習。',repair:'指出錯誤定義，要求用同一個例子比較，再讓你自己判斷。',result:'修正後的模擬回覆：`pwd` 顯示你所在的位置；`cd` 改變你所在的位置。例：先用 `pwd` 看位置，再用 `cd projects` 進入資料夾。小練習：若只想知道目前在哪裡，你會選哪個？',hint:['先查正確性，再看是否回應了學習目標。','指出 pwd/cd 定義顛倒；要求例子加一題練習。','「你把兩個定義說反了：pwd 顯示目前位置，cd 切換位置。請用同一個資料夾例子比較，最後給我一題讓我自己選，不要直接代答。」']},
+  transfer:{prompt:'換個情境：你知道「儲存」和「匯出」大概不同，但不確定什麼時候用哪個。寫一段提問，說明已知和混淆點，請對方用小例子教你並留一道題自己回答。',hint:['先說懂的部分和不清楚的區別。','要求例子、情境差異，最後留給自己作答。','「我知道儲存會保留目前檔案，但不確定它和匯出的用途差在哪。可以用同一份文件舉例比較，再給我一個情境讓我自己判斷要用哪個嗎？先不要公布答案。」'],check:['交代目前理解','點出具體混淆','要求例子並保留自己練習的機會'],example:'我知道儲存會保留目前檔案，但不確定它和匯出的用途差在哪。可以用同一份文件舉例比較，再給我一個情境讓我自己判斷要用哪個嗎？先不要公布答案。'}
+ },
+ {type:'情境 4 · 安全界線',title:'先找檔案，不要動它',copy:'你想找到 weekly.md 並知道它在哪個資料夾。你只需要位置，不要開啟內容、修改、搬移或刪除檔案。',goal:'說清楚對象、要取得的資訊和不能做的事。',
+  missing:{prompt:'收到「幫我處理一下 weekly.md」。要避免對方做過頭，哪些事情應先釐清？（可複選）',options:[['object','要對檔案做哪個具體動作'],['result','最後需要哪種資訊'],['boundary','不能讀內容或更動檔案'],['multiple','如果有多個同名檔案要怎麼回報'],['color','檔案圖示顏色']],key:['object','result','boundary','multiple'],ask:'寫一句能守住範圍的追問：'},
+  compare:{prompt:'只要檔案位置，不能讀或改檔案。哪個指令範圍更清楚？',a:'「搜尋 weekly.md，回報完整路徑；不要讀內容或更動檔案。如果找到多個，列出全部位置。」',b:'「找出 weekly.md 並整理好，順便修正你發現的問題。」',better:'a',why:'A 限定查詢動作、回報內容與多筆處理；B 的「整理、修正」擴大了授權。',explain:'指出哪個字眼可能讓操作超出原本目的：'},
+  sim:{bot:'模擬回答（預先寫好的，不是真 AI）：我找到檔案了，也順手把內容格式統一、刪掉舊版本。',flaw:'回答執行了未授權的讀取與刪除，甚至沒有回報完整路徑。',repair:'指出超出範圍的動作，重新限定只查位置並列出結果。',result:'修正後的模擬回覆：找到 `./notes/weekly.md`。沒有開啟、修改、搬移或刪除檔案。',hint:['比對「只查位置」和回答實際做了什麼。','明確禁止讀內容與任何更動，指定只回報完整路徑。','「你讀取並刪除了檔案，超出我的要求。請停止任何更動；我只要 weekly.md 的完整路徑，不要開啟內容、修改、搬移或刪除。如果還沒查到，先只做唯讀搜尋。」']},
+  transfer:{prompt:'換個情境：你想知道照片資料夾中有哪些 .png 檔及其位置，但不能開圖、改名或刪除。寫一段範圍清楚、包含多筆結果處理方式的指令。',hint:['想清楚對象、查詢結果、禁止事項和多筆情況。','只列檔名和完整路徑；不開啟、不改動。','「請只列出照片資料夾中所有 .png 檔的檔名與完整路徑；不要開啟圖片、改名、搬移或刪除。若找到多個，全部列出；若沒找到，直接回報。」'],check:['限定查詢的檔案類型和資料夾','明確禁止開啟或變更','說明多筆或無結果時如何回報'],example:'請只列出照片資料夾中所有 .png 檔的檔名與完整路徑；不要開啟圖片、改名、搬移或刪除。若找到多個，全部列出；若沒找到，直接回報。'}
+ },
+ {type:'情境 5 · 錯誤診斷',title:'出現 Permission denied',copy:'你讀取檔案時看到 `Permission denied`。你不知道是路徑、權限還是其他原因，也不確定下一步該查什麼。',goal:'把證據貼清楚，先要求低風險檢查，不要猜結論。',
+  missing:{prompt:'有人說「指令不能用，出現 Permission denied」。要幫他診斷，哪些資訊最關鍵？（可複選）',options:[['intent','他原本想完成什麼'],['command','完整操作指令和錯誤原文'],['context','發生在什麼檔案／位置'],['check','要求先做只讀檢查'],['keyboard','鍵盤配置']],key:['intent','command','context','check'],ask:'寫一句能取得關鍵證據的追問：'},
+  compare:{prompt:'目前原因未知；先安全檢查。哪個問法比較恰當？',a:'「直接教我用 sudo 強制讀取，最好順便改掉所有權限。」',b:'「我用 cat notes.txt 讀取時收到 Permission denied。可以先教我一個只查看路徑或權限資訊、不改檔也不使用 sudo 的檢查嗎？」',better:'b',why:'B 提供操作與原文，並限制為只檢查；A 在原因未明時擴大權限。',explain:'解釋你選的問法如何處理「尚未確定原因」：'},
+  sim:{bot:'模擬回答（預先寫好的，不是真 AI）：這一定是檔案壞了。用 sudo chmod -R 777 專案資料夾即可。',flaw:'把可能性說成確定原因，還建議遞迴放寬權限，沒有根據證據檢查。',repair:'指出猜測與高風險操作，要求一個唯讀確認步驟。',result:'修正後的模擬回覆：請先確認檔案路徑是否正確，並只查看檔案本身的權限資訊；貼回結果後再判斷，不要先更改權限。',hint:['注意「一定」是否有證據，以及建議會不會更改狀態。','先查路徑、檔案權限等資訊；暫不使用 sudo 或遞迴修改。','「目前還不能確定是檔案損壞。請不要執行 sudo chmod -R；先教我只讀查看路徑和該檔案權限的步驟，我貼回結果後再一起判斷。」']},
+  transfer:{prompt:'換個情境：上傳作業時顯示「格式不支援」。你不確定是檔案類型、大小或網站限制。寫一段求助內容，要求先查看錯誤和限制，不要叫你刪檔或轉檔。',hint:['交代目標、操作、錯誤、目前未知和安全下一步。','要求先查看允許格式／大小，再提供結果，不先更動原檔。','「我上傳作業時看到『格式不支援』，還不確定是格式或大小限制。可以先帶我查看網站允許的格式和大小上限嗎？先不要刪除或轉換原檔；我會回報檢查結果再決定下一步。」'],check:['提供實際操作與錯誤原文','承認原因尚未確定','先查限制並避免更動原檔'],example:'我上傳作業時看到「格式不支援」，還不確定是格式或大小限制。可以先帶我查看網站允許的格式和大小上限嗎？先不要刪除或轉換原檔；我會回報檢查結果再決定下一步。'}
+ },
+ {type:'情境 6 · 分步與驗收',title:'帶我新增檔案並確認成功',copy:'你想在目前資料夾建立空的 todo.txt。你希望自己親手輸入指令：一次只給一個步驟，等你回報結果後再繼續；最後確認檔案真的存在。',goal:'交代分工、節奏和完成證據，保留自己動手的空間。',
+  missing:{prompt:'需求只有「幫我新增 todo.txt」。若要讓學習者自己操作且知道何時完成，還要釐清什麼？（可複選）',options:[['location','檔案要放哪裡'],['who','由誰親自操作'],['pace','一次給幾個步驟'],['proof','用什麼方式確認完成'],['wallpaper','桌布是什麼']],key:['location','who','pace','proof'],ask:'寫一句能補齊分工和驗收的追問：'},
+  compare:{prompt:'目標是自己建立檔案、一次一步、最後驗收。哪個指令更適合？',a:'「請直接替我建立 todo.txt，完成後說好了。」',b:'「帶我在目前資料夾建立空的 todo.txt；一次給一個指令、說明作用，等我貼結果再繼續。最後教我只讀確認檔案存在，不要替我操作。」',better:'b',why:'B 說清楚誰操作、步驟節奏與驗收證據；A 雖快，但拿走了練習並沒有證明成功。',explain:'比較兩個指令如何分配操作與驗收責任：'},
+  sim:{bot:'模擬回答（預先寫好的，不是真 AI）：執行 `touch todo.txt && ls -la && git add . && git commit -m done`，完成。',flaw:'一次塞入多個步驟，還包含未要求的 Git 變更；沒有等待回報或解釋，也沒有確認結果。',repair:'要求一次只給一個安全步驟，排除未授權操作，並在結果回報後再繼續。',result:'修正後的模擬回覆：第 1 步：先確認目前位置，避免把檔案建在錯的資料夾。請執行 `pwd`，把輸出貼回來；我確認後再給下一步。',hint:['看看是否一次給太多步、是否夾帶未要求的操作。','先確認目前位置；一次給一個指令，等待結果，不做 Git 操作。','「請不要直接執行或加入 Git。一次只給我一個步驟並說明作用，等我親自回報輸出後再繼續；先確認目前位置，最後用只讀方式確認 todo.txt 存在。」']},
+  transfer:{prompt:'換個情境：你要自己把一段文字存成 draft.txt，怕覆蓋舊檔。寫一段指令，要求先確認同名檔案是否存在，再一次一步帶你操作，最後檢查結果；不要直接替你做。',hint:['目標、先查存在與否、一次一步、由誰操作、最後驗收。','發現同名檔先停下詢問，不可覆蓋。','「帶我在目前資料夾把文字存成 draft.txt。先用只讀方式確認同名檔是否存在；若存在先停下問我，不要覆蓋。由我親自操作，一次給一個步驟並等我回報；完成後再教我確認內容與檔案存在。」'],check:['要求先檢查同名檔','清楚規定同名時停止，不覆蓋','由自己一步步操作並安排驗收'],example:'帶我在目前資料夾把文字存成 draft.txt。先用只讀方式確認同名檔是否存在；若存在先停下問我，不要覆蓋。由我親自操作，一次給一個步驟並等我回報；完成後再教我確認內容與檔案存在。'}
+ }
+];
 
-function render(){
-  const item=scenarios[current];
-  roundLabel.textContent=`情境 ${current+1} / ${scenarios.length}`;
-  progress.value=current;
-  type.textContent=item.type;title.textContent=item.title;copy.textContent=item.copy;goal.textContent=item.goal;
-  toolkitPanel.hidden=true;toolkitToggle.setAttribute('aria-expanded','false');
-  byId('method-title').textContent=item.mode==='question'?'提問四格':'下指令四件事';
-  byId('method-steps').replaceChildren(...item.steps.map(text=>{const li=document.createElement('li');li.textContent=text;return li;}));
-  byId('method-note').textContent=item.mode==='question'?'提問骨架：目標 → 嘗試／已知 → 結果／混淆 → 想要的下一步。':'指令骨架：動作與對象 → 背景材料 → 限制與分工 → 完成證據。';
-  byId('insert-template').dataset.template=item.template;
-  draft.value='';feedback.hidden=true;finish.hidden=true;byId('error').hidden=true;
-  byId('review').hidden=false;byId('clear').hidden=false;draft.hidden=false;byId('review').focus();
-}
-
-toolkitToggle.addEventListener('click',()=>{
-  const open=toolkitToggle.getAttribute('aria-expanded')!=='true';
-  toolkitToggle.setAttribute('aria-expanded',String(open));toolkitPanel.hidden=!open;
-});
-byId('insert-template').addEventListener('click',event=>{
-  const template=event.currentTarget.dataset.template;
-  draft.value=draft.value.trim()?`${draft.value.trim()}\n\n${template}`:template;
-  draft.focus();draft.setSelectionRange(draft.value.length,draft.value.length);
-});
-
-byId('review').addEventListener('click',()=>{
-  if(!draft.value.trim()){byId('error').hidden=false;draft.focus();return;}
-  const item=scenarios[current];
-  byId('feedback-intro').textContent=item.intro;
-  const list=byId('checklist');list.replaceChildren(...item.checks.map(text=>{const li=document.createElement('li'),label=document.createElement('label'),input=document.createElement('input');input.type='checkbox';input.setAttribute('aria-label',text);input.addEventListener('change',updateCheckSummary);label.append(input,document.createTextNode(text));li.append(label);return li;}));
-  updateCheckSummary();
-  byId('example').textContent=item.example;
-  byId('error').hidden=true;feedback.hidden=false;byId('review').hidden=true;byId('clear').hidden=true;
-  byId('next').textContent=current===scenarios.length-1?'完成這輪 ✓':'我看完了，下一題 →';
-  feedback.querySelector('h3').focus();
-  byId('feedback').scrollIntoView({behavior:'smooth',block:'nearest'});
-});
-function updateCheckSummary(){
-  const checks=[...byId('checklist').querySelectorAll('input[type="checkbox"]')],checked=checks.filter(input=>input.checked).length;
-  byId('check-summary').textContent=`自我核對：${checked} / ${checks.length} 項。沒勾到的不是錯誤，只是可以考慮補進草稿的資訊。`;
-}
-byId('revise').addEventListener('click',()=>{feedback.hidden=true;byId('review').hidden=false;byId('clear').hidden=false;draft.focus();});
-byId('clear').addEventListener('click',()=>{draft.value='';draft.focus();});
-byId('next').addEventListener('click',()=>{
-  current++;
-  if(current>=scenarios.length){feedback.hidden=true;byId('review').hidden=true;byId('clear').hidden=true;draft.hidden=true;roundLabel.textContent='情境 6 / 6';progress.value=scenarios.length;finish.hidden=false;byId('restart').focus();return;}
-  render();title.focus();
-});
-byId('restart').addEventListener('click',()=>{current=0;draft.hidden=false;render();title.focus();});
-render();
+const byId=id=>document.getElementById(id);let current=0,stage=0,hintLevel=0,answerAtReveal=null;
+const exercise=byId('exercise'),progress=byId('round-progress');
+function el(tag,cls,text){const node=document.createElement(tag);if(cls)node.className=cls;if(text!==undefined)node.textContent=text;return node;}
+function button(label,cls,fn){const b=el('button',cls,label);b.type='button';b.addEventListener('click',fn);return b;}
+function advance(){stage++;renderStage();}
+function renderHeader(){const r=rounds[current];byId('round-label').textContent=`情境 ${current+1} / ${rounds.length}`;progress.value=current;byId('scenario-type').textContent=r.type;byId('scenario-title').textContent=r.title;byId('scenario-copy').textContent=r.copy;byId('scenario-goal').textContent=r.goal;const labels=['① 找缺口','② 比一比','③ 修正對話','④ 換情境'];document.querySelectorAll('.stages span').forEach((s,i)=>{if(i===stage)s.setAttribute('aria-current','step');else s.removeAttribute('aria-current');});}
+function renderStage(){renderHeader();exercise.replaceChildren();hintLevel=0;answerAtReveal=null;const r=rounds[current];if(stage===0)renderMissing(r);else if(stage===1)renderCompare(r);else if(stage===2)renderRepair(r);else renderTransfer(r);byId('scenario-title').focus();}
+function labelledInput(type,name,text,value){const label=el('label','choice');const input=document.createElement('input');input.type=type;input.name=name;input.value=value;label.append(input,document.createTextNode(text));return {label,input};}
+function requireText(answer,message){if(answer.value.trim())return true;let status=answer.nextElementSibling;if(!status||!status.classList.contains('validation')){status=el('p','validation');status.setAttribute('role','status');answer.insertAdjacentElement('afterend',status);}status.textContent=message;answer.focus();return false;}
+function requireChoice(group,selector,message){if(group.querySelector(selector))return true;let status=group.nextElementSibling;if(!status||!status.classList.contains('validation')){status=el('p','validation');status.setAttribute('role','status');group.insertAdjacentElement('afterend',status);}status.textContent=message;return false;}
+function requireRevision(answer,original,message){if(answer.value.trim()&&answer.value.trim()!==original?.trim())return true;let status=answer.parentNode.querySelector('.revision-validation');if(!status){status=el('p','validation revision-validation');status.setAttribute('role','status');answer.insertAdjacentElement('afterend',status);}status.textContent=message;answer.focus();return false;}
+function renderMissing(r){const d=r.missing;exercise.append(el('h3','stage-title','① 找缺口，再補問'));exercise.append(el('p','prompt',d.prompt));const group=el('fieldset','choices');group.append(el('legend','','選出最關鍵的資訊（可複選）'));for(const [value,text] of d.options){const item=labelledInput('checkbox','missing',text,value);group.append(item.label);}exercise.append(group);exercise.append(el('label','field-label',d.ask));const answer=document.createElement('textarea');answer.rows=3;answer.maxLength=800;answer.placeholder='用自己的話寫一句追問；不會因為關鍵字被自動判分。';exercise.append(answer);const result=el('div','response');result.hidden=true;exercise.append(result);exercise.append(button('送出看看 →','primary',event=>{if(result.hidden){if(!requireChoice(group,'input:checked','先選一項你認為會影響建議的資訊。'))return;if(!requireText(answer,'先試著用自己的話寫一句追問，再看對照。'))return;const selected=[...group.querySelectorAll('input:checked')].map(i=>i.value);const missed=d.key.filter(k=>!selected.includes(k));const extra=selected.filter(k=>!d.key.includes(k));result.append(el('strong','','選項對照（只回饋選擇，不評自由文字）：'));result.append(el('p','',missed.length?`還可考慮補問：${missed.map(k=>d.options.find(o=>o[0]===k)?.[1]).join('、')}`:'你選的關鍵資訊都有包含。'));if(extra.length)result.append(el('p','','也選了較不影響第一步的資訊；想想它會不會改變建議。'));result.append(el('p','self-note','你的追問留在本頁；請自行對照目標，看看它是否問到缺口。'));result.hidden=false;event.currentTarget.textContent='下一步：比較問法 →';}else advance();}));}
+function renderCompare(r){const d=r.compare;exercise.append(el('h3','stage-title','② 同題比較：不是越長越好'));exercise.append(el('p','prompt',d.prompt));const group=el('fieldset','choices');group.append(el('legend','','選一份，再說明理由'));const a=labelledInput('radio','compare','問法 A｜'+d.a,'a'),b=labelledInput('radio','compare','問法 B｜'+d.b,'b');group.append(a.label,b.label);exercise.append(group);exercise.append(el('label','field-label',d.explain));const reason=document.createElement('textarea');reason.rows=3;reason.maxLength=800;reason.placeholder='指出和目的有關的差別；不是比字數。';exercise.append(reason);const result=el('div','response');result.hidden=true;exercise.append(result);exercise.append(button('對照選擇 →','primary',event=>{if(result.hidden){if(!requireChoice(group,'input:checked','先選一份，再比較它和目標的差異。'))return;if(!requireText(reason,'先寫一句自己的理由，再看對照。'))return;const selected=group.querySelector('input:checked')?.value;result.append(el('strong','',selected===d.better?'選擇與目的相符。':'另一份更貼近這回合的目的。'));result.append(el('p','',d.why));result.append(el('p','self-note','自由文字由你自己檢視：你的理由有指出具體差異嗎？這裡不會按關鍵字評分。'));result.hidden=false;reason.focus();event.currentTarget.textContent='下一步：修正對話 →';}else advance();}));}
+function renderRepair(r){const d=r.sim;exercise.append(el('h3','stage-title','③ 多輪修正：指出問題，再補要求'));exercise.append(el('p','prompt','先讀這段預設模擬回答，再練習讓下一輪更符合需求。'));exercise.append(el('blockquote','simulated',d.bot));exercise.append(el('p','field-label','寫下：它哪裡不合用？你要它怎麼修正？'));const answer=document.createElement('textarea');answer.rows=4;answer.maxLength=1000;answer.placeholder='把問題說具體，再補上你的條件或希望的下一步。';exercise.append(answer);const hints=el('section','hint-box');const hintText=el('p','');hints.append(hintText);hints.hidden=true;exercise.append(hints);exercise.append(button('給我一層提示','',event=>{hintLevel=Math.min(hintLevel+1,d.hint.length);hintText.textContent=`提示 ${hintLevel} / ${d.hint.length}：${d.hint[hintLevel-1]}`;hints.hidden=false;event.currentTarget.textContent=hintLevel===d.hint.length?'已顯示完整參考':'再給一層提示';event.currentTarget.disabled=hintLevel===d.hint.length;}));const result=el('div','response');result.hidden=true;exercise.append(result);exercise.append(button('看修正後的模擬回覆 →','primary',event=>{if(result.hidden){if(!requireText(answer,'先試著指出一個問題，並寫下你希望的修正，再看比較。'))return;answerAtReveal=answer.value;result.append(el('strong','','先自己指出問題，再比較：'));result.append(el('p','',d.flaw));result.append(el('p','',d.repair));result.append(el('blockquote','simulated-good',d.result));result.append(el('p','self-note','這是預先編寫的示例，不是模型即時生成；自由文字沒有自動評分。看完請自己改寫一次。'));result.hidden=false;answer.focus();event.currentTarget.textContent='下一步：換情境重做 →';}else{if(answerAtReveal!==null&&!requireRevision(answer,answerAtReveal,'看完參考後，請回到草稿用自己的話改寫一次，再繼續。'))return;advance();}}));}
+function renderTransfer(r){const d=r.transfer;exercise.append(el('h3','stage-title','④ 換情境重做：把技巧帶走'));exercise.append(el('p','prompt',d.prompt));const answer=document.createElement('textarea');answer.rows=5;answer.maxLength=1200;answer.placeholder='先自己寫。卡住時可逐層要提示；提示不會代替你完成。';exercise.append(answer);const hints=el('section','hint-box');const hintText=el('p','');hints.append(hintText);hints.hidden=true;exercise.append(hints);exercise.append(button('提示 1：先給方向','',event=>{hintLevel=Math.min(hintLevel+1,d.hint.length);hintText.textContent=`提示 ${hintLevel} / ${d.hint.length}：${d.hint[hintLevel-1]}`;hints.hidden=false;if(hintLevel===d.hint.length)answerAtReveal=answer.value;event.currentTarget.textContent=hintLevel===d.hint.length?'完整參考已解鎖':'再看下一層提示';event.currentTarget.disabled=hintLevel===d.hint.length;}));const result=el('div','response');result.hidden=true;exercise.append(result);exercise.append(button('完成作答，看自我檢核 →','primary',event=>{if(result.hidden){if(!answer.value.trim()){answer.focus();answer.setCustomValidity('先寫一版自己的內容，或至少先試著描述你的想法。');answer.reportValidity();answer.addEventListener('input',()=>answer.setCustomValidity(''),{once:true});return;}result.append(el('strong','','自我檢核：逐項看看你的版本有沒有做到'));const list=el('ul','check-list');for(const text of d.check){const row=el('li','');const item=labelledInput('checkbox','transfer-check',text,text);row.append(item.label);list.append(row);}result.append(list);const details=document.createElement('details');details.append(el('summary','','完整參考寫法（看完後，請自己改寫）'));details.append(el('blockquote','',d.example));details.querySelector('summary').addEventListener('click',()=>{if(!details.open)answerAtReveal=answer.value;});result.append(details);result.append(el('p','self-note','勾選只是你的自我檢視，沒有判定整段文字好壞；若看了範例，請回到上方草稿用自己的話重寫。'));result.hidden=false;answerAtReveal=answerAtReveal===null?null:answerAtReveal;answer.focus();event.currentTarget.textContent=current===rounds.length-1?'完成本輪 ✓':'下一題 →';}else{if(answerAtReveal!==null&&!requireRevision(answer,answerAtReveal,'看完完整參考後，請回到草稿用自己的話改寫一次，再繼續。'))return;nextRound();}}));}
+function nextRound(){current++;stage=0;if(current>=rounds.length){exercise.hidden=true;document.querySelector('.stages').hidden=true;byId('scenario-title').hidden=true;byId('scenario-copy').hidden=true;document.querySelector('.goal').hidden=true;byId('finish').hidden=false;progress.value=rounds.length;byId('round-label').textContent=`情境 ${rounds.length} / ${rounds.length}`;byId('restart').focus();return;}renderStage();}
+function renderToolbox(){const host=byId('toolbox-cards');for(const item of toolkit){const card=el('article','tool-card');card.append(el('h3','',item.name),el('p','before',`少了／不清楚：${item.before}`),el('p','after',`補得更清楚：${item.after}`),el('p','why',item.why));host.append(card);}}
+byId('restart').addEventListener('click',event=>{current=0;stage=0;exercise.hidden=false;document.querySelector('.stages').hidden=false;byId('scenario-title').hidden=false;byId('scenario-copy').hidden=false;document.querySelector('.goal').hidden=false;byId('finish').hidden=true;renderStage();});
+renderToolbox();renderStage();
