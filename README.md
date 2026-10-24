@@ -1,6 +1,6 @@
 # Dora playground
 
-十三款免費、純前端小遊戲，從 `index.html` 入口進入。
+十四款免費、純前端小遊戲，從 `index.html` 入口進入。
 
 ## 試玩
 
@@ -149,10 +149,11 @@ python3 -m http.server 8765
 
 ## 專案檔案
 
-- `index.html`：十三款遊戲共同入口；舊首頁 `#r=` 戰績連結自動轉到雙標遊戲並保留片段。
+- `index.html`：十四款遊戲共同入口；舊首頁 `#r=` 戰績連結自動轉到雙標遊戲並保留片段。
 - `double-standard.html`：原雙標遊戲的畫面、流程和計分。
 - `start-small.html`、`start-small.css`、`start-small.js`：拖延啟動遊戲。
 - `mini-kart.html`、`mini-kart.css`、`mini-kart.js`、`kart.svg`：迷你卡丁車與原創插圖。
+- `frogger.html`、`frogger.css`、`frogger.js`、`frogger.svg`：青蛙過街，躲車、搭浮木渡河，將五隻青蛙送回家；每局不保存紀錄。
 - `rocket.svg`、`masks.svg`、`box.svg`：本地向量插圖，不依賴外部字型或圖片服務。
 - `scenarios.js`：情境題庫，包括替別人和換自己時的敘述。
 - `choices.js`：每案兩輪共用的具體行動選項。
@@ -163,7 +164,7 @@ python3 -m http.server 8765
 
 ## 部署
 
-這是靜態網站。GitHub Pages 可發布倉庫根目錄的 `index.html` 作共同入口；所有十三款遊戲的 HTML、CSS 和 JS 必須同時發布。啟用 Pages 後，分享連結會自動以當前網站網址產生。發布設定由倉庫擁有者決定。
+這是靜態網站。GitHub Pages 可發布倉庫根目錄的 `index.html` 作共同入口；所有十四款遊戲的 HTML、CSS 和 JS 必須同時發布。啟用 Pages 後，分享連結會自動以當前網站網址產生。發布設定由倉庫擁有者決定。
 
 ## 授權
 
