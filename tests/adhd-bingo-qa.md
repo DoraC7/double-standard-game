@@ -1,4 +1,18 @@
-# ADHD 日常賓果 QA — 2026-10-19
+# ADHD 日常賓果 QA
+
+## 全面過動版 — 2026-10-28
+
+- 完整自動測試：`node --test tests/*.test.cjs`，170/170 通過；包含新增的坐不住加量抽卡測試，兩尺寸各 200 個卡號，比例、不重複、自由格、同號重現及與混合模式不同均通過。
+- `node --check adhd-bingo-data.js`、`node --check adhd-bingo.js`、`node --check tests/adhd-bingo-browser-qa.js` 及 `git diff --check` 通過。
+- Chrome 候選 DOM 預覽：桌面 1280×900、直式 320×740、橫式 844×390；每個尺寸完整執行 `adhd-bingo-browser-qa.js`，連線／取消／復原／切換模式／切換尺寸／滿卡／清除／新卡／卡片網址／PNG／無勾選持久儲存／版面均通過，各步驟沒有頁面橫向溢出。
+- 坐不住加量在 5×5 為 10 格坐不住與衝動，3×3 為 5 格；切換模式會清空勾選，復原同時恢復模式、卡片及勾選。
+- PNG：瀏覽器產生 1400×1820 的 `image/png`，當次滿卡 3×3 為 306494 bytes；確認圖片包含 8/8、坐不住加量及一則簡短分數說明。自動下載在 DOM 驗收中被攔截，實際 Blob、預覽解碼及手動下載連結均存在；未驗證實體手機存入相簿。
+- 鍵盤：實際送出 Space，勾選數 0→1。複製連結以 clipboard writeText 測試替身捕捉參數，確認只有 card／size／mode、不含勾選；不將替身測試稱為系統剪貼簿驗證。
+- Chrome page errors 0；桌面全頁截圖目視確認沒有裁切。另有 320 寬與橫式流程檢查，沒有實體 iOS／Android 測試。
+- 預覽方式：從公開的遊戲首頁重新導覽後，把候選 HTML、CSS 與 JavaScript 暫時寫入該分頁 DOM；未修改公開主機或遠端儲存庫。唯一重用的 bingo.svg 與候選檔案逐位元組相同。這不是本機 HTTP 伺服器測試，也不是已部署驗收。
+- `start-small.html`、`hyper-challenge.html` 只改重複標語為實際玩法說明，未變動遊戲程式。
+
+## 原版 — 2026-10-19
 
 - 自動測試：`node --test tests/adhd-bingo.test.cjs`，4/4 通過。含 400 張卡的兩種尺寸、四類均衡、不重複、同號重現及橫直斜線／滿卡／取消。
 - Chrome 實際操作：經典卡點選首排五格 → 5 格、1 線、5 格標示；取消一格 → 0 線，復原 → 1 線。

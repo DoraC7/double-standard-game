@@ -44,3 +44,18 @@ test('橫直斜、重疊、多線、取消與滿卡計算', () => {
     assert.equal(findLines(full, size).length, 2 * size + 2);
   }
 });
+test('坐不住加量真正改變抽卡比例；兩尺寸、不重複、可重現', () => {
+  for (const size of [3, 5]) for (let n = 0; n < 200; n++) {
+    const code = n.toString(16).padStart(8, '0');
+    const card = makeCard(code, size, 'hyper');
+    const actual = card.filter(Boolean);
+    assert.equal(actual.length, size * size - 1);
+    assert.equal(card[Math.floor(size * size / 2)], null);
+    assert.equal(new Set(actual.map(x => x.id)).size, actual.length);
+    const expected = size === 5 ? [5, 5, 10, 4] : [1, 1, 5, 1];
+    ['focus', 'time', 'impulse', 'daily'].forEach((group, i) => assert.equal(actual.filter(x => x.group === group).length, expected[i]));
+    assert.equal(JSON.stringify(card), JSON.stringify(makeCard(code, size, 'hyper')));
+    assert.notEqual(JSON.stringify(card), JSON.stringify(makeCard(code, size, 'mix')));
+  }
+  assert.throws(() => makeCard('12345678', 5, 'unknown'));
+});

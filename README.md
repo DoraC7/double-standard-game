@@ -90,14 +90,17 @@ GitHub Pages：<https://dorac7.github.io/double-standard-game/>。同一份遊�
 node --test tests/zhuyin-data.test.cjs tests/zhuyin-spelling.test.cjs
 ```
 
-## ADHD 日常賓果
+## ADHD 日常賓果・全面過動版
 
-`adhd-bingo.html`、`adhd-bingo.css`、`adhd-bingo-data.js`、`adhd-bingo.js` 與 `bingo.svg`：40 則原創正體中文敘述，3×3／5×5 均衡抽題、自選勾選、自由格、橫直斜連線、重抽、清除、一層復原、各格生活小提示。可在本機產生 PNG（保留非診斷說明）；同款空白卡連結只含卡號與尺寸，不含勾選。無帳號、依賴、持久儲存或答題上傳，重新整理清空。
+試玩：<https://dorac7.github.io/double-standard-game/adhd-bingo.html>。
 
-這是趣味自我觀察，不是 ADHD 篩檢、診斷或治療。格數與連線沒有醫療意義；不給任何人預設勾選。玩法、資料來源與隱私邊界見 [ADHD-BINGO-SOURCES.md](ADHD-BINGO-SOURCES.md)。
+40 則原創日常吐槽：注意力、時間與安排、坐不住與衝動、生活支線各 10 則。3×3／5×5 兩種卡片；混合開局平均抽四類，坐不住加量在 5×5 抽 10 則坐不住與衝動、5 則注意力、5 則時間、4 則生活支線，3×3 則為 5、1、1、1 格。兩種都另送中央自由格。模式真正改變抽卡比例，不是只換標題。
 
-資料、抽卡與連線邏輯檢查：`node --test tests/adhd-bingo.test.cjs`。
+點格子可取消、看對應的小方法，橫直斜連線；切換模式／尺寸、換卡、清除均可復原上次操作。卡號、尺寸、模式可複製成同款空白卡連結，不含勾選；舊的 card／size 連結仍以混合模式開啟。PNG 包含當次模式與勾選。所有選擇只留在目前分頁，重新整理即清空，不儲存或上傳。
 
+娛樂賓果，不以連線判定診斷或嚴重度；簡短說明收在來源折疊區，遊玩回饋不反覆插播。保留 `ADHD-BINGO-SOURCES.md` 的來源與用途說明。沒有引入依賴、外部託管或私人病史素材。
+
+檢查：`node --test tests/adhd-bingo.test.cjs`；瀏覽器驗收紀錄：`tests/adhd-bingo-qa.md`。
 
 ## 龍蝦終端機探險
 
