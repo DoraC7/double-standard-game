@@ -15,16 +15,17 @@ class Node {
  click(){if(!this.disabled)this.listeners.click?.();}
  querySelectorAll(selector){const found=[];const visit=n=>{if(selector==='button'&&n.tagName==='button')found.push(n);n.children.forEach(visit);};this.children.forEach(visit);return found;}
 }
-function boot(){
- const ids=Object.fromEntries(['desk','intro','case-map','completion','review','download','ending','map-section','start','random','tools','toolbox'].map(id=>[id,new Node()]));
+function boot({stored=new Map(),failRead=false,failWrite=false,failRemove=false,confirm=true}={}){
+ const ids=Object.fromEntries(['desk','intro','case-map','completion','review','download','ending','map-section','start','random','tools','toolbox','save-status','save-notes-label','save-notes','clear-saved','remember-progress','session-only'].map(id=>[id,new Node()]));
  const walk=(root,id)=>{if(root.id===id)return root;for(const n of root.children){const hit=walk(n,id);if(hit)return hit;}};
  const document={createElement:tag=>new Node(tag),getElementById:id=>ids[id]||Object.values(ids).map(n=>walk(n,id)).find(Boolean),body:new Node('body')};
- const downloads=[];
- vm.runInNewContext(source,{THINKING_CASES:cases,document,Map,Math,Blob,URL:{createObjectURL:b=>{downloads.push(b);return 'blob:test';},revokeObjectURL(){}},setTimeout:f=>f()});
+ const downloads=[],writes=[];
+ const localStorage={getItem:k=>{if(failRead)throw Error('blocked');return stored.get(k)??null;},setItem:(k,v)=>{if(failWrite)throw Error('quota');stored.set(k,v);writes.push(v);},removeItem:k=>{if(failRemove)throw Error('blocked');stored.delete(k);}};
+ vm.runInNewContext(source,{THINKING_CASES:cases,document,localStorage,window:{confirm:()=>confirm},Map,Math,Blob,URL:{createObjectURL:b=>{downloads.push(b);return 'blob:test';},revokeObjectURL(){}},setTimeout:f=>f()});
  const find=(txt,root=ids.desk)=>root.querySelectorAll('button').find(b=>b.textContent===txt);
  const check=()=>find('核對這一步').click();
  const next=()=>{const b=find('下一步 →')||find('整理本案 →');assert.ok(b,'advance button is present');b.click();};
- return {ids,document,find,check,next,downloads};
+ return {ids,document,find,check,next,downloads,stored,writes};
 }
 function classify(app,c,wrong=false){for(const b of app.ids.desk.querySelectorAll('button'))if(b.dataset.card!==undefined&&b.dataset.category===(wrong?'guess':c.cards[Number(b.dataset.card)][1]))b.click();app.check();app.next();}
 function investigate(app,indices){for(const i of indices)app.ids.desk.querySelectorAll('button').find(b=>b.dataset.clue===i).click();app.check();app.next();}
@@ -67,5 +68,41 @@ test('notes export as text, keep first-attempt outcomes, and cannot execute as m
  classify(app,c,true);investigate(app,[0,1]);finish(app,c,c.lead);
  app.ids.review.click();classify(app,c);investigate(app,[0,1]);finish(app,c,c.lead);
  app.ids.download.click();const text=await app.downloads[0].text();assert.match(text,/<img src=x onerror=alert\(1\)>/);assert.match(text,/初次核對：分清楚 待釐清/);assert.match(text,/狀態：已完成四步練習/);
- assert.ok(!source.includes('innerHTML'));assert.ok(!/localStorage|sessionStorage|fetch\(|XMLHttpRequest|sendBeacon/.test(source));
+ assert.ok(!source.includes('innerHTML'));assert.ok(!/sessionStorage|fetch\(|XMLHttpRequest|sendBeacon/.test(source));assert.equal(app.writes.length,0);
+});
+
+const key='thinking-lab-progress-v1';
+function complete(app){const c=cases[0];app.ids.start.click();classify(app,c);investigate(app,[0,1]);finish(app,c,c.lead);}
+function note(app,text){const n=app.document.getElementById('my-note');n.value=text;n.listeners.input();}
+function notesOn(app,on){app.ids['save-notes'].checked=on;app.ids['save-notes'].listeners.change({target:app.ids['save-notes']});}
+test('預設不寫入；選擇儲存後重載可還原進度，但不存自由文字',()=>{
+ const app=boot();complete(app);note(app,'私人筆記');assert.equal(app.stored.size,0);assert.equal(boot({stored:app.stored}).ids.completion.textContent,'0 / 12 案已練');
+ app.ids['remember-progress'].click();assert.equal(JSON.parse(app.stored.get(key)).notesEnabled,false);assert.deepEqual(JSON.parse(app.stored.get(key)).notes,{});
+ const loaded=boot({stored:app.stored});assert.equal(loaded.ids.completion.textContent,'1 / 12 案已練');loaded.ids.start.click();assert.equal(loaded.document.getElementById('my-note').value,'');
+});
+test('筆記另行同意；取消筆記儲存會移除持久副本但保留本分頁文字',()=>{
+ const app=boot();app.ids['remember-progress'].click();complete(app);note(app,'<script>文字而已</script>');notesOn(app,true);app.ids['remember-progress'].click();assert.equal(JSON.parse(app.stored.get(key)).notesEnabled,true);
+ const loaded=boot({stored:app.stored});loaded.ids.start.click();assert.equal(loaded.document.getElementById('my-note').value,'<script>文字而已</script>');
+ notesOn(app,false);assert.deepEqual(JSON.parse(app.stored.get(key)).notes,{});assert.equal(app.document.getElementById('my-note').value,'<script>文字而已</script>');
+});
+test('再次開啟儲存不讀回舊內容覆蓋當前進度與筆記；分頁模式停止寫入',()=>{
+ const app=boot();app.ids['remember-progress'].click();complete(app);note(app,'舊筆記');notesOn(app,true);app.ids['session-only'].click();const saved=app.stored.get(key);
+ note(app,'新筆記');assert.equal(app.stored.get(key),saved);assert.equal(app.ids['clear-saved'].hidden,false);
+ app.ids['remember-progress'].click();notesOn(app,true);assert.equal(JSON.parse(app.stored.get(key)).notes[cases[0].id],'新筆記');
+});
+test('清除需確認；成功同時重設畫面，取消及儲存權限錯誤保留紀錄',()=>{
+ const app=boot();app.ids['remember-progress'].click();complete(app);note(app,'筆記');notesOn(app,true);const cancel=boot({stored:app.stored,confirm:false});
+ cancel.ids['clear-saved'].click();assert.equal(cancel.ids.completion.textContent,'1 / 12 案已練');assert.equal(app.stored.has(key),true);
+ const blocked=boot({stored:app.stored,failRemove:true});blocked.ids['clear-saved'].click();assert.match(blocked.ids['save-status'].textContent,/清除失敗/);assert.equal(blocked.ids.completion.textContent,'1 / 12 案已練');
+ app.ids['clear-saved'].click();assert.equal(app.stored.has(key),false);assert.equal(app.ids.completion.textContent,'0 / 12 案已練');assert.equal(app.ids.desk.hidden,true);assert.equal(app.ids.intro.hidden,false);assert.equal(app.ids.download.disabled,true);
+});
+test('瀏覽器無法讀寫時仍可完成案件，不誤報儲存成功',()=>{
+ const app=boot({failRead:true,failWrite:true});assert.match(app.ids['save-status'].textContent,/讀取.*失敗/);complete(app);app.ids['remember-progress'].click();assert.match(app.ids['save-status'].textContent,/無法儲存/);assert.equal(app.ids.completion.textContent,'1 / 12 案已練');
+});
+test('損壞及非預期儲存格式不會使地圖、複習或匯出當掉',()=>{
+ for(const raw of ['{','null','[]',JSON.stringify({version:1,records:[],notesEnabled:true,notes:{}})]){const app=boot({stored:new Map([[key,raw]])});assert.match(app.ids['save-status'].textContent,/讀取.*失敗/);complete(app);}
+ const valid={first:[false,true,true,true],latest:[true,true,true,true],clues:[0,1],conclusion:'已知線索',update:'新證據'};
+ const records={[cases[0].id]:valid,[cases[1].id]:{...valid,clues:[7,7]},[cases[2].id]:{...valid,latest:[1,1,1,1]}};
+ const app=boot({stored:new Map([[key,JSON.stringify({version:1,records,notesEnabled:true,notes:{[cases[0].id]:{},[cases[1].id]:'可還原的筆記'}})]])});
+ assert.equal(app.ids.completion.textContent,'1 / 12 案已練');assert.match(app.ids['save-status'].textContent,/格式不正確/);app.ids.download.click();
 });

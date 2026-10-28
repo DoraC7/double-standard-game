@@ -4,12 +4,41 @@
  const cases = THINKING_CASES;
  const labels = {fact:'事實／紀錄',guess:'推測／解釋',unknown:'尚未知曉'};
  const steps = ['分清楚','選線索','下結論','遇到新證據'];
+ const storageKey='thinking-lab-progress-v1';
  const records = new Map();
  const notes = new Map();
- let active = -1, phase = 0, round, queue = null;
+ let active = -1, phase = 0, round, queue = null, remember=false, rememberNotes=false, hasSaved=false, storageError='';
  const el = (tag, text, cls) => {const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n;};
  function button(text, fn, cls) {const b=el('button',text,cls);b.type='button';b.addEventListener('click',fn);return b;}
  function shuffle(items) {const out=[...items];for(let i=out.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[out[i],out[j]]=[out[j],out[i]];}return out;}
+ function validRecord(r) {
+  const checks=a=>Array.isArray(a)&&a.length===4&&a.every(v=>typeof v==='boolean');
+  return r&&checks(r.first)&&checks(r.latest)&&Array.isArray(r.clues)&&r.clues.length===2&&new Set(r.clues).size===2&&r.clues.every(i=>Number.isInteger(i)&&i>=0&&i<4)&&typeof r.conclusion==='string'&&r.conclusion.length<=8000&&typeof r.update==='string'&&r.update.length<=8000;
+ }
+ function saveState() {
+  if(!remember)return;
+  try {localStorage.setItem(storageKey,JSON.stringify({version:1,records:Object.fromEntries(records),notesEnabled:rememberNotes,notes:rememberNotes?Object.fromEntries(notes):{}}));hasSaved=true;storageError='';}
+  catch {storageError='這個瀏覽器無法儲存資料；仍可在本分頁遊玩或下載筆記。';}
+  updateSaveControls();
+ }
+ function loadState() {
+  try {
+   const raw=localStorage.getItem(storageKey);hasSaved=raw!==null;if(!hasSaved)return;
+   const saved=JSON.parse(raw);
+   if(!saved||saved.version!==1||!saved.records||typeof saved.records!=='object'||Array.isArray(saved.records)||typeof saved.notesEnabled!=='boolean'||!saved.notes||typeof saved.notes!=='object'||Array.isArray(saved.notes))throw new Error('invalid save');
+   remember=true;rememberNotes=saved.notesEnabled;let invalid=false;
+   cases.forEach(c=>{const r=saved.records[c.id];if(r===undefined)return;if(validRecord(r))records.set(c.id,{first:[...r.first],latest:[...r.latest],clues:[...r.clues],conclusion:r.conclusion,update:r.update});else invalid=true;});
+   if(rememberNotes)cases.forEach(c=>{const n=saved.notes[c.id];if(n===undefined)return;if(typeof n==='string'&&n.length<=8000)notes.set(c.id,n);else invalid=true;});
+   if(invalid)storageError='部分先前紀錄格式不正確，已略過；其餘案件仍可照常練習。';
+  } catch {storageError='讀取先前紀錄失敗；目前仍可照常遊玩或清除舊紀錄。';}
+ }
+ function updateSaveControls() {
+  const status=$('save-status');
+  status.textContent=storageError||(remember?'已開啟此瀏覽器的進度儲存。'+(rememberNotes?'自由文字筆記也會儲存。':'自由文字筆記不儲存。'):'目前只記在這個分頁，關閉或重新整理會清空本次未儲存的內容。'+(hasSaved?'先前儲存的紀錄仍保留，可用清除按鈕移除。':''));
+  $('save-notes-label').hidden=!remember;$('clear-saved').hidden=!hasSaved;
+  $('save-notes').checked=rememberNotes;
+  $('remember-progress').setAttribute('aria-pressed',String(remember));$('session-only').setAttribute('aria-pressed',String(!remember));
+ }
  function focusDesk() {const title=$('case-title');title?.focus();$('desk').scrollIntoView({block:'start',behavior:'instant'});}
  function renderMap() {
   $('case-map').replaceChildren(...cases.map((c,i)=>{
@@ -35,7 +64,7 @@
   const wrap=el('div');const label=el('label','我的推理筆記（選填，不評分）','notes');label.htmlFor='my-note';
   const hint=el('p','用自己的話記：我憑什麼判斷？還缺什麼？什麼新證據會讓我改變看法？','small');hint.id='note-hint';
   const input=el('textarea');input.id='my-note';input.maxLength=8000;input.setAttribute('aria-describedby','note-hint');input.value=notes.get(cases[active].id)||'';
-  input.addEventListener('input',()=>{notes.set(cases[active].id,input.value);$('download').disabled=false;});
+  input.addEventListener('input',()=>{notes.set(cases[active].id,input.value);$('download').disabled=false;saveState();});
   wrap.append(label,hint,input);return wrap;
  }
  function evidenceBox(c) {
@@ -134,6 +163,7 @@
  function renderCaseSummary(desk,c) {
   const prior=records.get(c.id);
   records.set(c.id,{first:prior?prior.first:[...round.checks],latest:[...round.checks],clues:[...round.opened],conclusion:round.answer.text,update:round.update.text});
+  saveState();
   renderMap();
   const panel=el('div',undefined,'panel');panel.append(el('h3','本案已練完。帶走的是方法，不是標籤。'));
   const list=el('ul',undefined,'summary-list');round.checks.forEach((ok,i)=>list.append(el('li',`${ok?'✓ 已對齊':'↺ 可再釐清'}：${steps[i]}`)));panel.append(list,el('p',c.reason));
@@ -152,6 +182,15 @@
  $('random').addEventListener('click',()=>{queue=null;startCase(Math.floor(Math.random()*cases.length));});
  $('review').addEventListener('click',()=>{queue=cases.map((c,i)=>records.has(c.id)&&!records.get(c.id).latest.every(Boolean)?i:-1).filter(i=>i>=0);const next=queue.shift();if(next!==undefined)startCase(next);});
  $('tools').addEventListener('click',()=>{const open=$('toolbox').hidden;$('toolbox').hidden=!open;$('tools').setAttribute('aria-expanded',String(open));if(open)$('toolbox').scrollIntoView({block:'start',behavior:'instant'});});
+ $('session-only').addEventListener('click',()=>{remember=false;rememberNotes=false;storageError='';updateSaveControls();});
+ $('remember-progress').addEventListener('click',()=>{if(remember)return;remember=true;rememberNotes=false;saveState();});
+ $('save-notes').addEventListener('change',e=>{rememberNotes=e.target.checked;saveState();});
+ $('clear-saved').addEventListener('click',()=>{
+  if(!window.confirm('要清除這個瀏覽器儲存的所有案件進度與筆記嗎？此操作無法復原。'))return;
+  try {localStorage.removeItem(storageKey);}catch {storageError='清除失敗；此瀏覽器的舊紀錄可能仍保留，請檢查網站儲存權限。';updateSaveControls();return;}
+  records.clear();notes.clear();remember=false;rememberNotes=false;hasSaved=false;storageError='';queue=null;active=-1;round=null;
+  $('desk').replaceChildren();$('desk').hidden=true;$('intro').hidden=false;updateSaveControls();renderMap();$('session-only').focus();
+ });
  $('download').addEventListener('click',()=>{
   const out=['思考偵探社｜本次辦案筆記','虛構情境練習；不代表智力、心理或人格評分。','紀錄為本分頁內的選擇；自由文字沒有自動評分。',''];
   cases.forEach(c=>{const r=records.get(c.id),note=notes.get(c.id);if(!r&&!note)return;
@@ -161,5 +200,5 @@
   });
   const url=URL.createObjectURL(new Blob(['\uFEFF'+out.join('\n')],{type:'text/plain;charset=utf-8'}));const link=el('a');link.href=url;link.download='思考偵探社-辦案筆記.txt';document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
  });
- renderMap();
+ loadState();updateSaveControls();renderMap();
 })();

@@ -1,10 +1,18 @@
 # Dora playground
 
-二十二款免費、純前端小遊戲，從 `index.html` 入口進入。
+二十三款免費、純前端小遊戲，從 `index.html` 入口進入。
 
 ## 試玩
 
 GitHub Pages：<https://dorac7.github.io/double-standard-game/>。同一份遊戲也由現有伺服器提供：<http://bigmac.dorac7.com:9487/>。
+
+## 腦力補給站
+
+試玩：<https://dorac7.github.io/double-standard-game/brain-break.html>。
+
+18 道原創益智題：規律觀察、條件推理、空間想像各 6 題。輕鬆一輪 6 題（每類 2 題）、完整補給 18 題，或單類 6 題；同輪不重複，題目與選項順序隨機。先選答案再確認，作答後顯示解析；可先看解析或重新嘗試，首次結果不會被重試覆蓋。結算列出所有題目與解法，不限時、無智力評分。作答只留在本分頁，重新整理即清空，不儲存或上傳；無外部套件。
+
+部署檔案：`brain-break.html`、`brain-break.css`、`brain-break.js`、`brain-break-engine.js`、`brain-break.svg`，沿用共用動畫控制。
 
 ## 思考偵探社
 
@@ -14,7 +22,7 @@ GitHub Pages：<https://dorac7.github.io/double-standard-game/>。同一份遊�
 
 可自由選案、隨機辦案、重練待釐清案件。每步有方向提示與具體解釋；可寫自己的推理筆記並下載 UTF-8 文字紀錄。保留初次核對與最近重練結果，不把重練當初次答對。自由文字不依字數、關鍵字或範例相似度評分；完成與選擇結果不代表智力、心理或人格評分。無倒數，鍵盤與觸控皆可操作。
 
-所有情境、線索與回饋預先編寫，不連接 AI，不使用真實人物的事件作題目。選擇與筆記只留在分頁記憶體，不上傳或自動儲存，重新整理即清空；需保留可自行下載。方法靈感與延伸閱讀：[Harvard Project Zero / See, Think, Wonder](https://pz.harvard.edu/resources/see-think-wonder)、[Claim, Support, Question](https://pz.harvard.edu/resources/claim-support-question)。不是官方教材或影片內容改編。
+所有情境、線索與回饋預先編寫，不連接 AI，不使用真實人物的事件作題目。玩家可選擇只在本次分頁練習，或將已完成案件與作答結果儲存在此瀏覽器；自由文字筆記另行選擇是否儲存。資料不會上傳，並可清除；換裝置不會同步。切回本次練習會停止後續儲存，但先前已儲存的紀錄仍保留，需用清除按鈕移除；清除前會再次確認。仍可下載 UTF-8 文字紀錄。方法靈感與延伸閱讀：[Harvard Project Zero / See, Think, Wonder](https://pz.harvard.edu/resources/see-think-wonder)、[Claim, Support, Question](https://pz.harvard.edu/resources/claim-support-question)。不是官方教材或影片內容改編。
 
 部署檔案：`thinking-lab.html`、`thinking-lab.css`、`thinking-lab.js`、`thinking-cases.js`、`thinking-lab.svg`。無外部套件或網路執行依賴。
 
@@ -233,6 +241,8 @@ Linux 明確區分 GNOME／Files 與 KDE Plasma／Dolphin 預設；macOS 的 Ret
 「多拉絕對不是三寶之汽車知識跟道路安全小學堂」：`road-safety-school.html`。42 個台灣道路情境、七大單元（速限、五油三水、遠光燈／霧燈、號誌與迴轉、胎壓、緊急事件、油門控制），14 題短局、42 題完整局與單元練習。速限滑桿、可見光束的燈光面板、三步處置排序、八項油水圖鑑、號誌口袋卡與示意踏板；選擇送出即鎖定，結束可逐題複習。
 
 依台灣法規與官方資料整理（2026-10-28），各題附來源。法規與安全建議分開，廠牌手冊不當成通用保養週期；EPS、電動車、密閉電瓶另說明。胎壓 33 psi 只是假想車的標籤閱讀題，非通用建議；踏板只呈現輸入大小，不是實車速度／煞停距離模擬。不取代駕訓、維修或現場救援，不可邊開車邊玩。僅分頁記憶體，無儲存、上傳或第三方套件。測試及來源對照：`tests/road-safety-school-qa.md`。
+
+車燈控制採車頭朝上的俯視示意，近光、遠光與霧燈分別顯示照射範圍，並有完整文字狀態；光型與亮度不是實車校準。
 
 ## Common sense 生活小學堂
 

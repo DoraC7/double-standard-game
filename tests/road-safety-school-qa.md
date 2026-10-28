@@ -38,3 +38,9 @@ Managed Chromium on the existing public site with exact candidate HTML/CSS/JS in
 - Preserve the existing server checkout's five unrelated storage-feature edits. Snapshot and retain stash; prepare merged README before fast-forward; compare all added/deleted diff lines before/after.
 - Compare published HTML/CSS/JS/SVG, shared assets and lobby on BOTH GitHub Pages and existing port 9487 host to release bytes.
 - Run live full game UI, source links, lobby entry and error check. Live results recorded in workspace daily note.
+
+## 2026-10-28 車燈修復
+
+- 以俯視車輛取代朝向不一致的正面車圖；兩道頭燈光束固定從車頭射向前方，近光短、遠光長；霧燈為前方較短較寬的獨立光束。
+- 文字標示「行進方向 ↑」與狀態；圖案僅示意，不宣稱實際光型或亮度。不改法規題目與判分。
+- 公開伺服器 Chromium：320×568、844×390 各完成燈光單元 6 題，檢查初始關燈、近光／遠光／霧燈開關的實際 computed display、出光方向、送出鎖定及 6/6 結算。遠光加霧燈畫面已視覺檢查。
