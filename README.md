@@ -1,6 +1,6 @@
 # Dora playground
 
-十四款免費、純前端小遊戲，從 `index.html` 入口進入。
+十五款免費、純前端小遊戲，從 `index.html` 入口進入。
 
 ## 試玩
 
@@ -149,7 +149,7 @@ python3 -m http.server 8765
 
 ## 專案檔案
 
-- `index.html`：十四款遊戲共同入口；舊首頁 `#r=` 戰績連結自動轉到雙標遊戲並保留片段。
+- `index.html`：十五款遊戲共同入口；舊首頁 `#r=` 戰績連結自動轉到雙標遊戲並保留片段。
 - `double-standard.html`：原雙標遊戲的畫面、流程和計分。
 - `start-small.html`、`start-small.css`、`start-small.js`：拖延啟動遊戲。
 - `mini-kart.html`、`mini-kart.css`、`mini-kart.js`、`kart.svg`：迷你卡丁車與原創插圖。
@@ -164,7 +164,7 @@ python3 -m http.server 8765
 
 ## 部署
 
-這是靜態網站。GitHub Pages 可發布倉庫根目錄的 `index.html` 作共同入口；所有十四款遊戲的 HTML、CSS 和 JS 必須同時發布。啟用 Pages 後，分享連結會自動以當前網站網址產生。發布設定由倉庫擁有者決定。
+這是靜態網站。GitHub Pages 可發布倉庫根目錄的 `index.html` 作共同入口；所有十五款遊戲的 HTML、CSS 和 JS 必須同時發布。啟用 Pages 後，分享連結會自動以當前網站網址產生。發布設定由倉庫擁有者決定。
 
 ## 授權
 
@@ -217,3 +217,13 @@ PR 說明範例（以實際結果取代括號）：
 大廳的小龍蝦可點擊打招呼；依心情篩選時有短轉場，遊戲封面在滑鼠或鍵盤聚焦時呈現不同動效。各遊戲加入抽卡、回條出紙、線索／題目揭示、數值跳動與結算短動畫，不改變玩法、分數或操作時機。
 
 共用 `arcade-fx.css`、`arcade-fx.js` 與大廳原創向量小龍蝦 `arcade-lobster.svg`，需隨所有遊戲一起部署。頁尾可關閉小動畫（只影響目前分頁，不保存）；雙標遊戲沿用原動畫按鈕。尊重系統減少動態效果，離開分頁會停止新增裝飾動畫，不添加音效、儲存、追蹤或外部依賴。
+
+## 電腦快速鍵小學堂
+
+試玩：<https://dorac7.github.io/double-standard-game/shortcut-school.html>。
+
+Windows、macOS、Linux GNOME／KDE 的圖形介面快捷鍵，每個平台 12 個獨立情境：全選、複製、貼上、剪下文字、復原、重做、儲存、文件內搜尋、新增資料夾、重新命名、新視窗、程式切換。點畫面鍵帽組合，親眼看模擬文字、剪貼簿、資料夾與視窗改變；搜尋、建資料夾與重新命名還要實際填入目標內容才完成。提供提示、依主題分類的圖鑑、整輪回顧與重玩。首次完成需第一次組合正確、未看提示且後續輸入無誤；無倒數，不是能力測驗。
+
+Linux 明確區分 GNOME／Files 與 KDE Plasma／Dolphin 預設；macOS 的 Return 重新命名、Cmd 與 Control 差別、文字剪下與 Finder 搬檔案不混用。依官方文件及上游預設整理並附來源；實際行為依應用程式、發行版與自訂設定而異。所有組合只用本頁鍵帽，不攔截真實系統組合、不讀寫系統剪貼簿或檔案。只留在本分頁記憶體，重整清空，無儲存或上傳。
+
+部署 `shortcut-school.html`、`shortcut-school.css`、`shortcut-school.js`、`shortcut-school-engine.js`、`shortcut-school.svg` 及共用 `arcade-fx.css/js`。不新增依賴。檢查：`node --test tests/shortcut-school.test.cjs`。

@@ -25,10 +25,10 @@ function boot({reduce=false,legacy=false,canAnimate=true}={}) {
  const toggle=()=>children.find(c=>c.className==='arcade-fx-tools') && children.find(c=>c.className==='arcade-fx-toggle');
  return {document,body,result,setting,listeners,observers,animations,children,change,toggle};
 }
-test('all fourteen games and lobby load local effects without modifying game scripts',()=>{
+test('all games and lobby load local effects without modifying game scripts',()=>{
  const lobby=fs.readFileSync(path.join(root,'index.html'),'utf8');
  const pages=['index.html',...[...lobby.matchAll(/<a class="card" href="([^"]+)"/g)].map(m=>m[1])];
- assert.equal(pages.length,15);
+ assert.equal(pages.length,16);
  for(const file of pages){const html=fs.readFileSync(path.join(root,file),'utf8');assert.match(html,/href="arcade-fx.css\?v=/,file);assert.match(html,/src="arcade-fx.js\?v=/,file);assert.match(html,/data-fx=/,file);}
 });
 test('completion celebrates once on appearance, not on subsequent result text changes',()=>{
