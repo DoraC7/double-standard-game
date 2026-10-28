@@ -32,14 +32,17 @@
 @media(prefers-reduced-motion:reduce){.pick-art img{animation:none!important}.pick-dialog::backdrop{backdrop-filter:none}}
 
 </style>
+<link rel="stylesheet" href="arcade-fx.css?v=20261028-1">
+<script src="arcade-fx.js?v=20261028-1" defer></script>
 </head>
-<body>
+<body data-arcade-page="index" class="arcade-lobby">
 <main>
 <header><b>🦞 Dora playground</b><span>不用登入・打開就玩</span></header>
-<section class="hero">
+<section class="hero arcade-hero">
 <span class="stamp">大人小孩都能玩的遊戲間</span>
 <h1>今天想<br><em>玩哪一種感覺？</em></h1>
 <p class="lead">想動腦、放空、甩尾，還是開一間情緒價值分行？先選現在的心情，再挑一款。每款遊戲都能直接開始，沒有登入、沒有排行榜，也不用先讀一大篇規則。</p>
+<div class="arcade-host"><button class="arcade-host-button" id="arcade-host" type="button" aria-label="跟小龍蝦打招呼"><img src="arcade-lobster.svg" width="118" height="118" alt="" aria-hidden="true"></button><p class="arcade-host-speech" id="arcade-host-speech" role="status">挑一台機台，今天就出發！</p></div>
 </section>
 <section class="chooser" aria-labelledby="chooser-title">
 <div class="chooser-head"><div><h2 id="chooser-title">我現在想要…</h2><p>選一個方向，只留下適合現在這一刻的遊戲。</p></div><button class="surprise" id="surprise" type="button">🎲 幫我選一款</button></div>
@@ -72,7 +75,7 @@
 <div class="empty" id="empty">這個分類目前沒有遊戲，再換一個心情看看。</div>
 <p class="note">這裡是娛樂與練習，不是醫療診斷或治療。分數不代表記憶力、人格或心理健康。<br>拖延遊戲的自訂任務只留在這個分頁，不會上傳或保存。</p>
 </main>
-<dialog class="pick-dialog" id="pick-dialog" aria-labelledby="pick-title">
+<dialog class="pick-dialog" id="pick-dialog" aria-labelledby="pick-title" data-fx="draw">
 <div class="pick-shell">
 <button class="pick-close" id="pick-close" type="button" aria-label="關閉推薦">×</button>
 <div class="pick-art" id="pick-art"><img id="pick-image" src="masks.svg" alt=""></div>

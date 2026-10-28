@@ -10,8 +10,10 @@
 <link rel="stylesheet" href="adhd-bingo.css">
 <script defer src="adhd-bingo-data.js"></script>
 <script defer src="adhd-bingo.js"></script>
+<link rel="stylesheet" href="arcade-fx.css?v=20261028-1">
+<script src="arcade-fx.js?v=20261028-1" defer></script>
 </head>
-<body>
+<body data-arcade-page="adhd-bingo">
 <main>
 <nav class="topbar" aria-label="導覽"><a href="index.html">← Dora playground</a><span>🦞 NO RUSH, JUST BINGO.</span></nav>
 <header class="hero">
@@ -21,10 +23,10 @@
 <section class="game-shell" aria-labelledby="game-title">
 <div class="game-toolbar"><div><span class="eyebrow dark">YOUR LITTLE CHECK-IN</span><h2 id="game-title">今天的共鳴卡</h2></div><div class="size-switch" role="group" aria-label="卡片大小"><button type="button" data-size="3" aria-pressed="false">3×3 輕巧</button><button type="button" data-size="5" aria-pressed="true">5×5 經典</button></div></div>
 <p class="howto" id="howto">① 勾選自己的經驗　② 橫、直、斜連線　③ 點過的格子再點可取消。中間自由格送你。</p>
-<div class="stats" aria-live="polite" aria-atomic="true"><span>共鳴 <strong id="marked-count">0</strong><span id="marked-total"> / 24 格</span></span><span>連線 <strong id="line-count">0</strong> 條</span><span class="card-code" id="card-code"></span></div>
+<div class="stats" aria-live="polite" aria-atomic="true"><span>共鳴 <strong id="marked-count">0</strong><span id="marked-total"> / 24 格</span></span><span>連線 <strong id="line-count" data-fx="score">0</strong> 條</span><span class="card-code" id="card-code"></span></div>
 <div class="bingo-letters" aria-hidden="true"><span>B</span><span>I</span><span>N</span><span>G</span><span>O</span></div>
 <div class="board" id="board" role="group" aria-label="可點選的賓果卡" aria-describedby="howto"></div>
-<div class="result-banner" id="result-banner" role="status">不用拚全滿；只勾選你自己有共鳴的格子就好。</div>
+<div class="result-banner" id="result-banner" role="status" data-fx="stamp">不用拚全滿；只勾選你自己有共鳴的格子就好。</div>
 <div class="legend"><span><i class="focus"></i>注意力</span><span><i class="time"></i>時間與安排</span><span><i class="impulse"></i>坐不住與衝動</span><span><i class="daily"></i>生活共鳴*</span></div>
 <p class="legend-note">*「生活共鳴」是許多人都可能有的經驗，不是 ADHD 特有表現。其餘格子也不能單獨用來判斷。</p>
 <div class="actions"><button class="primary" id="new-card" type="button">↻ 換張新卡</button><button id="clear-card" type="button">清除勾選</button><button id="undo" type="button" disabled>復原上次操作</button><button id="download" type="button">↓ 下載賓果圖</button><button id="copy-link" type="button">↗ 複製同款空白卡</button></div>

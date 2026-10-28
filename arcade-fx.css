@@ -1,0 +1,56 @@
+/* Small, finite, presentation-only effects. No game rules depend on these. */
+:root{--arcade-pop:#e4ab50}
+.arcade-fx-tools{display:flex;justify-content:center;padding:18px 16px 26px;clear:both}
+.arcade-fx-toggle{font:700 12px/1.5 system-ui,sans-serif!important;color:inherit!important;background:transparent!important;border:1px solid currentColor!important;border-radius:999px!important;padding:9px 15px!important;min-height:40px;cursor:pointer;opacity:.8}
+.arcade-fx-toggle:focus-visible{outline:3px solid var(--arcade-pop);outline-offset:4px;opacity:1}
+.arcade-fx-bit{position:fixed;z-index:10000;pointer-events:none;width:7px;height:7px;border-radius:2px;background:var(--arcade-pop);contain:strict}
+/* The lobby: a little arcade cabinet, not an always-moving wallpaper. */
+.arcade-hero{position:relative;padding-right:240px;min-height:310px}
+.arcade-host{position:absolute;right:8px;top:32px;width:206px;text-align:center;transform:rotate(5deg)}
+.arcade-host-button{position:relative;display:grid;place-items:center;width:158px;height:158px;margin:0 auto;border:2px solid #17352a;border-radius:42px;background:#f6c873;box-shadow:7px 9px 0 #17352a;cursor:pointer;font-size:84px;line-height:1;transition:transform .2s,box-shadow .2s;touch-action:manipulation}
+.arcade-host-button::before,.arcade-host-button::after{content:'✦';position:absolute;font-size:24px;color:#a85135;top:12px;left:12px}.arcade-host-button::after{top:auto;left:auto;right:10px;bottom:10px;font-size:18px}
+.arcade-host-button:hover{transform:rotate(-7deg) translateY(-4px);box-shadow:9px 13px 0 #17352a}
+.arcade-host-button:active{transform:translate(4px,5px);box-shadow:2px 3px 0 #17352a}
+.arcade-host-speech{position:relative;margin:19px 0 0;background:#fffaf0;border:1px solid #b6c0a6;border-radius:16px;padding:10px 8px;font-size:13px;font-weight:800;line-height:1.5;min-height:60px;transform:rotate(-5deg)}
+.arcade-host-speech::before{content:'';position:absolute;width:10px;height:10px;border-top:1px solid #b6c0a6;border-left:1px solid #b6c0a6;top:-6px;left:48%;background:#fffaf0;transform:rotate(45deg)}
+.arcade-lobby .card .art{isolation:isolate}.arcade-lobby .card .art::before{content:'';position:absolute;inset:14px;border:1px dashed #17352a26;border-radius:18px;z-index:-1;transition:transform .3s,background .3s}
+.arcade-lobby .card .art img{transition:transform .35s cubic-bezier(.2,.8,.2,1);transform-origin:center 70%}
+.arcade-lobby .card:is(:hover,:focus-visible) .art::before{transform:rotate(-4deg);background:#fff7}.arcade-lobby .card:is(:hover,:focus-visible) .art img{transform:translateY(-9px) rotate(-7deg) scale(1.08)}
+.arcade-lobby .card:is(:hover,:focus-visible) .go b{transform:translate(4px,-4px)}.arcade-lobby .go b{transition:transform .2s}
+.arcade-lobby .card[data-cabinet="mini-kart"]:is(:hover,:focus-visible) .art img{animation:arcade-drive .75s ease-in-out 2}
+.arcade-lobby .card[data-cabinet="frogger"]:is(:hover,:focus-visible) .art img{animation:arcade-hop .7s ease 2}
+.arcade-lobby .card[data-cabinet="start-small"]:is(:hover,:focus-visible) .art img{animation:arcade-launch .9s ease 2}
+.arcade-lobby .card[data-cabinet="double-standard"]:is(:hover,:focus-visible) .art img{animation:arcade-sway .9s ease 2}
+.arcade-lobby .card[data-cabinet="hyper-challenge"]:is(:hover,:focus-visible) .art img{animation:arcade-charge .65s ease 2}
+.arcade-lobby .card[data-cabinet="emotion-printer"]:is(:hover,:focus-visible) .art img{animation:arcade-stamp .7s ease 2}
+.arcade-lobby .card[data-cabinet="dora-quotes"]:is(:hover,:focus-visible) .art img{animation:arcade-sway .9s ease 2}
+.arcade-lobby .pick-dialog[open]{animation:arcade-dialog .32s cubic-bezier(.2,.8,.2,1)}
+@keyframes arcade-dialog{from{opacity:.3;transform:translateY(12px) scale(.95)}to{opacity:1;transform:none}}
+@keyframes arcade-drive{30%{transform:translateX(-13px) rotate(-9deg)}70%{transform:translateX(13px) rotate(7deg)}}
+@keyframes arcade-hop{45%{transform:translateY(-20px) scale(.96,1.08)}75%{transform:translateY(2px) scale(1.08,.94)}}
+@keyframes arcade-launch{45%{transform:translate(8px,-22px) rotate(9deg)}80%{transform:translate(-2px,-7px) rotate(-3deg)}}
+@keyframes arcade-sway{30%{transform:rotate(-12deg)}70%{transform:rotate(10deg)}}
+@keyframes arcade-charge{50%{transform:scale(1.14) rotate(-8deg);filter:drop-shadow(0 0 16px #fff9)}}
+@keyframes arcade-stamp{45%{transform:translateY(-10px) scale(1.08)}75%{transform:translateY(4px) scale(.96)}}
+@media(max-width:760px){.arcade-hero{padding-right:0;min-height:0}.arcade-host{position:relative;top:auto;right:auto;width:100%;display:flex;align-items:center;gap:20px;transform:none;margin:24px 0 10px}.arcade-host-button{flex:0 0 76px;width:76px;height:76px;margin:0;border-radius:23px;font-size:45px;box-shadow:4px 5px 0 #17352a}.arcade-host-button::before,.arcade-host-button::after{font-size:12px;left:5px;top:5px}.arcade-host-button::after{left:auto;top:auto;bottom:4px;right:4px}.arcade-host-speech{margin:0;flex:1;min-height:0;transform:none;text-align:left;padding:14px}.arcade-host-speech::before{top:calc(50% - 5px);left:-6px;transform:rotate(-45deg)}}
+/* Game-specific reactions stay on artwork, never on moving hit targets. */
+[data-arcade-page="mini-kart"] .cover:is(:hover,:focus-within) img{animation:arcade-drive .8s ease 2}
+[data-arcade-page="frogger"] .preview:hover img{animation:arcade-hop .7s ease 2}
+[data-arcade-page="frogger"] .preview:hover .river i{animation:arcade-current 1.4s ease-in-out 2}
+[data-arcade-page="frogger"] .preview:hover .road i{animation:arcade-current 1s ease-in-out 2 reverse}
+[data-arcade-page="start-small"] #intro .hero-art:hover img{animation:arcade-launch .9s ease 2}
+[data-arcade-page="thinking-lab"] .cover:hover .lens{animation:arcade-sway .8s ease 2}
+[data-arcade-page="adhd-bingo"] .tile[aria-pressed="true"] .check{animation:arcade-check .28s ease-out}
+[data-arcade-page="adhd-bingo"] .tile.in-line{box-shadow:inset 0 0 0 3px #b27216}
+[data-arcade-page="zhuyin"] #symbol-grid button:hover .glyph{animation:arcade-hop .6s ease 1}
+@keyframes arcade-current{50%{translate:16px 0}}
+@keyframes arcade-check{from{scale:.5;rotate:-20deg}to{scale:1;rotate:0deg}}
+.arcade-host-button img{display:block;width:118px;height:118px;pointer-events:none}
+b[data-fx="score"],strong[data-fx="score"],span[data-fx="score"]{display:inline-block}
+[data-arcade-page="terminal-quest"] #output>.entry:last-child,[data-arcade-page="git-quest"] #output>.entry:last-child{animation:arcade-entry .22s ease-out}
+@keyframes arcade-entry{from{opacity:.4;translate:0 5px}to{opacity:1;translate:0 0}}
+@media(max-width:760px){.arcade-host-button img{width:58px;height:58px}}
+
+/* All effects, including game-specific hover animations, honor both opt-outs. */
+.arcade-still *, .arcade-still *::before, .arcade-still *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+@media(prefers-reduced-motion:reduce){[data-arcade-page] *,[data-arcade-page] *::before,[data-arcade-page] *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.arcade-fx-bit{display:none}}

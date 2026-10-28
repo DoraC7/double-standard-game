@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" fill="none">
+<title>準備開玩的龍蝦小店長</title>
+<g stroke="#17352a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+<path d="M62 127 48 144 69 141 80 150 91 141 112 144 98 127" fill="#ed7953"/>
+<path d="M59 99 42 107m16 4-17 10m60-22 17 8m-16 4 17 10"/>
+<path d="m56 78-20-16m68 16 20-16" stroke-width="9"/>
+<path d="M36 68C11 68 9 42 19 31l10 16 7-25c21 10 27 35 0 46Z" fill="#ed7953"/>
+<path d="M124 68c25 0 27-26 17-37l-10 16-7-25c-21 10-27 35 0 46Z" fill="#ed7953"/>
+<path d="M60 61c-9-12-13-18-13-29m53 29c9-12 13-18 13-29"/>
+<path d="M51 91c0-27 10-42 29-42s29 15 29 42c0 31-10 46-29 46S51 122 51 91Z" fill="#ef8b61"/>
+<path d="M53 111q27 14 54 0M58 126q22 9 44 0" stroke="#b7543b"/>
+<path d="M61 53V41m38 12V41" stroke-width="7"/>
+<circle cx="61" cy="35" r="9" fill="#fffaf0"/><circle cx="99" cy="35" r="9" fill="#fffaf0"/>
+<path d="M61 35h.1m38-.1h.1" stroke-width="6"/>
+<path d="M70 76q10 11 20 0"/>
+<path d="M59 74h5m32 0h5" stroke="#d75c48" stroke-width="6"/>
+<path d="m64 94 16 10 16-10-16-9-16 9Z" fill="#f6d98b"/>
+</g>
+</svg>

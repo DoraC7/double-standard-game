@@ -10,8 +10,10 @@
   <script src="terminal-engine.js" defer></script>
   <script src="terminal-missions.js" defer></script>
   <script src="terminal-quest.js" defer></script>
+<link rel="stylesheet" href="arcade-fx.css?v=20261028-1">
+<script src="arcade-fx.js?v=20261028-1" defer></script>
 </head>
-<body>
+<body data-arcade-page="terminal-quest">
 <main>
   <header class="topbar"><a href="index.html">← 回 Dora playground</a><span>🦞 Dora playground</span></header>
   <section class="hero">
@@ -22,12 +24,12 @@
   <section class="journey" aria-label="探險進度"><div class="journey-head"><span id="chapter">01 / 找到方向</span><strong id="progress-label">完成 0 / 20 關</strong></div><progress id="progress" value="0" max="20" aria-label="已完成關卡"></progress><div id="milestones" class="milestones" aria-hidden="true"></div></section>
   <div class="workspace">
     <section class="mission panel" aria-labelledby="mission-title">
-      <p class="eyebrow" id="mission-number">MISSION 01</p><h2 id="mission-title" tabindex="-1">先知道自己在哪裡</h2><p class="goal" id="goal"></p><p class="concept" id="concept"></p>
+      <p class="eyebrow" id="mission-number">MISSION 01</p><h2 id="mission-title" tabindex="-1" data-fx="reveal">先知道自己在哪裡</h2><p class="goal" id="goal"></p><p class="concept" id="concept"></p>
       <div id="lesson-controls"><button class="hint-button" id="hint-button" type="button">🦞 給我一點提示</button><p id="hint" class="hint" aria-live="polite" hidden></p><button class="text-button" id="retry" type="button">↶ 重來這一關</button></div>
-      <div class="feedback" id="feedback" role="status"></div>
+      <div class="feedback" id="feedback" role="status" data-fx="stamp"></div>
       <fieldset class="quiz" id="quiz" hidden><legend id="quiz-question"></legend><div id="quiz-options"></div><p id="quiz-feedback" role="status"></p></fieldset>
       <button class="primary next" id="next" type="button" hidden>下一站 →</button>
-      <div id="finish" hidden><p class="finish-badge">🦞 探險路線完成</p><p>你完成了操作與核對。接著可以去沙盒重做一輪，看看不看提示能否自己完成。</p><button class="primary" id="free-after" type="button">去沙盒自由練習 →</button><button class="text-button" id="restart" type="button">重新開始探險</button></div>
+      <div id="finish" hidden data-fx="finish"><p class="finish-badge">🦞 探險路線完成</p><p>你完成了操作與核對。接著可以去沙盒重做一輪，看看不看提示能否自己完成。</p><button class="primary" id="free-after" type="button">去沙盒自由練習 →</button><button class="text-button" id="restart" type="button">重新開始探險</button></div>
       <div id="sandbox-tools" hidden><p>這裡沒有指定答案。試著幫一份檔案換名字、複製到另一個資料夾，再親手核對。</p><button class="text-button" id="reset-sandbox" type="button">↶ 重設沙盒</button><p class="small">沙盒與關卡分開；切換回去會接著原本進度。</p></div>
     </section>
     <section class="console" aria-label="虛擬終端機">

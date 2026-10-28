@@ -3,8 +3,10 @@
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#17463f">
   <title>青蛙過街・遊戲間</title><link rel="stylesheet" href="frogger.css">
+<link rel="stylesheet" href="arcade-fx.css?v=20261028-1">
+<script src="arcade-fx.js?v=20261028-1" defer></script>
 </head>
-<body><main>
+<body data-arcade-page="frogger"><main>
   <header><a href="./">← 遊戲間</a><b>青蛙過街</b><span>經典街機・安全過馬路</span></header>
   <section id="intro">
     <p class="eyebrow">HOP · HOP · HOME</p><h1>青蛙過街</h1>
@@ -15,11 +17,11 @@
     <p class="fine">每局重新開始，不保存遊戲紀錄。離開分頁會自動暫停。</p>
   </section>
   <section id="play" hidden>
-    <div class="hud"><span>🐸 回家 <b id="homes">0 / 5</b></span><span>💛 機會 <b id="lives">3</b></span><button id="pause">暫停</button></div>
-    <div class="board-wrap"><canvas id="board" width="540" height="660" tabindex="0" aria-label="青蛙過街遊戲區；方向鍵或 WASD 移動"></canvas><div id="message" class="message" role="status" aria-live="polite"></div></div>
+    <div class="hud"><span>🐸 回家 <b id="homes" data-fx="score">0 / 5</b></span><span>💛 機會 <b id="lives">3</b></span><button id="pause">暫停</button></div>
+    <div class="board-wrap"><canvas id="board" width="540" height="660" tabindex="0" aria-label="青蛙過街遊戲區；方向鍵或 WASD 移動"></canvas><div id="message" class="message" role="status" aria-live="polite" data-fx="stamp"></div></div>
     <div class="pad" aria-label="方向控制"><span></span><button data-dir="up" aria-label="往上">▲</button><span></span><button data-dir="left" aria-label="往左">◀</button><button data-dir="down" aria-label="往下">▼</button><button data-dir="right" aria-label="往右">▶</button></div>
     <p class="fine">方向鍵／WASD 或點擊移動；P 暫停。上岸後按上鍵繼續前進。</p>
     <div id="overlay" class="overlay" hidden><h2 id="overlay-title">休息一下</h2><button id="resume" class="primary">繼續</button><button id="again" class="secondary">重新開始</button></div>
   </section>
-  <section id="result" hidden><p class="eyebrow">FROG SQUAD HOME!</p><h1>全員平安到家！</h1><div class="win" aria-label="五隻青蛙都已回家"><img src="frogger.svg" alt=""><img src="frogger.svg" alt=""><img src="frogger.svg" alt=""><img src="frogger.svg" alt=""><img src="frogger.svg" alt=""></div><p class="lead">車流難不倒你們，青蛙小隊集合成功！</p><button id="replay" class="primary">再玩一局</button><a class="back" href="./">回遊戲間 →</a></section>
+  <section id="result" hidden data-fx="finish"><p class="eyebrow">FROG SQUAD HOME!</p><h1>全員平安到家！</h1><div class="win" aria-label="五隻青蛙都已回家"><img src="frogger.svg" alt=""><img src="frogger.svg" alt=""><img src="frogger.svg" alt=""><img src="frogger.svg" alt=""><img src="frogger.svg" alt=""></div><p class="lead">車流難不倒你們，青蛙小隊集合成功！</p><button id="replay" class="primary">再玩一局</button><a class="back" href="./">回遊戲間 →</a></section>
 </main><script src="frogger.js"></script></body></html>

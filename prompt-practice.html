@@ -6,17 +6,19 @@
 <title>提問與下指令練習場｜Dora playground</title>
 <link rel="icon" href="prompt-practice.svg" type="image/svg+xml"><link rel="stylesheet" href="prompt-practice.css">
 <script src="prompt-practice.js" defer></script><script src="prompt-collab.js" defer></script>
+<link rel="stylesheet" href="arcade-fx.css?v=20261028-1">
+<script src="arcade-fx.js?v=20261028-1" defer></script>
 </head>
-<body><main>
+<body data-arcade-page="prompt-practice"><main>
 <header><a href="index.html">← 回遊戲間</a><span>溝通練習室 / No. 012</span></header>
 <section class="hero"><div><p class="eyebrow">拆解・比較・修正・遷移</p><h1>提問與下指令<br><em>練習場</em></h1><p>不是把提示詞寫得越長越好。練習判斷當下缺什麼、怎麼追問，以及收到不合用的回答後如何修正。</p></div><div class="speech-art" aria-hidden="true"><span>？</span><span>→</span><span>✓</span><i>🦞</i></div></section>
 <aside class="privacy"><strong>先說好：</strong>這裡沒有接 AI。選項和模擬回答都是預先寫好的；自由文字不會被關鍵字打分、儲存或上傳。看完回饋後，記得自己改寫一次。</aside>
 <section class="collab" aria-labelledby="collab-title">
   <div class="collab-head"><p class="eyebrow">從問一句，到把工作做完</p><h2 id="collab-title">🤝 AI 協作任務台</h2><p>8 個主題 × 3 個短情境。互動會換花樣；錯題可回鍋，自由文字只供自己檢視。</p></div>
   <div class="collab-tabs" id="topic-tabs" aria-label="選擇練習主題"></div>
-  <div class="collab-card" id="collab-card" aria-live="polite"></div>
+  <div class="collab-card" id="collab-card" aria-live="polite" data-fx="reveal"></div>
   <div class="collab-actions"><button id="retry-mistakes" type="button">錯題重練 <span id="mistake-count">0</span></button><button id="transfer-challenge" type="button">換情境挑戰 ↗</button><button id="start-capstone" class="primary" type="button">開始 App 完整任務鏈 →</button></div>
-  <section id="capstone" class="capstone" hidden aria-live="polite"></section>
+  <section id="capstone" class="capstone" hidden aria-live="polite" data-fx="reveal"></section>
 </section>
 <details class="toolbox"><summary>🧰 技巧小工具箱：五種資訊，按需要挑</summary><p>不用每次全部塞滿。先問「缺了哪一項會讓對方做錯或無法驗收？」再補那一項。</p><div id="toolbox-cards" class="toolbox-grid"></div></details>
 <details class="toolbox question-art"><summary>🎨 問問題的藝術：讓對話往前走</summary>
@@ -34,8 +36,8 @@
   <div class="progress-line"><span id="round-label">情境 1 / 7</span><progress id="round-progress" max="7" value="0" aria-label="已完成情境數"></progress></div>
   <nav class="stages" aria-label="本回合練習步驟"><span aria-current="step">① 找缺口</span><span>② 比一比</span><span>③ 修正對話</span><span>④ 換情境</span></nav>
   <article class="scenario"><p class="tag" id="scenario-type"></p><h2 id="scenario-title" tabindex="-1"></h2><p id="scenario-copy"></p><div class="goal"><b>這回合要練：</b><span id="scenario-goal"></span></div></article>
-  <section class="exercise" id="exercise" aria-live="polite"></section>
-  <section class="finish" id="finish" hidden><p class="eyebrow">七題基礎課完成</p><h2 tabindex="-1">你練到的不只是套句型。</h2><p>先拆清目標與未知，挑出最值得問的缺口，再比較問法、修正不合用的回答，最後把方法帶去新情境。問題問得多不等於問得好；先問能改變下一步的那一題。</p><button id="restart" class="primary" type="button">再練一輪 ↻</button></section>
+  <section class="exercise" id="exercise" aria-live="polite" data-fx="reveal"></section>
+  <section class="finish" id="finish" hidden data-fx="finish"><p class="eyebrow">七題基礎課完成</p><h2 tabindex="-1">你練到的不只是套句型。</h2><p>先拆清目標與未知，挑出最值得問的缺口，再比較問法、修正不合用的回答，最後把方法帶去新情境。問題問得多不等於問得好；先問能改變下一步的那一題。</p><button id="restart" class="primary" type="button">再練一輪 ↻</button></section>
 </section>
 <footer>免費・純前端・無登入・無外部模型。這是溝通技巧練習，不是能力測驗。<a href="terminal-quest.html">想練實際終端機指令？去龍蝦終端機探險 ↗</a></footer>
 <noscript>請啟用 JavaScript 才能進行練習；本遊戲不需要連接 AI。</noscript>

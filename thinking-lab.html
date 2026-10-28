@@ -6,8 +6,10 @@
 <meta name="description" content="12 個原創案件：分清事實與推測、用有限調查找證據、比較解釋，再跟著新證據更新判斷。">
 <link rel="stylesheet" href="thinking-lab.css">
 <script defer src="thinking-cases.js"></script><script defer src="thinking-lab.js"></script>
+<link rel="stylesheet" href="arcade-fx.css?v=20261028-1">
+<script src="arcade-fx.js?v=20261028-1" defer></script>
 </head>
-<body>
+<body data-arcade-page="thinking-lab">
 <header class="top"><a href="index.html">← 遊戲間</a><span>DORA PLAYGROUND / FIELD NOTES 01</span><button id="tools" aria-expanded="false" aria-controls="toolbox">偵探小抄 ＋</button></header>
 <main>
 <section class="intro" id="intro">
@@ -15,9 +17,9 @@
 <div class="cover" aria-hidden="true"><div class="folder"><span>CASE FILE / 001</span><div class="lens">?</div><p>看見 ≠ 猜到<br>可能 ≠ 確定</p><b>KEEP ASKING WHY</b></div><span class="seal">證據<br>優先</span></div>
 </section>
 <aside id="toolbox" class="panel toolbox" hidden><h2>帶著這四件工具出發</h2><div class="tool-grid"><p><b>01 先分開</b><br>直接觀察／紀錄、自己的解釋、還缺的資訊。紀錄裡寫了什麼，不一定就是現實全貌。</p><p><b>02 換個解釋</b><br>除了第一個猜測，還有什麼可能？什麼觀察能區分它們？</p><p><b>03 查會改變行動的事</b><br>優先取得時間、範圍、實際輸入與結果，不是堆更多無關細節。</p><p><b>04 有證據就更新</b><br>新證據可以支持、縮小或推翻結論。資訊足夠時，也不必永遠說不知道。</p></div><p class="small">方法靈感：Harvard Project Zero 的 <a href="https://pz.harvard.edu/resources/see-think-wonder" target="_blank" rel="noopener">See, Think, Wonder</a> 與 <a href="https://pz.harvard.edu/resources/claim-support-question" target="_blank" rel="noopener">Claim, Support, Question</a>。以下題目與遊戲機制為原創，非官方教材、能力測驗或影片改編。</p></aside>
-<section id="desk" hidden aria-label="辦案桌"></section>
+<section id="desk" hidden aria-label="辦案桌" data-fx="reveal"></section>
 <section id="map-section" aria-labelledby="map-title"><div class="section-title"><h2 id="map-title">案件地圖</h2><span id="completion">0 / 12 案已練</span></div><p class="muted">依序走、自由挑，或回頭把不穩的地方再練一次。切換案件會重置未完成的選擇，筆記留在本分頁。</p><div id="case-map" class="case-map"></div><div class="actions"><button id="review" disabled>重練待釐清案件（0）</button><button id="download" disabled>下載本次辦案筆記 ↓</button></div></section>
-<section id="ending" class="panel" hidden></section>
+<section id="ending" class="panel" hidden data-fx="finish"></section>
 <p class="footer">所有情境與人物皆為虛構。不連接 AI；線索與回饋為預先編寫。自由文字不評分。<br>選擇與筆記只留在本分頁記憶體，不自動保存、不上傳；重整即清空。可自行下載筆記。</p>
 <noscript><p class="panel">這個互動遊戲需要啟用 JavaScript。啟用後即可玩，不需帳號或付費 API。</p></noscript>
 </main>
