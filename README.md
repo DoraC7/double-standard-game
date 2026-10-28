@@ -1,6 +1,6 @@
 # Dora playground
 
-十七款免費、純前端小遊戲，從 `index.html` 入口進入。
+十八款免費、純前端小遊戲，從 `index.html` 入口進入。
 
 ## 試玩
 
@@ -149,7 +149,7 @@ python3 -m http.server 8765
 
 ## 專案檔案
 
-- `index.html`：十五款遊戲共同入口；舊首頁 `#r=` 戰績連結自動轉到雙標遊戲並保留片段。
+- `index.html`：十八款遊戲共同入口；舊首頁 `#r=` 戰績連結自動轉到雙標遊戲並保留片段。
 - `double-standard.html`：原雙標遊戲的畫面、流程和計分。
 - `start-small.html`、`start-small.css`、`start-small.js`：拖延啟動遊戲。
 - `mini-kart.html`、`mini-kart.css`、`mini-kart.js`、`kart.svg`：迷你卡丁車與原創插圖。
@@ -164,7 +164,7 @@ python3 -m http.server 8765
 
 ## 部署
 
-這是靜態網站。GitHub Pages 可發布倉庫根目錄的 `index.html` 作共同入口；所有十五款遊戲的 HTML、CSS 和 JS 必須同時發布。啟用 Pages 後，分享連結會自動以當前網站網址產生。發布設定由倉庫擁有者決定。
+這是靜態網站。GitHub Pages 可發布倉庫根目錄的 `index.html` 作共同入口；所有十八款遊戲的 HTML、CSS 和 JS 必須同時發布。啟用 Pages 後，分享連結會自動以當前網站網址產生。發布設定由倉庫擁有者決定。
 
 ## 授權
 
@@ -241,3 +241,14 @@ Linux 明確區分 GNOME／Files 與 KDE Plasma／Dolphin 預設；macOS 的 Ret
 洗衣精放手冊指定槽，不直接淋衣物，但膠囊、自動投放與允許的局部預處理各有不同；不把一台洗衣機教成所有機型。虛構30mL、1650W等標籤只供閱讀題，不是通用規格。名稱是受委託玩笑，不評斷人物能力；無倒數、無儲存／上傳，不操作真實家電或做化學實驗。依Samsung、GINETEX、UKHSA、FSA與USFA公開說明（2026-10-28），不冒充台灣官方法規或專業維修。
 
 新頁使用 `common-sense-engine.js`、`common-sense-school.js/css/svg`，沿用 `road-safety-school.css` 的基礎版面與共用動畫。測試：`tests/common-sense-school.test.cjs`、`tests/common-sense-school-qa.md`。
+
+
+## 國文小學堂・動詞不要只會用
+
+試玩：<https://dorac7.github.io/double-standard-game/chinese-school.html>。
+
+30 個原創情境、六單元：日常動作、廚房動詞、檔案操作、完成狀態、具體請求與上下文。12 題短局每單元兩題，可選完整30題或單元5題。選詞與三欄句子積木都需先選再確認；自然且符合情境的已列同義選項均接受，答後保留首次結果。結算逐題顯示情境、選擇、解說、參考句與自己的選填改寫。
+
+重點不是禁止「用」，而是區分洗淨、瀝乾、收納，以及下載、安裝、儲存、上傳等不同動作；也區分計畫、執行與驗證結果。原創例句不是私人聊天引述、官方題庫或人物能力評量，口語省略需看上下文。自由改寫不以字數、關鍵字或範例相似度評分。無倒數、無AI、無儲存或上傳；只留分頁記憶體，重新整理即清空。教育部辭典僅列為查字工具，非逐題來源。
+
+部署檔案：`chinese-school.html`、`chinese-school.css`、`chinese-school.js`、`chinese-school-engine.js`、`chinese-school.svg`，共用 `road-safety-school.css` 與 `arcade-fx.css/js`。沒有新增依賴。測試：`node --test tests/chinese-school.test.cjs`；人工驗證見 `tests/chinese-school-qa.md`。
