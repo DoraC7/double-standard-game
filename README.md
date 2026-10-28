@@ -1,10 +1,22 @@
 # Dora playground
 
-二十六款免費、純前端小遊戲，從 `index.html` 入口進入。
+二十七款免費、純前端小遊戲，從 `index.html` 入口進入。
 
 ## 試玩
 
 GitHub Pages：<https://dorac7.github.io/double-standard-game/>。同一份遊戲也由現有伺服器提供：<http://bigmac.dorac7.com:5487/>。
+
+## 吹牛大挑戰
+
+試玩：<https://dorac7.github.io/double-standard-game/bluff-challenge.html>，現有伺服器：<http://bigmac.dorac7.com:5487/bluff-challenge.html>。
+
+三人單機骰盅吹牛：你對兩位虛構電腦對手阿膨、阿風。快嘴局每人3骰、正式桌每人5骰；自己暗骰可見，對手只顯示剩餘骰數。輪流喊「全桌至少幾顆某點數」；加數量，或同數量加點數。固定1點不萬用，沒有喊齋、搶開或精準開等額外規則。
+
+輪到自己可加喊或抓包前手。抓包後攤開整桌並標出符合的骰子：實際數量達標（包含相等）則抓包者少1骰，不足則喊的人少1骰。輸家下一盅先喊；出局者跳過。玩家骰子先歸零就結束，撐到兩位對手都歸零即獲勝。攤牌紀錄保留在當前分頁，親手按下一盅才會繼續；可以重新開桌。
+
+電腦以自己的手牌、公開剩餘骰數和前手喊話估算機率，加入風險差異；決策函式沒有收到對手的暗骰。不連接AI或真人。選好數量與點數後再確認喊話；1–6可選點數，數量欄支援原生↑↓，P／Esc暫停。失焦或背景會停止電腦回合，須手動繼續。手機按鈕與鍵盤皆可操作，不限時、無必要音效。
+
+原創虛構骰桌，不是誠信或人格測驗，無下注、帳號、上傳、儲存或外部套件。沿用原站純JavaScript，未引入遊戲平台。部署 `bluff-challenge.html/css/js/svg`、`bluff-engine.js`，共用 `arcade-fx.css/js`。測試：`node --test tests/bluff.test.cjs`；驗收見 `tests/bluff-qa.md`。
 
 ## 過敏搔癢大挑戰
 
@@ -192,7 +204,7 @@ python3 -m http.server 8765
 
 ## 專案檔案
 
-- `index.html`：二十六款遊戲共同入口；舊首頁 `#r=` 戰績連結自動轉到雙標遊戲並保留片段。
+- `index.html`：二十七款遊戲共同入口；舊首頁 `#r=` 戰績連結自動轉到雙標遊戲並保留片段。
 - `double-standard.html`：原雙標遊戲的畫面、流程和計分。
 - `start-small.html`、`start-small.css`、`start-small.js`：拖延啟動遊戲。
 - `mini-kart.html`、`mini-kart.css`、`mini-kart.js`、`kart.svg`：迷你卡丁車與原創插圖。
@@ -207,7 +219,7 @@ python3 -m http.server 8765
 
 ## 部署
 
-這是靜態網站。GitHub Pages 可發布儲存庫根目錄的 `index.html` 作共同入口；所有二十六款遊戲的 HTML、CSS 和 JS 必須同時發布。啟用 Pages 後，分享連結會自動以當前網站網址產生。發布設定由儲存庫擁有者決定。
+這是靜態網站。GitHub Pages 可發布儲存庫根目錄的 `index.html` 作共同入口；所有二十七款遊戲的 HTML、CSS 和 JS 必須同時發布。啟用 Pages 後，分享連結會自動以當前網站網址產生。發布設定由儲存庫擁有者決定。
 
 ## 授權
 
