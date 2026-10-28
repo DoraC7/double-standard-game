@@ -34,16 +34,19 @@
 </style>
 <link rel="stylesheet" href="arcade-fx.css?v=20261028-1">
 <script src="arcade-fx.js?v=20261028-1" defer></script>
+<link rel="stylesheet" href="lobby-play.css?v=20261028-1">
+<script src="lobby-play.js?v=20261028-1" defer></script>
 </head>
 <body data-arcade-page="index" class="arcade-lobby">
 <main>
-<header><b>🦞 Dora playground</b><span>不用登入・打開就玩</span></header>
+<header><b>🦞 Dora playground</b><div class="lobby-header-tools"><span>不用登入・打開就玩</span><button id="lobby-motion" type="button" aria-label="首頁小動畫開關" aria-pressed="true" disabled>小動畫控制載入中</button></div></header>
 <section class="hero arcade-hero">
-<span class="stamp">大人小孩都能玩的遊戲間</span>
+<div class="lobby-intro"><span class="stamp">大人小孩都能玩的遊戲間</span>
 <h1>今天想<br><em>玩哪一種感覺？</em></h1>
-<p class="lead">想動腦、放空、甩尾，還是開一間情緒價值分行？先選現在的心情，再挑一款。每款遊戲都能直接開始，沒有登入、沒有排行榜，也不用先讀一大篇規則。</p>
-<div class="arcade-host"><button class="arcade-host-button" id="arcade-host" type="button" aria-label="跟小龍蝦打招呼"><img src="arcade-lobster.svg" width="118" height="118" alt="" aria-hidden="true"></button><p class="arcade-host-speech" id="arcade-host-speech" role="status">挑一台機台，今天就出發！</p></div>
+<p class="lead">想動腦、放空、甩尾，還是開一間情緒價值分行？先選現在的心情，再挑一款。每款遊戲都能直接開始，沒有登入、沒有排行榜，也不用先讀一大篇規則。</p><a class="lobby-jump" href="#chooser-title">挑一個心情，準備出發 <span aria-hidden="true">↓</span></a></div>
+<section class="lobby-stage" aria-labelledby="lobby-stage-title"><div class="stage-top"><h2 id="lobby-stage-title">龍蝦開場秀</h2><span class="stage-label">PRESS TO PLAY</span></div><div class="stage-window"><div class="stage-scenery" aria-hidden="true"><i class="stage-orbit orbit-one"></i><i class="stage-orbit orbit-two"></i><span class="stage-spark spark-one">✦</span><span class="stage-spark spark-two">＋</span><span class="stage-spark spark-three">○</span></div><div class="arcade-host"><button class="arcade-host-button" id="arcade-host" type="button" aria-label="跟小龍蝦打招呼"><img src="arcade-lobster.svg" width="118" height="118" alt="" aria-hidden="true"></button><p class="arcade-host-speech" id="arcade-host-speech" role="status">挑一台機台，今天就出發！</p></div></div><div class="stage-deck"><p class="stage-instruction">點亮三盞燈，幫龍蝦暖機。<br>也可以直接挑遊戲，不必先完成。</p><div class="lobby-lights" role="group" aria-label="點亮龍蝦暖身燈"><button type="button" data-light="curious" aria-pressed="false"><span aria-hidden="true">✦</span>好奇心</button><button type="button" data-light="play" aria-pressed="false"><span aria-hidden="true">✦</span>玩心</button><button type="button" data-light="go" aria-pressed="false"><span aria-hidden="true">✦</span>行動力</button></div><p id="lobby-status" class="lobby-status" role="status" aria-atomic="true">亮燈 0 / 3 · 想從哪一盞開始？</p><div class="lobby-stage-actions"><button id="lobby-draw" type="button">抽一張冒險票 <span aria-hidden="true">↗</span></button><button id="lobby-reset" type="button">重新暖機</button></div><p id="lobby-pool" class="lobby-pool">從全部遊戲中選出，不花錢、不需要帳號。</p></div></section>
 </section>
+<div class="lobby-strip" aria-label="遊戲間特色"><span><i aria-hidden="true"></i>隨時開玩</span><span>鍵盤・觸控都可以</span><span>不比排名，只管好玩</span></div>
 <section class="chooser" aria-labelledby="chooser-title">
 <div class="chooser-head"><div><h2 id="chooser-title">我現在想要…</h2><p>選一個方向，只留下適合現在這一刻的遊戲。</p></div><button class="surprise" id="surprise" type="button">🎲 幫我選一款</button></div>
 <div class="filters" role="group" aria-label="依心情篩選遊戲">
@@ -55,7 +58,7 @@
 <button class="filter" type="button" data-filter="learn" aria-pressed="false">🌱 學點新東西</button>
 </div>
 </section>
-<div class="section-head"><h2>遊戲櫃</h2><span class="result-count" id="result-count" aria-live="polite">22 款遊戲</span></div>
+<div class="section-head"><h2>遊戲櫃 <span class="cabinet-label">PICK YOUR NEXT ADVENTURE</span></h2><span class="result-count" id="result-count" aria-live="polite">22 款遊戲</span></div>
 <section class="cards" id="cards" aria-label="遊戲列表">
 <a class="card" href="tech-base.html" data-tags="learn think chill"><div class="art purple"><img src="tech-base.svg" alt="" width="220" height="180"><small>NEW · 親子資訊科技</small></div><div class="info"><div class="title-row"><h3>科技任務基地</h3><span class="mood">資訊科技小學堂</span></div><p class="description">認識電腦、親手整理模擬檔案、練網路安全，再排方向指令讓機器人送信。小一、小二和家長一起玩。</p><div class="meta"><span>16 關・4 個主題</span><span>模擬檔案・機器人</span><span>家長陪玩提示</span></div><span class="go">接收科技任務 <b>↗</b></span></div></a>
 
