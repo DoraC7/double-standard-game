@@ -28,7 +28,7 @@ function boot({reduce=false,legacy=false,canAnimate=true}={}) {
 test('all games and lobby load local effects without modifying game scripts',()=>{
  const lobby=fs.readFileSync(path.join(root,'index.html'),'utf8');
  const pages=['index.html',...[...lobby.matchAll(/<a class="card" href="([^"]+)"/g)].map(m=>m[1])];
- assert.equal(pages.length,26);
+ assert.equal(pages.length,27);
  for(const file of pages){const html=fs.readFileSync(path.join(root,file),'utf8');assert.match(html,/href="arcade-fx.css\?v=/,file);assert.match(html,/src="arcade-fx.js\?v=/,file);assert.match(html,/data-fx=/,file);}
 });
 test('completion celebrates once on appearance, not on subsequent result text changes',()=>{

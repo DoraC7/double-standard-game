@@ -1,10 +1,20 @@
 # Dora playground
 
-二十五款免費、純前端小遊戲，從 `index.html` 入口進入。
+二十六款免費、純前端小遊戲，從 `index.html` 入口進入。
 
 ## 試玩
 
 GitHub Pages：<https://dorac7.github.io/double-standard-game/>。同一份遊戲也由現有伺服器提供：<http://bigmac.dorac7.com:5487/>。
+
+## 過敏搔癢大挑戰
+
+試玩：<https://dorac7.github.io/double-standard-game/itch-challenge.html>，現有伺服器：<http://bigmac.dorac7.com:5487/itch-challenge.html>。
+
+三區九宮格反應防線：毛球沙發、花粉花園、睡前大亂鬥。按住藍色癢癢怪到泡泡裝滿，放開會中斷充能；紅色抓抓手別碰，誤碰增加18點警報並斷連擊，同一隻紅手只處罰一次。漏掉藍怪增加7點警報；封印成功降8點。警報達100立即失敗；每區倒數結束需達封印目標。正式挑戰每關18秒、長按0.65秒、目標4／5／6隻；暖身每關12秒、長按0.45秒、目標2／3／4隻。關卡結算後親手前進；失敗可重試本區，前區成果保留。
+
+手機／滑鼠直接按住格子；鍵盤按住1–9（左到右、上到下）或QWE／ASD／ZXC，也可聚焦格子後按住空白鍵／Enter。P／Esc暫停；失焦／背景自動暫停，須手動繼續並清除按住狀態。操作區防長按選字，不影響說明文字複製。無必要音效，尊重減少動態效果。
+
+原創虛構卡通遊戲，不是過敏測驗或治療，警報值與分數不代表真實健康。沒有使用真實皮膚照片，無帳號、儲存、上傳或外部依賴。沿用原站純DOM／JavaScript，不引入遊戲框架。部署 `itch-challenge.html/css/js/svg`、`itch-challenge-engine.js`，共用 `arcade-fx.css/js`。測試：`node --test tests/itch-challenge.test.cjs`；操作驗收見 `tests/itch-challenge-qa.md`。
 
 ## 過動兒大冒險
 
@@ -182,7 +192,7 @@ python3 -m http.server 8765
 
 ## 專案檔案
 
-- `index.html`：二十二款遊戲共同入口；舊首頁 `#r=` 戰績連結自動轉到雙標遊戲並保留片段。
+- `index.html`：二十六款遊戲共同入口；舊首頁 `#r=` 戰績連結自動轉到雙標遊戲並保留片段。
 - `double-standard.html`：原雙標遊戲的畫面、流程和計分。
 - `start-small.html`、`start-small.css`、`start-small.js`：拖延啟動遊戲。
 - `mini-kart.html`、`mini-kart.css`、`mini-kart.js`、`kart.svg`：迷你卡丁車與原創插圖。
@@ -197,7 +207,7 @@ python3 -m http.server 8765
 
 ## 部署
 
-這是靜態網站。GitHub Pages 可發布儲存庫根目錄的 `index.html` 作共同入口；所有二十四款遊戲的 HTML、CSS 和 JS 必須同時發布。啟用 Pages 後，分享連結會自動以當前網站網址產生。發布設定由儲存庫擁有者決定。
+這是靜態網站。GitHub Pages 可發布儲存庫根目錄的 `index.html` 作共同入口；所有二十六款遊戲的 HTML、CSS 和 JS 必須同時發布。啟用 Pages 後，分享連結會自動以當前網站網址產生。發布設定由儲存庫擁有者決定。
 
 ## 授權
 

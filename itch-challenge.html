@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#193f46"><title>過敏搔癢大挑戰｜Dora playground</title>
+<meta name="description" content="癢癢怪出沒！按住裝滿冰冰泡泡，避開抓抓誘惑。三關九宮格反應挑戰，手機與鍵盤都能玩。">
+<link rel="stylesheet" href="itch-challenge.css?v=1"><link rel="stylesheet" href="arcade-fx.css?v=20261028-1">
+<script defer src="itch-challenge-engine.js?v=1"></script><script defer src="itch-challenge.js?v=1"></script><script defer src="arcade-fx.js?v=20261028-1"></script>
+</head>
+<body><main>
+<header><a href="index.html">← 回遊戲間</a><span>NO SCRATCH CLUB / 026</span></header>
+<section id="intro">
+<div class="hero"><div><p class="eyebrow">手很想動，但這局要動對地方。</p><h1>過敏搔癢<br><em>大挑戰</em></h1><p class="lead">癢癢怪又來亂了！<br>把牠裝進冰冰泡泡，<br>別讓抓抓手騙走你的連擊。</p><span class="sticker">只封印卡通怪，不考驗真實皮膚。</span></div><img src="itch-challenge.svg" width="360" height="330" alt="戴著藍色大手套的小龍蝦，用泡泡包住紫色癢癢怪"></div>
+<div class="rules"><p><b>01 按住藍色怪</b>泡泡裝滿才算封印，提前放開會重來。</p><p><b>02 別碰紅色手</b>抓抓誘惑會加警報，放著讓它離開。</p><p><b>03 守住三個區域</b>倒數結束時達到封印目標，警報不能滿格。</p></div>
+<div class="actions"><button id="start" class="primary">正式挑戰 · 每關 18 秒 →</button><button id="easy">暖身一下 · 每關 12 秒</button></div>
+<p class="help">觸控／滑鼠按住九宮格；鍵盤按住 1–9，依畫面由左到右、由上到下排列。也可用 QWE／ASD／ZXC。P／Esc 暫停；切換分頁會自動暫停。</p>
+<p class="small">虛構反應遊戲，不是過敏測驗或治療建議。警報值與分數只屬於遊戲；無帳號、不儲存、不上傳。</p>
+</section>
+<section id="play" hidden aria-label="九宮格挑戰">
+<div class="play-heading"><div><p id="stage-label" class="eyebrow"></p><h2 id="stage-name"></h2></div><button id="pause">暫停 ⏸</button></div>
+<div class="hud"><span>倒數 <b id="time">18</b>s</span><span>封印 <b id="cooled">0 / 4</b></span><span>連擊 <b id="combo">0</b></span><span>分數 <b id="score">0</b></span></div>
+<div class="alarm"><label for="alarm">癢癢警報 <b id="alarm-value">24 / 100</b></label><progress id="alarm" max="100" value="24"></progress></div>
+<div class="arena"><div id="board" class="board" role="group" aria-label="按住藍色怪、避開紅色手；數字1到9對應九宮格"></div><div id="pause-cover" class="cover" hidden><span class="pause-icon">Ⅱ</span><h2>手先休息，怪也等你。</h2><p>倒數、警報與癢癢怪都已暫停。</p><button id="resume" class="primary">繼續守住 →</button><button id="quit">回說明</button></div></div>
+<p id="notice" role="status">找到藍色癢癢怪，按住到泡泡裝滿！</p><p class="legend">藍怪：按住裝滿泡泡 · 紅手：不要碰 · 放開會中斷充能</p>
+</section>
+<section id="result" class="result" hidden data-fx="finish"><p id="result-label" class="eyebrow"></p><h2 id="result-title" tabindex="-1"></h2><p id="result-text"></p><div id="badges" class="badges"></div><div class="actions"><button id="next" class="primary">下一區 →</button><button id="retry" class="primary">重試這一關 ↻</button><button id="again" class="primary">再挑戰一次 ↻</button><button id="menu">回說明</button></div></section>
+<footer>手套戴好，癢癢怪退散。<a href="index.html">換一款玩 ↗</a></footer>
+</main></body></html>
