@@ -25,3 +25,44 @@ async function melonRealtimeQA(chosen='normal'){
  $(chosen==='practice'?'practice':'start').click();const started=performance.now();let count=0;
  return await new Promise((resolve,reject)=>{const limit=setTimeout(()=>reject(Error('實際計時測試逾時')),85000);function tick(){const s=snap();if(s.paused){clearTimeout(limit);reject(Error('實際計時測試被暫停'));return;}if(s.done){clearTimeout(limit);const r=MelonArcade.outcome(s);if(!r.won){reject(Error('實際操作路線未勝選：'+JSON.stringify(r)));return;}resolve({mode:chosen,wallSeconds:(performance.now()-started)/1000,gameSeconds:s.time,votes:s.votes,rival:s.rivalVotes,hits:s.hits,bestCombo:s.bestCombo,frames:count,result:document.getElementById('result-title').textContent});return;}autopilot();count++;requestAnimationFrame(tick);}requestAnimationFrame(tick);});
 }
+
+// Scoped long-press protection and input-release regression (synthetic pointer IDs).
+async function melonTouchQA(){
+ const $=id=>document.getElementById(id),checks=[],ok=(v,m)=>{if(!v)throw Error(m);checks.push(m);},snap=()=>MelonRun.snapshot();
+ const realRAF=requestAnimationFrame,realCancel=cancelAnimationFrame;let clock=1000,id=0,frames=[],cancelled=new Set();
+ window.requestAnimationFrame=fn=>{frames.push({id:++id,fn});return id;};window.cancelAnimationFrame=n=>cancelled.add(n);
+ const advance=seconds=>{for(let i=0;i<Math.ceil(seconds/.05);i++){clock+=50;const pending=frames;frames=[];for(const f of pending)if(!cancelled.has(f.id))f.fn(clock);}};
+ const event=(el,type)=>{const e=new Event(type,{bubbles:true,cancelable:true});el.dispatchEvent(e);return e;};
+ try{
+  $('practice').click();advance(.05);
+  for(const el of [$('field'),...document.querySelectorAll('.controls,.controls *')]){
+   ok(getComputedStyle(el).userSelect==='none','操作區不選字');
+   ok(event(el,'contextmenu').defaultPrevented&&event(el,'selectstart').defaultPrevented,'操作區攔截原生選單／選取');
+  }
+  for(const el of [document.querySelector('.play-help'),document.querySelector('header a')]){
+   ok(getComputedStyle(el).userSelect!=='none','一般文字保留選取');
+   ok(!event(el,'contextmenu').defaultPrevented&&!event(el,'selectstart').defaultPrevented,'一般文字與連結不攔截選單');
+  }
+  for(const [i,direction] of ['up','down','left','right'].entries()){
+   $('practice').click();advance(.05);const b=document.querySelector(`[data-move=${direction}]`),capture=b.setPointerCapture;
+   b.setPointerCapture=()=>{};
+   try{
+    const before=snap().player;
+    b.dispatchEvent(new PointerEvent('pointerdown',{pointerId:87+i,bubbles:true,cancelable:true}));advance(1.2);
+    const after=snap().player;ok(Math.hypot(after.x-before.x,after.y-before.y)>30,`${direction}長按持續移動`);
+    ok(b.classList.contains('held')&&event(b,'contextmenu').defaultPrevented,'長按選單不打斷按住狀態');
+    const release=['pointerup','pointercancel','lostpointercapture','pointerup'][i];
+    b.dispatchEvent(new PointerEvent(release,{pointerId:87+i,bubbles:true}));const pos=snap().player;advance(.15);
+    ok(JSON.stringify(snap().player)===JSON.stringify(pos)&&!b.classList.contains('held'),`${release}清除移動`);
+   }finally{b.setPointerCapture=capture;}
+  }
+  $('practice').click();advance(.05);const b=document.querySelector('[data-move=up]');
+  b.focus();b.dispatchEvent(new KeyboardEvent('keydown',{key:' ',bubbles:true,cancelable:true}));advance(.15);
+  ok(snap().player.y<240,'方向按鈕仍支援鍵盤長按');b.dispatchEvent(new KeyboardEvent('keyup',{key:' ',bubbles:true}));
+  const y=snap().player.y;advance(.1);ok(snap().player.y===y,'鍵盤放開停止');
+  $('dash').click();advance(.05);ok(snap().cooldown>2,'衝刺點選仍可用');
+  window.dispatchEvent(new Event('blur'));ok(snap().paused,'失焦仍自動暫停');$('quit').click();
+  ok(document.documentElement.scrollWidth<=innerWidth,'無水平溢出');
+  return {passed:true,viewport:[innerWidth,innerHeight],assertions:checks.length,note:'DOM pointer模擬；未測實體iPhone系統選單'};
+ }finally{window.requestAnimationFrame=realRAF;window.cancelAnimationFrame=realCancel;}
+}
