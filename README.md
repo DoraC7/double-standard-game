@@ -1,6 +1,6 @@
 # Dora playground
 
-二十一款免費、純前端小遊戲，從 `index.html` 入口進入。
+二十二款免費、純前端小遊戲，從 `index.html` 入口進入。
 
 ## 試玩
 
@@ -149,7 +149,7 @@ python3 -m http.server 8765
 
 ## 專案檔案
 
-- `index.html`：二十一款遊戲共同入口；舊首頁 `#r=` 戰績連結自動轉到雙標遊戲並保留片段。
+- `index.html`：二十二款遊戲共同入口；舊首頁 `#r=` 戰績連結自動轉到雙標遊戲並保留片段。
 - `double-standard.html`：原雙標遊戲的畫面、流程和計分。
 - `start-small.html`、`start-small.css`、`start-small.js`：拖延啟動遊戲。
 - `mini-kart.html`、`mini-kart.css`、`mini-kart.js`、`kart.svg`：迷你卡丁車與原創插圖。
@@ -164,7 +164,7 @@ python3 -m http.server 8765
 
 ## 部署
 
-這是靜態網站。GitHub Pages 可發布倉庫根目錄的 `index.html` 作共同入口；所有二十一款遊戲的 HTML、CSS 和 JS 必須同時發布。啟用 Pages 後，分享連結會自動以當前網站網址產生。發布設定由倉庫擁有者決定。
+這是靜態網站。GitHub Pages 可發布倉庫根目錄的 `index.html` 作共同入口；所有二十二款遊戲的 HTML、CSS 和 JS 必須同時發布。啟用 Pages 後，分享連結會自動以當前網站網址產生。發布設定由倉庫擁有者決定。
 
 ## 授權
 
@@ -273,3 +273,14 @@ Linux 明確區分 GNOME／Files 與 KDE Plasma／Dolphin 預設；macOS 的 Ret
 面向小一、小二與家長，單站四關約 3～5 分鐘，也可完整玩 16 關。每關提供家長提問與安全的離線延伸建議；答錯可重試，保留第一次核對結果。無倒數、排行榜、帳號、作答儲存或上傳，重整或回地圖清空本輪。可由家長朗讀，亦有可選的瀏覽器裝置語音與無語音回退；可用聲音與是否連線依裝置而異。不要求語音才能玩。
 
 部署：`math-island.html/svg`、`curiosity-lab.html/svg`、`kids-school.css`、`kids-school.js`、`kids-school-data.js`，無外部依賴。非官方教材或完整課綱。檢查：`node --test tests/kids-school.test.cjs`；手動 QA 見 `tests/kids-school-qa.md`。
+
+
+## 科技任務基地 · 資訊科技小學堂
+
+試玩：<https://dorac7.github.io/double-standard-game/tech-base.html>。
+
+小一、小二親子 16 關四站：電腦好朋友（輸入／輸出／兩者分類）、檔案小管家（編輯再儲存、改名、移動與複製）、網路安全盾（個資、密碼、照片同意與可疑連結）、小小程式員（排方向指令、執行地圖機器人、觀察撞牆與修改除錯）。可只玩一站四關，或完整 16 關；每關附家長提問與離線活動。
+
+不是只選操作名稱：檔案執行後才改變模擬內容／位置，並依實際狀態驗收；機器人接受不同可行路線，編輯指令後須重新執行，不能靠舊執行結果通關。第四個程式任務先觀察原錯誤程式，再修改。核對前不評分，答錯可重試，首次驗收結果仍保留，結算含操作紀錄。
+
+全為本頁離線模擬，不存取真實檔案、帳號、攝影機、麥克風或訊息。無帳號、倒數、作答儲存／上傳或外部依賴；裝置語音可選並有失敗回退。不是完整課綱或程度認證。部署：`tech-base.html`、`tech-base.svg`、`tech-base.css`、`tech-base.js`、`tech-base-data.js`、`tech-base-engine.js`，沿用 `kids-school.css` 與 `arcade-fx.css/js`。測試：`node --test tests/tech-base.test.cjs`；驗收見 `tests/tech-base-qa.md`。

@@ -1,0 +1,24 @@
+async () => {
+ const $=id=>document.getElementById(id),assert=(ok,msg)=>{if(!ok)throw Error(msg);},D=TechBaseData,E=TechBaseEngine,wrongKinds=new Set(),over=[];
+ function geo(stage){if(document.documentElement.scrollWidth>innerWidth)over.push({title:$('title').textContent,stage,width:innerWidth,scroll:document.documentElement.scrollWidth});}
+ if(!$('play').hidden)$('leave').click();if(!$('result').hidden)$('restart').click();$('all').click();let count=0;
+ while(!$('play').hidden){let q=D.questions.find(x=>x.title===$('title').textContent);assert(q,'known question');assert($('confirm').disabled,'no initial confirm');geo('initial');
+  function answer(good){
+   if(q.kind==='classify')q.cards.forEach((c,i)=>{const value=good||i>0?c.answer:(c.answer+1)%q.labels.length;document.querySelector(`[data-item="${i}"] [data-category="${value}"]`).click();if(i<q.cards.length-1)assert($('confirm').disabled,'all cards required');});
+   if(q.kind==='choice')document.querySelector(`[data-answer="${good?q.answer:(q.answer+1)%q.options.length}"]`).click();
+   if(q.kind==='file'){
+    document.querySelector(`[data-file="${good?'house':'tree'}"]`).click();if(good&&q.goal==='save'){$('edit').click();assert($('confirm').disabled,'edit alone not saved');assert(document.querySelector('[data-file="house"]').textContent.includes('紅色小屋'),'file still old before save');}
+    const op=good?q.goal:'rename';document.querySelector(`[data-operation="${op}"]`).click();if(op==='rename')$('new-name').value='我的小屋.txt';assert($('feedback').hidden,'operation selection not scored');$('execute-file').click();assert(!$('confirm').disabled,'operation enables inspection');
+    if(good){if(q.goal==='save')assert(document.querySelector('[data-file="house"]').textContent.includes('藍色小屋'),'saved visible');if(q.goal==='move')assert(document.querySelector('[data-file="house"]').closest('.folder').querySelector('h3').textContent==='作品夾','moved visible');if(q.goal==='copy')assert(document.querySelectorAll('[data-file]').length===3,'copy visible extra file');if(q.goal==='rename')assert(document.querySelector('[data-file="house"] b').textContent==='我的小屋.txt','rename visible');}
+   }
+   if(q.kind==='robot'){
+    if(q.id==='robot4') {assert(document.querySelector('[data-edit="clear"]').disabled,'must inspect original bug first');$('run').click();assert($('robot-report').textContent.includes('障礙'),'original bug observed');}
+    document.querySelector('[data-edit="clear"]').click();const route=good?q.example:['up'];for(const step of route)document.querySelector(`[data-direction="${step}"]`).click();assert($('confirm').disabled,'edited program requires execution');$('run').click();assert(!$('confirm').disabled,'executed can inspect');
+    if(good){assert(document.querySelector('.cell.bot.target'),'robot visible at target');document.querySelector('[data-edit="undo"]').click();assert($('confirm').disabled,'old successful run invalidated');document.querySelector(`[data-direction="${route.at(-1)}"]`).click();$('run').click();assert(document.querySelector('.cell.bot.target'),'rerun success');}
+   }
+  }
+  if(!wrongKinds.has(q.kind)){wrongKinds.add(q.kind);answer(false);$('confirm').click();assert(!$('retry').hidden&&$('next').hidden,'wrong result retry only');const before=$('feedback').textContent;document.querySelector('#controls button').dispatchEvent(new MouseEvent('click',{bubbles:true}));$('confirm').dispatchEvent(new MouseEvent('click',{bubbles:true}));assert(before===$('feedback').textContent,'wrong first attempt locked');$('retry').click();assert($('confirm').disabled,'retry fresh selection');}
+  answer(true);assert($('feedback').hidden,'no grade before confirm');$('confirm').click();assert(!$('next').hidden,'correct result advances');const feedback=$('feedback').textContent;document.querySelector('#controls button').dispatchEvent(new MouseEvent('click',{bubbles:true}));$('confirm').dispatchEvent(new MouseEvent('click',{bubbles:true}));assert(feedback===$('feedback').textContent,'answer immutable');document.querySelector('.parent').open=true;geo('answered+parent');$('next').click();count++;assert(count<=16,'finite');
+ }
+ assert(count===16,'full sixteen');assert($('summary').textContent.includes('第一次驗收就完成 12 題'),'four initial misses preserved');assert($('review').children.length===16,'complete review');$('review').querySelector('details').open=true;geo('result');await Promise.all([...document.images].map(i=>i.decode().catch(()=>null)));assert([...document.images].every(i=>i.naturalWidth>0),'all art decoded');$('restart').click();for(const b of $('stations').children){b.click();assert($('round').textContent==='任務 1 / 4','balanced station mode');$('leave').click();}return {width:innerWidth,height:innerHeight,completed:count,first:12,kinds:[...wrongKinds],overflow:over,retryAndLock:true,programMustRerun:true,fileStatesVerified:true};
+}
