@@ -1,6 +1,6 @@
 # Dora playground
 
-十八款免費、純前端小遊戲，從 `index.html` 入口進入。
+十九款免費、純前端小遊戲，從 `index.html` 入口進入。
 
 ## 試玩
 
@@ -149,7 +149,7 @@ python3 -m http.server 8765
 
 ## 專案檔案
 
-- `index.html`：十八款遊戲共同入口；舊首頁 `#r=` 戰績連結自動轉到雙標遊戲並保留片段。
+- `index.html`：十九款遊戲共同入口；舊首頁 `#r=` 戰績連結自動轉到雙標遊戲並保留片段。
 - `double-standard.html`：原雙標遊戲的畫面、流程和計分。
 - `start-small.html`、`start-small.css`、`start-small.js`：拖延啟動遊戲。
 - `mini-kart.html`、`mini-kart.css`、`mini-kart.js`、`kart.svg`：迷你卡丁車與原創插圖。
@@ -164,7 +164,7 @@ python3 -m http.server 8765
 
 ## 部署
 
-這是靜態網站。GitHub Pages 可發布倉庫根目錄的 `index.html` 作共同入口；所有十八款遊戲的 HTML、CSS 和 JS 必須同時發布。啟用 Pages 後，分享連結會自動以當前網站網址產生。發布設定由倉庫擁有者決定。
+這是靜態網站。GitHub Pages 可發布倉庫根目錄的 `index.html` 作共同入口；所有十九款遊戲的 HTML、CSS 和 JS 必須同時發布。啟用 Pages 後，分享連結會自動以當前網站網址產生。發布設定由倉庫擁有者決定。
 
 ## 授權
 
@@ -252,3 +252,14 @@ Linux 明確區分 GNOME／Files 與 KDE Plasma／Dolphin 預設；macOS 的 Ret
 重點不是禁止「用」，而是區分洗淨、瀝乾、收納，以及下載、安裝、儲存、上傳等不同動作；也區分計畫、執行與驗證結果。原創例句不是私人聊天引述、官方題庫或人物能力評量，口語省略需看上下文。自由改寫不以字數、關鍵字或範例相似度評分。無倒數、無AI、無儲存或上傳；只留分頁記憶體，重新整理即清空。教育部辭典僅列為查字工具，非逐題來源。
 
 部署檔案：`chinese-school.html`、`chinese-school.css`、`chinese-school.js`、`chinese-school-engine.js`、`chinese-school.svg`，共用 `road-safety-school.css` 與 `arcade-fx.css/js`。沒有新增依賴。測試：`node --test tests/chinese-school.test.cjs`；人工驗證見 `tests/chinese-school-qa.md`。
+
+
+## AI 小學堂・會問，也要會驗收
+
+試玩：<https://dorac7.github.io/double-standard-game/ai-school.html>。
+
+30個原創情境、六單元各5題：AI基本原理、模型與工具、查證、合作與學習、資料授權、結果驗收。18題選擇、6題三卡分類、6題證據判讀；12題短局每單元2題，亦可完整30題／單元5題。證據只在親自翻開後才算作答時已知；未取得足夠證據時可合理待查，取得關鍵證據後則需作出有依據的具體結論。送出後鎖定首次結果與已讀卡片，回顧可對照當時證據、完整材料及自己的選填筆記。
+
+以Google LLM入門、OWASP提示注入、錯誤資訊、敏感資料與代理權限公開說明為概念來源，各題附連結；數字、對話與工具回條均為原創模擬，不冒充真實操作或官方題庫。沒有連接AI、不要求API Key、不執行真實工具、不儲存或上傳；筆記不由關鍵字／字數評分。與既有提問練習場互相連結，重點是能力判斷、證據範圍與驗收，而非重複提示句型。
+
+部署：`ai-school.html`、`ai-school.css`、`ai-school.js`、`ai-school-engine.js`、`ai-school.svg`，沿用共用`road-safety-school.css`與`arcade-fx.css/js`。無新增依賴。測試：`node --test tests/ai-school.test.cjs`；檢查紀錄：`tests/ai-school-qa.md`。
