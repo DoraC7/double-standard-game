@@ -4,7 +4,7 @@
 
 ## 試玩
 
-GitHub Pages：<https://dorac7.github.io/double-standard-game/>。同一份遊戲也由現有伺服器提供：<http://bigmac.dorac7.com:9487/>。
+GitHub Pages：<https://dorac7.github.io/double-standard-game/>。同一份遊戲也由現有伺服器提供：<http://bigmac.dorac7.com:5666/>。
 
 ## 民主聖地噴泉西瓜選市長大挑戰
 
