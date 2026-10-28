@@ -76,7 +76,7 @@
     document.getElementById('pick-again').addEventListener('click',()=>animate(document.getElementById('pick-image'),[{rotate:'0deg',scale:1},{rotate:'-12deg',scale:.86,offset:.45},{rotate:'0deg',scale:1}],{duration:400}));
     if(typeof IntersectionObserver==='function'){
       const stageObserver=new IntersectionObserver(entries=>{for(const entry of entries)body.classList.toggle('lobby-offstage',!entry.isIntersecting);});stageObserver.observe(stage);
-      const revealObserver=new IntersectionObserver(entries=>{for(const entry of entries)if(entry.isIntersecting){animate(entry.target.querySelector('.art img'),[{translate:'0 9px',opacity:.6},{translate:'0 0',opacity:1}],{duration:420});revealObserver.unobserve(entry.target);}},{threshold:.12});cards.forEach(c=>revealObserver.observe(c));
+      const revealObserver=new IntersectionObserver(entries=>{for(const entry of entries)if(entry.isIntersecting){animate(entry.target.querySelector('.art img'),[{scale:'.96',opacity:.6},{scale:'1',opacity:1}],{duration:420});revealObserver.unobserve(entry.target);}},{threshold:.12});cards.forEach(c=>revealObserver.observe(c));
     }
     renderLights();sync();
   };
