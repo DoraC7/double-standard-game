@@ -1,6 +1,6 @@
 # Dora playground
 
-十五款免費、純前端小遊戲，從 `index.html` 入口進入。
+十六款免費、純前端小遊戲，從 `index.html` 入口進入。
 
 ## 試玩
 
@@ -227,3 +227,9 @@ Windows、macOS、Linux GNOME／KDE 的圖形介面快捷鍵，每個平台 12 �
 Linux 明確區分 GNOME／Files 與 KDE Plasma／Dolphin 預設；macOS 的 Return 重新命名、Cmd 與 Control 差別、文字剪下與 Finder 搬檔案不混用。依官方文件及上游預設整理並附來源；實際行為依應用程式、發行版與自訂設定而異。所有組合只用本頁鍵帽，不攔截真實系統組合、不讀寫系統剪貼簿或檔案。只留在本分頁記憶體，重整清空，無儲存或上傳。
 
 部署 `shortcut-school.html`、`shortcut-school.css`、`shortcut-school.js`、`shortcut-school-engine.js`、`shortcut-school.svg` 及共用 `arcade-fx.css/js`。不新增依賴。檢查：`node --test tests/shortcut-school.test.cjs`。
+
+## 汽車知識跟道路安全小學堂
+
+「多拉絕對不是三寶之汽車知識跟道路安全小學堂」：`road-safety-school.html`。42 個台灣道路情境、七大單元（速限、五油三水、遠光燈／霧燈、號誌與迴轉、胎壓、緊急事件、油門控制），14 題短局、42 題完整局與單元練習。速限滑桿、可見光束的燈光面板、三步處置排序、八項油水圖鑑、號誌口袋卡與示意踏板；選擇送出即鎖定，結束可逐題複習。
+
+依台灣法規與官方資料整理（2026-10-28），各題附來源。法規與安全建議分開，廠牌手冊不當成通用保養週期；EPS、電動車、密閉電瓶另說明。胎壓 33 psi 只是假想車的標籤閱讀題，非通用建議；踏板只呈現輸入大小，不是實車速度／煞停距離模擬。不取代駕訓、維修或現場救援，不可邊開車邊玩。僅分頁記憶體，無儲存、上傳或第三方套件。測試及來源對照：`tests/road-safety-school-qa.md`。
