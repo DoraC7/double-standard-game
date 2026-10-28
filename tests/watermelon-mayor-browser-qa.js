@@ -1,34 +1,27 @@
-async function melonBrowserQA(){
- const $=id=>document.getElementById(id),checks=[];
- const ok=(value,label)=>{if(!value)throw Error(label);checks.push(label);};
- const fit=()=>ok(document.documentElement.scrollWidth<=innerWidth,'無水平溢出');
- const level=n=>{$('level').value=n;$('level').dispatchEvent(new Event('input',{bubbles:true}));};
- const choose=n=>$('choices').children[n].click();
- const play=async(path,power,expected)=>{
-  ($('intro').hidden?$('restart'):$('start')).click();ok(!$('play').hidden,'參選成功');
-  for(let i=0;i<8;i++){
-   ok($('confirm').disabled,'尚未選活動，確認停用');fit();
-   const before=$('budget').textContent;choose(path[i]);level(power);
-   ok(!$('confirm').disabled,'可行活動可確認');ok($('budget').textContent===before,'預覽不扣預算');
-   $('confirm').click();const budget=$('budget').textContent,feedback=$('feedback').textContent;
-   ok([...$('choices').children].every(b=>b.disabled)&&$('level').disabled,'確認後鎖定全部輸入');
-   $('confirm').click();choose((path[i]+1)%3);level(3);
-   ok($('budget').textContent===budget&&$('feedback').textContent===feedback,'重複操作不扣款或改結果');fit();$('next').click();
-  }
-  ok(!$('election').hidden&&$('outcome').hidden,'完成八回合後才開票');
-  for(let i=0;i<3;i++){const b=$('boxes').children[i];b.click();const count=$('count').textContent;b.click();ok($('count').textContent===count,'票匭不得重複計票');if(i<2)ok($('outcome').hidden,'未開完不揭曉結局');fit();}
-  ok(!$('outcome').hidden,'三區開完出現結果');ok($('result-text').textContent.includes(`西瓜 ${expected} 票`),'票數符合路線');
-  ok($('ledger').children.length===8,'帳本包含八回合');ok(document.activeElement===$('result-title'),'結局鍵盤焦點');
- };
- await play([1,1,1,1,1,1,1,1],1,2690);ok($('result-title').textContent.includes('當選市長'),'勝選結局');
- await play([2,0,0,2,2,0,2,0],0,950);ok($('result-title').textContent.includes('落選'),'落選結局');
- $('restart').click();ok($('budget').textContent==='100 點'&&$('water').textContent==='70 / 100','重玩重設全部資源');
- for(let i=0;i<5;i++){choose(0);level(3);ok(!$('confirm').disabled,'高花費路線可執行');$('confirm').click();$('next').click();}
- ok($('budget').textContent==='3 點','高花費路線剩餘3點');choose(1);level(0);ok($('confirm').disabled&&$('preview').textContent.includes('資源不足'),'資源不足清楚提示且不能執行');choose(0);ok(!$('confirm').disabled,'零花費退路可繼續');
- $('reset').click();ok(!$('intro').hidden&&document.activeElement===$('start'),'放棄返回說明並恢復焦點');
- $('start').click();level(3);await new Promise(resolve=>setTimeout(resolve,330));const high=getComputedStyle($('jets')).transform;
- level(0);await new Promise(resolve=>setTimeout(resolve,330));const low=getComputedStyle($('jets')).transform;ok(high!==low&&low.includes(', 0,'),'噴泉旋鈕改變實際顯示');
- const toggle=document.querySelector('.arcade-fx-toggle');if(toggle&&!toggle.disabled&&toggle.getAttribute('aria-pressed')==='true')toggle.click();level(2);ok(getComputedStyle($('jets')).transitionDuration==='0s','關閉動畫仍顯示噴泉但無過渡動畫');
- fit();await Promise.all([...document.images].map(i=>i.decode().catch(()=>null)));ok([...document.images].every(i=>i.naturalWidth>0),'圖片全部載入');
- return {viewport:[innerWidth,innerHeight],assertions:checks.length,win:2690,lose:950,checks:[...new Set(checks)]};
+async function melonActionQA(){
+const $=id=>document.getElementById(id),checks=[],ok=(v,m)=>{if(!v)throw Error(m);checks.push(m);},snap=()=>MelonRun.snapshot(),fit=()=>ok(document.documentElement.scrollWidth<=innerWidth,'無水平溢出');
+const realRAF=window.requestAnimationFrame,realCancel=window.cancelAnimationFrame;let clock=1000,id=0,frames=[],cancelled=new Set();window.requestAnimationFrame=fn=>{frames.push({id:++id,fn});return id;};window.cancelAnimationFrame=n=>cancelled.add(n);
+const advance=seconds=>{for(let i=0;i<Math.ceil(seconds/.05);i++){clock+=50;const pending=frames;frames=[];for(const f of pending)if(!cancelled.has(f.id))f.fn(clock);}};
+const key=(k,on=true)=>window.dispatchEvent(new KeyboardEvent(on?'keydown':'keyup',{key:k,bubbles:true}));
+try{
+ $('start').click();advance(.05);ok(!snap().done&&snap().remaining===60,'正式賽60秒開始');fit();let before=snap();key('ArrowRight');advance(.25);key('ArrowRight',false);ok(snap().player.x>before.player.x+40,'鍵盤持續移動');
+ key(' ');advance(.05);key(' ',false);ok(snap().cooldown>2,'空白鍵衝刺有冷卻');key('ArrowUp');advance(.65);key('ArrowUp',false);
+ $('pause').click();const frozen=JSON.stringify(snap());advance(2);ok(JSON.stringify(snap())===frozen,'暫停時間／對手／資源全部凍結');ok(!$('pause-cover').hidden&&document.activeElement===$('resume'),'暫停面板與焦點');$('resume').click();advance(.1);ok(snap().time>JSON.parse(frozen).time,'繼續遊戲');
+ key('ArrowLeft');window.dispatchEvent(new Event('blur'));ok(snap().paused,'失焦自動暫停');$('resume').click();const x=snap().player.x;advance(.1);ok(snap().player.x===x,'暫停清除按鍵避免卡住');key('ArrowLeft',false);
+ Object.defineProperty(document,'hidden',{value:true,configurable:true});document.dispatchEvent(new Event('visibilitychange'));ok(snap().paused,'背景分頁自動暫停');delete document.hidden;$('resume').click();
+ const capture=$('field').setPointerCapture;$('field').setPointerCapture=()=>{};const r=$('field').getBoundingClientRect(),a=snap().player;
+ $('field').dispatchEvent(new PointerEvent('pointerdown',{pointerId:77,clientX:r.left+(a.x+70)*r.width/640,clientY:r.top+a.y*r.height/480,bubbles:true}));advance(.15);ok(snap().player.x>a.x,'拖曳座標隨畫面縮放正確換算');$('field').dispatchEvent(new PointerEvent('pointercancel',{pointerId:77,bubbles:true}));const released=snap().player.x;advance(.1);ok(snap().player.x===released,'拖曳取消停止移動');$('field').setPointerCapture=capture;
+ const left=document.querySelector('[data-move=left]'),cap=left.setPointerCapture;left.setPointerCapture=()=>{};left.dispatchEvent(new PointerEvent('pointerdown',{pointerId:78,bubbles:true}));advance(.1);ok(snap().player.x<released,'手機方向按住移動');left.dispatchEvent(new PointerEvent('pointerup',{pointerId:78,bubbles:true}));left.setPointerCapture=cap;const released2=snap().player.x;advance(.1);ok(snap().player.x===released2,'手機方向放開停止');
+ function autopilot(){const s=snap();if(!s.ballots.length)return;let t=s.ballots.reduce((a,b)=>Math.hypot(a.x-s.player.x,a.y-s.player.y)/(a.gold?1.25:1)<Math.hypot(b.x-s.player.x,b.y-s.player.y)/(b.gold?1.25:1)?a:b);const l={x1:s.player.x,y1:s.player.y,x2:t.x,y2:t.y};if(MelonArcade.segmentDistance({x:320,y:240},l)<90){const a=Math.atan2(s.player.y-240,s.player.x-320),b=Math.atan2(t.y-240,t.x-320),d=Math.atan2(Math.sin(b-a),Math.cos(b-a));t={x:320+Math.cos(a+(d>=0?1:-1)*.65)*115,y:240+Math.sin(a+(d>=0?1:-1)*.65)*115};}const dx=t.x-s.player.x,dy=t.y-s.player.y;for(const [k,on] of [['ArrowLeft',dx<-6],['ArrowRight',dx>6],['ArrowUp',dy<-6],['ArrowDown',dy>6]])key(k,on);if(s.cooldown===0&&MelonArcade.jets(s).some(j=>j.active&&MelonArcade.segmentDistance(s.player,j)<65)){key(' ');key(' ',false);}}
+ let n=0;while(!snap().done&&n++<1500){autopilot();advance(.05);if(n%100===0)fit();}ok(snap().done,'完整正式賽倒數結束');ok(!document.getElementById('result').hidden,'顯示結算');ok(MelonArcade.outcome(snap()).won,'操作路線可實際勝選');ok(snap().collected>0&&snap().bestCombo>1&&snap().rivalVotes>0,'雙方搶票與連擊實際發生');ok($('result-title').textContent.includes('市長室'),'勝選結局');ok(document.activeElement===$('result-title'),'結算焦點');const won={votes:snap().votes,rival:snap().rivalVotes,hits:snap().hits};fit();
+ $('restart').click();ok(snap().votes===0&&snap().hits===0&&snap().combo===0&&snap().remaining===60,'再戰清空所有局內狀態');while(!snap().done)advance(.05);ok(!MelonArcade.outcome(snap()).won&&$('result-title').textContent.includes('瓜棚'),'無操作會落選');
+ $('back').click();$('practice').click();ok(snap().mode==='practice'&&snap().remaining===30,'暖身模式30秒');while(!snap().done){autopilot();advance(.05);}ok(MelonArcade.outcome(snap()).won,'完整暖身可通關');$('back').click();ok(!$('intro').hidden&&document.activeElement===$('start'),'返回說明焦點');fit();return {viewport:[innerWidth,innerHeight],assertions:checks.length,won,checks:[...new Set(checks)],time:'瀏覽器加速時間模擬，非實際60秒'};
+}finally{window.requestAnimationFrame=realRAF;window.cancelAnimationFrame=realCancel;}
+}
+
+async function melonRealtimeQA(chosen='normal'){
+ const $=id=>document.getElementById(id),snap=()=>MelonRun.snapshot(),key=(k,on=true)=>window.dispatchEvent(new KeyboardEvent(on?'keydown':'keyup',{key:k,bubbles:true}));
+ function autopilot(){const s=snap();if(!s.ballots.length)return;let t=s.ballots.reduce((a,b)=>Math.hypot(a.x-s.player.x,a.y-s.player.y)/(a.gold?1.25:1)<Math.hypot(b.x-s.player.x,b.y-s.player.y)/(b.gold?1.25:1)?a:b);const l={x1:s.player.x,y1:s.player.y,x2:t.x,y2:t.y};if(MelonArcade.segmentDistance({x:320,y:240},l)<90){const a=Math.atan2(s.player.y-240,s.player.x-320),b=Math.atan2(t.y-240,t.x-320),d=Math.atan2(Math.sin(b-a),Math.cos(b-a));t={x:320+Math.cos(a+(d>=0?1:-1)*.65)*115,y:240+Math.sin(a+(d>=0?1:-1)*.65)*115};}const dx=t.x-s.player.x,dy=t.y-s.player.y;for(const [k,on] of [['ArrowLeft',dx<-6],['ArrowRight',dx>6],['ArrowUp',dy<-6],['ArrowDown',dy>6]])key(k,on);if(s.cooldown===0&&MelonArcade.jets(s).some(j=>j.active&&MelonArcade.segmentDistance(s.player,j)<65)){key(' ');key(' ',false);}}
+ $(chosen==='practice'?'practice':'start').click();const started=performance.now();let count=0;
+ return await new Promise((resolve,reject)=>{const limit=setTimeout(()=>reject(Error('實際計時測試逾時')),85000);function tick(){const s=snap();if(s.paused){clearTimeout(limit);reject(Error('實際計時測試被暫停'));return;}if(s.done){clearTimeout(limit);const r=MelonArcade.outcome(s);if(!r.won){reject(Error('實際操作路線未勝選：'+JSON.stringify(r)));return;}resolve({mode:chosen,wallSeconds:(performance.now()-started)/1000,gameSeconds:s.time,votes:s.votes,rival:s.rivalVotes,hits:s.hits,bestCombo:s.bestCombo,frames:count,result:document.getElementById('result-title').textContent});return;}autopilot();count++;requestAnimationFrame(tick);}requestAnimationFrame(tick);});
 }

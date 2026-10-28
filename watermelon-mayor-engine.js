@@ -1,32 +1,35 @@
-(function(root,factory){const api=factory();if(typeof module==='object'&&module.exports)module.exports=api;else root.MelonMayor=api;})(typeof globalThis!=='undefined'?globalThis:this,()=>{
+(function(root,factory){const api=factory();if(typeof module==='object'&&module.exports)module.exports=api;else root.MelonArcade=api;})(typeof globalThis!=='undefined'?globalThis:this,()=>{
 'use strict';
-const districts=['噴泉商圈','安靜住宅區','瓜田農業區'];
-const levels=[{name:'休息一下',cost:0,water:0,delta:[0,1,1]},{name:'小巧水花',cost:2,water:3,delta:[2,0,0]},{name:'觀光水舞',cost:5,water:7,delta:[4,-2,-1]},{name:'衝天民主噴泉',cost:9,water:12,delta:[6,-5,-3]}];
-const choice=(name,cost,water,delta,why,repair=false)=>({name,cost,water,delta,why,repair});
-const rounds=[
- {title:'一顆西瓜，正式登記',text:'民主聖地「瓜瓜市」開放市長登記。對手冬瓜已經掛滿看板。你的第一招是？',choices:[choice('掛滿「西瓜凍蒜」看板',20,0,[8,1,0],'看板讓商圈認得你，瓜田仍在等具體安排。'),choice('推著瓜車走訪三區',10,0,[4,7,7],'你聽到水壓、噪音與灌溉三種不同需求。'),choice('躺著等瓜熟',0,0,[-5,-4,-4],'西瓜不說話很合理，但市民不知道你的計畫。')]},
- {title:'噴泉底下在漏水',text:'技師發現水管漏水。修好後，每回合噴泉的預算與用水成本都會減半、無條件進位。',choices:[choice('先貼巨大競選海報遮住',4,0,[2,-6,-8],'海報擋不住漏水，也沒有改善後續成本。'),choice('修水管，公開施工紀錄',18,0,[2,7,9],'水管修好了！從本回合開始套用節水成本。',true),choice('暫時關閉支管並回收存水',0,18,[-3,2,3],'先取回18格水；沒有修復，所以往後成本不變。')]},
- {title:'瓜田喊渴',text:'農民帶來乾裂的土塊；商圈則期待週末水舞。你的儲水槽也是噴泉的水源。',choices:[choice('把灌溉水都借來造勢',0,20,[5,-3,-14],'水槽增加20格水，但農業區支持下降。'),choice('鋪設滴灌並回收雨水',15,24,[0,5,12],'回收24格水，瓜田用水安排也改善。'),choice('開放公所屋頂集雨',0,12,[0,2,4],'增加12格水，成本低，但改善幅度較小。')]},
- {title:'觀光團來拍照',text:'遊覽車停在噴泉廣場，導遊問：「市長候選瓜，今天除了噴很高，還有什麼？」',choices:[choice('撒亮片，讓整條街閃亮',16,0,[12,-6,-5],'照片很搶眼，但住戶與農民擔心清理。'),choice('安排瓜市集與步行導覽',10,0,[9,4,4],'遊客逛市集，三區也各有收穫。'),choice('只擺一張西瓜自拍立牌',0,0,[3,0,0],'便宜又可愛，吸引力也比較有限。')]},
- {title:'今晚，誰睡得著？',text:'住戶抱著枕頭來陳情。阿嬤說：「我不是反對噴泉，我是想睡覺。」',choices:[choice('加碼音響，蓋過陳情聲',12,0,[7,-15,-4],'廣場更熱鬧，但住宅區更加不滿。'),choice('設安靜時段，改善隔音',10,0,[-1,14,3],'夜間安排改善，住戶支持回升。'),choice('送大家一張耳塞折價券',0,0,[0,-5,0],'市民覺得問題沒有被處理。')]},
- {title:'辯論台上，西瓜能說話嗎',text:'冬瓜問你：「你到底靠政見，還是靠皮綠？」主持人遞來一支迷你麥克風。',choices:[choice('大喊：我有籽，他沒有！',0,0,[4,-5,-3],'梗有傳開，但沒有回答市政問題。'),choice('拿出水管與預算帳本',4,0,[5,8,8],'帳目清楚，支持增加。這是遊戲預設效果，不是真實民調模型。'),choice('跳一段噴泉西瓜舞',6,0,[9,0,0],'商圈很喜歡這段舞，其他區還在等回答。')]},
- {title:'最後一場造勢',text:'團隊說還能辦一場活動。預算與水槽都有限，噴泉強度也要一起算。',choices:[choice('全押巨型舞台',24,0,[15,-3,-3],'商圈歡呼，但費用很高。'),choice('三區小型說明會',8,0,[5,7,7],'沒有巨型煙火，但每區都有人聽見你。'),choice('在瓜棚直播聊天',0,0,[2,2,2],'花費少，各區各增加一點支持。')]},
- {title:'選前最後一晚',text:'噴泉旋鈕還在你手上。投票之前，你想留下什麼樣的廣場？',choices:[choice('加派人手辦整夜狂歡',16,0,[12,-8,-4],'觀光客很開心，住戶與瓜田的反應不同。'),choice('清理廣場，保留返家通道',6,0,[4,8,6],'散場順暢，各區支持增加。'),choice('先收攤，留下公開帳本',0,0,[1,3,3],'沒有大場面，省下最後一筆預算。')]}
-];
-const clamp=(v,min,max)=>Math.max(min,Math.min(max,v));
-function create(){return {index:0,budget:100,water:70,support:[38,42,36],repaired:false,selected:null,level:1,locked:false,done:false,history:[],opened:[]};}
-function validIndex(v,n){return Number.isInteger(v)&&v>=0&&v<n;}
-function preview(s,selected=s.selected,level=s.level){
- if(s.done||!validIndex(selected,3)||!validIndex(level,4))return null;
- const c=rounds[s.index].choices[selected],f=levels[level],div=s.repaired||c.repair?2:1;
- const cost=c.cost+Math.ceil(f.cost/div),used=Math.ceil(f.water/div);
- return {cost,used,water:clamp(s.water+c.water-used,0,100),budget:s.budget-cost,repaired:s.repaired||c.repair,delta:c.delta.map((d,i)=>clamp(s.support[i]+d+f.delta[i],5,95)-s.support[i]),affordable:s.budget>=cost&&s.water+c.water>=used};
+const W=640,H=480,CX=320,CY=240,R=18,POOL=58;
+const modes={normal:{seconds:60,target:400,rival:185,period:2.8},practice:{seconds:30,target:80,rival:100,period:3.5}};
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const distance=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
+function random(s){s.seed=(Math.imul(s.seed,1664525)+1013904223)>>>0;return s.seed/4294967296;}
+function spawn(s){for(let n=0;n<70;n++){const b={x:40+random(s)*560,y:42+random(s)*396,id:s.serial,gold:s.serial%7===6};if(Math.hypot(b.x-CX,b.y-CY)<100||distance(b,s.player)<55||distance(b,s.rival)<45||s.ballots.some(a=>distance(a,b)<42))continue;s.serial++;s.ballots.push(b);return true;}return false;}
+function create(mode='normal',seed=Math.floor(Math.random()*4294967295)){
+ if(!modes[mode])throw Error('不支援的玩法');
+ const s={mode,seed:seed>>>0,serial:0,time:0,remaining:modes[mode].seconds,player:{x:100,y:240},rival:{x:540,y:240},votes:0,rivalVotes:0,combo:0,bestCombo:0,chain:0,hits:0,collected:0,cooldown:0,dash:0,invulnerable:0,facing:{x:1,y:0},dashDirection:{x:1,y:0},ballots:[],spawnClock:0,paused:false,done:false,notice:'搶金色選票，注意黃色預警！',noticeClock:3};
+ for(let i=0;i<7;i++)spawn(s);return s;
 }
-function select(s,value){if(s.done||s.locked||!validIndex(value,3))return false;s.selected=value;return true;}
-function setLevel(s,value){if(s.done||s.locked||!validIndex(value,4))return false;s.level=value;return true;}
-function submit(s){const p=preview(s);if(s.locked||!p||!p.affordable)return false;const c=rounds[s.index].choices[s.selected];s.history.push({round:s.index,choice:s.selected,level:s.level,cost:p.cost,used:p.used,delta:[...p.delta],why:c.why});s.budget=p.budget;s.water=p.water;s.repaired=p.repaired;s.support=s.support.map((v,i)=>clamp(v+p.delta[i],5,95));s.locked=true;return true;}
-function next(s){if(s.done||!s.locked)return false;if(s.index===rounds.length-1){s.done=true;return true;}s.index++;s.locked=false;s.selected=null;return true;}
-function open(s,index){if(!s.done||!validIndex(index,3)||s.opened.includes(index))return false;s.opened.push(index);return true;}
-function tally(s){const votes=s.support.map(v=>v*10),total=votes.reduce((a,b)=>a+b,0);return {votes,total,opponent:3000-total,won:total>1500,tie:total===1500};}
-return {districts,levels,rounds,create,preview,select,setLevel,submit,next,open,tally};
+function jets(s){const period=modes[s.mode].period,cycle=Math.floor(s.time/period),phase=s.time%period;const warning=phase<.85,active=phase>=.85&&phase<1.85;const angles=[cycle*Math.PI/4,cycle*Math.PI/4+Math.PI];if(s.time>=40&&s.mode==='normal')angles.push(cycle*Math.PI/4+Math.PI/2,cycle*Math.PI/4+Math.PI*1.5);return angles.map(a=>({x1:CX+Math.cos(a)*65,y1:CY+Math.sin(a)*65,x2:CX+Math.cos(a)*290,y2:CY+Math.sin(a)*290,warning,active}));}
+function segmentDistance(p,l){const dx=l.x2-l.x1,dy=l.y2-l.y1,t=clamp(((p.x-l.x1)*dx+(p.y-l.y1)*dy)/(dx*dx+dy*dy),0,1);return Math.hypot(p.x-l.x1-t*dx,p.y-l.y1-t*dy);}
+function move(p,dx,dy){p.x=clamp(p.x+dx,R,W-R);p.y=clamp(p.y+dy,R,H-R);const x=p.x-CX,y=p.y-CY,d=Math.hypot(x,y);if(d<POOL+R){const a=d>0?x/d:1,b=d>0?y/d:0;p.x=CX+a*(POOL+R);p.y=CY+b*(POOL+R);}}
+function say(s,message){s.notice=message;s.noticeClock=1.6;}
+function hurt(s){if(s.invulnerable>0||s.dash>0)return false;s.votes=Math.max(0,s.votes-8);s.hits++;s.combo=0;s.chain=0;s.invulnerable=1.1;const dx=s.player.x-CX,dy=s.player.y-CY,d=Math.hypot(dx,dy)||1;move(s.player,dx/d*18,dy/d*18);say(s,'被噴到！−8 票，連擊中斷');return true;}
+function pause(s,value=true){if(s.done)return false;s.paused=!!value;return true;}
+function outcome(s){const target=modes[s.mode].target;return {won:s.votes>=target&&s.votes>s.rivalVotes,tie:s.votes===s.rivalVotes,target,votes:s.votes,rivalVotes:s.rivalVotes};}
+function step(s,elapsed,input={}){
+ if(s.done||s.paused||!Number.isFinite(elapsed)||elapsed<=0)return false;const dt=Math.min(elapsed,.05),cfg=modes[s.mode];s.time=Math.min(cfg.seconds,s.time+dt);s.remaining=Math.max(0,cfg.seconds-s.time);
+ for(const key of ['cooldown','dash','invulnerable','chain','noticeClock'])s[key]=Math.max(0,s[key]-dt);
+ if(!s.chain)s.combo=0;
+ let x=Number.isFinite(input.x)?clamp(input.x,-1,1):0,y=Number.isFinite(input.y)?clamp(input.y,-1,1):0;const len=Math.hypot(x,y);if(len>0){x/=len;y/=len;s.facing={x,y};}
+ if(input.dash&&s.cooldown===0){s.dash=.2;s.cooldown=2.2;s.dashDirection={...s.facing};say(s,'西瓜衝刺！短暫無敵');}
+ const dir=s.dash>0?s.dashDirection:{x,y},speed=s.dash>0?650:225;move(s.player,dir.x*speed*dt,dir.y*speed*dt);
+ if(s.ballots.length){let target=s.ballots.reduce((a,b)=>distance(s.rival,a)<distance(s.rival,b)?a:b);const line={x1:s.rival.x,y1:s.rival.y,x2:target.x,y2:target.y};if(segmentDistance({x:CX,y:CY},line)<POOL+R+10){const a=Math.atan2(s.rival.y-CY,s.rival.x-CX),b=Math.atan2(target.y-CY,target.x-CX),diff=Math.atan2(Math.sin(b-a),Math.cos(b-a)),turn=diff>=0?1:-1;target={x:CX+Math.cos(a+turn*.65)*115,y:CY+Math.sin(a+turn*.65)*115};}const dx=target.x-s.rival.x,dy=target.y-s.rival.y,d=Math.hypot(dx,dy)||1;move(s.rival,dx/d*cfg.rival*dt,dy/d*cfg.rival*dt);}
+ for(const jet of jets(s))if(jet.active&&segmentDistance(s.player,jet)<R+9)hurt(s);
+ s.ballots=s.ballots.filter(b=>{if(distance(s.player,b)<R+12){s.combo=Math.min(6,s.combo+1);s.bestCombo=Math.max(s.bestCombo,s.combo);s.chain=3;s.collected++;const gain=(b.gold?30:10)+(s.combo-1)*2;s.votes+=gain;say(s,`${b.gold?'金票！':'搶到票！'}+${gain} · ${s.combo} 連擊`);return false;}if(distance(s.rival,b)<R+12){s.rivalVotes+=b.gold?30:10;return false;}return true;});
+ s.spawnClock+=dt;while(s.spawnClock>=.55){s.spawnClock-=.55;if(s.ballots.length<7)spawn(s);}
+ if(s.remaining<=0){s.done=true;s.paused=false;s.dash=0;say(s,outcome(s).won?'凍蒜！西瓜當選！':'選戰結束，再拚一局！');}return true;
+}
+return {W,H,CX,CY,R,POOL,modes,create,step,jets,segmentDistance,move,pause,outcome};
 });
