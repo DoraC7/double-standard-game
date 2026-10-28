@@ -208,3 +208,7 @@ A change is done when it:
 - does not introduce unnecessary data collection or persistence;
 - has received the appropriate manual checks;
 - updates documentation when user-visible behavior changed.
+
+## Taiwan Chinese copy
+
+Use Taiwan-standard Traditional Chinese for all Chinese UI text, accessible labels, metadata, feedback, exports, documentation and test descriptions. Prefer 點選／選取, 重新整理, 自動完成, 唯讀, 提示字元, 清單, 金鑰, 本機, 儲存庫, 前後文, 產生 and 資料. Write 正體中文 and describe file operations in full when abbreviations obscure the action. Retain standard technical abbreviations (AI, Git, HTML) and natural Taiwan wording; do not replace vocabulary mechanically when its meaning differs. Preserve official MOE source data and attribution, including radical forms. In learning activities, retain intentionally vague examples when learners are asked to improve them.

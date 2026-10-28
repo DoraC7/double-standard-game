@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#17352a">
-  <meta name="description" content="跟小龍蝦練習 terminal！20 個繁中任務，親手輸入指令、觀察虛擬檔案變化，再確認結果。不需安裝。">
+  <meta name="description" content="跟小龍蝦練習 terminal！20 個正體中文任務，親手輸入指令、觀察虛擬檔案變化，再確認結果。不需安裝。">
   <title>龍蝦終端機探險 · Dora playground</title>
   <link rel="stylesheet" href="terminal-quest.css">
   <script src="terminal-engine.js" defer></script>
@@ -35,18 +35,18 @@
     <section class="console" aria-label="虛擬終端機">
       <div class="console-top"><span><i></i><i></i><i></i></span><b>lobster@island — 模擬 shell</b><span aria-hidden="true">⌘</span></div>
       <div class="terminal-output" id="output" role="log" aria-label="指令與輸出" aria-live="polite" aria-relevant="additions text" tabindex="0"></div>
-      <form id="command-form" autocomplete="off"><div class="prompt-path" id="prompt-path">~/</div><div class="command-line"><span class="dollar" aria-hidden="true">$</span><label class="sr-only" for="command">輸入終端機指令，不用輸入提示符 $</label><input id="command" name="command" type="text" maxlength="500" autocapitalize="none" autocorrect="off" spellcheck="false" enterkeyhint="send" aria-describedby="input-help"><button class="run" id="run" type="submit">執行 ↵</button></div></form>
-      <div class="input-help" id="input-help">只輸入 $ 後面的指令・↑↓ 歷史・Ctrl+Space／按鈕自動補全</div>
-      <div class="terminal-tools"><button id="history-up" type="button">↑ 上一筆</button><button id="complete" type="button">自動補全</button><button id="undo" type="button" disabled>復原上一步</button><button id="open-record" type="button">文字紀錄 ↗</button></div>
+      <form id="command-form" autocomplete="off"><div class="prompt-path" id="prompt-path">~/</div><div class="command-line"><span class="dollar" aria-hidden="true">$</span><label class="sr-only" for="command">輸入終端機指令，不用輸入提示字元 $</label><input id="command" name="command" type="text" maxlength="500" autocapitalize="none" autocorrect="off" spellcheck="false" enterkeyhint="send" aria-describedby="input-help"><button class="run" id="run" type="submit">執行 ↵</button></div></form>
+      <div class="input-help" id="input-help">只輸入 $ 後面的指令・↑↓ 歷史・Ctrl+Space／按鈕自動完成</div>
+      <div class="terminal-tools"><button id="history-up" type="button">↑ 上一筆</button><button id="complete" type="button">自動完成</button><button id="undo" type="button" disabled>復原上一步</button><button id="open-record" type="button">文字紀錄 ↗</button></div>
     </section>
     <section class="reference panel" aria-label="探索工具">
       <details open><summary>🗂 檔案地圖 <span>會隨你的操作變化</span></summary><pre id="file-tree" aria-label="虛擬檔案結構"></pre><p class="small" id="location"></p></details>
-      <details><summary>⌨ 指令小抄 <span>點一下只填入，不自動執行</span></summary><div id="cheats" class="cheats"></div><p class="small">cd .. 上一層・cd ~ 回家・cd - 上個位置。ls -la／ls --all 看隱藏項目；mkdir -p 可建立多層。檔名含空格可加引號。Ctrl+Space 或「自動補全」按鈕可補齊指令或檔名；Tab 保留給鍵盤焦點移動。</p></details>
-      <details><summary>這裡和真實 terminal 有什麼不同？</summary><p class="small">這是 POSIX 風格的入門模擬，不是完整 Bash／zsh，也不是 Windows cmd。沒有執行系統指令、安裝程式或連接 GitHub。Git 只模擬 --version；uname 只顯示虛構系統資訊，不會偵測你的裝置。find 支援起點、-type 與 -name（引號內 *／? 樣式）；grep 僅實作 -F 固定文字搜尋，可加 -n／-i／-v／-c。head／tail 支援 -n 非負筆數，不模擬 tail -f。不支援管線、重導向、變數、shell 萬用字元展開或遞迴刪除。cp／mv 只處理檔案，且不直接覆蓋既有檔案；真實指令可能覆蓋。多檔指令若任一項失敗，整條不改環境；真實指令可能已完成部分項目。ls -l 的權限與時間是遊戲示意；未模擬權限控制或時間戳記。這裡 rm 有復原鈕，真實 rm 通常沒有。</p><p class="small"><a href="https://swcarpentry.github.io/shell-novice/" target="_blank" rel="noopener noreferrer">免費延伸：Software Carpentry Shell 入門 ↗</a></p></details>
+      <details><summary>⌨ 指令小抄 <span>點一下只填入，不自動執行</span></summary><div id="cheats" class="cheats"></div><p class="small">cd .. 上一層・cd ~ 回家・cd - 上個位置。ls -la／ls --all 看隱藏項目；mkdir -p 可建立多層。檔名含空白可加引號。Ctrl+Space 或「自動完成」按鈕可補齊指令或檔名；Tab 保留給鍵盤焦點移動。</p></details>
+      <details><summary>這裡和真實 terminal 有什麼不同？</summary><p class="small">這是 POSIX 風格的入門模擬，不是完整 Bash／zsh，也不是 Windows cmd。沒有執行系統指令、安裝程式或連接 GitHub。Git 只模擬 --version；uname 只顯示虛構系統資訊，不會偵測你的裝置。find 支援起點、-type 與 -name（引號內 *／? 樣式）；grep 僅實作 -F 固定文字搜尋，可加 -n／-i／-v／-c。head／tail 支援 -n 非負筆數，不模擬 tail -f。不支援管線、重導向、變數、shell 萬用字元展開或遞迴刪除。cp／mv 只處理檔案，且不直接覆蓋既有檔案；真實指令可能覆蓋。操作多個檔案的指令若任一項失敗，整條不改環境；真實指令可能已完成部分項目。ls -l 的權限與時間是遊戲示意；未模擬權限控制或時間戳記。這裡 rm 有復原鈕，真實 rm 通常沒有。</p><p class="small"><a href="https://swcarpentry.github.io/shell-novice/" target="_blank" rel="noopener noreferrer">免費延伸：Software Carpentry Shell 入門 ↗</a></p></details>
     </section>
   </div>
   <section class="reflection panel"><div><p class="eyebrow">把「做過」變成「說得出來」</p><h2>留一句自己的探險筆記</h2><p>用自己的話寫：做了什麼、用什麼結果確認、還有哪裡不懂。可以隨時寫，不用等通關。</p></div><div><label for="reflection">我的筆記（僅留在此分頁，重新整理會清空）</label><textarea id="reflection" rows="4" maxlength="4000" placeholder="我剛剛試了……&#10;我用……確認結果，因為……&#10;我還不確定……"></textarea><button class="text-button" id="notes-record" type="button">把筆記和操作紀錄一起帶走 ↗</button></div></section>
-  <footer>不限時・不用登入・無外部套件・指令與筆記不儲存、不上傳，關閉或重新整理會重置。</footer>
+  <footer>不限時・不用登入・無外部套件・指令與筆記不儲存、不上傳，關閉或重新整理會重設。</footer>
 </main>
 <dialog id="record-dialog" aria-labelledby="record-title"><div class="record-inner"><div class="record-heading"><h2 id="record-title">文字紀錄，不用截圖</h2><button id="close-record" type="button" aria-label="關閉文字紀錄">×</button></div><p>包含實際輸入、輸出、關卡證據與你自己寫的筆記；clear 不會清掉這份紀錄。</p><label class="sr-only" for="record-text">可複製的文字紀錄</label><textarea id="record-text" rows="14" readonly></textarea><div class="record-actions"><button class="primary" id="copy-record" type="button">複製文字</button><button id="download-record" type="button">下載 .txt</button></div><p id="copy-status" role="status"></p></div></dialog>
 <noscript><p class="noscript">請開啟 JavaScript 才能執行虛擬終端機。<a href="index.html">回遊戲間</a></p></noscript>

@@ -137,7 +137,7 @@
     if (command.disabled) return;
     const options = E.complete(session.env, command.value);
     if (options.length === 1) command.value = options[0];
-    else system(options.length ? '可自動補全：' + options.map(o => o.trim()).join('  ') : '沒有可自動補全的項目；可用 ls 看看名稱。');
+    else system(options.length ? '可自動完成：' + options.map(o => o.trim()).join('  ') : '沒有可自動完成的項目；可用 ls 看看名稱。');
     command.focus();
   }
   command.addEventListener('keydown', event => {
@@ -193,7 +193,7 @@
     proofs.length = 0; checkpoint = E.clone(lesson.env); output.replaceChildren();
     system('🦞 新的一趟探險開始。這次試著少看一點提示。'); renderMission(); command.focus();
   });
-  const cheatNames = { pwd:'看位置', ls:'列出內容', cd:'切換資料夾', cat:'讀文字檔', mkdir:'建立資料夾', touch:'建立空白檔', cp:'複製檔案', mv:'搬移／改名', rm:'刪除檔案', rmdir:'刪除空資料夾', find:'找檔名', grep:'找固定文字', head:'讀開頭', tail:'讀結尾', clear:'清畫面', git:'模擬版本', uname:'模擬系統資訊', help:'查說明' };
+  const cheatNames = { pwd:'看位置', ls:'列出內容', cd:'切換資料夾', cat:'讀文字檔', mkdir:'建立資料夾', touch:'建立空白檔', cp:'複製檔案', mv:'搬移／改名', rm:'刪除檔案', rmdir:'刪除空資料夾', find:'尋找檔名', grep:'找固定文字', head:'讀開頭', tail:'讀結尾', clear:'清除畫面', git:'模擬版本', uname:'模擬系統資訊', help:'查說明' };
   for (const [cmd, description] of Object.entries(cheatNames)) {
     const button = document.createElement('button'); button.type = 'button'; button.append(document.createTextNode(cmd));
     const small = document.createElement('small'); small.textContent = description; button.append(small);
@@ -242,7 +242,7 @@
     document.body.append(link); link.click(); link.remove(); setTimeout(() => URL.revokeObjectURL(url), 10000);
     $('copy-status').textContent = '已請瀏覽器下載 .txt；若未下載，可改用複製文字。';
   });
-  system('🦞 歡迎登陸 Shell Island！\n這是虛擬終端機，只會改動遊戲裡的檔案。\n看左邊（手機看上方）的任務，從第一行指令開始。\n$ 是提示符，不用輸入。輸入 help 可看支援的指令。');
+  system('🦞 歡迎登陸 Shell Island！\n這是虛擬終端機，只會改動遊戲裡的檔案。\n看左邊（手機看上方）的任務，從第一行指令開始。\n$ 是提示字元，不用輸入。輸入 help 可看支援的指令。');
   lesson.transcript.push({ note: '開始第 1 關：' + missions[0].title });
   renderMission();
 })();

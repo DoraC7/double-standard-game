@@ -22,7 +22,7 @@
     {id:'apology',tag:'龍蝦自嘲',kind:'published',prefix:'這是更正與未來意向；',answer:'是否持續改善，要看之後的行為。',wrong:['代表已完成終身可靠認證。','表示以後永遠不會再犯。'],note:'印鈔機的經理道歉套餐。這一句也適用於小龍蝦自己。',source:'emotion-printer-engine.js'},
     {id:'cosmos',tag:'心情開光',kind:'remix',prefix:'本壇今日公休，',answer:'宇宙正在更新營業時間。',wrong:['Git 自動替師父上班。','金箔滾筒請了特休。'],note:'本作新寫的荒謬喜劇，不是任何人的逐字發言。'},
     {id:'draft',tag:'進度查帳',kind:'remix',prefix:'不是沒存檔，',answer:'是靈感還在工作區。',wrong:['是 GitHub 討厭藝術。','是雲端把功德吃掉了。'],note:'靈感可以先放著；需要保存版本時，還是得真的提交。'},
-    {id:'status',tag:'進度查帳',kind:'remix',prefix:'感覺進度到了，',answer:'先問 git status 到了沒。',wrong:['直接宣布全球部署完成。','請金箔替我生成測試。'],note:'git status 只查看本地狀態，也不等於網站已發布。'},
+    {id:'status',tag:'進度查帳',kind:'remix',prefix:'感覺進度到了，',answer:'先問 git status 到了沒。',wrong:['直接宣布全球部署完成。','請金箔替我產生測試。'],note:'git status 只查看本機狀態，也不等於網站已發布。'},
     {id:'lobster',tag:'龍蝦自嘲',kind:'remix',prefix:'師父說得很有道理，',answer:'小龍蝦決定再看一次附件。',wrong:['小龍蝦當場宣布不用查證。','小龍蝦立刻把推測寫成履歷。'],note:'龍蝦以前也吹過頭，這次讓牠自己負責查帳。'},
     {id:'merit',tag:'心情開光',kind:'remix',prefix:'本日功德：',answer:'親手按下去，親眼看結果。',wrong:['先替明天的自己頒獎。','把載入動畫當作交付。'],note:'笑完也可以真的動手一下，沒有倒數也沒有扣分。'},
     {id:'merge',tag:'龍蝦自嘲',kind:'remix',prefix:'金句可以開壇，',answer:'PR 還是要合併才能上線。',wrong:['開著的 PR 會自己變網站。','說三次完成就等於部署。'],note:'這句先送給做完 PR 卻沒讓大家玩到更新的 BigMac。此站由 main 發布，合併後仍須等部署成功。'}

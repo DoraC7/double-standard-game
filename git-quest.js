@@ -23,9 +23,9 @@
     $('lesson-mode').setAttribute('aria-pressed',String(!free));$('sandbox-mode').setAttribute('aria-pressed',String(free));
     const count=finished?M.length:step+(passed&&quizPassed?1:0);$('progress').value=count;$('progress').max=M.length;$('progress-label').textContent='完成 '+count+' / '+M.length+' 關';
     $('mission-number').textContent=free?'FREE PLAY':finished?'JOURNEY COMPLETE':'MISSION '+String(step+1).padStart(2,'0');
-    $('mission-title').textContent=free?'每一版，都自己決定':finished?'會保存，也會核對與收拾！':m.title;
+    $('mission-title').textContent=free?'每一版，都自己決定':finished?'會儲存，也會核對與收拾！':m.title;
     $('goal').textContent=free?'自由試試編輯、暫存、提交、開分支與快轉合併。輸入 help 查看範圍。':finished?M.length+' 關操作與核對已完成。可下載實際紀錄，或到沙盒試著獨立重現。':m.goal;
-    $('concept').textContent=free?'沙盒不會覆蓋關卡進度；刷新會清空兩邊，想保留請先下載。':finished?'這能證明遊戲內完成的操作，不等於真實 Git 或 GitHub 設定完成。':m.concept;
+    $('concept').textContent=free?'沙盒不會覆蓋關卡進度；重新整理會清空兩邊，想保留請先下載。':finished?'這能證明遊戲內完成的操作，不等於真實 Git 或 GitHub 設定完成。':m.concept;
     $('lesson-controls').hidden=free||finished;$('free-tools').hidden=!free;$('restart').hidden=free||!finished;
     $('hint').hidden=!hint;$('hint').textContent=m.hint;
     $('feedback').textContent=passed&&!free&&!finished?'✓ 已操作並用指令核對這一關。':'';
@@ -35,7 +35,7 @@
     $('quiz').hidden=free||finished||!passed||!m.quiz;
     if(m.quiz&&!$('quiz').hidden){
       $('quiz-question').textContent=m.quiz.q;
-      $('quiz-options').replaceChildren(...m.quiz.options.map((text,i)=>{const b=document.createElement('button');b.type='button';b.textContent=text;b.disabled=quizPassed;b.onclick=()=>{quizPassed=i===m.quiz.answer;$('quiz-feedback').textContent=quizPassed?'✓ 正確；依實際保存的位置判斷。':'再看看工作區、暫存區和提交的位置。';draw();if(quizPassed)$('next').focus();};return b;}));
+      $('quiz-options').replaceChildren(...m.quiz.options.map((text,i)=>{const b=document.createElement('button');b.type='button';b.textContent=text;b.disabled=quizPassed;b.onclick=()=>{quizPassed=i===m.quiz.answer;$('quiz-feedback').textContent=quizPassed?'✓ 正確；依實際儲存的位置判斷。':'再看看工作區、暫存區和提交的位置。';draw();if(quizPassed)$('next').focus();};return b;}));
     }
   }
   function run(line){
@@ -71,7 +71,7 @@
   function mode(isFree){free=isFree;session=free?sandbox:lesson;historyIndex=session.history.length;$('command').value='';loadEditor();redrawLog();draw();}
   $('lesson-mode').onclick=()=>mode(false);$('sandbox-mode').onclick=()=>mode(true);
   $('reset-sandbox').onclick=()=>{if(!confirm('重設沙盒的檔案與版本？關卡進度不受影響。'))return;sandbox=fresh();mode(true);};
-  $('restart').onclick=()=>{if(!confirm('重開旅程會重置關卡進度；要繼續嗎？'))return;lesson=fresh();step=0;passed=quizPassed=finished=hint=false;checkpoint=E.clone(lesson.env);proofs.length=0;mode(false);};
+  $('restart').onclick=()=>{if(!confirm('重開旅程會重設關卡進度；要繼續嗎？'))return;lesson=fresh();step=0;passed=quizPassed=finished=hint=false;checkpoint=E.clone(lesson.env);proofs.length=0;mode(false);};
   const commands=['git init','git status','git add README.md','git add .','git add -A','git status -sb','git diff','git diff --staged','git diff --cached','git commit -m "更新菜單"','git log --oneline','git branch','git switch -c soup','git checkout -b soup','git switch main','git checkout main','git merge soup','git restore --staged README.md','git restore README.md','git show HEAD:notes.txt','git show :README.md','git branch -d soup','help','clear'];
   commands.forEach(text=>{const b=document.createElement('button');b.type='button';b.textContent=text;b.onclick=()=>{if($('command').disabled)return;$('command').value=text;$('command').focus();};$('cheats').append(b);});
   $('download').onclick=()=>{

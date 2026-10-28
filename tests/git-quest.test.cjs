@@ -15,7 +15,7 @@ for(const [label,create,switchBack] of [
  steps.forEach((commands,i)=>{assert.equal(Boolean(M[i].check(s,{event:'unrelated'})),false);let r;for(const c of commands)r=typeof c==='function'?c():run(s,c);assert.equal(M[i].check(s,r),true,'mission '+i);});
  assert.equal(E.clean(s),true);assert.equal(s.commits.length,3);assert.equal(s.work['README.md'],'濃湯');
 });
-test('add 保存當時快照；commit 不偷收後續工作區修改',()=>{
+test('add 儲存當時快照；commit 不偷收後續工作區修改',()=>{
  const s=init();E.edit(s,'README.md','A');run(s,'git add .');E.edit(s,'README.md','B');run(s,'git commit -m "A"');
  assert.equal(E.head(s).files['README.md'],'A');assert.equal(s.work['README.md'],'B');assert.equal(E.clean(s),false);
  assert.match(run(s,'git diff').output,/\+ B/);assert.match(run(s,'git diff --staged').output,/沒有差異/);
@@ -53,7 +53,7 @@ test('checkout 錯誤、未模擬模式及重複分支都不改環境',()=>{
  }
  assert.match(E.execute(s,'git push').output,/本模擬器尚未實作/);
 });
-test('可提交刪檔；刪除工作區內容不刪除既有版本',()=>{
+test('可提交刪除檔案；刪除工作區內容不刪除既有版本',()=>{
  const s=init();commit(s,'one');delete s.work['README.md'];run(s,'git add README.md');assert.match(run(s,'git diff --staged').output,/刪除/);run(s,'git commit -m "remove"');assert.deepEqual(E.head(s).files,{});assert.ok(s.commits[0].files['README.md']);
 });
 test('不執行 shell；不支援操作與錯誤引號不改環境',()=>{
@@ -69,7 +69,7 @@ for(const [name,options] of [
  ['long',{add:'git add --all',status:'git status --short --branch',message:'git commit --message="開張"',log:'git log --oneline --max-count=1',diff:'git diff --cached',branch:'git switch --create soup',list:'git branch --list'}],
  ['short',{add:'git add -A',status:'git status -sb',message:'git commit -m開張',log:'git log -1',diff:'git diff --cached',branch:'git checkout -b soup',list:'git branch --show-current'}],
  ['paths',{add:'git add -- ./README.md',status:'git status -s -b',message:'git commit --message 開張',log:'git log -n 1',diff:'git diff --staged',branch:'git branch soup',list:'git branch -l'}]
-])test('等效命令完整通過 10 關：'+name,()=>{
+])test('等效指令完整通過 10 關：'+name,()=>{
  const s=E.initial(),steps=[['git init'],[options.status],[options.add,options.status],[options.message,options.log],
  [()=>E.edit(s,'README.md','第二版'),'git diff'],[options.add,options.diff],['git commit -am "第二版"',options.status],
  [options.branch,...(name==='paths'?['git checkout soup']:[]),options.list],

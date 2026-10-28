@@ -91,7 +91,7 @@ window.createZhuyinSpelling = ({words, shuffle, stopAudio, award}) => {
   function renderStudy() {
     stop(); round = null; show('study');
     const level = checked('spell-level');
-    $('spelling-study-title').textContent = `${levelNames[level]}拼讀卡 · 點喇叭聽完整字音`;
+    $('spelling-study-title').textContent = `${levelNames[level]}拼讀卡 · 按喇叭聽完整字音`;
     $('spelling-word-cards').replaceChildren();
     core.pool(words, level).forEach(word => {
       const card = make('article', '', 'word-card');

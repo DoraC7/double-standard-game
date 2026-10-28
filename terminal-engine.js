@@ -2,7 +2,7 @@
 (function (root) {
   'use strict';
   const HOME = '/home/lobster';
-  const GUIDE = '歡迎來到龍蝦遊戲間！\n先看位置，再看內容，改動之後再驗證。\n資料夾用 cd 進入；文字檔用 cat 閱讀。\n檔名分大小寫。$ 是提示符，不是指令的一部分。';
+  const GUIDE = '歡迎來到龍蝦遊戲間！\n先看位置，再看內容，改動之後再驗證。\n資料夾用 cd 進入；文字檔用 cat 閱讀。\n檔名分大小寫。$ 是提示字元，不是指令的一部分。';
   const commands = ['pwd', 'ls', 'cd', 'cat', 'mkdir', 'touch', 'cp', 'mv', 'rm', 'rmdir', 'find', 'grep', 'head', 'tail', 'clear', 'git', 'uname', 'help'];
   const LOG = '09:00 INFO workshop started\n09:01 INFO read README\n09:02 ERROR missing menu.txt\n09:03 INFO checked path\n09:04 INFO created menu.txt\n09:05 ERROR upload not attempted\n09:06 INFO local checks passed\n09:07 INFO workshop ended\n';
   const help = {
@@ -88,7 +88,7 @@
   function perform(state, line) {
     const fail = message => ({ ok: false, output: message, changed: false });
     if (line.length > 500) return fail('這條指令太長了，請縮短到 500 字元內。');
-    if (/^\s*[$%]\s*/.test(line)) return fail('$／% 是提示符，不用輸入。只輸入後面的指令，例如 pwd。');
+    if (/^\s*[$%]\s*/.test(line)) return fail('$／% 是提示字元，不用輸入。只輸入後面的指令，例如 pwd。');
     const tokens = tokenize(line);
     if (!tokens.length) return { ok: true, output: '', empty: true, changed: false };
     const [cmd, ...args] = tokens.map(t=>t.text);
@@ -255,7 +255,7 @@
       for(let i=0;i<targets.length;i++){
         const path=targets[i];if(!exists(path))return fail(cmd+'：找不到 '+path);
         if(operands[i].text.endsWith('/')&&!isDir(path))return fail(cmd+'：檔案名稱後面不能加 /。');
-        if(cmd==='rm'&&isDir(path))return fail('rm：這是資料夾。本練習只用 rm 刪檔；空資料夾用 rmdir。');
+        if(cmd==='rm'&&isDir(path))return fail('rm：這是資料夾。本練習只用 rm 刪除檔案；空資料夾用 rmdir。');
         if(cmd==='rmdir'){
           if(!isDir(path))return fail('rmdir：這不是資料夾。');
           if(path==='/'||state.cwd===path||state.cwd.startsWith(path+'/'))return fail('不能刪除目前位置或它的上層資料夾。');

@@ -16,6 +16,39 @@
       let a;try{a=node.animate(frames,{duration:420,easing:'cubic-bezier(.2,.8,.2,1)',...options});}catch{return;}
       active.add(a);const clear=()=>active.delete(a);a.onfinish=clear;a.oncancel=clear;
     }
+    // Real image readiness, not a timer pretending to measure download progress.
+    // The welcome never covers links, moves focus or delays playing a game.
+    const welcome=document.querySelector('.lobby-welcome');
+    function welcomeShow(){
+      if(!welcome)return;
+      animate(welcome.querySelector('.welcome-mascot'),[{rotate:'-12deg',scale:.85},{rotate:'8deg',scale:1.12,offset:.55},{rotate:'0deg',scale:1}],{duration:750});
+      animate(welcome.querySelector('.welcome-badge'),[{scale:1.3,rotate:'-14deg',opacity:.4},{scale:1,rotate:'-6deg',opacity:1}],{duration:550});
+      animate(document.querySelector('.lobby-intro'),[{translate:'0 10px',opacity:.65},{translate:'0 0',opacity:1}],{duration:600});
+    }
+    if(welcome){
+      const headline=document.getElementById('welcome-status'),detail=document.getElementById('welcome-detail'),meter=document.getElementById('welcome-meter'),replay=document.getElementById('welcome-replay');
+      const images=[...document.images];let done=0,failed=0,settled=false;
+      const paint=()=>{meter.style.setProperty('--welcome-progress',String(images.length?done/images.length:1));};
+      headline.textContent='小龍蝦正在準備遊戲間…';detail.textContent='插圖載入中，遊戲可以直接開始。';
+      welcome.classList.add('is-loading');paint();
+      const finish=()=>{
+        settled=true;welcome.classList.remove('is-loading');welcome.classList.add('is-ready');
+        headline.textContent='歡迎來到龍蝦遊戲間！';
+        detail.textContent=failed?'部分插圖暫時無法顯示，仍可選擇遊戲。':`${cards.length} 款遊戲已在這裡，挑一款就出發。`;
+        replay.hidden=false;welcomeShow();
+      };
+      // Slow artwork must not leave a permanent "loading" announcement.
+      const deadline=setTimeout(()=>{if(!settled){welcome.classList.remove('is-loading');headline.textContent='歡迎來到龍蝦遊戲間！';detail.textContent='部分插圖還在載入，遊戲可以直接開始。';replay.hidden=false;}},2500);
+      Promise.all(images.map(async image=>{
+        try{if(image.decode)await image.decode();else if(!image.complete)await new Promise(resolve=>{image.addEventListener('load',resolve,{once:true});image.addEventListener('error',resolve,{once:true});});if(!image.naturalWidth)failed++;}
+        catch{failed++;}
+        done++;paint();
+      })).then(()=>{clearTimeout(deadline);finish();});
+      replay.addEventListener('click',()=>{
+        headline.textContent=headline.textContent==='歡迎來到龍蝦遊戲間！'?'小龍蝦向你打招呼，一起玩吧！':'歡迎來到龍蝦遊戲間！';
+        welcomeShow();
+      });
+    }
     function celebrate(){
       const windowNode=stage.querySelector('.stage-window');
       if(!allowed()||!windowNode.animate||bits.size)return;

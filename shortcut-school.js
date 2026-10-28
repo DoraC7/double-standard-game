@@ -37,7 +37,7 @@
     if(v.app==='notes'){
       const text=el('p',undefined,'note-text'+(v.selected?' selected':''));
       if(v.found){const i=v.text.indexOf(v.query);text.append(document.createTextNode(v.text.slice(0,i)),el('mark',v.query),document.createTextNode(v.text.slice(i+v.query.length)));}else text.textContent=v.text||'（這段文字已剪下）';
-      content.append(text,el('p',v.saved?'已儲存到本頁模擬檔案（重整清空）':'尚未儲存 · 僅為模擬情境','save-state'+(v.saved?' saved':'')));
+      content.append(text,el('p',v.saved?'已儲存到本頁模擬檔案（重新整理清空）':'尚未儲存 · 僅為模擬情境','save-state'+(v.saved?' saved':'')));
       if(v.selected)content.append(el('p','反白選取中','small'));
     }else{
       const grid=el('div',undefined,'file-grid');v.files.forEach(name=>{const item=el('div',undefined,'file-item'+(v.selectedFile===name?' selected':''));const icon=el('i',undefined,'file-symbol'+(name.endsWith('.txt')?' document':''));icon.setAttribute('aria-hidden','true');item.append(icon,el('span',name));grid.append(item);});content.append(grid);
@@ -69,7 +69,7 @@
   document.querySelectorAll('[data-os]').forEach(b=>b.addEventListener('click',()=>selectProfile(b.dataset.os==='linux'?$('linux-desktop').value:b.dataset.os)));
   $('linux-desktop').addEventListener('change',()=>selectProfile($('linux-desktop').value));$('reference-filter').addEventListener('change',reference);$('start').addEventListener('click',start);$('restart').addEventListener('click',start);
   $('clear').addEventListener('click',()=>{selected.clear();paintKeys();});
-  $('hint').addEventListener('click',()=>{const keys=E.hint(state);if(keys){$('hint-text').textContent='本關組合：'+chord(keys)+'。先按住修飾鍵，再按最後一鍵；這裡請點鍵帽。';$('hint-text').hidden=false;}});
+  $('hint').addEventListener('click',()=>{const keys=E.hint(state);if(keys){$('hint-text').textContent='本關組合：'+chord(keys)+'。先按住修飾鍵，再按最後一鍵；這裡請點選鍵帽。';$('hint-text').hidden=false;}});
   $('try').addEventListener('click',()=>{const r=E.submit(state,[...selected]);if(r.status==='empty'){feedback('先選一組鍵帽，再試試看。');return;}if(r.status==='wrong'){feedback('這不是本關練的組合。先看目前程式與任務；可以清空重選，或看提示。',true);return;}if(r.status==='locked')return;renderScene();if(r.status==='input'){feedback('組合正確！接著在模擬視窗的輸入框完成任務。');paintKeys();}else finishStep();});
   $('next').addEventListener('click',()=>{if(!E.next(state))return;if(state.phase==='result')result();else renderMission();});
   selectProfile('windows');

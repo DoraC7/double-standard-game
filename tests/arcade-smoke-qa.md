@@ -1,6 +1,6 @@
 # 全站冒煙檢查
 
-不需要帳號或付費服務。需 Python 3：在倉庫目錄執行 `python3 -m http.server 8765`，用瀏覽器開啟 http://localhost:8765/ 。不要用 file://。自動檢查另需 Node.js：`node --test tests/*.test.cjs`。
+不需要帳號或付費服務。需 Python 3：在儲存庫目錄執行 `python3 -m http.server 8765`，用瀏覽器開啟 http://localhost:8765/ 。不要用 file://。自動檢查另需 Node.js：`node --test tests/*.test.cjs`。
 
 ## 首頁與導覽
 

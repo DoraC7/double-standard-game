@@ -28,7 +28,7 @@ window.createZhuyinAdventure = ({symbols, shuffle, glyph, play, stopAudio, openM
     });
     $('passport-note').textContent = badges.size === stops.length
       ? '六個地方都亮起來了！可以再出發，每次都會重新洗牌。'
-      : '點地點就能出發。完成小任務，讓小島慢慢亮起來！';
+      : '點選地點就能出發。完成小任務，讓小島慢慢亮起來！';
   }
   stops.forEach(stop => {
     const b = document.createElement('button');
@@ -199,7 +199,7 @@ window.createZhuyinAdventure = ({symbols, shuffle, glyph, play, stopAudio, openM
     $('hunt-board').style.setProperty('--cols', level.cols);
     $('hunt-board').replaceChildren();
     $('hunt-question').textContent = '下一顆星星，在哪裡？';
-    $('hunt-instruction').textContent = '聽一聽，再點符號，或把小船拖過去。';
+    $('hunt-instruction').textContent = '聽一聽，再點選符號，或把小船拖過去。';
     nodes.forEach((item, index) => {
       const b = document.createElement('button');
       b.type = 'button';
@@ -238,7 +238,7 @@ window.createZhuyinAdventure = ({symbols, shuffle, glyph, play, stopAudio, openM
     // A replay or mode switch may have cancelled this recording. Never unlock stale clues.
     if (played) {
       setSailing(true);
-      $('hunt-feedback').textContent = '聽到了嗎？點小島，或拖動小船去找它。';
+      $('hunt-feedback').textContent = '聽到了嗎？點選小島，或拖動小船去找它。';
     } else {
       $('hunt-feedback').textContent = '還沒有播出線索，請再按一次喇叭。';
     }

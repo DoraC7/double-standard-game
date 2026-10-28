@@ -112,16 +112,16 @@ test('引號、中文與空白檔名；隱藏檔 ls -a；空目錄可刪', () =>
   assert.equal(s.nodes[H + '/我的 筆記'], undefined);
 });
 
-test('提示符、未關引號、shell 操作符與原型名稱安全拒絕，不執行 JavaScript', () => {
+test('提示字元、未關引號、shell 操作符與原型名稱安全拒絕，不執行 JavaScript', () => {
   const s = E.initial();
-  assert.match(E.execute(s, '$ pwd').output, /提示符/);
+  assert.match(E.execute(s, '$ pwd').output, /提示字元/);
   for (const line of ['% ls', 'cat "README.txt', 'pwd; rm x', 'pwd | cat x', 'touch x > y', 'echo $(pwd)', 'rm *', 'toString', '__proto__', 'constructor']) {
     const before = E.clone(s); assert.equal(E.execute(s, line).ok, false, line); assert.deepEqual(s, before);
   }
   assert.equal(run(s, 'help __proto__').output, '沒有這個指令的說明。');
 });
 
-test('自動補全命令與資料夾，不改動環境；多個候選不擅自選擇', () => {
+test('自動完成指令與資料夾，不改動環境；多個候選不擅自選擇', () => {
   const s = E.initial(), before = E.clone(s);
   assert.deepEqual(E.complete(s, 'pw'), ['pwd ']);
   assert.deepEqual(E.complete(s, 'cd ar'), ['cd arcade/']);
@@ -177,7 +177,7 @@ test('mkdir -p 多層／既存目錄；多檔 touch、cp、mv、cat、rm、rmdir
  run(s,'rm a/b/x a/b/y a/x a/y');run(s,'rmdir a/b/c a/b a other');
  assert.equal(s.nodes[H+'/a'],undefined);
 });
-test('多檔操作任何失敗均整條復原；不靜默覆蓋，保留沙盒空間限制',()=>{
+test('多個檔案的操作任何失敗均整條復原；不靜默覆蓋，保留沙盒空間限制',()=>{
  for(const c of ['mkdir made arcade','mkdir -p made arcade/README.txt/child','touch made missing/file','cp arcade/README.txt missing other/','mv downloads/hello.txt missing arcade/','rm downloads/hello.txt missing','rmdir downloads arcade','touch ""','mkdir -p ""']){
   const s=E.initial(),before=E.clone(s);assert.equal(E.execute(s,c).ok,false,c);assert.deepEqual(s,before,c);
  }
@@ -203,7 +203,7 @@ test('uname 長旗標與 git -v 可核對版本；沒有偵測真實裝置',()=>
  for(const c of ['uname --nodename','uname --kernel-release','uname --kernel-version'])assert.match(run(s,c).output,/遊戲模擬/);
  assert.ok(missions[12].check(s,run(s,'git -v')));assert.deepEqual(s,before);
 });
-test('自動補全會跳脫空白檔名，結果可直接執行；不存在路徑不丟例外',()=>{
+test('自動完成會跳脫空白檔名，結果可直接執行；不存在路徑不丟例外',()=>{
  const s=E.initial();run(s,'mkdir "my notes"');const choices=E.complete(s,'cd my');assert.deepEqual(choices,['cd my\\ notes/']);run(s,choices[0]);assert.equal(s.cwd,H+'/my notes');
  assert.deepEqual(E.complete(s,'cat missing/sub/'),[]);
 });

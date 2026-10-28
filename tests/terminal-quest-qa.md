@@ -27,7 +27,7 @@ No claim of physical-device, Safari or real shell/Git execution testing. This ga
 
 ## Follow-up: terminology and uname — 2026-10-20
 
-- Replaced 補完 with 自動補全 in UI, feedback, and documentation. Ctrl+Space/button still complete; Tab still moves focus to Run.
+- Replaced 補完 with 自動完成 in UI, feedback, and documentation. Ctrl+Space/button still complete; Tab still moves focus to Run.
 - Added explicitly fictional `uname` information with POSIX-style `-a`, `-s`, `-n`, `-r`, `-v`, `-m` flags; no device detection. Unsupported commands now explain the simulator limitation rather than implying a real command does not exist.
 - `node --test tests/terminal-quest.test.cjs`: 15/15 passed, including all 14 missions and new uname flag/error/non-mutation checks.
 - Focused local Chromium checks at 1365×950, 390×844, 320×640, and 844×390: completion button/Ctrl+Space, Tab focus, uname output/help, unsupported-command guidance, transcript export, lesson/sandbox isolation, lobby link, no horizontal overflow or page runtime errors. Mobile screenshot inspected.
@@ -38,9 +38,9 @@ No claim of physical-device, Safari or real shell/Git execution testing. This ga
 
 - 全站 `node --test tests/*.test.cjs`：62/62 通過；其中 Git 22 項、終端機 24 項。引擎測試包含 6 條 Git 完整 10 關路線、3 條終端機完整 14 關路線。
 - 本機 HTTP server + 主機既有獨立 Chromium／Playwright：1280×900 與 390×844 各自用新增等效指令完整走過 Git 10/10、終端機 14/14；觀念題錯答不前進，正答才前進。無 pageerror。
-- 桌面／手機均實際下載並讀回兩款 .txt，確認保留原始等效指令、通關證據與玩家自寫筆記。沙盒隔離、復原、clear 保留紀錄、跳脫空白名稱自動補全、↑ 歷史與 Tab 焦點均通過。
+- 桌面／手機均實際下載並讀回兩款 .txt，確認保留原始等效指令、通關證據與玩家自寫筆記。沙盒隔離、復原、clear 保留紀錄、跳脫空白名稱自動完成、↑ 歷史與 Tab 焦點均通過。
 - 兩尺寸的兩款遊戲與首頁無水平溢位；桌面／手機完整截圖目視檢查；reduced-motion 開啟下可操作。首頁仍有 10 款遊戲。
-- 額外以真正的本機 Git 在獨立暫存倉庫對照 9 項短格式狀態、暫存、commit -am 與分支切換結果，符合已宣告子集。遊戲比真實 Git 更嚴格的乾淨工作目錄要求仍保留，不以真實 Git 可切換推論遊戲必須放行。
+- 額外以真正的本機 Git 在獨立暫存儲存庫對照 9 項短格式狀態、暫存、commit -am 與分支切換結果，符合已宣告子集。遊戲比真實 Git 更嚴格的乾淨工作目錄要求仍保留，不以真實 Git 可切換推論遊戲必須放行。
 - OpenClaw browser 實測仍拒絕 loopback；未改動導覽政策，改用主機既有獨立 Chromium。未安裝專案依賴。
 - 這是修正分支的驗證；尚未合併／部署，不宣稱已上正式站或實體手機／Safari 驗證。
 
@@ -52,9 +52,9 @@ No claim of physical-device, Safari or real shell/Git execution testing. This ga
 - 全站 `node --test tests/*.test.cjs`：74/74 通過。新增 `practice-expansion.test.cjs` 的 12 項測試涵蓋兩條完整 Git 16 關路線、終端機 20 站、還原來源／錯誤原子化、show 讀取位置、安全刪分支、過期差異證據、find／grep／head／tail。
 - 本機 HTTP + 既有獨立 Chromium／Playwright，在 1280×900、390×844 透過真實表單輸入完成 Git 16/16、終端機 20/20；每題觀念題先錯答、再正答，錯答不前進。無 pageerror。
 - Git 取消暫存後按 Undo，再 status 不會通過；重來本關後需重新操作。終端機 head 後重來，再單獨 tail 不通過，重新 head／tail 才通過；證據確實清除。
-- 兩尺寸都下載並讀回兩款 .txt，核對實際指令、新關卡證據與使用者自寫筆記；clear 後早期指令仍在匯出紀錄。沙盒隔離、Undo、跳脫空白的自動補全、歷史與 Tab 焦點正常。
+- 兩尺寸都下載並讀回兩款 .txt，核對實際指令、新關卡證據與使用者自寫筆記；clear 後早期指令仍在匯出紀錄。沙盒隔離、Undo、跳脫空白的自動完成、歷史與 Tab 焦點正常。
 - 目視檢查新 Git 雙差異關的手機完整截圖與終端機日誌關的桌面完整截圖。兩尺寸的兩款與首頁無水平溢位。
 - 額外在 320×640 與 844×390 展開指令小抄、切沙盒，無水平溢位、Run 可用、localStorage／sessionStorage 無新增；使用 reduced-motion。
-- 獨立暫存參考倉庫與文字檔，用真正本機 Git、find、grep、head、tail 做 16 項對照：restore 工作區／暫存區／兩區、取消新檔暫存、show 兩位置、安全刪指標、讀日誌與找檔結果，在宣告子集內一致。
+- 獨立暫存參考儲存庫與文字檔，用真正本機 Git、find、grep、head、tail 做 16 項對照：restore 工作區／暫存區／兩區、取消新檔案的暫存、show 兩位置、安全刪指標、讀日誌與尋找檔案結果，在宣告子集內一致。
 - JavaScript 語法與 `git diff --check` 通過。未新增依賴、網路呼叫或資料持久儲存。OpenClaw browser 拒絕 loopback，使用主機既有的獨立 Chromium，未更改導覽政策。
-- PR 基於尚未合併的 #20，相容性修正需先合入。此為擴充分支本機驗證，尚未部署；未驗證實體手機／Safari。
+- PR 基於尚未合併的 #20，相容性修正需先合併至。此為擴充分支本機驗證，尚未部署；未驗證實體手機／Safari。

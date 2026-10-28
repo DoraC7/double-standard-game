@@ -14,7 +14,7 @@ GitHub Pages：<https://dorac7.github.io/double-standard-game/>。同一份遊�
 
 可自由選案、隨機辦案、重練待釐清案件。每步有方向提示與具體解釋；可寫自己的推理筆記並下載 UTF-8 文字紀錄。保留初次核對與最近重練結果，不把重練當初次答對。自由文字不依字數、關鍵字或範例相似度評分；完成與選擇結果不代表智力、心理或人格評分。無倒數，鍵盤與觸控皆可操作。
 
-所有情境、線索與回饋預先編寫，不連接 AI，不使用真實人物的事件作題目。選擇與筆記只留在分頁記憶體，不上傳或自動保存，重整即清空；需保留可自行下載。方法靈感與延伸閱讀：[Harvard Project Zero / See, Think, Wonder](https://pz.harvard.edu/resources/see-think-wonder)、[Claim, Support, Question](https://pz.harvard.edu/resources/claim-support-question)。不是官方教材或影片內容改編。
+所有情境、線索與回饋預先編寫，不連接 AI，不使用真實人物的事件作題目。選擇與筆記只留在分頁記憶體，不上傳或自動儲存，重新整理即清空；需保留可自行下載。方法靈感與延伸閱讀：[Harvard Project Zero / See, Think, Wonder](https://pz.harvard.edu/resources/see-think-wonder)、[Claim, Support, Question](https://pz.harvard.edu/resources/claim-support-question)。不是官方教材或影片內容改編。
 
 部署檔案：`thinking-lab.html`、`thinking-lab.css`、`thinking-lab.js`、`thinking-cases.js`、`thinking-lab.svg`。無外部套件或網路執行依賴。
 
@@ -32,7 +32,7 @@ GitHub Pages：<https://dorac7.github.io/double-standard-game/>。同一份遊�
 
 ## 多拉甩尾俱樂部
 
-「多拉甩尾俱樂部」：<https://dorac7.github.io/double-standard-game/mini-kart.html>。純 Canvas 原創偽 3D 單機卡丁車，花園、海岸、夜市三條路；兜風 2 圈或正式賽 3 圈，自動加速、左右轉向、按住甩尾後放開衝刺。星星只記收集數，道具箱隨機給護盾或加速，香蕉／路障讓車暫時變慢；有 3 台電腦對手。方向鍵或 A/D 轉向、空白鍵或 Shift 甩尾、P 暫停；手機可按住按鍵或在賽道拖動。切換分頁與視窗失焦自動暫停。重玩重新生成障礙和道具，無帳號／持久儲存。
+「多拉甩尾俱樂部」：<https://dorac7.github.io/double-standard-game/mini-kart.html>。純 Canvas 原創偽 3D 單機卡丁車，花園、海岸、夜市三條路；兜風 2 圈或正式賽 3 圈，自動加速、左右轉向、按住甩尾後放開衝刺。星星只記收集數，道具箱隨機給護盾或加速，香蕉／路障讓車暫時變慢；有 3 台電腦對手。方向鍵或 A/D 轉向、空白鍵或 Shift 甩尾、P 暫停；手機可按住按鍵或在賽道拖動。切換分頁與視窗失焦自動暫停。重玩重新產生障礙和道具，無帳號／持久儲存。
 
 ## 過動大挑戰
 
@@ -46,10 +46,10 @@ GitHub Pages：<https://dorac7.github.io/double-standard-game/>。同一份遊�
 - 符號花園：聽音、逐筆看寫法。
 - 聽音找朋友：每局 6 題，起步 2 選 1、進階 4 選 1。
 - 翻翻配對：2／4／6 對卡片，翻牌聽音、記住位置；配錯由玩家決定何時蓋回，不限時。
-- 小島尋寶：聽錄音後點島嶼，或拖動小船；三張地圖分別有 4／9／12 座島、收集 3／4／5 顆星，收齊後親手開寶箱。
+- 小島尋寶：聽錄音後點選島嶼，或拖動小船；三張地圖分別有 4／9／12 座島、收集 3／4／5 顆星，收齊後親手開寶箱。
 - 聲調小火車：橫式或直式注音，一聲到輕聲各一題。只練符號與標注，不是聽音辨調或完整拼讀課程。
 
-探索護照以完成任務解鎖五枚徽章（花園需親手點選三個不同符號）；切換分頁不會自動解鎖。所有玩法一開始都可選，不強迫依序過關；重新整理後護照重置。無倒數、可重試、無合成語音或麥克風。拖曳之外保留點選與鍵盤操作；切換瀏覽器分頁時停止聲音，尋寶須重播線索才能繼續。
+探索護照以完成任務解鎖五枚徽章（花園需親手點選三個不同符號）；切換分頁不會自動解鎖。所有玩法一開始都可選，不強迫依序過關；重新整理後護照重設。無倒數、可重試、無合成語音或麥克風。拖曳之外保留點選與鍵盤操作；切換瀏覽器分頁時停止聲音，尋寶須重播線索才能繼續。
 
 資料核對、教材範圍與 CC BY 4.0 姓名標示見 [ZHUYIN-SOURCES.md](ZHUYIN-SOURCES.md)。原始音檔與授權聲明隨站發布，不依賴教育部網站即時載入。驗證資料可執行 `node --test tests/zhuyin-data.test.cjs`。
 
@@ -72,7 +72,7 @@ node --test tests/zhuyin-data.test.cjs tests/zhuyin-spelling.test.cjs
 
 ## ADHD 日常賓果
 
-`adhd-bingo.html`、`adhd-bingo.css`、`adhd-bingo-data.js`、`adhd-bingo.js` 與 `bingo.svg`：40 則原創繁中敘述，3×3／5×5 均衡抽題、自選勾選、自由格、橫直斜連線、重抽、清除、一層復原、各格生活小提示。可在本機產生 PNG（保留非診斷說明）；同款空白卡連結只含卡號與尺寸，不含勾選。無帳號、依賴、持久儲存或答題上傳，刷新清空。
+`adhd-bingo.html`、`adhd-bingo.css`、`adhd-bingo-data.js`、`adhd-bingo.js` 與 `bingo.svg`：40 則原創正體中文敘述，3×3／5×5 均衡抽題、自選勾選、自由格、橫直斜連線、重抽、清除、一層復原、各格生活小提示。可在本機產生 PNG（保留非診斷說明）；同款空白卡連結只含卡號與尺寸，不含勾選。無帳號、依賴、持久儲存或答題上傳，重新整理清空。
 
 這是趣味自我觀察，不是 ADHD 篩檢、診斷或治療。格數與連線沒有醫療意義；不給任何人預設勾選。玩法、資料來源與隱私邊界見 [ADHD-BINGO-SOURCES.md](ADHD-BINGO-SOURCES.md)。
 
@@ -83,17 +83,17 @@ node --test tests/zhuyin-data.test.cjs tests/zhuyin-spelling.test.cjs
 
 試玩：<https://dorac7.github.io/double-standard-game/terminal-quest.html>。
 
-20 站繁中入門任務，親手操作 `pwd`、`ls`、`cd`、`cat`、`mkdir`、`touch`、`cp`、`mv`、`rm`、`clear` 與模擬 `git --version`。建立、複製、改名、刪除後需再用讀取指令核對；五題觀念確認分辨建立與進入、複製與搬移、清畫面與刪檔、查版本與安裝。接著完成隱藏檔、巢狀目錄、空白檔名、find 找檔、grep 查日誌、head／tail 讀取局部內容，共 20 站。find 支援 -type、-name（引號內 *／?）；grep 僅固定文字 -F，支援 -n／-i／-v／-c 及對應長選項；head／tail 接受 -n／--lines／-2 等非負筆數（最多 10000 行），不實作 tail -f。不只比對固定字串，接受等效的相對／絕對路徑；也接受 `ls -la`／`--all`、`mkdir -p`／`--parents`、`cd -`、`pwd -L/-P`、`git -v`、多檔操作及用 `--` 分隔選項。`ls -l` 的權限／時間僅為示意；多檔指令失敗時整條不改環境，與真實指令可能部分成功不同。
+20 站正體中文入門任務，親手操作 `pwd`、`ls`、`cd`、`cat`、`mkdir`、`touch`、`cp`、`mv`、`rm`、`clear` 與模擬 `git --version`。建立、複製、改名、刪除後需再用讀取指令核對；五題觀念確認分辨建立與進入、複製與搬移、清除畫面與刪除檔案、查版本與安裝。接著完成隱藏檔、巢狀目錄、空白檔名、find 尋找檔案、grep 查日誌、head／tail 讀取局部內容，共 20 站。find 支援 -type、-name（引號內 *／?）；grep 僅固定文字 -F，支援 -n／-i／-v／-c 及對應長選項；head／tail 接受 -n／--lines／-2 等非負筆數（最多 10000 行），不實作 tail -f。不只比對固定字串，接受等效的相對／絕對路徑；也接受 `ls -la`／`--all`、`mkdir -p`／`--parents`、`cd -`、`pwd -L/-P`、`git -v`、多個檔案的操作及用 `--` 分隔選項。`ls -l` 的權限／時間僅為示意；操作多個檔案的指令失敗時整條不改環境，與真實指令可能部分成功不同。
 
-- 每關兩段按需提示、不限時、不扣分；可復原最近一次位置／檔案改動、重來本關。
-- 獨立自由沙盒，切回關卡保留本分頁進度。↑↓ 呼叫指令歷史，Ctrl+Space 或按鈕自動補全指令／檔名；Tab 正常移動焦點。小抄點擊只填入、不自動執行。支援觸控與鍵盤。
+- 每關兩段視需要提供的提示、不限時、不扣分；可復原最近一次位置／檔案改動、重來本關。
+- 獨立自由沙盒，切回關卡保留本分頁進度。↑↓ 呼叫指令歷史，Ctrl+Space 或按鈕自動完成指令／檔名；Tab 正常移動焦點。小抄點選只填入、不自動執行。支援觸控與鍵盤。
 - 即時虛擬檔案地圖與目前路徑；操作紀錄可複製或下載 UTF-8 `.txt`，`clear` 不會抹掉匯出紀錄。玩家可加入自己寫的筆記，遊戲不代寫。
-- 所有檔案、指令、進度與筆記只在本分頁記憶體；不持久儲存、不上傳。刷新／關閉即重置；需保留時請自行匯出。
+- 所有檔案、指令、進度與筆記只在本分頁記憶體；不持久儲存、不上傳。重新整理／關閉即重設；需保留時請自行匯出。
 - 不是完整 shell，也不執行任何真正的電腦指令。POSIX 風格，非 Windows cmd；Git 只模擬版本，不能驗證本機安裝或 GitHub 登入。`uname` 與 `uname -a`（另支援 `-s`、`-n`、`-r`、`-v`、`-m`，可合併或使用對應長選項）只顯示明確標示的虛構系統資訊，不偵測裝置。只處理列出的操作，不支援管線、重導向、變數、shell 萬用字元展開、遞迴改動操作。`cp`／`mv` 僅支援檔案且拒絕直接覆蓋；真實指令可能覆蓋。`rm` 的遊戲復原鈕不代表真實 shell 有相同功能。
 
 新增檔案：`terminal-quest.html`、`terminal-quest.css`、`terminal-quest.js`、`terminal-engine.js`、`terminal-missions.js`、`terminal.svg`。全部為無依賴靜態資產，與首頁一併發布。
 
-既有方案預查：[Bashcrawl](https://github.com/notklaatu/bashcrawl) 使用實際 POSIX shell／外部 Binder；[xterm.js](https://github.com/xtermjs/xterm.js) 是終端機顯示元件而非教學引擎。為保持原站免安裝、無後端、繁中與無依賴，本遊戲獨立實作簡化的虛擬檔案系統，未複製上述專案的程式或題目。
+既有方案預查：[Bashcrawl](https://github.com/notklaatu/bashcrawl) 使用實際 POSIX shell／外部 Binder；[xterm.js](https://github.com/xtermjs/xterm.js) 是終端機顯示元件而非教學引擎。為保持原站免安裝、無後端、正體中文與無依賴，本遊戲獨立實作簡化的虛擬檔案系統，未複製上述專案的程式或題目。
 
 檢查引擎、檔案效果、錯誤與完整通關：
 
@@ -106,13 +106,13 @@ node --test tests/terminal-quest.test.cjs
 
 試玩：<https://dorac7.github.io/double-standard-game/git-quest.html>。
 
-16 關繁中模擬練習：初始化、status、add、commit、diff／diff --staged、log、分支、switch／checkout 與 fast-forward merge。建立並切換分支可用 `git switch -c soup` 或 `git checkout -b soup`；切回主線可用 `git switch main` 或 `git checkout main`，也接受先 branch 再切換。也接受 `status -sb`、`add -A/--all/-u/--update`、多檔和 `./檔名`、`diff --cached`、`commit --message`／`-m訊息`／`-am`、`log -n 1`／`-1`／`--max-count=1`、`branch --list/--show-current`、`switch --create` 與 `merge --ff-only`。`commit -a` 只收追蹤檔修改，不收未追蹤檔。新增 6 關練習取消暫存、還原工作區、show 讀取提交、雙份修改、普通 commit 保留草稿，以及刪除已合入主線的本地分支。支援 `restore [--staged/-S] [--worktree/-W] [--] 檔案…`／`.`，可合併為 -SW，不支援 --source；`show [HEAD|分支|完整模擬提交 ID][:檔名]`／`:檔名`；`branch -d/--delete` 只允許已合入目前分支的本地指標（不模擬 upstream）。用內建編輯器改菜單，觀察工作區、暫存區與 HEAD 三份內容；每段操作需再用讀取指令核對，五題觀念題區分暫存快照與工作區、遊戲內合併與遠端發布。
+16 關正體中文模擬練習：初始化、status、add、commit、diff／diff --staged、log、分支、switch／checkout 與 fast-forward merge。建立並切換分支可用 `git switch -c soup` 或 `git checkout -b soup`；切回主線可用 `git switch main` 或 `git checkout main`，也接受先 branch 再切換。也接受 `status -sb`、`add -A/--all/-u/--update`、多個檔案和 `./檔名`、`diff --cached`、`commit --message`／`-m訊息`／`-am`、`log -n 1`／`-1`／`--max-count=1`、`branch --list/--show-current`、`switch --create` 與 `merge --ff-only`。`commit -a` 只收追蹤檔修改，不收未追蹤檔。新增 6 關練習取消暫存、還原工作區、show 讀取提交、雙份修改、普通 commit 保留草稿，以及刪除已合併至主線的本機分支。支援 `restore [--staged/-S] [--worktree/-W] [--] 檔案…`／`.`，可合併為 -SW，不支援 --source；`show [HEAD|分支|完整模擬提交 ID][:檔名]`／`:檔名`；`branch -d/--delete` 只允許已合併至目前分支的本機指標（不模擬 upstream）。用內建編輯器改菜單，觀察工作區、暫存區與 HEAD 三份內容；每段操作需再用讀取指令核對，五題觀念題區分暫存快照與工作區、遊戲內合併與遠端發布。
 
-獨立沙盒、指令歷史、小抄、提示、重來本關、最近環境改動復原、實際操作紀錄與自寫筆記下載。進度、檔案、版本和筆記只存在本分頁記憶體，無持久儲存或上傳；刷新即清空。
+獨立沙盒、指令歷史、小抄、提示、重來本關、最近環境改動復原、實際操作紀錄與自寫筆記下載。進度、檔案、版本和筆記只存在本分頁記憶體，無持久儲存或上傳；重新整理即清空。
 
 不是完整 Git 或 shell，不執行系統指令或連接 GitHub。不模擬 remote／push／pull／rebase／reset／三方合併或衝突；checkout 只支援分支切換與 -b 建立分支，不含還原檔案、指定起點或 detached HEAD。只支援根目錄文字檔與單一父提交、快轉合併。提交編號是模擬流水號，非真實雜湊。切換與合併要求乾淨工作目錄，比真實 Git 更嚴格。差異以整份舊／新文字顯示；未追蹤檔不列入 diff。初始分支固定 main；分支名稱可包含 `/`（例如 feature/soup）。這仍是列明範圍的教學子集，未知選項不代表真實指令不合法。上限為每檔 6000 字、15 個工作檔、15 分支、80 提交；復原按鈕不代表真實 Git 有相同功能。
 
-部署須帶上 `git-quest.html`、`git-quest.css`、`git-quest.js`、`git-engine.js`、`git-missions.js`、`git.svg`，並保留共用的 `terminal-quest.css`。不新增外部依賴。終端機探險仍只模擬 git --version；更多 Git 模擬練習由此獨立入口提供。免費延伸：[Learn Git Branching](https://learngitbranching.js.org/)、[Software Carpentry Shell 入門](https://swcarpentry.github.io/shell-novice/)。沿用現有繁中無依賴遊戲，未複製外部課程題目或引入其程式。
+部署須帶上 `git-quest.html`、`git-quest.css`、`git-quest.js`、`git-engine.js`、`git-missions.js`、`git.svg`，並保留共用的 `terminal-quest.css`。不新增外部依賴。終端機探險仍只模擬 git --version；更多 Git 模擬練習由此獨立入口提供。免費延伸：[Learn Git Branching](https://learngitbranching.js.org/)、[Software Carpentry Shell 入門](https://swcarpentry.github.io/shell-novice/)。沿用現有正體中文無依賴遊戲，未複製外部課程題目或引入其程式。
 
 引擎與完整通關檢查：`node --test tests/git-quest.test.cjs`。
 
@@ -153,8 +153,8 @@ python3 -m http.server 8765
 - `double-standard.html`：原雙標遊戲的畫面、流程和計分。
 - `start-small.html`、`start-small.css`、`start-small.js`：拖延啟動遊戲。
 - `mini-kart.html`、`mini-kart.css`、`mini-kart.js`、`kart.svg`：迷你卡丁車與原創插圖。
-- `frogger.html`、`frogger.css`、`frogger.js`、`frogger.svg`：青蛙過街，躲車、搭浮木渡河，將五隻青蛙送回家；每局不保存紀錄。
-- `rocket.svg`、`masks.svg`、`box.svg`：本地向量插圖，不依賴外部字型或圖片服務。
+- `frogger.html`、`frogger.css`、`frogger.js`、`frogger.svg`：青蛙過街，躲車、搭浮木渡河，將五隻青蛙送回家；每局不儲存紀錄。
+- `rocket.svg`、`masks.svg`、`box.svg`：專案內的向量插圖，不依賴外部字型或圖片服務。
 - `scenarios.js`：情境題庫，包括替別人和換自己時的敘述。
 - `choices.js`：每案兩輪共用的具體行動選項。
 - `v2.html`、`v3.html`：早期原型存檔，不是目前遊戲入口。
@@ -164,20 +164,20 @@ python3 -m http.server 8765
 
 ## 部署
 
-這是靜態網站。GitHub Pages 可發布倉庫根目錄的 `index.html` 作共同入口；所有二十二款遊戲的 HTML、CSS 和 JS 必須同時發布。啟用 Pages 後，分享連結會自動以當前網站網址產生。發布設定由倉庫擁有者決定。
+這是靜態網站。GitHub Pages 可發布儲存庫根目錄的 `index.html` 作共同入口；所有二十二款遊戲的 HTML、CSS 和 JS 必須同時發布。啟用 Pages 後，分享連結會自動以當前網站網址產生。發布設定由儲存庫擁有者決定。
 
 ## 授權
 
-尚未選定開源授權；公開倉庫不等於授權他人再利用。由倉庫擁有者確認後再加入 `LICENSE`。
+尚未選定開源授權；公開儲存庫不等於授權他人再利用。由儲存庫擁有者確認後再加入 `LICENSE`。
 
 
 ## 參與修正與 Pull Request
 
 1. 選一個 [Issue](https://github.com/DoraC7/double-standard-game/issues)，先讀需求與 [AGENTS.md](AGENTS.md) 的相容性、素材姓名標示與隱私規則。
-2. 把倉庫 clone 到本機（沒有寫入權限時先在 GitHub Fork，再 clone 自己的倉庫）。在倉庫目錄建立分支，例如 `git switch -c fix/lobby-count`。
+2. 把儲存庫 clone 到本機（沒有寫入權限時先在 GitHub Fork，再 clone 自己的儲存庫）。在儲存庫目錄建立分支，例如 `git switch -c fix/lobby-count`。
 3. 做小範圍修改，依「本機啟動」開站。執行 `node --test tests/*.test.cjs`，再依 [全站冒煙檢查](tests/arcade-smoke-qa.md) 和 [推薦視窗檢查](tests/arcade-dialog-qa.md) 驗證受影響流程。首頁專用測試為 `node --test tests/arcade.test.cjs`。需要 Node.js 才能執行測試，遊玩不需要。
 4. 檢查 `git diff`，用 `git add <修改的檔案>`、`git commit -m "Fix lobby count"`、`git push -u origin fix/lobby-count` 上傳。
-5. 到 GitHub 建立以原倉庫 `main` 為目標的 Pull Request，引用 Issue（例如 `Closes #9`），附上實際驗證結果；未做的檢查要註明。不要宣稱未設定的 CI 或格式檢查已通過。
+5. 到 GitHub 建立以原儲存庫 `main` 為目標的 Pull Request，引用 Issue（例如 `Closes #9`），附上實際驗證結果；未做的檢查要註明。不要宣稱未設定的 CI 或格式檢查已通過。
 
 PR 說明範例（以實際結果取代括號）：
 
@@ -196,7 +196,7 @@ PR 說明範例（以實際結果取代括號）：
 
 「如來紫衣師父多拉」是群聊梗改編的虛構喜劇角色。扮演 BigMac 分行經理，接 8 張虛構訂單，選擇彩虹屁開光、誠實接話或查證再印。管理 1,100 點虛擬 Token、發行 EV 與心情熱度，挑戰 20,000 EV 的試營運目標；沒有倒數。金箔滾筒花 120 Token，將後續面額翻倍，但不增加證據。第 4、8 單按當時累計的無依據評價，每張回收 1,000 EV（以餘額為限），不退 Token；會預留後續最低接話費，避免卡死。
 
-可查看逐單流水帳、下載本局 UTF-8 文字帳單與重玩。查證只支持附件所示的具體事項，沒有附件時保留待證；讓人開心與評語是否有依據分開記錄。所有訂單、評語和數值為遊戲設計，不是任何人的人格評價或心理測量；EV 不能兌現、沒有實際 API 費用。無音效、帳號、儲存或玩家資料上傳，刷新清空。
+可查看逐單流水帳、下載本局 UTF-8 文字帳單與重玩。查證只支持附件所示的具體事項，沒有附件時保留待證；讓人開心與評語是否有依據分開記錄。所有訂單、評語和數值為遊戲設計，不是任何人的人格評價或心理測量；EV 不能兌現、沒有實際 API 費用。無音效、帳號、儲存或玩家資料上傳，重新整理清空。
 
 資產：`emotion-printer.html`、`emotion-printer.css`、`emotion-printer.js`、`emotion-printer-engine.js`、`emotion-printer.svg`。沿用現有無依賴靜態遊戲結構，未引入外部平台或付費服務。引擎檢查：`node --test tests/emotion-printer.test.cjs`；人工驗證見 [QA](tests/emotion-printer-qa.md)。
 
@@ -208,23 +208,23 @@ PR 說明範例（以實際結果取代括號）：
 
 - 抽籤典藏：有「極簡三句」「等等系列」「經典加映」專區、依分類抽卡、一輪不重複、收藏／取消收藏、複製附帶喜劇標示的文字、下載自選 UTF-8 文字典藏。剪貼簿不可用時提供手動複製框。
 - 金句接龍：每局隨機 8 張不重複題目，三選一、答後揭曉、完整回顧、可重玩。分數只代表本局接梗，不是人格或能力測量。
-- 同張卡連結用 `#q=卡片代號`，不包含玩家收藏或作答；不自動發布或發送。所有收藏、紀錄只留在本分頁記憶體，刷新清空，無登入、追蹤、持久儲存或資料上傳。
+- 同張卡連結用 `#q=卡片代號`，不包含玩家收藏或作答；不自動發布或發送。所有收藏、紀錄只留在本分頁記憶體，重新整理清空，無登入、追蹤、持久儲存或資料上傳。
 
 隨站發布 `dora-quotes.html`、`.css`、`.js`、`dora-quotes-data.js`、`dora-quotes.svg`。資料來源與完整結算檢查：`node --test tests/dora-quotes.test.cjs`。沿用現有無依賴靜態架構，未引入外部服務或套件。
 
 ## 遊戲間互動小動畫
 
-大廳的小龍蝦可點擊打招呼；依心情篩選時有短轉場，遊戲封面在滑鼠或鍵盤聚焦時呈現不同動效。各遊戲加入抽卡、回條出紙、線索／題目揭示、數值跳動與結算短動畫，不改變玩法、分數或操作時機。
+大廳的小龍蝦可點選打招呼；依心情篩選時有短轉場，遊戲封面在滑鼠或鍵盤聚焦時呈現不同動效。各遊戲加入抽卡、回條出紙、線索／題目揭示、數值跳動與結算短動畫，不改變玩法、分數或操作時機。
 
-共用 `arcade-fx.css`、`arcade-fx.js` 與大廳原創向量小龍蝦 `arcade-lobster.svg`，需隨所有遊戲一起部署。頁尾可關閉小動畫（只影響目前分頁，不保存）；雙標遊戲沿用原動畫按鈕。尊重系統減少動態效果，離開分頁會停止新增裝飾動畫，不添加音效、儲存、追蹤或外部依賴。
+共用 `arcade-fx.css`、`arcade-fx.js` 與大廳原創向量小龍蝦 `arcade-lobster.svg`，需隨所有遊戲一起部署。頁尾可關閉小動畫（只影響目前分頁，不儲存）；雙標遊戲沿用原動畫按鈕。尊重系統減少動態效果，離開分頁會停止新增裝飾動畫，不加入音效、儲存、追蹤或外部依賴。
 
 ## 電腦快速鍵小學堂
 
 試玩：<https://dorac7.github.io/double-standard-game/shortcut-school.html>。
 
-Windows、macOS、Linux GNOME／KDE 的圖形介面快捷鍵，每個平台 12 個獨立情境：全選、複製、貼上、剪下文字、復原、重做、儲存、文件內搜尋、新增資料夾、重新命名、新視窗、程式切換。點畫面鍵帽組合，親眼看模擬文字、剪貼簿、資料夾與視窗改變；搜尋、建資料夾與重新命名還要實際填入目標內容才完成。提供提示、依主題分類的圖鑑、整輪回顧與重玩。首次完成需第一次組合正確、未看提示且後續輸入無誤；無倒數，不是能力測驗。
+Windows、macOS、Linux GNOME／KDE 的圖形介面快速鍵，每個平台 12 個獨立情境：全選、複製、貼上、剪下文字、復原、重做、儲存、文件內搜尋、新增資料夾、重新命名、新視窗、程式切換。點選畫面鍵帽組合，親眼看模擬文字、剪貼簿、資料夾與視窗改變；搜尋、建資料夾與重新命名還要實際填入目標內容才完成。提供提示、依主題分類的圖鑑、整輪回顧與重玩。首次完成需第一次組合正確、未看提示且後續輸入無誤；無倒數，不是能力測驗。
 
-Linux 明確區分 GNOME／Files 與 KDE Plasma／Dolphin 預設；macOS 的 Return 重新命名、Cmd 與 Control 差別、文字剪下與 Finder 搬檔案不混用。依官方文件及上游預設整理並附來源；實際行為依應用程式、發行版與自訂設定而異。所有組合只用本頁鍵帽，不攔截真實系統組合、不讀寫系統剪貼簿或檔案。只留在本分頁記憶體，重整清空，無儲存或上傳。
+Linux 明確區分 GNOME／Files 與 KDE Plasma／Dolphin 預設；macOS 的 Return 重新命名、Cmd 與 Control 差別、文字剪下與 Finder 搬檔案不混用。依官方文件及上游預設整理並附來源；實際行為依應用程式、發行版與自訂設定而異。所有組合只用本頁鍵帽，不攔截真實系統組合、不讀寫系統剪貼簿或檔案。只留在本分頁記憶體，重新整理清空，無儲存或上傳。
 
 部署 `shortcut-school.html`、`shortcut-school.css`、`shortcut-school.js`、`shortcut-school-engine.js`、`shortcut-school.svg` 及共用 `arcade-fx.css/js`。不新增依賴。檢查：`node --test tests/shortcut-school.test.cjs`。
 
@@ -247,9 +247,9 @@ Linux 明確區分 GNOME／Files 與 KDE Plasma／Dolphin 預設；macOS 的 Ret
 
 試玩：<https://dorac7.github.io/double-standard-game/chinese-school.html>。
 
-30 個原創情境、六單元：日常動作、廚房動詞、檔案操作、完成狀態、具體請求與上下文。12 題短局每單元兩題，可選完整30題或單元5題。選詞與三欄句子積木都需先選再確認；自然且符合情境的已列同義選項均接受，答後保留首次結果。結算逐題顯示情境、選擇、解說、參考句與自己的選填改寫。
+30 個原創情境、六單元：日常動作、廚房動詞、檔案操作、完成狀態、具體請求與前後文。12 題短局每單元兩題，可選完整30題或單元5題。選詞與三欄句子積木都需先選再確認；自然且符合情境的已列同義選項均接受，答後保留首次結果。結算逐題顯示情境、選擇、解說、參考句與自己的選填改寫。
 
-重點不是禁止「用」，而是區分洗淨、瀝乾、收納，以及下載、安裝、儲存、上傳等不同動作；也區分計畫、執行與驗證結果。原創例句不是私人聊天引述、官方題庫或人物能力評量，口語省略需看上下文。自由改寫不以字數、關鍵字或範例相似度評分。無倒數、無AI、無儲存或上傳；只留分頁記憶體，重新整理即清空。教育部辭典僅列為查字工具，非逐題來源。
+重點不是禁止「用」，而是區分洗淨、瀝乾、收納，以及下載、安裝、儲存、上傳等不同動作；也區分計畫、執行與驗證結果。原創例句不是私人聊天引述、官方題庫或人物能力評量，口語省略需看前後文。自由改寫不以字數、關鍵字或範例相似度評分。無倒數、無AI、無儲存或上傳；只留分頁記憶體，重新整理即清空。教育部辭典僅列為查字工具，非逐題來源。
 
 部署檔案：`chinese-school.html`、`chinese-school.css`、`chinese-school.js`、`chinese-school-engine.js`、`chinese-school.svg`，共用 `road-safety-school.css` 與 `arcade-fx.css/js`。沒有新增依賴。測試：`node --test tests/chinese-school.test.cjs`；人工驗證見 `tests/chinese-school-qa.md`。
 
@@ -270,7 +270,7 @@ Linux 明確區分 GNOME／Files 與 KDE Plasma／Dolphin 預設；macOS 的 Ret
 - [數感冒險島](https://dorac7.github.io/double-standard-game/math-island.html)：16 關、四站，練具體數量、10 以內加減與分配、小店金額、規律、量長度和整點。用加減按鈕擺出答案，或點選比較；時鐘由 SVG 繪製。
 - [好奇心研究所](https://dorac7.github.io/double-standard-game/curiosity-lab.html)：16 關、四站，探索水、光影、豆苗、磁鐵。先做不評分的預測，再親手觀察每種設定的示例紀錄，全部比較後才能核對結論。模型與多日紀錄都預先編寫，不是真實感測或即時植物生長。
 
-面向小一、小二與家長，單站四關約 3～5 分鐘，也可完整玩 16 關。每關提供家長提問與安全的離線延伸建議；答錯可重試，保留第一次核對結果。無倒數、排行榜、帳號、作答儲存或上傳，重整或回地圖清空本輪。可由家長朗讀，亦有可選的瀏覽器裝置語音與無語音回退；可用聲音與是否連線依裝置而異。不要求語音才能玩。
+面向小一、小二與家長，單站四關約 3～5 分鐘，也可完整玩 16 關。每關提供家長提問與安全的離線延伸建議；答錯可重試，保留第一次核對結果。無倒數、排行榜、帳號、作答儲存或上傳，重新整理或回地圖清空本輪。可由家長朗讀，亦有可選的瀏覽器裝置語音與無語音回退；可用聲音與是否連線依裝置而異。不要求語音才能玩。
 
 部署：`math-island.html/svg`、`curiosity-lab.html/svg`、`kids-school.css`、`kids-school.js`、`kids-school-data.js`，無外部依賴。非官方教材或完整課綱。檢查：`node --test tests/kids-school.test.cjs`；手動 QA 見 `tests/kids-school-qa.md`。
 
@@ -293,3 +293,7 @@ Linux 明確區分 GNOME／Files 與 KDE Plasma／Dolphin 預設；macOS 的 Ret
 卡片新增滑鼠光影／小幅圖像視差、首次進入視野的圖像動態、分類數量與推薦票面回應；觸控不攔截點進遊戲，所有主要按鈕可鍵盤操作。頂端小動畫開關與原底部開關同步；關閉動畫或系統減少動態效果時，保留亮燈／推薦結果，停止視差、彩紙與裝飾動態。背景分頁暫停，舞台離開視野停止循環裝飾，無音效、閃爍、帳號、新依賴或額外網路服務。
 
 新增部署檔案：`lobby-play.css`、`lobby-play.js`，只由首頁載入，不改各遊戲玩法。瀏覽器驗收：`tests/lobby-play-browser-qa.js`；檢查紀錄：`tests/lobby-play-qa.md`。
+
+### 首頁歡迎進場
+
+首頁以小龍蝦歡迎區顯示插圖的實際載入情況；插圖較慢或載入失敗時仍能直接選擇遊戲，不使用全畫面遮罩或強制等待。載入完成有短暫的龍蝦招呼、開玩印章與文字進場，也可按「再看一次歡迎」。沿用首頁與頁尾的動畫開關、系統減少動態效果與背景分頁停止動畫；不新增音效、帳號、資料儲存或外部套件。中文文案統一使用台灣慣用的正體中文與清楚的操作說明。

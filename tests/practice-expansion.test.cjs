@@ -6,7 +6,7 @@ const TM=require('../terminal-missions.js');
 const run=(E,s,line)=>{const r=E.execute(s,line);assert.equal(r.ok,true,line+': '+r.output);return r;};
 const base=()=>{const s=G.initial();run(G,s,'git init');run(G,s,'git add .');run(G,s,'git commit -m base');return s;};
 const edit=(s,text,name='README.md')=>{const r=G.edit(s,name,text);assert.ok(r.ok);return r;};
-for(const short of [false,true])test('Git 16 關完整路線：'+(short?'短旗標':'長旗標')+'；實際保存內容與事件核對',()=>{
+for(const short of [false,true])test('Git 16 關完整路線：'+(short?'短旗標':'長旗標')+'；實際儲存內容與事件核對',()=>{
  const s=G.initial(),restore=short?'git restore -S':'git restore --staged';
  const steps=[['git init'],['git status'],['git add README.md','git status'],['git commit -m base','git log'],
  [()=>edit(s,'second'),'git diff'],['git add .','git diff --cached'],['git commit -m second','git status'],
@@ -34,7 +34,7 @@ test('restore 多檔錯誤原子化；拒絕未知來源與未追蹤路徑；unb
  }
  const unborn=G.initial();run(G,unborn,'git init');run(G,unborn,'git add .');const snap=G.clone(unborn);assert.equal(G.execute(unborn,'git restore --staged README.md').ok,false);assert.deepEqual(unborn,snap);
 });
-test('restore 可取消新檔暫存、還原刪除與已暫存刪除；不改動舊提交',()=>{
+test('restore 可取消新檔案的暫存、還原刪除與已暫存刪除；不改動舊提交',()=>{
  const s=base(),original=G.clone(G.head(s));edit(s,'new','notes.txt');run(G,s,'git add notes.txt');run(G,s,'git restore --staged notes.txt');assert.equal(s.index['notes.txt'],undefined);assert.equal(s.work['notes.txt'],'new');
  delete s.work['README.md'];run(G,s,'git restore README.md');assert.equal(s.work['README.md'],original.files['README.md']);
  delete s.work['README.md'];run(G,s,'git add -u');run(G,s,'git restore --staged --worktree README.md');assert.equal(s.work['README.md'],original.files['README.md']);assert.deepEqual(G.head(s),original);
@@ -46,7 +46,7 @@ test('show 區分 HEAD／index／分支／完整 ID；全部讀取無副作用',
  for(const line of ['git show HEAD:missing','git show HEAD~1','git show --stat','git show HEAD extra','git show :__proto__'])assert.equal(G.execute(s,line).ok,false,line);
  assert.deepEqual(s,before);
 });
-test('branch -d 拒絕目前分支與未合入版本；合入後只移除指標不刪提交',()=>{
+test('branch -d 拒絕目前分支與未合併至版本；合併至後只移除指標不刪提交',()=>{
  const s=base();run(G,s,'git switch -c soup');edit(s,'soup');run(G,s,'git add .');run(G,s,'git commit -m soup');run(G,s,'git switch main');const before=G.clone(s);
  for(const line of ['git branch -d main','git branch -d soup','git branch -d missing','git branch -D soup']){assert.equal(G.execute(s,line).ok,false);assert.deepEqual(s,before);}
  run(G,s,'git merge soup');const commits=G.clone(s.commits);run(G,s,'git branch --delete soup');assert.deepEqual(s.commits,commits);assert.equal(s.branches.soup,undefined);
@@ -69,7 +69,7 @@ test('find 支援起點、type、name 引號樣式；只比檔名、不改環境
  for(const line of ['find missing','find a -delete','find a -type x','find a -name','find a -type f -type d','find arcade/README.txt/'])assert.equal(T.execute(s,line).ok,false,line);
  assert.deepEqual(s,before);
 });
-test('grep -F 固定文字、行號、大小寫、反選、計行、多檔；無符合與錯誤不改檔',()=>{
+test('grep -F 固定文字、行號、大小寫、反選、計行、多個檔案；無符合與錯誤不修改檔案',()=>{
  const s=T.initial(),log='arcade/logs/workshop.log',before=T.clone(s);
  assert.equal(run(T,s,'grep -nF ERROR '+log).output,'3:09:02 ERROR missing menu.txt\n6:09:05 ERROR upload not attempted');
  assert.equal(run(T,s,'grep -Fic error '+log).output,'2');assert.equal(run(T,s,'grep --fixed-strings --ignore-case --count error '+log).output,'2');assert.equal(run(T,s,'grep -Fvc ERROR '+log).output,'6');

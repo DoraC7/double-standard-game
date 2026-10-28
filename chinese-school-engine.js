@@ -1,5 +1,5 @@
 (function(root,factory){const api=factory();if(typeof module==='object'&&module.exports)module.exports=api;else root.ChineseSchool=api;})(typeof globalThis!=='undefined'?globalThis:this,()=>{'use strict';
-const topics={"daily": "日常動作說清楚", "kitchen": "廚房動詞配對", "files": "檔案不是都叫用", "status": "完成到哪一步", "request": "請人幫忙說具體", "context": "用字要看上下文"},questions=[
+const topics={"daily": "日常動作說清楚", "kitchen": "廚房動詞配對", "files": "檔案不是都叫用", "status": "完成到哪一步", "request": "請人幫忙說具體", "context": "用字要看前後文"},questions=[
  {
   "id": "detergent",
   "topic": "daily",
@@ -497,7 +497,7 @@ const topics={"daily": "日常動作說清楚", "kitchen": "廚房動詞配對",
   "id": "clarify",
   "topic": "request",
   "title": "一句「幫我用」，先問哪件事？",
-  "scene": "對方只說「幫我用一下這個檔案」，沒有其他上下文，也沒交代目標。",
+  "scene": "對方只說「幫我用一下這個檔案」，沒有其他前後文，也沒交代目標。",
   "old": "幫我用一下這個檔案。",
   "prompt": "你先回哪句，最能釐清真正缺少的資訊？",
   "kind": "choice",
@@ -598,13 +598,13 @@ const topics={"daily": "日常動作說清楚", "kitchen": "廚房動詞配對",
  {
   "id": "context-clear",
   "topic": "context",
-  "title": "上下文清楚，口語也可以",
+  "title": "前後文清楚，口語也可以",
   "scene": "甲問：「你洗好碗了嗎？」乙回答：「洗好了，放在瀝水架。」",
   "old": "洗好了，放在瀝水架。",
   "prompt": "這個回答有什麼特點？",
   "kind": "choice",
   "options": [
-   "上下文已說明是碗，回答補了動作與位置，不必每次重複全部名詞。",
+   "前後文已說明是碗，回答補了動作與位置，不必每次重複全部名詞。",
    "沒有把碗的名稱寫三次，所以一定錯。",
    "用了口語，不能算正確中文。"
   ],
@@ -756,7 +756,7 @@ const topics={"daily": "日常動作說清楚", "kitchen": "廚房動詞配對",
  {
   "id": "which-car",
   "topic": "context",
-  "title": "沒有上下文，別幫「用好」補劇情",
+  "title": "沒有前後文，別幫「用好」補劇情",
   "scene": "你只收到「車子用好了」這句訊息，不知道對方原本在洗車、保養、修理，還是借車。",
   "old": "車子用好了。",
   "prompt": "哪個回應最合理？",
@@ -769,7 +769,7 @@ const topics={"daily": "日常動作說清楚", "kitchen": "廚房動詞配對",
   "good": [
    0
   ],
-  "why": "「用完車」在借用情境可能很清楚；沒有上下文時，先釐清動作，不替對方猜一個完成狀態。",
+  "why": "「用完車」在借用情境可能很清楚；沒有前後文時，先釐清動作，不替對方猜一個完成狀態。",
   "model": "你指的是洗車、保養、維修，還是已經用完車？目前完成了什麼？"
  }
 ];

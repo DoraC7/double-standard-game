@@ -4,7 +4,7 @@
   const clone = value => JSON.parse(JSON.stringify(value));
   const own = (obj, key) => Object.hasOwn(obj, key);
   const same = (a,b) => JSON.stringify(Object.entries(a).sort()) === JSON.stringify(Object.entries(b).sort());
-  const help = 'git restore [--staged|-S] [--worktree|-W] [--] 檔案…（或 .） · git show [HEAD|分支|提交ID][:檔名] · git show :檔名 · git branch -d 名稱\nrestore --staged 只改暫存區；restore 檔案 會丟棄該檔工作區草稿。show 僅讀取；branch -d 只刪已合入目前分支的本地指標，不模擬 upstream。\ngit init · git status [-sb] · git add [-A|-u] [檔案…] · git diff [--staged|--cached] · git commit [-a] -m "訊息" · git log [--oneline] [-n 筆數] · git branch [名稱] · git switch [-c] 分支 · git checkout [-b] 分支 · git merge 分支（僅快轉）\n建立並切換分支：git switch -c 名稱 或 git checkout -b 名稱。add 接受 ./檔名、多檔與 --；commit 也接受 --message、-m訊息 與 -am。status 支援 --short／--branch，branch 支援 --list／--show-current，merge 支援 --ff-only。checkout 只模擬分支切換，不含還原檔案或 detached HEAD。\n用右側編輯器修改檔案；所有版本都是遊戲模擬，不連接 GitHub。';
+  const help = 'git restore [--staged|-S] [--worktree|-W] [--] 檔案…（或 .） · git show [HEAD|分支|提交ID][:檔名] · git show :檔名 · git branch -d 名稱\nrestore --staged 只改暫存區；restore 檔案 會丟棄該檔工作區草稿。show 僅讀取；branch -d 只刪已合併至目前分支的本機指標，不模擬 upstream。\ngit init · git status [-sb] · git add [-A|-u] [檔案…] · git diff [--staged|--cached] · git commit [-a] -m "訊息" · git log [--oneline] [-n 筆數] · git branch [名稱] · git switch [-c] 分支 · git checkout [-b] 分支 · git merge 分支（僅快轉）\n建立並切換分支：git switch -c 名稱 或 git checkout -b 名稱。add 接受 ./檔名、多檔與 --；commit 也接受 --message、-m訊息 與 -am。status 支援 --short／--branch，branch 支援 --list／--show-current，merge 支援 --ff-only。checkout 只模擬分支切換，不含還原檔案或 detached HEAD。\n用右側編輯器修改檔案；所有版本都是遊戲模擬，不連接 GitHub。';
   const initial = () => ({ready:false, work:{'README.md':'# 龍蝦食堂\n今日供應：海藻湯\n'}, index:{}, commits:[], branches:{main:null}, branch:'main', serial:0});
   const head = s => s.commits.find(c => c.id === s.branches[s.branch]);
   const snapshot = s => head(s)?.files || {};
@@ -14,7 +14,7 @@
   const ancestor = (s,a,b) => {while(b){if(a===b)return true;b=s.commits.find(c=>c.id===b)?.parent;}return a===null;};
   const validFile = name => /^[\p{L}\p{N}_-][\p{L}\p{N}_. -]{0,60}$/u.test(name) && !['__proto__','constructor','prototype'].includes(name);
   function edit(s,name,text) {
-    if (!validFile(name)) return {ok:false,output:'檔名請用 1–61 個文字、數字、空格、底線、點或短橫線；本練習只處理根目錄檔案。'};
+    if (!validFile(name)) return {ok:false,output:'檔名請用 1–61 個文字、數字、空白、底線、點或短橫線；本練習只處理根目錄檔案。'};
     if (text.length>6000 || (!own(s.work,name) && Object.keys(s.work).length>=15)) return {ok:false,output:'每檔最多 6000 字、最多 15 個工作檔案。'};
     s.work[name]=text; return {ok:true,output:'已修改工作區的 '+name+'；還沒有暫存或提交。',event:'edit',name};
   }
@@ -47,11 +47,11 @@
     if(cmd==='init') {
       if(args.length)return usage();
       if(s.ready)return result('已經初始化；既有紀錄保留。');
-      s.ready=true; return result('已建立遊戲內的 Git 倉庫（初始分支 main）。');
+      s.ready=true; return result('已建立遊戲內的 Git 儲存庫（初始分支 main）。');
     }
     if((cmd==='--version'||cmd==='-v')&&!args.length)return result('git version 2.53.0（遊戲模擬）','version');
     if((cmd==='--help'||cmd==='help')&&!args.length)return result(help,'help');
-    if(!s.ready)return fail('還不是 Git 倉庫。先執行 git init。');
+    if(!s.ready)return fail('還不是 Git 儲存庫。先執行 git init。');
     if(cmd==='status') {
       let short=false,branch=false;
       for(const a of args){
@@ -114,7 +114,7 @@
       s.index=nextIndex;
       const id=(++s.serial).toString(16).padStart(7,'0');
       s.commits.push({id,parent:s.branches[s.branch],message,files:clone(s.index)}); s.branches[s.branch]=id;
-      return {...result('['+s.branch+' '+id+'] '+message+(auto?'\n已先暫存追蹤檔的修改／刪除，再保存快照；未追蹤新檔不包含在內。':'\n已保存暫存區快照；未暫存的修改不包含在內。')),auto,commitId:id};
+      return {...result('['+s.branch+' '+id+'] '+message+(auto?'\n已先暫存追蹤檔的修改／刪除，再儲存快照；未追蹤新檔不包含在內。':'\n已儲存暫存區快照；未暫存的修改不包含在內。')),auto,commitId:id};
     }
     if(cmd==='log') {
       let limit=80;
@@ -153,7 +153,7 @@
       }
       if(Object.keys(nextWork).length>15)return fail('還原後會超過 15 個工作檔案，請先整理。');
       const changed=!same(s.work,nextWork)||!same(s.index,nextIndex);s.work=nextWork;s.index=nextIndex;
-      return {...result(staged&&!worktree?'已從 HEAD 還原暫存區；工作區內容保留，尚未建立提交。':'已還原工作區；指定檔案尚未保存的修改會被取代。請用 diff／status 核對。'),targets,staged,changed,worktree:worktree||!staged};
+      return {...result(staged&&!worktree?'已從 HEAD 還原暫存區；工作區內容保留，尚未建立提交。':'已還原工作區；指定檔案尚未儲存的修改會被取代。請用 diff／status 核對。'),targets,staged,changed,worktree:worktree||!staged};
     }
     if(cmd==='show') {
       if(args.length>1||args[0]?.startsWith('-'))return usage();
@@ -179,8 +179,8 @@
         const name=args[1];if(args.length!==2||!name||name.startsWith('-'))return usage();
         if(!own(s.branches,name))return fail('找不到分支：'+name);
         if(name===s.branch)return fail('不能刪除目前所在的分支。');
-        if(!ancestor(s,s.branches[name],s.branches[s.branch]))return fail('該分支尚未完整合入目前分支；保留分支，不模擬強制刪除。');
-        delete s.branches[name];return {...result('已刪除合入目前分支的本地分支 '+name+'；提交仍保留，沒有操作遠端分支。','branch-delete'),name};
+        if(!ancestor(s,s.branches[name],s.branches[s.branch]))return fail('該分支尚未完整合併至目前分支；保留分支，不模擬強制刪除。');
+        delete s.branches[name];return {...result('已刪除合併至目前分支的本機分支 '+name+'；提交仍保留，沒有操作遠端分支。','branch-delete'),name};
       }
       if(args.length>1)return usage();
       if(args.length===1&&args[0]==='--show-current')return result(s.branch);
