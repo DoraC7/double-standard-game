@@ -1,6 +1,6 @@
 # Dora playground
 
-十九款免費、純前端小遊戲，從 `index.html` 入口進入。
+二十一款免費、純前端小遊戲，從 `index.html` 入口進入。
 
 ## 試玩
 
@@ -149,7 +149,7 @@ python3 -m http.server 8765
 
 ## 專案檔案
 
-- `index.html`：十九款遊戲共同入口；舊首頁 `#r=` 戰績連結自動轉到雙標遊戲並保留片段。
+- `index.html`：二十一款遊戲共同入口；舊首頁 `#r=` 戰績連結自動轉到雙標遊戲並保留片段。
 - `double-standard.html`：原雙標遊戲的畫面、流程和計分。
 - `start-small.html`、`start-small.css`、`start-small.js`：拖延啟動遊戲。
 - `mini-kart.html`、`mini-kart.css`、`mini-kart.js`、`kart.svg`：迷你卡丁車與原創插圖。
@@ -164,7 +164,7 @@ python3 -m http.server 8765
 
 ## 部署
 
-這是靜態網站。GitHub Pages 可發布倉庫根目錄的 `index.html` 作共同入口；所有十九款遊戲的 HTML、CSS 和 JS 必須同時發布。啟用 Pages 後，分享連結會自動以當前網站網址產生。發布設定由倉庫擁有者決定。
+這是靜態網站。GitHub Pages 可發布倉庫根目錄的 `index.html` 作共同入口；所有二十一款遊戲的 HTML、CSS 和 JS 必須同時發布。啟用 Pages 後，分享連結會自動以當前網站網址產生。發布設定由倉庫擁有者決定。
 
 ## 授權
 
@@ -263,3 +263,13 @@ Linux 明確區分 GNOME／Files 與 KDE Plasma／Dolphin 預設；macOS 的 Ret
 以Google LLM入門、OWASP提示注入、錯誤資訊、敏感資料與代理權限公開說明為概念來源，各題附連結；數字、對話與工具回條均為原創模擬，不冒充真實操作或官方題庫。沒有連接AI、不要求API Key、不執行真實工具、不儲存或上傳；筆記不由關鍵字／字數評分。與既有提問練習場互相連結，重點是能力判斷、證據範圍與驗收，而非重複提示句型。
 
 部署：`ai-school.html`、`ai-school.css`、`ai-school.js`、`ai-school-engine.js`、`ai-school.svg`，沿用共用`road-safety-school.css`與`arcade-fx.css/js`。無新增依賴。測試：`node --test tests/ai-school.test.cjs`；檢查紀錄：`tests/ai-school-qa.md`。
+
+
+## 親子小學堂：數感冒險島／好奇心研究所
+
+- [數感冒險島](https://dorac7.github.io/double-standard-game/math-island.html)：16 關、四站，練具體數量、10 以內加減與分配、小店金額、規律、量長度和整點。用加減按鈕擺出答案，或點選比較；時鐘由 SVG 繪製。
+- [好奇心研究所](https://dorac7.github.io/double-standard-game/curiosity-lab.html)：16 關、四站，探索水、光影、豆苗、磁鐵。先做不評分的預測，再親手觀察每種設定的示例紀錄，全部比較後才能核對結論。模型與多日紀錄都預先編寫，不是真實感測或即時植物生長。
+
+面向小一、小二與家長，單站四關約 3～5 分鐘，也可完整玩 16 關。每關提供家長提問與安全的離線延伸建議；答錯可重試，保留第一次核對結果。無倒數、排行榜、帳號、作答儲存或上傳，重整或回地圖清空本輪。可由家長朗讀，亦有可選的瀏覽器裝置語音與無語音回退；可用聲音與是否連線依裝置而異。不要求語音才能玩。
+
+部署：`math-island.html/svg`、`curiosity-lab.html/svg`、`kids-school.css`、`kids-school.js`、`kids-school-data.js`，無外部依賴。非官方教材或完整課綱。檢查：`node --test tests/kids-school.test.cjs`；手動 QA 見 `tests/kids-school-qa.md`。

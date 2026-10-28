@@ -1,0 +1,19 @@
+async () => {
+ const $=id=>document.getElementById(id),science=document.body.dataset.school==='science',d=KidsSchoolData[science?'science':'math'],assert=(v,m)=>{if(!v)throw Error(m);},overflow=[];
+ const geo=stage=>{if(document.documentElement.scrollWidth>innerWidth)overflow.push({stage,title:$('title').textContent,width:innerWidth,scroll:document.documentElement.scrollWidth});};
+ if(!$('play').hidden)$('leave').click();if(!$('result').hidden)$('restart').click();
+ $('all').click();let n=0;
+ while(!$('play').hidden){const q=d.questions.find(x=>x.title===$('title').textContent);assert(q,'known question');assert($('confirm').disabled,'no submit before answer');geo('question');
+  if(science){assert($('experiment').hidden,'experiment starts hidden');document.querySelector('[data-answer]').dispatchEvent(new MouseEvent('click'));assert($('confirm').disabled,'hidden conclusion cannot bypass evidence');document.querySelector('[data-prediction="1"]').click();assert(!$('experiment').hidden,'prediction enables exploring');assert($('observe').disabled,'must select setting');
+   for(let i=0;i<q.settings.length;i++){document.querySelector(`[data-setting="${i}"]`).click();assert($('observation').hidden=== (i===0),'selection does not reveal new observation');$('observe').click();assert($('observation').textContent.includes(q.settings[i].result),'observed selected setting');if(i===0){assert($('conclusion').hidden,'one of two is insufficient');assert($('confirm').disabled,'no early confirm');}geo('observing');}
+   assert(!$('conclusion').hidden,'comparison unlocks conclusion');assert($('feedback').hidden,'observation not graded');assert($('evidence-log').children.length===2,'both observations retained');
+  }
+  const answer=value=>{if(q.kind==='number'){const delta=value-Number($('amount').value);for(let j=0;j<Math.abs(delta);j++)document.querySelector(`[data-step="${Math.sign(delta)}"]`).click();}else document.querySelector(`[data-answer="${value}"]`).click();};
+  if(n===0){answer(q.kind==='number'?q.answer+1:(q.answer+1)%q.options.length);assert($('feedback').hidden,'selection does not grade');$('confirm').click();assert(!$('retry').hidden&&$('next').hidden,'wrong answer offers retry');const locked=$('feedback').textContent;document.querySelector('#controls button').dispatchEvent(new MouseEvent('click',{bubbles:true}));$('confirm').dispatchEvent(new MouseEvent('click',{bubbles:true}));assert(locked===$('feedback').textContent,'locked wrong feedback');$('retry').click();assert($('confirm').disabled,'retry requires new action');}
+  answer(q.answer);assert(!$('confirm').disabled,'answer ready');assert($('feedback').hidden,'selection no grade');$('confirm').click();assert(!$('next').hidden,'correct answer permits next');const locked=$('feedback').textContent;document.querySelector('#controls button').dispatchEvent(new MouseEvent('click',{bubbles:true}));$('confirm').dispatchEvent(new MouseEvent('click',{bubbles:true}));assert(locked===$('feedback').textContent,'first response locks controls');document.querySelector('.parent').open=true;geo('answered+parent');$('next').click();n++;assert(n<=16,'finite');
+ }
+ assert(n===16,'complete sixteen');assert($('summary').textContent.includes('第一次確認就找到答案 15 題'),'first attempt preserved after retry');assert($('review').children.length===16,'complete review');$('review').querySelector('details').open=true;geo('result');
+ await Promise.all([...document.images].map(i=>i.decode().catch(()=>null)));assert([...document.images].every(i=>i.naturalWidth>0),'images loaded');
+ $('restart').click();assert(!$('lobby').hidden,'restart map');for(const b of $('stations').children){b.click();assert($('round').textContent==='任務 1 / 4','station four tasks');assert($('confirm').disabled,'fresh station');$('leave').click();}
+ return {school:d.title,width:innerWidth,height:innerHeight,completed:n,firstCorrect:n-1,overflow,stations:4,evidenceGating:science,retryAndLock:true};
+}
