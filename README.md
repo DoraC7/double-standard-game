@@ -1,10 +1,20 @@
 # Dora playground
 
-二十四款免費、純前端小遊戲，從 `index.html` 入口進入。
+二十五款免費、純前端小遊戲，從 `index.html` 入口進入。
 
 ## 試玩
 
 GitHub Pages：<https://dorac7.github.io/double-standard-game/>。同一份遊戲也由現有伺服器提供：<http://bigmac.dorac7.com:5487/>。
+
+## 過動兒大冒險
+
+試玩：<https://dorac7.github.io/double-standard-game/restless-adventure.html>，本機伺服器：<http://bigmac.dorac7.com:5487/restless-adventure.html>。
+
+三站橫向平台跑跳：出門三件組、分頁森林、主線交付城。左右移動、跳上單向平台，收齊每關三件主線物品再到右側終點；支線星星每關三顆、自由選擇。通知怪可從上方踩掉，側面碰撞或掉落扣一顆心並回檢查點，已收集物品保留；黃色彈跳墊自動彈高。通關後親手前往下一站，最後打包交付。
+
+一般模式每關90秒、三顆心；悠哉模式不限時、五顆心。失敗可重試本關，前關成果保留。方向鍵／A D移動，空白鍵／↑／W跳躍，P／Esc暫停；手機有方向與跳躍按鈕，操作區防長按選字。失焦／背景自動暫停，須手動繼續。裝飾動畫可關閉，必要移動仍保留。
+
+虛構跑跳遊戲，無帳號、儲存、上傳或套件。部署 `restless-adventure.html/css/js/svg`、`restless-adventure-engine.js`，沿用共用 `arcade-fx.css/js`。驗收見 `tests/restless-adventure-qa.md`。
 
 ## 民主聖地噴泉西瓜選市長大挑戰
 
