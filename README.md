@@ -1,10 +1,20 @@
 # Dora playground
 
-二十七款免費、純前端小遊戲，從 `index.html` 入口進入。
+二十八款免費、純前端小遊戲，從 `index.html` 入口進入。
 
 ## 試玩
 
 GitHub Pages：<https://dorac7.github.io/double-standard-game/>。同一份遊戲也由現有伺服器提供：<http://bigmac.dorac7.com:5487/>。
+
+## 無知大挑戰
+
+試玩：<https://dorac7.github.io/double-standard-game/ignorance-challenge.html>，現有伺服器：<http://bigmac.dorac7.com:5487/ignorance-challenge.html>。
+
+12 個原創虛構案例，四類各三案：畫面之外、因果別跳步、來源與原話、證據來了改判。每案三步：拆原話 → 三選一查證卡（確認後才揭露內容）→ 依實際翻開的資料更新結論。選到無關資料，後續答案也不會要求使用尚未取得的證據；證據足夠時則可以明確下結論，不鼓勵一律說不知道。
+
+快問快查每類一案，共4案12步；完整挑戰12案36步。同輪不重複，案例與選項順序隨機。先選再確認，可先看解析、答錯重試，保留首次與最近結果；重新挑查證會換掉目前資料卡。結算可逐案複習、下載本輪文字紀錄。1–3選答案、Enter確認、P／Esc暫停；切換分頁或失焦自動暫停，手動繼續。不限時，不需音效，手機與鍵盤皆可操作。
+
+不影射真人，不連接AI；情境與查證資料皆預先編寫，不是真實事件報告。沒有帳號、儲存、上傳或外部依賴，重新整理即清空；分數不是智力、人格或道德評鑑。沿用原站純JavaScript與共用動畫，未引入另一套平台。部署 `ignorance-challenge.html/css/js/svg`、`ignorance-cases.js`、`ignorance-engine.js` 與 `arcade-fx.css/js`。測試：`node --test tests/ignorance.test.cjs`；驗收見 `tests/ignorance-qa.md`。
 
 ## 吹牛大挑戰
 
