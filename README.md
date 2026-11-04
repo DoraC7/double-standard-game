@@ -1,6 +1,6 @@
 # Dora playground
 
-二十八款免費、純前端小遊戲，從 `index.html` 入口進入。
+二十九款免費、純前端小遊戲，從 `index.html` 入口進入。
 
 ## 試玩
 
@@ -360,3 +360,11 @@ Linux 明確區分 GNOME／Files 與 KDE Plasma／Dolphin 預設；macOS 的 Ret
 開場是約 1.5 秒的有限演出：西瓜衝入、冬瓜入場、水柱展開、選票飛入與標題落版；「重播開場」重播完整序列，不只是改文字。按鈕與連結全程可用，不遮罩、不等待插圖解碼。首頁／頁尾的動畫開關同步，系統減少動態效果或關閉動畫時，直接顯示完整靜態海報；離開分頁停止開場。沒有新套件、帳號或資料儲存。
 
 部署 `lobby-play.css/js` 與 `lobby-feature.svg`（海報向量原稿；首頁內嵌同一份 SVG 以控制分層動畫）。人工驗收見 `tests/lobby-play-qa.md`，瀏覽器檢查程式 `tests/lobby-play-browser-qa.js`。
+
+## 過敏兒保養小教室
+
+現有伺服器：<http://bigmac.dorac7.com:5487/allergy-school.html>。GitHub Pages 路徑（合併部署後可用）：`allergy-school.html`。
+
+12個原創情境，皮膚照護、居家過敏原、何時求助各4題。輕鬆局6題、完整12題或單元4題，題目和選項隨機。先選再確認；可先看解說或重練，首次結果不被覆蓋。結算逐題顯示首次選擇、建議與來源。不限時，原生按鈕支援觸控與鍵盤；沒有即時背景進程。
+
+依AAD與AAAAI公開衛教整理（2026-11-04），不是官方測驗、診斷或個人治療計畫，不提供劑量；緊急求助依台灣119。無帳號、儲存、上傳、外部套件或網路執行依賴。部署檔案：`allergy-school.html/css/js/svg`、`allergy-school-engine.js`，共用`road-safety-school.css`與`arcade-fx.css/js`。測試：`node --test tests/allergy-school.test.cjs`；驗收見`tests/allergy-school-qa.md`。
