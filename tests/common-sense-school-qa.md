@@ -38,3 +38,11 @@ Exact candidate HTML/CSS/JS inlined into a fresh neutral public lobby realm (DOM
 ## Release checks
 
 Authorized direct push/deployment, no PR. Verify origin/main SHA, successful matching Pages deployment, both public hosts' lobby/new assets/reused styles/effects bytes and a full live game run. Preserve five unrelated existing server-checkout edits using precomputed merges, snapshots and retained stash. Record observed release SHA/deployment/live checks in workspace daily note.
+
+
+## 2026-11-04 題庫擴充驗證
+
+- 完整題庫現為48題，新增題目為中階／進階；短局每單元各一題基礎與中高難度，100組種子抽樣通過。
+- 現有公開伺服器 bigmac.dorac7.com:5487 實際載入新版，非 DOM 注入預覽。Chromium 在320×568、844×390、1280×800完成全題流程：新增題選正解、原題選不確定，逐題檢查解說、首次作答鎖定、題數、分數、完整回顧與重新開始；各題無水平溢出。這是瀏覽器 viewport 測試，非實體手機測試。
+- 全專案 Node 測試216項通過；頁面錯誤記錄0。既有數值／位置／排序操作未修改，本輪瀏覽器以不確定略過，判分仍由既有自動測試覆蓋。
+- 沿用既有來源與條件限定；新增計算為虛構標籤、純數學換算，不是通用設備或車款規格。GitHub Pages尚未推送，不能視為已同步。

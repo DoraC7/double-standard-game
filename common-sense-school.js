@@ -22,7 +22,7 @@ function start(){state=E.create($('mode').value);$('intro').hidden=true;$('resul
 function render(){
  if(state.index>=state.items.length){finish();return;}
  const q=state.items[state.index];$('round').textContent=`第 ${state.index+1} / ${state.items.length} 題`;$('score').textContent=`首次答對 ${state.answers.filter(a=>a.ok).length} 題`;$('progress').max=state.items.length;$('progress').value=state.answers.length;
- $('topic').textContent=E.topics[q.topic];$('title').textContent=q.title;$('prompt').textContent=q.prompt;$('clue').hidden=!q.clue;$('clue').textContent=q.clue||'';$('art').replaceChildren(art(q.art));$('controls').replaceChildren();$('feedback').replaceChildren();$('feedback').hidden=true;$('next').hidden=true;$('unsure').hidden=false;
+ $('topic').textContent=E.topics[q.topic]+' · '+({easy:'基礎',medium:'中階',hard:'進階'})[q.difficulty];$('title').textContent=q.title;$('prompt').textContent=q.prompt;$('clue').hidden=!q.clue;$('clue').textContent=q.clue||'';$('art').replaceChildren(art(q.art));$('controls').replaceChildren();$('feedback').replaceChildren();$('feedback').hidden=true;$('next').hidden=true;$('unsure').hidden=false;
  if(q.kind==='drawer')placement(q);else if(q.kind==='fridge')placement(q);else if(q.kind==='temperature')temperature(q);else if(q.kind==='dose')dose(q);else if(q.kind==='order')ordering(q);else choices(q);
  $('title').focus();
 }
