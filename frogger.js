@@ -23,7 +23,7 @@
   function updateHud(){$('homes').textContent=`${homesDone.length} / 5`;$('lives').textContent='♥'.repeat(lives)||'0';}
   function say(t){$('message').textContent=t;clearTimeout(toastTimer);toastTimer=setTimeout(()=>{$('message').textContent='';},1600);}
   function hit(){lives--;updateHud();if(lives<=0){paused=true;$('overlay-title').textContent='青蛙們需要再試一次';$('resume').hidden=true;$('overlay').hidden=false;}else{resetFrog();say('哎呀！回起點再來一次');}}
-  function move(dx,dy){if($('play').hidden||paused||ended||!frog)return;const nx=frog.x+dx,ny=frog.y+dy;if(nx<0||nx>=COLS||ny<0||ny>=ROWS)return;frog={x:nx,y:ny};if(ny===0){if(!homes.includes(nx)||homesDone.includes(nx)){hit();return;}homesDone.push(nx);updateHud();if(homesDone.length===5){ended=true;cancelAnimationFrame(raf);$('play').hidden=true;$('result').hidden=false;return;}resetFrog();say('安全到家！再接一位');}draw();}
+  function move(dx,dy){if($('play').hidden||paused||ended||!frog)return;const nx=frog.x+dx,ny=frog.y+dy;if(nx<0||nx>=COLS||ny<0||ny>=ROWS)return;frog={x:nx,y:ny};if(ny===0){const home=homes.find(x=>Math.abs(nx-x)<=.34);if(home===undefined||homesDone.includes(home)){hit();return;}homesDone.push(home);updateHud();if(homesDone.length===5){ended=true;cancelAnimationFrame(raf);$('play').hidden=true;$('result').hidden=false;return;}resetFrog();say('安全到家！再接一位');}draw();}
   function laneAt(row){return lanes.find(l=>l.row===row);}
   function draw(){
     ctx.clearRect(0,0,canvas.width,canvas.height);
