@@ -36,7 +36,7 @@ function start(){state=E.create($('mode').value);$('intro').hidden=true;$('resul
 function render(){
  if(state.index>=state.items.length){finish();return;}
  const q=state.items[state.index];$('round').textContent=`第 ${state.index+1} / ${state.items.length} 題`;$('score').textContent=`首次答對 ${state.answers.filter(a=>a.ok).length} 題`;
- $('progress').max=state.items.length;$('progress').value=state.answers.length;$('topic').textContent=E.topics[q.topic];$('title').textContent=q.title;$('prompt').textContent=q.prompt;
+ $('progress').max=state.items.length;$('progress').value=state.answers.length;$('topic').textContent=E.topics[q.topic]+' · '+({easy:'基礎',medium:'中階',hard:'進階'})[q.difficulty];$('title').textContent=q.title;$('prompt').textContent=q.prompt;
  $('art').replaceChildren(art(q.art));$('controls').replaceChildren();$('feedback').hidden=true;$('feedback').replaceChildren();$('next').hidden=true;$('unsure').hidden=false;$('unsure').disabled=false;
  if(q.kind==='speed')speedControl(q);else if(q.kind==='lights')lampControl();else if(q.kind==='order')orderControl(q);else choiceControl(q);
  $('title').focus();
