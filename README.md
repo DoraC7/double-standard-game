@@ -363,7 +363,7 @@ Linux 明確區分 GNOME／Files 與 KDE Plasma／Dolphin 預設；macOS 的 Ret
 
 ## 過敏兒保養小教室
 
-現有伺服器：<http://bigmac.dorac7.com:5487/allergy-school.html>。GitHub Pages 路徑（合併部署後可用）：`allergy-school.html`。
+現有伺服器：<http://bigmac.dorac7.com:5487/allergy-school.html>。GitHub Pages：<https://dorac7.github.io/double-standard-game/allergy-school.html>。
 
 12個原創情境，皮膚照護、居家過敏原、何時求助各4題。輕鬆局6題、完整12題或單元4題，題目和選項隨機。先選再確認；可先看解說或重練，首次結果不被覆蓋。結算逐題顯示首次選擇、建議與來源。不限時，原生按鈕支援觸控與鍵盤；沒有即時背景進程。
 
