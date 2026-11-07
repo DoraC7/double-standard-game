@@ -1,5 +1,39 @@
 (function(root,factory){const api=factory();if(typeof module==='object'&&module.exports)module.exports=api;else root.ChaosPark=api;})(typeof globalThis!=='undefined'?globalThis:this,()=>{'use strict';
 const scenes=[
+{
+  "id": "restroom",
+  "title": "廁所擦身折返站",
+  "icon": "🚻",
+  "intro": "全隊經過廁所，同行的人問要不要先上。卡通阿鬧揮手說不用，隊伍才剛轉過彎。",
+  "props": [
+    "🚻",
+    "🚶",
+    "↩️"
+  ],
+  "actions": [
+    {
+      "label": "經過說不用，離開馬上喊要上",
+      "note": "阿鬧剛走離廁所，就舉手說現在要上！全隊的前進箭頭當場轉成迴轉箭頭，剛才那扇門又熱情出場。",
+      "badge": "離開才啟用需求",
+      "extra": "廁所就在旁邊時說不用，離開後立刻讓全隊折返。",
+      "mess": 1
+    },
+    {
+      "label": "說下一間再上，走兩步又要回頭",
+      "note": "阿鬧才宣布下一間比較順路，鞋子就自己畫出回頭路線。下一間還沒看到，上一間已經迎來第二次路過。",
+      "badge": "下一間變上一間",
+      "extra": "原本可以順路處理，最後把同一段路走成來回票。",
+      "mess": 2
+    },
+    {
+      "label": "催大家快走，出發後立刻喊暫停",
+      "note": "阿鬧在廁所門口喊別停啦，出發最重要！隊伍剛出發，阿鬧又喊等等我要上廁所。行程表還沒翻頁，就先按下倒帶。",
+      "badge": "出發即刻倒帶",
+      "extra": "剛才催走的人，成了立刻要求折返的人；全隊又回到同一扇門前。",
+      "mess": 3
+    }
+  ]
+},
   {
     "id": "keys",
     "title": "鑰匙失蹤城",
