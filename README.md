@@ -1,6 +1,6 @@
 # Dora playground
 
-三十七款免費、純前端小遊戲，從 `index.html` 入口進入。
+三十八款免費、純前端小遊戲，從 `index.html` 入口進入。
 
 ## 試玩
 
@@ -439,3 +439,13 @@ Linux 明確區分 GNOME／Files 與 KDE Plasma／Dolphin 預設；macOS 的 Ret
 無帳號、永久儲存、上傳、音效、倒數或外部依賴；重新整理清空。保留低年級「好奇心研究所」，本頁更重視控制變因與資料比較。部署 `science-lab.html/css/js/svg`、`science-lab-engine.js` 與共用 `arcade-fx.css/js`。
 
 生活科學新增：濕度與露點（NWS近似式）、雨量換算理論落水量（mm×m²=L）、熱湯冷卻（牛頓冷卻簡化式）、三大營養素熱量（4／4／9估算）、份量與鈉標示。每個附生活提問、比較操作與模型限制，沿用A/B、圖表及CSV。露點不是降雨機率，冷卻曲線不判定食品安全；營養估算不等於健康評分或個人攝取建議。參考NWS、OpenStax、FDA與21 CFR 101.9營養標示規則。
+
+## 小動物與生物探索館
+
+[帶著好奇心出發](https://dorac7.github.io/double-standard-game/biology-explorer.html)，現有伺服器：<http://bigmac.dorac7.com:5487/biology-explorer.html>。
+
+獨立於科學實驗室的生物觀察區，16個原創情境、四主題各4題：身體構造（蜘蛛、蝸牛、蝙蝠、鼠婦）、生命週期（蝴蝶、蛙、斑蚊、蝗蟲）、生態關係（授粉、真菌、蚯蚓、食物鏈）、友善觀察（樣本範圍、關聯與原因、控制變因、非侵入式紀錄）。參考OpenStax Biology 2e、CDC與Animal Diversity Web，每題解析與複習附對應連結；插圖只是示意，不是物種鑑定圖。
+
+短輪8題、每類2題，完整16題或單元4題，同輪不重複；先選再確認，解析在確認後揭露。可先看解析、答錯重試，首次與最新結果分開；結算逐題回顧。無倒數，使用原生按鈕與鍵盤焦點，手機可操作。不捕捉、餵食或移放動物，不提供飼養或現場鑑定；非官方教材。無帳號、永久儲存、上傳或外部依賴，重新整理清空。
+
+部署 `biology-explorer.html/css/js/svg`、`biology-explorer-engine.js`、共用 `brain-break.css` 與 `arcade-fx.css/js`。
