@@ -6,7 +6,7 @@ test('已知數值、單位轉換與物理不變量',()=>{
  const ohm=trial(E.create('ohm'));near(ohm.outputs.current,60);near(ohm.outputs.power,.36);
  near(trial(E.create('solution')).outputs.concentration,20);
  const fall=trial(E.create('fall'));near(fall.outputs.time,Math.sqrt(10/9.8));near(fall.outputs.speed,Math.sqrt(98));
- for(const id of Object.keys(E.models)){const s=E.create(id);for(const p of E.models[id].params)for(const v of [p.min,p.max]){const r=trial(s,{[p.key]:v});for(const val of Object.values(r.outputs))assert.ok(Number.isFinite(val)&&val>0);}}
+ for(const id of Object.keys(E.models)){const s=E.create(id);for(const p of E.models[id].params)for(const v of [p.min,p.max]){const r=trial(s,{[p.key]:v});for(const val of Object.values(r.outputs))assert.ok(Number.isFinite(val)&&(Object.keys(E.models).indexOf(id)<4?val>0:true));}}
 });
 test('預期趨勢與比例、自由落體質量無關只限此模型',()=>{
  const p=E.create('pendulum'),a=trial(p,{length:.5}),b=trial(p,{length:2});near(b.outputs.period/a.outputs.period,2);
@@ -36,3 +36,21 @@ test('CSV包含單位、完整精度、當時預測與基準；清除只影響�
  const a=E.create('solution'),b=E.create('ohm');trial(a);trial(a,{volume:1000},'decrease');trial(b);const csv=E.csv(a);assert.equal(csv.trim().split('\r\n').length,3);assert.match(csv,/溶液總體積 \(mL\)/);assert.match(csv,/質量濃度 \(g\/L\)/);assert.ok(csv.includes('"2","1","減少"'));assert.match(csv,/"10","1000","10"/);
  E.clear(a);assert.equal(a.rows.length,0);assert.equal(a.seq,0);assert.equal(a.completed,false);assert.equal(b.rows.length,1);assert.equal(E.compare(a),null);assert.deepEqual(E.plot(a),[]);
 });
+
+ test('生活科學已知數值與邊界：露點、雨量、冷卻、熱量與份量',()=>{
+ near(trial(E.create('dewpoint'),{temperature:25,humidity:100}).outputs.dewpoint,25);
+ near(trial(E.create('dewpoint')).outputs.dewpoint,13.86761705026077,1e-6);
+ near(trial(E.create('rainfall')).outputs.water,200);
+ near(trial(E.create('rainfall'),{rain:0}).outputs.water,0);
+ near(trial(E.create('cooling'),{minutes:0}).outputs.temperature,80);
+ const cold=trial(E.create('cooling'),{ambient:20,minutes:60}).outputs.temperature;assert.ok(cold>20&&cold<80);
+ near(trial(E.create('energy')).outputs.energy,250);
+ near(trial(E.create('energy'),{carbs:0,protein:0,fat:0}).outputs.energy,0);
+ near(trial(E.create('sodium'),{servings:2}).outputs.total,400);
+ for(const t of [5,25,40])for(const rh of [10,50,100])assert.ok(trial(E.create('dewpoint'),{temperature:t,humidity:rh}).outputs.dewpoint<=t+1e-9);
+ });
+ test('生活模型的受控方向與限制不混同真實預報、食品安全或飲食處方',()=>{
+ const cases=[['dewpoint','humidity',80,'increase'],['rainfall','area',40,'increase'],['cooling','minutes',20,'decrease'],['energy','fat',20,'increase'],['sodium','servings',2,'increase']];
+ for(const [id,key,value,direction] of cases){const s=E.create(id);trial(s);E.setX(s,key);trial(s,{[key]:value},direction);assert.equal(E.compare(s).kind,'controlled');assert.equal(E.compare(s).direction,direction);assert.equal(E.compare(s).prediction,'match');assert.equal(E.plot(s).length,2);assert.equal(E.csv(s).trim().split('\r\n').length,3);}
+ assert.match(E.models.dewpoint.limits,/不是降雨機率/);assert.match(E.models.cooling.limits,/不能判定/);assert.match(E.models.energy.limits,/不是個人/);assert.match(E.models.sodium.limits,/鈉不等於食鹽/);
+ });

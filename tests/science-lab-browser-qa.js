@@ -24,7 +24,7 @@ async function scienceLabQA(){
   $('clear').click();$('clear-cancel').click();await settle();check(!$('clear-dialog').open&&document.activeElement===$('clear'),'取消後恢復焦點');check($('table-body').children.length===4,'取消保留紀錄');
   check(document.documentElement.scrollWidth<=innerWidth,'整頁溢出 '+id+' '+document.documentElement.scrollWidth+'/'+innerWidth+' '+[...document.querySelectorAll('main *')].filter(e=>e.getBoundingClientRect().right>innerWidth+1).map(e=>e.tagName+'#'+e.id).slice(0,8).join(','));results.push({id,records:4,controlled:true,confounded:true,predictionBaselineChecked:true,csvRows:4});
  }
- check($('completion').textContent.includes('4 / 4'),'四個模型完成受控比較');
+ check($('completion').textContent.includes(Object.keys(E.models).length+' / '+Object.keys(E.models).length),'所有模型完成受控比較');
  // 清除目前模型不影響其他實驗。
  await wipe();check($('table-body').children.length===0&&!$('chart').querySelector('svg'),'清除目前實驗');open('pendulum');check($('table-body').children.length===4,'其他實驗仍保留');
  for(const id of Object.keys(E.models)){open(id);await wipe();}
