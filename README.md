@@ -1,6 +1,6 @@
 # Dora playground
 
-三十六款免費、純前端小遊戲，從 `index.html` 入口進入。
+三十七款免費、純前端小遊戲，從 `index.html` 入口進入。
 
 ## 試玩
 
@@ -428,3 +428,12 @@ Linux 明確區分 GNOME／Files 與 KDE Plasma／Dolphin 預設；macOS 的 Ret
 先填介係詞、選混搭風味，再確認；烙度定義為英文字母÷英文字母與中文字總數，忽略空白／數字／標點，只是遊戲風味門檻，不是英文能力分數。每輪隨機三分之一題會先追問Really？真的嗎？以新的近似情境測轉用，回答前不揭露原題解答。用法、風味與追問分開統計，重試保留首次紀錄；一次答對或相似題高分不等於證明長期學會。
 
 無倒數、帳號、儲存、上傳或外部執行依賴。題目原創，文法參考連結供延伸閱讀；不宣稱官方題庫。部署 `english-flex.html/css/js/svg`、`english-flex-data.js`、`english-flex-engine.js`，沿用 `brain-break.css` 與共用 `arcade-fx.css/js`。
+
+
+## 科學實驗室
+
+[開始研究](https://dorac7.github.io/double-standard-game/science-lab.html)，現有伺服器：<http://bigmac.dorac7.com:5487/science-lab.html>。四個可自由調參數的理想模型：小角度單擺、歐姆定律、溶液質量濃度、無空氣阻力的自由落體。先預測，再執行，留下輸入／輸出／當時預測與基準編號。不是即時感測、真實實測或實體操作教學。各模型附公式、成立條件與OpenStax參考章節。
+
+可選任兩筆A/B紀錄與研究變因。比較區分相同設定、只改研究變因、改到其他變因、同時改多項；預測只和當時指定的A核對，不套到後來換過的基準。圖表只顯示其他參數都與A相同的資料點，表格保留全部紀錄。重複同條件得到同結果，沒有假造量測噪音。每個模型資料在分頁內各自保留，可匯出CSV，清除需確認且只清目前模型。
+
+無帳號、永久儲存、上傳、音效、倒數或外部依賴；重新整理清空。保留低年級「好奇心研究所」，本頁更重視控制變因與資料比較。部署 `science-lab.html/css/js/svg`、`science-lab-engine.js` 與共用 `arcade-fx.css/js`。
