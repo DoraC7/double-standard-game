@@ -1,6 +1,6 @@
 # Dora playground
 
-三十二款免費、純前端小遊戲，從 `index.html` 入口進入。
+三十三款免費、純前端小遊戲，從 `index.html` 入口進入。
 
 ## 試玩
 
@@ -396,3 +396,10 @@ Linux 明確區分 GNOME／Files 與 KDE Plasma／Dolphin 預設；macOS 的 Ret
 [開搞](https://dorac7.github.io/double-standard-game/mischief-school.html)，現有伺服器：<http://bigmac.dorac7.com:5487/mischief-school.html>。12幕卡通惡作劇、三個片場各4幕。每幕挑道具確認後，舞台與文字呈現該道具的實際結果，再依該結果選收尾；不是把錯選道具偷換成標準答案。36個道具分支可走完，笑點與收尾各1點。
 
 快閃6幕、完整12幕或單片場4幕；同輪不重複，幕序與選項隨機。可重演本幕，清除舞台和選擇但保留首次紀錄；結算可對照首次與最近道具、實際結果與收尾。全為虛構卡通及玩具舞台，無真實設備、帳號、倒數、儲存、上傳或外部依賴。裝飾動畫可關閉且尊重減少動態效果。部署 `mischief-school.html/css/js/svg`、`mischief-school-engine.js`，沿用 `brain-break.css` 和 `arcade-fx.css/js`。
+
+
+## 無知大聲公 🔉
+
+[開台](https://dorac7.github.io/double-standard-game/ignorance-megaphone.html)，現有伺服器：<http://bigmac.dorac7.com:5487/ignorance-megaphone.html>。12個原創虛構廣播情境，畫面與原話、因果、數字各4題。原始資料全程可讀，先選句子再調整擴音0～100、確認廣播；每級2人次、0不外播，是遊戲模型不是社群預測，也不改裝置實際音量。真假判定只依提供資料，不以音量或一律不確定拿分。
+
+快閃6題（每類2）、完整12題或單類4題。選句與調音量不提前判分，確認後鎖定；修訂重播保留首次句子、音量與模擬誤傳人次，結算對照首次／最近。聲波視覺大小隨滑桿改變，無實際音效；裝飾動畫可關閉且尊重減少動態效果。無倒數、帳號、儲存、上傳或外部依賴。保留原「無知大挑戰」，不是改名取代。部署 `ignorance-megaphone.html/css/js/svg`、`ignorance-megaphone-engine.js`，共用 `brain-break.css` 和 `arcade-fx.css/js`。
