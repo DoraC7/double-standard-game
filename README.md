@@ -1,6 +1,6 @@
 # Dora playground
 
-三十五款免費、純前端小遊戲，從 `index.html` 入口進入。
+三十六款免費、純前端小遊戲，從 `index.html` 入口進入。
 
 ## 試玩
 
@@ -419,3 +419,12 @@ Linux 明確區分 GNOME／Files 與 KDE Plasma／Dolphin 預設；macOS 的 Ret
 快閃4區或完整9區，同輪不重複；地圖也可點選單一園區直接入場；先選再確認，招式改變場面道具、姿勢、災情牌與文字，不是選擇正確答案。可重演本區看不同災情，報表保留各區最近招式，重演不重複累加園區或混亂小火花；小火花為卡通鬧劇刻度，不是金錢或健康數值。玩具車在園內，帳單為道具；沒有真實付款、購物、設備控制或食品用量／療效建議，不影射真人。
 
 無倒數、音效、帳號、儲存、上傳或外部依賴；裝飾動畫可關閉且尊重減少動態效果。部署 `chaos-park.html/css/js/svg`、`chaos-park-engine.js` 與共用 `arcade-fx.css/js`。
+
+
+## 烙英文大挑戰
+
+[Let's 開始](https://dorac7.github.io/double-standard-game/english-flex.html)，現有伺服器：<http://bigmac.dorac7.com:5487/english-flex.html>。36組近似介係詞題：時間、地點與動作、交通各12題；熱身12題（各類4題）、完整36題或單類12題。題幹明確限定時間、語意或慣用句型，避免把可接受的不同意思誤判為唯一錯誤。
+
+先填介係詞、選混搭風味，再確認；烙度定義為英文字母÷英文字母與中文字總數，忽略空白／數字／標點，只是遊戲風味門檻，不是英文能力分數。每輪隨機三分之一題會先追問Really？真的嗎？以新的近似情境測轉用，回答前不揭露原題解答。用法、風味與追問分開統計，重試保留首次紀錄；一次答對或相似題高分不等於證明長期學會。
+
+無倒數、帳號、儲存、上傳或外部執行依賴。題目原創，文法參考連結供延伸閱讀；不宣稱官方題庫。部署 `english-flex.html/css/js/svg`、`english-flex-data.js`、`english-flex-engine.js`，沿用 `brain-break.css` 與共用 `arcade-fx.css/js`。
