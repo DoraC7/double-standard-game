@@ -1,6 +1,6 @@
 # Dora playground
 
-三十一款免費、純前端小遊戲，從 `index.html` 入口進入。
+三十二款免費、純前端小遊戲，從 `index.html` 入口進入。
 
 ## 試玩
 
@@ -389,3 +389,10 @@ Linux 明確區分 GNOME／Files 與 KDE Plasma／Dolphin 預設；macOS 的 Ret
 [開始家事練習](https://dorac7.github.io/double-standard-game/housework-school.html)，現有伺服器：<http://bigmac.dorac7.com:5487/housework-school.html>。24個原創情境：洗晾收衣、餐後廚房、清掃整理、分工與收尾各6題；16題選擇、8題三步排序，使用上移／下移而非拖曳限定。排序依題目明示流程，不宣稱家事只有一種合法順序。
 
 短局8題（各類2題）、完整24題或單類6題。先選／排序再確認，答錯可重試但保留首次結果；完整回顧含最後作答與建議順序。著重執行、驗收與交接，不重複生活常識的洗標／設備知識定位，不依性別分工。無倒數、帳號、儲存、上傳或外部依賴；不是實際家事能力認證。部署 `housework-school.html/css/js/svg`、`housework-school-engine.js`，沿用 `brain-break.css` 與共用 `arcade-fx.css/js`。
+
+
+## 搞事小學堂
+
+[開搞](https://dorac7.github.io/double-standard-game/mischief-school.html)，現有伺服器：<http://bigmac.dorac7.com:5487/mischief-school.html>。12幕卡通惡作劇、三個片場各4幕。每幕挑道具確認後，舞台與文字呈現該道具的實際結果，再依該結果選收尾；不是把錯選道具偷換成標準答案。36個道具分支可走完，笑點與收尾各1點。
+
+快閃6幕、完整12幕或單片場4幕；同輪不重複，幕序與選項隨機。可重演本幕，清除舞台和選擇但保留首次紀錄；結算可對照首次與最近道具、實際結果與收尾。全為虛構卡通及玩具舞台，無真實設備、帳號、倒數、儲存、上傳或外部依賴。裝飾動畫可關閉且尊重減少動態效果。部署 `mischief-school.html/css/js/svg`、`mischief-school-engine.js`，沿用 `brain-break.css` 和 `arcade-fx.css/js`。
