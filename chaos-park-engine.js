@@ -1,0 +1,317 @@
+(function(root,factory){const api=factory();if(typeof module==='object'&&module.exports)module.exports=api;else root.ChaosPark=api;})(typeof globalThis!=='undefined'?globalThis:this,()=>{'use strict';
+const scenes=[
+  {
+    "id": "keys",
+    "title": "鑰匙失蹤城",
+    "icon": "🔑",
+    "intro": "卡通阿鬧穿好鞋，鑰匙還在玄關桌上。門已經準備好表演「喀嚓」。",
+    "props": [
+      "🔑",
+      "🚪",
+      "🧍"
+    ],
+    "actions": [
+      {
+        "label": "甩門就走，氣勢先到",
+        "note": "阿鬧走到門外才發現口袋只住著空氣。鑰匙在屋內宣布：我今天居家上班。",
+        "badge": "喀嚓！",
+        "extra": "門外一個人，門內一把很悠閒的鑰匙。",
+        "mess": 1
+      },
+      {
+        "label": "隔著門喊芝麻開門",
+        "note": "門沒有打開，旁邊的芝麻包倒是開口了：你叫我嗎？",
+        "badge": "芝麻到場",
+        "extra": "芝麻包出勤了，鑰匙還在桌上度假。",
+        "mess": 2
+      },
+      {
+        "label": "戴墨鏡出門，把鑰匙留給桌子",
+        "note": "桌子被授予保管鑰匙終身成就獎。阿鬧戴著墨鏡，帥氣地坐在門口。",
+        "badge": "桌子升官",
+        "extra": "氣勢滿分，門口等候席也坐滿。",
+        "mess": 3
+      }
+    ]
+  },
+  {
+    "id": "fuel",
+    "title": "空油箱出巡場",
+    "icon": "⛽",
+    "intro": "園內玩具車油量顯示見底，阿鬧卻已經在向終點揮手。",
+    "props": [
+      "🚗",
+      "⛽",
+      "🏁"
+    ],
+    "actions": [
+      {
+        "label": "油量先不要看，終點比較重要",
+        "note": "玩具車滑出半個車身就停下來。終點旗自己走過來問：需要我離你近一點嗎？",
+        "badge": "半格旅行",
+        "extra": "車沒走遠，告別式揮手倒是揮完了。",
+        "mess": 1
+      },
+      {
+        "label": "對油箱大喊你可以的",
+        "note": "油箱回送一張「謝謝鼓勵，但我還是空的」紙條。玩具車開始練習原地旅行。",
+        "badge": "精神加油",
+        "extra": "加的是氣氛，車子沒有因此多走一步。",
+        "mess": 2
+      },
+      {
+        "label": "先拍一張環島出發照",
+        "note": "照片看起來像壯遊，背景卻連續三張都是同一根園區柱子。",
+        "badge": "原地環島",
+        "extra": "環島相簿三頁，停車位置一格。",
+        "mess": 3
+      }
+    ]
+  },
+  {
+    "id": "bills",
+    "title": "重複繳費旋轉木馬",
+    "icon": "🧾",
+    "intro": "園區三張道具帳單：水、電、瓦斯。每張都已經貼好「已繳」章。",
+    "props": [
+      "💧",
+      "💡",
+      "🧾"
+    ],
+    "actions": [
+      {
+        "label": "不看紀錄，再按一次全部繳",
+        "note": "道具收據又生出水、電、瓦斯三胞胎，拿著紙票繞旋轉木馬。",
+        "badge": "收據增殖",
+        "extra": "帳單沒有變新，收據卻突然人口增加。",
+        "mess": 1
+      },
+      {
+        "label": "看到提醒就再繳一次",
+        "note": "提醒只是還沒消失的舊泡泡，阿鬧卻又把紙票塞進道具繳費口。",
+        "badge": "提醒不下班",
+        "extra": "提醒泡泡留下來加班，紙票先下班了。",
+        "mess": 2
+      },
+      {
+        "label": "三個頁面一起按，效率最高",
+        "note": "水電瓦斯收據排成九宮格，全部高喊：我們是重複報到，不是新工作！",
+        "badge": "九宮格收據",
+        "extra": "三種帳單開成一桌收據同學會。",
+        "mess": 3
+      }
+    ]
+  },
+  {
+    "id": "expiry",
+    "title": "保健品考古館",
+    "icon": "🫙",
+    "intro": "阿鬧把新買的保健品放上架，接著只記得再買下一瓶。日曆正準備翻頁。",
+    "props": [
+      "🫙",
+      "📅",
+      "🕸️"
+    ],
+    "actions": [
+      {
+        "label": "買完先收藏，想到再說",
+        "note": "日曆翻到架上標示的期限之後，瓶子披上小披風，自稱鎮館之瓶。",
+        "badge": "收藏成古董",
+        "extra": "買到的興奮退場，過期標籤登台。",
+        "mess": 1
+      },
+      {
+        "label": "新瓶擋前面，舊瓶讓它休息",
+        "note": "舊瓶被擋在最後面，直到過期才被發現。它戴上探險帽：你終於找到我了！",
+        "badge": "架後遺跡",
+        "extra": "架子不是時光機，舊瓶卻成了考古現場。",
+        "mess": 2
+      },
+      {
+        "label": "等有空再整理，現在先補貨",
+        "note": "新舊瓶子排到架外，過期瓶還在裡面當資深導覽員。",
+        "badge": "庫存開分館",
+        "extra": "補貨速度很熱鬧，使用與整理都沒有跟上。",
+        "mess": 3
+      }
+    ]
+  },
+  {
+    "id": "overload",
+    "title": "份量暴走摩天輪",
+    "icon": "🚨",
+    "intro": "道具美容食品罐前有份量標籤；阿鬧盯著「漂亮」兩字，想把進度條直接拉滿。",
+    "props": [
+      "🫙",
+      "✨",
+      "🚨"
+    ],
+    "actions": [
+      {
+        "label": "把更多想成更快漂亮",
+        "note": "卡通份量指針衝出刻度，卻只轉出一張「漂亮沒有加速鍵」紙牌。",
+        "badge": "指針離家",
+        "extra": "份量警報開了，變美快轉鍵根本不存在。",
+        "mess": 1
+      },
+      {
+        "label": "昨天漏掉，今天想一次補回來",
+        "note": "阿鬧想拿昨天的行程去加今天的份量，日曆直接把算盤抱走：我沒有這種加法！",
+        "badge": "日曆拒算",
+        "extra": "漏掉的昨天不會替今天多開一個份量欄。",
+        "mess": 2
+      },
+      {
+        "label": "把廣告的超大聲當成超大份",
+        "note": "廣告大聲公越喊越大，份量標籤卻紋風不動。罐子把廣告請到旁邊唱獨角戲。",
+        "badge": "廣告獨唱",
+        "extra": "變大的是廣告音量，不是可用份量。",
+        "mess": 3
+      }
+    ]
+  },
+  {
+    "id": "brain",
+    "title": "腦袋寄物上班站",
+    "icon": "🧠",
+    "intro": "卡通腦袋還躺在家裡枕頭上。阿鬧本人已經刷卡進了辦公室。",
+    "props": [
+      "🧠",
+      "💼",
+      "📄"
+    ],
+    "actions": [
+      {
+        "label": "文件沒看就說沒問題",
+        "note": "空白文件蓋了一個超大沒問題章。真正的問題站在旁邊排隊，拿到001號。",
+        "badge": "問題排隊",
+        "extra": "嘴巴已經交件，腦袋還在枕頭上慢慢醒來。",
+        "mess": 1
+      },
+      {
+        "label": "需求只聽一半，後面自己腦補",
+        "note": "同事要一張表，阿鬧交出一隻紙摺小鳥。小鳥看完需求也歪了頭。",
+        "badge": "小鳥交件",
+        "extra": "交出去的東西很有翅膀，但不是對方要的。",
+        "mess": 2
+      },
+      {
+        "label": "先答應全部，行事曆晚點看",
+        "note": "六個同時段的約定搭上同一班電梯，電梯門乾脆變成一張問號臉。",
+        "badge": "約定塞車",
+        "extra": "六個好字一起出發，沒有六個阿鬧分身接班。",
+        "mess": 3
+      }
+    ]
+  },
+  {
+    "id": "beauty",
+    "title": "美妝時間黑洞",
+    "icon": "💄",
+    "intro": "化妝臺滿滿瓶罐：定妝噴霧、化妝水和保養品。阿鬧忙著拍美美照片，瓶身標示全被晾在一旁。",
+    "props": [
+      "💄",
+      "🧴",
+      "🪞"
+    ],
+    "actions": [
+      {
+        "label": "瓶子長得像，就把定妝噴霧當化妝水",
+        "note": "兩張用途名牌對調，鏡子舉起牌子：你拿的是定妝噴霧，不是化妝水啦！",
+        "badge": "用途大風吹",
+        "extra": "外觀像雙胞胎，用途沒有自動跟著交換。",
+        "mess": 1
+      },
+      {
+        "label": "今天想用哪罐，就不看用途亂加戲",
+        "note": "瓶罐們為了誰先出場吵成一團，梳妝臺變成沒有劇本的記者會。",
+        "badge": "瓶罐記者會",
+        "extra": "出場次序很忙碌，瓶身寫了什麼卻沒人看。",
+        "mess": 2
+      },
+      {
+        "label": "再拍一張就好，時間先暫停",
+        "note": "鏡子拍出第十個滿意角度，約定的時間卻早已經走出園區大門。",
+        "badge": "時間先走了",
+        "extra": "照片一張比一張漂亮，出門時間一格比一格遠。",
+        "mess": 3
+      }
+    ]
+  },
+  {
+    "id": "blame",
+    "title": "先兇再說迴力鏢",
+    "icon": "🪃",
+    "intro": "阿鬧把自己填錯日期的紙條拿去櫃檯，還沒核對就準備提高音量。",
+    "props": [
+      "📄",
+      "🗯️",
+      "🪃"
+    ],
+    "actions": [
+      {
+        "label": "先喊一定是你們弄錯",
+        "note": "日期紙條翻了一面，露出阿鬧自己的筆跡。那句指控坐著迴力鏢回來打招呼。",
+        "badge": "原話回航",
+        "extra": "音量到了櫃檯，自己的日期錯字也一起到了。",
+        "mess": 1
+      },
+      {
+        "label": "不查紀錄，先把鍋甩出去",
+        "note": "道具鍋飛了一圈，降落在阿鬧填錯的那張表上，自己變成一面放大鏡。",
+        "badge": "鍋自帶導航",
+        "extra": "鍋飛得很遠，紀錄仍然指著原本那一格。",
+        "mess": 2
+      },
+      {
+        "label": "別人解釋到一半就搶著兇",
+        "note": "櫃檯只好把原單據舉成超大字幕：這個日期是你寫的。搶話泡泡當場打了個嗝。",
+        "badge": "字幕比聲大",
+        "extra": "話搶到一半，自己的填寫紀錄先被看清楚。",
+        "mess": 3
+      }
+    ]
+  },
+  {
+    "id": "rotary",
+    "title": "扶輪社拆輪子",
+    "icon": "🛞",
+    "intro": "卡通多拉來到園區扶輪社舞台，聽見「扶輪」兩字，立刻盯上旁邊的道具輪子。",
+    "props": [
+      "🛞",
+      "🎀",
+      "🧰"
+    ],
+    "actions": [
+      {
+        "label": "聽到扶輪，先把道具輪子扶起來再拆",
+        "note": "卡通多拉把可拆式舞台輪子抱起來，鄭重宣布：輪我扶好了，拆下來比較好帶！主持人的問號轉成了第二顆輪子。",
+        "badge": "字面理解滿載",
+        "extra": "扶輪活動還沒開始，輪子已經有自己的報到席。",
+        "mess": 1
+      },
+      {
+        "label": "帶著整袋模型輪子報到",
+        "note": "多拉把玩具輪子一顆顆排到椅子上：每一輪都要有座位吧？來賓還在門口，輪子已經坐第一排。",
+        "badge": "輪子搶先入席",
+        "extra": "簽到表寫滿圈圈，主持人一時不知道該點名還是點輪。",
+        "mess": 2
+      },
+      {
+        "label": "主動幫忙，把舞台模型車輪全換成甜甜圈",
+        "note": "多拉對模型車說：我幫你升級成好吃的輪子了！模型車沒有開走，卻引來一排拿著盤子的卡通來賓。",
+        "badge": "輪子甜甜圈化",
+        "extra": "扶輪社的道具車，臨時改名成下午茶專車。",
+        "mess": 3
+      }
+    ]
+  }
+];
+function shuffle(items){const a=[...items];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function create(mode='short'){if(!['short','all',...scenes.map(q=>q.id)].includes(mode))throw Error('沒有這種入園券');return {items:shuffle(scenes.filter(q=>mode==='short'||mode==='all'||q.id===mode)).slice(0,mode==='short'?4:9),index:0,selected:null,launched:false,records:[],done:false};}
+function select(s,n){if(s.done||s.launched||!Number.isInteger(n)||n<0||n>2)return false;s.selected=n;return true;}
+function launch(s){if(s.done||s.launched||s.selected===null)return null;const scene=s.items[s.index],r={id:scene.id,choice:s.selected,...scene.actions[s.selected]};s.records[s.index]={...r};s.launched=true;return {...r};}
+function replay(s){if(s.done||!s.launched)return false;s.selected=null;s.launched=false;return true;}
+function next(s){if(s.done||!s.launched)return false;if(s.index===s.items.length-1)s.done=true;else{s.index++;s.selected=null;s.launched=false;}return true;}
+function stats(s){return {visited:s.records.length,mess:s.records.reduce((n,r)=>n+r.mess,0)};}
+return {scenes,shuffle,create,select,launch,replay,next,stats};});

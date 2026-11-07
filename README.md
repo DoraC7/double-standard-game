@@ -1,6 +1,6 @@
 # Dora playground
 
-三十四款免費、純前端小遊戲，從 `index.html` 入口進入。
+三十五款免費、純前端小遊戲，從 `index.html` 入口進入。
 
 ## 試玩
 
@@ -410,3 +410,12 @@ Linux 明確區分 GNOME／Files 與 KDE Plasma／Dolphin 預設；macOS 的 Ret
 [哈哈哈開場](https://dorac7.github.io/double-standard-game/giggle-crazy.html)，現有伺服器：<http://bigmac.dorac7.com:5487/giggle-crazy.html>。12顆原創怪東西、36種傻笑反應，只有「好好玩」「好有趣」「看起來很好吃」，沒有答錯、解析或說教。點選怪東西可戳出啵啵泡；反應改變姿勢、動畫、裝飾和奇怪變身文字，三種都能換著喊。
 
 短場4顆或完整12顆，同輪不重複；每顆收集一顆笑泡泡，切換反應不重複計數，結束有本輪傻笑相簿。無倒數、音效、帳號、儲存、上傳或外部依賴；動畫可關閉且尊重減少動態效果，關閉後仍保留反應姿勢與文字。部署 `giggle-crazy.html/css/js/svg`、`giggle-crazy-engine.js`、`giggle-crazy-art.js`，共用 `arcade-fx.css/js`。
+
+
+## 鬧事樂園
+
+[入園開鬧](https://dorac7.github.io/double-standard-game/chaos-park.html)，現有伺服器：<http://bigmac.dorac7.com:5487/chaos-park.html>。卡通阿鬧的九區諷刺鬧劇：忘鑰匙、空油箱、重複繳水電瓦斯、保健品過期、美容食品份量失控、上班忘腦袋、美妝用途／時間亂用、自己填錯先兇人，另有卡通多拉「扶輪社拆輪子」字面理解番外。每區3個招式，27種明確對應的場面與後果。
+
+快閃4區或完整9區，同輪不重複；地圖也可點選單一園區直接入場；先選再確認，招式改變場面道具、姿勢、災情牌與文字，不是選擇正確答案。可重演本區看不同災情，報表保留各區最近招式，重演不重複累加園區或混亂小火花；小火花為卡通鬧劇刻度，不是金錢或健康數值。玩具車在園內，帳單為道具；沒有真實付款、購物、設備控制或食品用量／療效建議，不影射真人。
+
+無倒數、音效、帳號、儲存、上傳或外部依賴；裝飾動畫可關閉且尊重減少動態效果。部署 `chaos-park.html/css/js/svg`、`chaos-park-engine.js` 與共用 `arcade-fx.css/js`。
