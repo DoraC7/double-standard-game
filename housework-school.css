@@ -1,0 +1,2 @@
+@import url('brain-break.css');
+:root{--ink:#604737;--paper:#faf2e7;--purple:#a35b35;--line:#dfc9b4}.puzzle{background:#f5e4ce;font-family:inherit;font-size:clamp(17px,3vw,25px);letter-spacing:0}.panel{box-shadow:0 6px 0 #ead9c4}.options button[aria-pressed=true]{background:#f6dfc7}.hero h1{font-size:clamp(32px,5.5vw,54px)}.step-list{padding-left:26px;margin:0}.step-list li{padding:12px 0;border-bottom:1px solid var(--line);overflow-wrap:anywhere}.step-actions{display:flex;gap:8px;margin-top:8px}.step-actions button{font-size:14px;padding:8px 14px}

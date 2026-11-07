@@ -1,6 +1,6 @@
 # Dora playground
 
-三十款免費、純前端小遊戲，從 `index.html` 入口進入。
+三十一款免費、純前端小遊戲，從 `index.html` 入口進入。
 
 ## 試玩
 
@@ -382,3 +382,10 @@ Linux 明確區分 GNOME／Files 與 KDE Plasma／Dolphin 預設；macOS 的 Ret
 [開始挑戰](https://dorac7.github.io/double-standard-game/math-school.html)，現有伺服器：<http://bigmac.dorac7.com:5487/math-school.html>。24 題四主題：四則運算、分數、時間與生活、周長與面積；約小三、小四程度。短局8題（每類2題）、完整24題或單類6題。同輪不重複，題序與選項隨機；分數圖與面積格由本機SVG繪製。
 
 先選再確認，答錯或先看解析後可重試，首次與最新結果分開保留；結算逐題複習。無倒數、必要音效、帳號、儲存或上傳，非官方教材／能力測驗。沿用原站純JavaScript與共用版面，保留小一二「數感冒險島」。部署 `math-school.html/css/js/svg`、`math-school-engine.js`，依賴 `brain-break.css` 與共用 `arcade-fx.css/js`。
+
+
+## 家事小學堂
+
+[開始家事練習](https://dorac7.github.io/double-standard-game/housework-school.html)，現有伺服器：<http://bigmac.dorac7.com:5487/housework-school.html>。24個原創情境：洗晾收衣、餐後廚房、清掃整理、分工與收尾各6題；16題選擇、8題三步排序，使用上移／下移而非拖曳限定。排序依題目明示流程，不宣稱家事只有一種合法順序。
+
+短局8題（各類2題）、完整24題或單類6題。先選／排序再確認，答錯可重試但保留首次結果；完整回顧含最後作答與建議順序。著重執行、驗收與交接，不重複生活常識的洗標／設備知識定位，不依性別分工。無倒數、帳號、儲存、上傳或外部依賴；不是實際家事能力認證。部署 `housework-school.html/css/js/svg`、`housework-school-engine.js`，沿用 `brain-break.css` 與共用 `arcade-fx.css/js`。
