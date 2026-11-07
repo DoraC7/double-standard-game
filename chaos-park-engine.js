@@ -305,10 +305,214 @@ const scenes=[
         "mess": 3
       }
     ]
+  },
+  {
+    "id": "meal",
+    "title": "空腹上課迴轉餐廳",
+    "icon": "🍚",
+    "intro": "卡通課表留了午餐空檔，飯也準備好了。阿鬧說：我不餓啦，先上課比較重要。",
+    "props": [
+      "🍚",
+      "📚",
+      "🕛"
+    ],
+    "actions": [
+      {
+        "label": "吃飯時間先不吃，說不餓要上課",
+        "note": "上課上一半，阿鬧的肚子舉起超大好餓牌。阿鬧整堂跑去餐廳，飯吃到了，原本說要先上的課卻整堂空著。",
+        "badge": "午餐搬進上課時段",
+        "extra": "先省掉吃飯時間，最後把整堂課送去當餐廳背景音。",
+        "mess": 1
+      },
+      {
+        "label": "先進教室，菜單等餓了再打開",
+        "note": "阿鬧上到一半開始研究吃什麼，從課堂畫面一路滑到菜單，再一路走到餐廳。老師講完一輪，阿鬧剛好選完套餐。",
+        "badge": "菜單接管講義",
+        "extra": "說好先上課，課程卻變成找餐廳的等待畫面。",
+        "mess": 2
+      },
+      {
+        "label": "說不會餓，等好餓才開始找店",
+        "note": "飯點先跳過，課中才找店、排隊、吃飯。阿鬧回來時，整堂課已經下課，黑板上只剩一個謝謝收看。",
+        "badge": "下課才回教室",
+        "extra": "肚子最後有吃飽，原定學習時段卻已經走光。",
+        "mess": 3
+      }
+    ]
+  },
+  {
+    "id": "notes",
+    "title": "筆記字體選美館",
+    "icon": "📝",
+    "intro": "課後要留下操作步驟與驗證結果，阿鬧卻先把游標停在字體選單。",
+    "props": [
+      "📝",
+      "🔤",
+      "⏳"
+    ],
+    "actions": [
+      {
+        "label": "內容等一下，先挑最好看的字體",
+        "note": "字體換到第十二種，筆記裡仍然只有日期。日期穿著漂亮西裝，一個人站在空白頁上。",
+        "badge": "日期獨走伸展臺",
+        "extra": "字很好看，做過什麼與怎麼驗證卻還沒寫。",
+        "mess": 1
+      },
+      {
+        "label": "先做漂亮目錄，操作晚點補",
+        "note": "目錄分成七大章，每章打開都寫稍後補上。阿鬧的筆記像一座只有招牌、還沒有展品的博物館。",
+        "badge": "目錄比內容熱鬧",
+        "extra": "分類已經非常完整，原本要記的實際操作還在外面排隊。",
+        "mess": 2
+      },
+      {
+        "label": "把上一版標題重新上色三次",
+        "note": "三套配色都精緻到可以開展，阿鬧卻想不起剛剛哪個指令成功。筆記的顏色有備份，操作的記憶沒有留下。",
+        "badge": "彩色的空白紀錄",
+        "extra": "修了三輪外觀，還沒留下能自己重做的步驟。",
+        "mess": 3
+      }
+    ]
+  },
+  {
+    "id": "slides",
+    "title": "簡報特效煙火臺",
+    "icon": "🎞️",
+    "intro": "明天要報告三個重點，阿鬧的投影片目前只有一個會飛進場的標題。",
+    "props": [
+      "🎞️",
+      "🎆",
+      "📄"
+    ],
+    "actions": [
+      {
+        "label": "重點先不要寫，轉場一定要帥",
+        "note": "標題翻滾七圈進場，接著舞臺安靜了：三個報告重點都還沒出生。",
+        "badge": "標題表演完沒內容",
+        "extra": "觀眾記住了飛進來的字，沒聽到原本要說的事。",
+        "mess": 1
+      },
+      {
+        "label": "每一行都加進場動畫",
+        "note": "阿鬧花整晚替空白項目安排入場順序。隔天點下一頁，空白本人非常準時地淡入了。",
+        "badge": "空白盛大登場",
+        "extra": "進場效果排得滿滿，資料與結論仍然沒到場。",
+        "mess": 2
+      },
+      {
+        "label": "先挑片尾音樂，資料以後找",
+        "note": "片尾曲挑到感動自己，投影片卻還在等第一張資料表。簡報尚未開始，就先練好了謝幕。",
+        "badge": "還沒開始先謝幕",
+        "extra": "謝幕氣氛很到位，報告主線還沒準備。",
+        "mess": 3
+      }
+    ]
+  },
+  {
+    "id": "planner",
+    "title": "計畫表裝修街",
+    "icon": "📅",
+    "intro": "今天原本要完成一件小任務。阿鬧先打開計畫表，準備讓開始變得非常隆重。",
+    "props": [
+      "📅",
+      "🎨",
+      "✅"
+    ],
+    "actions": [
+      {
+        "label": "做事之前先重排整週配色",
+        "note": "整週排程像糖果展示櫃，今天那件小任務卻一直站在門口說：所以我們什麼時候開始？",
+        "badge": "開始儀式加長版",
+        "extra": "安排工作的時間，把原本要工作的時段住滿了。",
+        "mess": 1
+      },
+      {
+        "label": "把同一件事拆成五十個標題",
+        "note": "任務名稱越拆越細，第一個實際動作卻還沒做。五十個標題圍著同一張空桌子開會。",
+        "badge": "標題分身大會",
+        "extra": "計畫看起來很有進展，作品本身仍然沒有變。",
+        "mess": 2
+      },
+      {
+        "label": "待辦清單換工具搬家三次",
+        "note": "待辦從粉紅房間搬到藍色房間，又搬到綠色房間。搬運工累了，待辦本人連鞋都沒穿。",
+        "badge": "待辦豪華搬家",
+        "extra": "工具位置換了三次，原本那件事還停在原點。",
+        "mess": 3
+      }
+    ]
+  },
+  {
+    "id": "filters",
+    "title": "上課濾鏡試衣間",
+    "icon": "📷",
+    "intro": "線上課已經開始，阿鬧的鏡頭與聲音都能用，卻還想先挑一個完美背景。",
+    "props": [
+      "📷",
+      "✨",
+      "📚"
+    ],
+    "actions": [
+      {
+        "label": "先把背景挑到完全滿意再聽",
+        "note": "海島、森林、太空背景輪流上班。阿鬧選到滿意的太空站時，課程重點已經飛過三個星球。",
+        "badge": "背景環遊世界",
+        "extra": "畫面去了很多地方，耳朵沒有跟上當時的說明。",
+        "mess": 1
+      },
+      {
+        "label": "不停調濾鏡，老師那邊先靜音",
+        "note": "老師的說明被按成靜音，濾鏡在螢幕前開派對。阿鬧回頭問剛剛教什麼，濾鏡只會幫忙加星星。",
+        "badge": "濾鏡不會代聽",
+        "extra": "上課視窗一直開著，原本要聽懂的內容卻沒進來。",
+        "mess": 2
+      },
+      {
+        "label": "等燈光完美，才開始記第一句",
+        "note": "光線終於把阿鬧照得像海報，第一句筆記卻還沒記。講解已經進到操作結果，筆記仍在等開場。",
+        "badge": "海報先畢業",
+        "extra": "鏡頭裡的準備完成了，課堂上的第一個紀錄還沒開始。",
+        "mess": 3
+      }
+    ]
+  },
+  {
+    "id": "discount",
+    "title": "優惠研究迷宮",
+    "icon": "🏷️",
+    "intro": "卡通阿鬧原本只要挑一件合用的道具，還有一份約好要完成的作品。螢幕跳出一張省兩枚紙幣的優惠券。",
+    "props": [
+      "🏷️",
+      "🕰️",
+      "📦"
+    ],
+    "actions": [
+      {
+        "label": "為了省兩枚紙幣，研究整個下午",
+        "note": "優惠條款被阿鬧畫成一張地鐵圖，原本約好的作品卻坐在站外等到天黑。",
+        "badge": "優惠比主線先通關",
+        "extra": "研究省到了小折扣，原本答應的作品還沒有完成。",
+        "mess": 1
+      },
+      {
+        "label": "越看越想湊滿額，合不合用先放旁邊",
+        "note": "道具購物車長出一列玩具火車，最初那件真正需要的東西反而被擠到最後一節。",
+        "badge": "滿額列車加班",
+        "extra": "滿額門檻忙著升高，原本的需要被越推越遠。",
+        "mess": 2
+      },
+      {
+        "label": "先把全部比價表做成漂亮報表",
+        "note": "比價表有封面、圖例和目錄，阿鬧的原定作品卻只剩檔名。優惠券已過期，報表還在換顏色。",
+        "badge": "比價報表開展",
+        "extra": "比較工具變成主角，原本要做的事被留在旁邊。",
+        "mess": 3
+      }
+    ]
   }
 ];
 function shuffle(items){const a=[...items];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
-function create(mode='short'){if(!['short','all',...scenes.map(q=>q.id)].includes(mode))throw Error('沒有這種入園券');return {items:shuffle(scenes.filter(q=>mode==='short'||mode==='all'||q.id===mode)).slice(0,mode==='short'?4:9),index:0,selected:null,launched:false,records:[],done:false};}
+function create(mode='short'){if(!['short','all',...scenes.map(q=>q.id)].includes(mode))throw Error('沒有這種入園券');return {items:shuffle(scenes.filter(q=>mode==='short'||mode==='all'||q.id===mode)).slice(0,mode==='short'?4:scenes.length),index:0,selected:null,launched:false,records:[],done:false};}
 function select(s,n){if(s.done||s.launched||!Number.isInteger(n)||n<0||n>2)return false;s.selected=n;return true;}
 function launch(s){if(s.done||s.launched||s.selected===null)return null;const scene=s.items[s.index],r={id:scene.id,choice:s.selected,...scene.actions[s.selected]};s.records[s.index]={...r};s.launched=true;return {...r};}
 function replay(s){if(s.done||!s.launched)return false;s.selected=null;s.launched=false;return true;}

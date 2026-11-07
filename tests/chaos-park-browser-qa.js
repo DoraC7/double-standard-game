@@ -2,8 +2,8 @@ async function chaosParkQA(){
  const $=id=>document.getElementById(id),E=ChaosPark,check=(ok,t)=>{if(!ok)throw Error(t)};
  const choose=n=>{document.querySelector('[data-choice="'+n+'"]').click();check(!$('launch').disabled&&$('outcome').hidden,'只選擇不開鬧');$('launch').click();};
  const run=(mode,branch)=>{
-  $('mode').value=mode;$('start').click();const total=mode==='all'?9:4;let n=0,seen=new Set(),records=[];
-  while(!$('play').hidden&&n<10){
+  $('mode').value=mode;$('start').click();const total=mode==='all'?15:4;let n=0,seen=new Set(),records=[];
+  while(!$('play').hidden&&n<16){
    const q=E.scenes.find(q=>q.title===$('title').textContent);check(q&&!seen.has(q.id),'園區不重複');seen.add(q.id);
    check($('stage').dataset.action==='idle'&&!$('stage').classList.contains('live')&&$('launch').disabled&&$('outcome').hidden,'新區清空');check($('note').textContent==='','舊災情清空');
    choose(branch);check($('stage').dataset.zone===q.id&&$('stage').dataset.action===String(branch),'場面對應招式');
