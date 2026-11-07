@@ -1,11 +1,11 @@
 const {test}=require('node:test'),assert=require('node:assert/strict');const E=require('../chaos-park-engine.js');
-test('九區27種災情，含指定狀況與扶輪社番外',()=>{
- assert.equal(E.scenes.length,9);assert.equal(new Set(E.scenes.map(q=>q.id)).size,9);
+test('十五區45種災情，含指定狀況與扶輪社番外',()=>{
+ assert.equal(E.scenes.length,15);assert.equal(new Set(E.scenes.map(q=>q.id)).size,15);
  for(const q of E.scenes){assert.equal(q.actions.length,3);assert.equal(new Set(q.actions.map(a=>a.note)).size,3);for(const [i,a] of q.actions.entries()){assert.ok(a.label&&a.note&&a.badge&&a.extra);assert.equal(a.mess,i+1);}}
  const all=JSON.stringify(E.scenes);for(const term of ['鑰匙','油量','水','電','瓦斯','過期','份量','腦袋','定妝噴霧','化妝水','日期','扶輪社','卡通多拉'])assert.ok(all.includes(term),term);
 });
-test('全部27招式對應各自場面，全場可完成',()=>{
- for(let branch=0;branch<3;branch++){const s=E.create('all');for(const q of s.items){assert.equal(E.launch(s),null);assert.ok(E.select(s,branch));const r=E.launch(s);assert.equal(r.note,q.actions[branch].note);assert.equal(r.badge,q.actions[branch].badge);assert.equal(r.extra,q.actions[branch].extra);assert.ok(E.next(s));}assert.ok(s.done);assert.equal(E.stats(s).visited,9);assert.equal(E.stats(s).mess,9*(branch+1));assert.equal(E.select(s,0),false);}
+test('全部45招式對應各自場面，全場可完成',()=>{
+ for(let branch=0;branch<3;branch++){const s=E.create('all');for(const q of s.items){assert.equal(E.launch(s),null);assert.ok(E.select(s,branch));const r=E.launch(s);assert.equal(r.note,q.actions[branch].note);assert.equal(r.badge,q.actions[branch].badge);assert.equal(r.extra,q.actions[branch].extra);assert.ok(E.next(s));}assert.ok(s.done);assert.equal(E.stats(s).visited,15);assert.equal(E.stats(s).mess,15*(branch+1));assert.equal(E.select(s,0),false);}
 });
 test('重演清除目前選擇與鎖定，最近結果取代、不重複計數',()=>{
  const s=E.create();E.select(s,2);E.launch(s);const before=JSON.stringify(s);assert.equal(E.launch(s),null);assert.equal(JSON.stringify(s),before);assert.equal(E.select(s,0),false);
@@ -21,3 +21,5 @@ test('食品份量段落不給用量或療效獎勵，車輛／付款與拆輪�
 });
 
 test('地圖單區直接進入指定場景',()=>{for(const q of E.scenes){const s=E.create(q.id);assert.equal(s.items.length,1);assert.equal(s.items[0].id,q.id);E.select(s,0);E.launch(s);E.next(s);assert.ok(s.done);}});
+
+test('捨本逐末新增六區保留原主線與錯置結果',()=>{for(const id of ['meal','notes','slides','planner','filters','discount'])assert.ok(E.scenes.some(q=>q.id===id));const meal=E.scenes.find(q=>q.id==='meal');assert.match(meal.intro,/午餐空檔/);assert.match(meal.actions[0].note,/整堂跑去餐廳/);assert.match(meal.actions[0].extra,/整堂課/);});
