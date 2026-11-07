@@ -1,6 +1,6 @@
 # Dora playground
 
-三十三款免費、純前端小遊戲，從 `index.html` 入口進入。
+三十四款免費、純前端小遊戲，從 `index.html` 入口進入。
 
 ## 試玩
 
@@ -403,3 +403,10 @@ Linux 明確區分 GNOME／Files 與 KDE Plasma／Dolphin 預設；macOS 的 Ret
 [開台](https://dorac7.github.io/double-standard-game/ignorance-megaphone.html)，現有伺服器：<http://bigmac.dorac7.com:5487/ignorance-megaphone.html>。12個原創虛構廣播情境，畫面與原話、因果、數字各4題。原始資料全程可讀，先選句子再調整擴音0～100、確認廣播；每級2人次、0不外播，是遊戲模型不是社群預測，也不改裝置實際音量。真假判定只依提供資料，不以音量或一律不確定拿分。
 
 快閃6題（每類2）、完整12題或單類4題。選句與調音量不提前判分，確認後鎖定；修訂重播保留首次句子、音量與模擬誤傳人次，結算對照首次／最近。聲波視覺大小隨滑桿改變，無實際音效；裝飾動畫可關閉且尊重減少動態效果。無倒數、帳號、儲存、上傳或外部依賴。保留原「無知大挑戰」，不是改名取代。部署 `ignorance-megaphone.html/css/js/svg`、`ignorance-megaphone-engine.js`，共用 `brain-break.css` 和 `arcade-fx.css/js`。
+
+
+## 開心傻笑瘋挑戰
+
+[哈哈哈開場](https://dorac7.github.io/double-standard-game/giggle-crazy.html)，現有伺服器：<http://bigmac.dorac7.com:5487/giggle-crazy.html>。12顆原創怪東西、36種傻笑反應，只有「好好玩」「好有趣」「看起來很好吃」，沒有答錯、解析或說教。點選怪東西可戳出啵啵泡；反應改變姿勢、動畫、裝飾和奇怪變身文字，三種都能換著喊。
+
+短場4顆或完整12顆，同輪不重複；每顆收集一顆笑泡泡，切換反應不重複計數，結束有本輪傻笑相簿。無倒數、音效、帳號、儲存、上傳或外部依賴；動畫可關閉且尊重減少動態效果，關閉後仍保留反應姿勢與文字。部署 `giggle-crazy.html/css/js/svg`、`giggle-crazy-engine.js`、`giggle-crazy-art.js`，共用 `arcade-fx.css/js`。
