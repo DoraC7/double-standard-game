@@ -46,7 +46,7 @@ function sceneControl(q){
  const board=el('div',undefined,'law-board '+q.scene.type);board.id='law-board';
  board.setAttribute('aria-label',q.scene.type==='junction'?'路口放行示意；文字條件以題幹為準':'停車方案選區；位置僅為示意');
  if(q.scene.type==='junction'){
-  board.innerHTML='<svg viewBox="0 0 320 220" aria-hidden="true"><rect width="320" height="220" rx="16" fill="#dce7cc"/><path d="M128 0h64v220h-64zM0 78h320v64H0z" fill="#526b66"/><path d="M160 0v65m0 90v65M0 110h110m100 0h110" stroke="#f6e2a4" stroke-width="3" stroke-dasharray="12 8"/><g class="law-car car-a"><rect x="140" y="160" width="40" height="48" rx="9" fill="#f3bb5c"/><text x="160" y="191" text-anchor="middle" font-size="25" fill="#183f3d">A↑</text></g><g class="law-car car-b"><rect x="248" y="90" width="60" height="38" rx="9" fill="#b5d4ee"/><text x="277" y="116" text-anchor="middle" font-size="24" fill="#183f3d">←B</text></g></svg>';
+  board.innerHTML='<svg viewBox="0 0 320 220" aria-hidden="true"><rect width="320" height="220" rx="16" fill="#dce7cc"/><path d="M128 0h64v220h-64zM0 78h320v64H0z" fill="#526b66"/><path d="M160 0v65m0 90v65M0 110h110m100 0h110" stroke="#f6e2a4" stroke-width="3" stroke-dasharray="12 8"/><g class="law-car car-a"><rect x="165" y="166" width="24" height="40" rx="9" fill="#f3bb5c"/><text x="177" y="191" text-anchor="middle" font-size="16" fill="#183f3d">A↑</text></g><g class="law-car car-b"><rect x="256" y="83" width="52" height="23" rx="9" fill="#b5d4ee"/><text x="282" y="100" text-anchor="middle" font-size="17" fill="#183f3d">←B</text></g></svg>';
   board.append(el('p',q.id==='law-turn'?'A 由下方直行；B 從 A 右方接近並轉彎。':'A 由下方直行；B 從 A 的右方接近。','small'));
  }else{
   board.innerHTML='<div class="parking-road" aria-hidden="true"><span class="park-car">▰ 本車</span><span>道路 →</span></div>';
