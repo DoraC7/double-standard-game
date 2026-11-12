@@ -38,10 +38,25 @@ function render(){
  const q=state.items[state.index];$('round').textContent=`第 ${state.index+1} / ${state.items.length} 題`;$('score').textContent=`首次答對 ${state.answers.filter(a=>a.ok).length} 題`;
  $('progress').max=state.items.length;$('progress').value=state.answers.length;$('topic').textContent=E.topics[q.topic]+' · '+({easy:'基礎',medium:'中階',hard:'進階'})[q.difficulty];$('title').textContent=q.title;$('prompt').textContent=q.prompt;
  $('art').replaceChildren(art(q.art));$('controls').replaceChildren();$('feedback').hidden=true;$('feedback').replaceChildren();$('next').hidden=true;$('unsure').hidden=false;$('unsure').disabled=false;
- if(q.kind==='speed')speedControl(q);else if(q.kind==='lights')lampControl();else if(q.kind==='order')orderControl(q);else choiceControl(q);
+ if(q.kind==='speed')speedControl(q);else if(q.kind==='lights')lampControl();else if(q.kind==='order')orderControl(q);else if(q.scene)sceneControl(q);else choiceControl(q);
  $('title').focus();
 }
 function choiceControl(q){const group=el('div',undefined,'options');E.shuffled(q.options.map((text,i)=>({text,i}))).forEach(o=>{const b=button(o.text,()=>answer(o.i));b.dataset.choice=o.i;group.append(b);});$('controls').append(group);}
+function sceneControl(q){
+ const board=el('div',undefined,'law-board '+q.scene.type);board.id='law-board';
+ board.setAttribute('aria-label',q.scene.type==='junction'?'路口放行示意；文字條件以題幹為準':'停車方案選區；位置僅為示意');
+ if(q.scene.type==='junction'){
+  board.innerHTML='<svg viewBox="0 0 320 220" aria-hidden="true"><rect width="320" height="220" rx="16" fill="#dce7cc"/><path d="M128 0h64v220h-64zM0 78h320v64H0z" fill="#526b66"/><path d="M160 0v65m0 90v65M0 110h110m100 0h110" stroke="#f6e2a4" stroke-width="3" stroke-dasharray="12 8"/><g class="law-car car-a"><rect x="140" y="160" width="40" height="48" rx="9" fill="#f3bb5c"/><text x="160" y="191" text-anchor="middle" font-size="25" fill="#183f3d">A↑</text></g><g class="law-car car-b"><rect x="248" y="90" width="60" height="38" rx="9" fill="#b5d4ee"/><text x="277" y="116" text-anchor="middle" font-size="24" fill="#183f3d">←B</text></g></svg>';
+  board.append(el('p',q.id==='law-turn'?'A 由下方直行；B 從 A 右方接近並轉彎。':'A 由下方直行；B 從 A 的右方接近。','small'));
+ }else{
+  board.innerHTML='<div class="parking-road" aria-hidden="true"><span class="park-car">▰ 本車</span><span>道路 →</span></div>';
+  board.append(el('p','選取下方位置／方案；依題幹限制判斷，圖形不是現場停車許可。','small'));
+ }
+ const group=el('div',undefined,'options law-options');
+ E.shuffled(q.options.map((text,i)=>({text,i}))).forEach(o=>{const b=button(o.text,()=>answer(o.i));b.dataset.choice=o.i;group.append(b);});
+ const status=el('p','尚未放行或停放。','law-status');status.id='law-status';status.setAttribute('role','status');
+ $('controls').append(board,group,status);
+}
 function speedControl(){const label=el('label','設定法定最高速限（不是建議安全速度）');label.htmlFor='speed-input';const out=el('output','0 km/h','speed-value');out.id='speed-value';const input=el('input');input.id='speed-input';input.type='range';input.min=0;input.max=100;input.step=10;input.value=0;input.setAttribute('aria-describedby','speed-help');input.addEventListener('input',()=>out.textContent=input.value+' km/h');const help=el('p','可拖滑桿，鍵盤用方向鍵調整；最後按送出。','small');help.id='speed-help';const send=button('送出速限',()=>answer(Number(input.value)));send.className='primary';$('controls').append(label,out,input,help,send);}
 function lampControl(){
  lamps={head:'off',fog:false};const group=el('div',undefined,'controls-row');group.setAttribute('role','group');group.setAttribute('aria-label','頭燈模式');
@@ -61,6 +76,7 @@ function orderControl(q){order=[2,0,1];const list=el('ol',undefined,'order-list'
 function answer(value){
  const a=E.submit(state,value);if(!a)return;const q=state.items[state.index];$('controls').querySelectorAll('button,input').forEach(n=>n.disabled=true);$('unsure').hidden=true;
  $('controls').querySelectorAll('[data-choice]').forEach(b=>{const n=Number(b.dataset.choice);if(n===q.answer)b.classList.add('correct');if(n===value){b.classList.add('chosen');if(!a.ok)b.classList.add('wrong');}});
+ if(q.scene){const board=$('law-board');board.classList.add(a.ok?'law-allowed':'law-blocked');if(a.ok&&q.scene.type==='junction')board.classList.add('go-'+q.scene.winner);$('law-status').textContent=a.ok?(q.scene.type==='junction'?'已按正確路權放行；另一車保持等候。':'此方案符合本題條件，確認後停放。'):'暫不放行／停放：這個方案不符合本題規定。請看下方解說。';}
  const f=$('feedback');f.hidden=false;f.append(el('strong',a.ok?'✓ 觀念到位！':value==='unsure'?'○ 先學會，比猜中重要。':'↺ 這裡有個關鍵。'));
  if(q.kind==='speed')f.append(el('p',`本題法定最高速限：${q.limit} km/h。`));
  if(q.kind==='lights')f.append(el('p','本題配置：近光燈'+(q.accepted.includes('low|1')?'；霧燈可開可不開。':'；霧燈關閉。')));
