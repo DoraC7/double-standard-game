@@ -25,6 +25,6 @@ function finish(){
  $('summary').textContent=`完成 ${state.items.length} 題，首次答對 ${first} 題；重試後目前答對 ${latest} 題。`;$('review').replaceChildren();
  state.items.forEach((q,i)=>{const r=state.results[i],d=el('details');d.append(el('summary',`${r.first?'✓':'○'} ${q.title}｜首次${r.first?'答對':'待複習'}`),el('p','最後作答：'+(r.value==='unsure'?'先看解析':q.options[r.value])),el('p','本題答案：'+q.options[q.answer]),el('p',q.why),reference(q));$('review').append(d);});$('result-title').focus();
 }
-for(const [key,label] of Object.entries(E.topics)){const option=el('option',label+' · 4 題');option.value=key;$('mode').append(option);}
+for(const [key,label] of Object.entries(E.topics)){const option=el('option',label+' · '+E.questions.filter(q=>q.topic===key).length+' 題');option.value=key;$('mode').append(option);}
 $('start').addEventListener('click',start);$('confirm').addEventListener('click',()=>answer(state.selected));$('unsure').addEventListener('click',()=>answer('unsure'));$('retry').addEventListener('click',()=>{if(E.retry(state))render();});$('next').addEventListener('click',()=>{if(E.next(state)){if(state.done)finish();else render();}});$('leave').addEventListener('click',showIntro);$('restart').addEventListener('click',showIntro);
 })();

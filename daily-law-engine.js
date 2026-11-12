@@ -1,6 +1,6 @@
 (function(root,factory){const api=factory();if(typeof module==='object'&&module.exports)module.exports=api;else root.DailyLaw=api;})(typeof globalThis!=='undefined'?globalThis:this,()=>{'use strict';
-const topics={"consumer": "消費與退貨", "labor": "工作與休假", "rental": "租屋與租借", "civil": "契約與賠償", "privacy": "個資與行銷", "copyright": "網路與著作權", "marriage": "婚姻與家事", "property": "夫妻財產與繼承", "accident": "意外與賠償", "injury": "傷害與告訴"};
-const sources={"consumer": ["消費者保護法 §19", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=J0170001&flno=19"], "records": ["勞動基準法 §30", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=N0030001&flno=30"], "wage": ["勞動基準法 §26", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=N0030001&flno=26"], "break": ["勞動基準法 §35", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=N0030001&flno=35"], "leave": ["勞動基準法 §38", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=N0030001&flno=38"], "repair": ["民法 §429", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=B0000001&flno=429"], "notice": ["民法 §430", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=B0000001&flno=430"], "care": ["民法 §432", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=B0000001&flno=432"], "end": ["民法 §450", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=B0000001&flno=450"], "agreement": ["民法 §153", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=B0000001&flno=153"], "benefit": ["民法 §179", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=B0000001&flno=179"], "damage": ["民法 §184", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=B0000001&flno=184"], "collect": ["個人資料保護法 §19", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=I0050021&flno=19"], "use": ["個人資料保護法 §20", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=I0050021&flno=20"], "rights": ["個人資料保護法 §3", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=I0050021&flno=3"], "fair": ["著作權法 §65", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=J0070017&flno=65"], "copy": ["著作權法 §22", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=J0070017&flno=22"], "public": ["著作權法 §26-1", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=J0070017&flno=26-1"], "license": ["著作權法 §37", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=J0070017&flno=37"], "marry": ["民法 §982", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=B0000001&flno=982"], "divorce": ["民法 §1050", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=B0000001&flno=1050"], "familycost": ["民法 §1003-1", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=B0000001&flno=1003-1"], "child": ["民法 §1055-1", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=B0000001&flno=1055-1"], "ownership": ["民法 §1017", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=B0000001&flno=1017"], "residual": ["民法 §1030-1", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=B0000001&flno=1030-1"], "inherit": ["民法 §1148", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=B0000001&flno=1148"], "renounce": ["民法 §1174", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=B0000001&flno=1174"], "injurycost": ["民法 §193", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=B0000001&flno=193"], "objectcost": ["民法 §196", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=B0000001&flno=196"], "fault": ["民法 §217", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=B0000001&flno=217"], "hurt": ["刑法 §277", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=C0000001&flno=277"], "negligent": ["刑法 §284", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=C0000001&flno=284"], "complaint": ["刑法 §287", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=C0000001&flno=287"], "deadline": ["刑事訴訟法 §237", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=C0010001&flno=237"], "withdraw": ["刑事訴訟法 §238", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=C0010001&flno=238"]};
+const topics={"consumer": "消費與退貨", "labor": "工作與休假", "rental": "租屋與租借", "civil": "契約與賠償", "privacy": "個資與行銷", "copyright": "網路與著作權", "marriage": "婚姻與家事", "property": "夫妻財產與繼承", "accident": "意外與賠償", "injury": "傷害與告訴", "medical": "醫療權益與爭議", "healthconsumer": "健康消費與退費"};
+const sources={"consumer": ["消費者保護法 §19", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=J0170001&flno=19"], "records": ["勞動基準法 §30", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=N0030001&flno=30"], "wage": ["勞動基準法 §26", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=N0030001&flno=26"], "break": ["勞動基準法 §35", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=N0030001&flno=35"], "leave": ["勞動基準法 §38", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=N0030001&flno=38"], "repair": ["民法 §429", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=B0000001&flno=429"], "notice": ["民法 §430", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=B0000001&flno=430"], "care": ["民法 §432", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=B0000001&flno=432"], "end": ["民法 §450", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=B0000001&flno=450"], "agreement": ["民法 §153", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=B0000001&flno=153"], "benefit": ["民法 §179", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=B0000001&flno=179"], "damage": ["民法 §184", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=B0000001&flno=184"], "collect": ["個人資料保護法 §19", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=I0050021&flno=19"], "use": ["個人資料保護法 §20", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=I0050021&flno=20"], "rights": ["個人資料保護法 §3", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=I0050021&flno=3"], "fair": ["著作權法 §65", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=J0070017&flno=65"], "copy": ["著作權法 §22", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=J0070017&flno=22"], "public": ["著作權法 §26-1", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=J0070017&flno=26-1"], "license": ["著作權法 §37", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=J0070017&flno=37"], "marry": ["民法 §982", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=B0000001&flno=982"], "divorce": ["民法 §1050", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=B0000001&flno=1050"], "familycost": ["民法 §1003-1", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=B0000001&flno=1003-1"], "child": ["民法 §1055-1", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=B0000001&flno=1055-1"], "ownership": ["民法 §1017", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=B0000001&flno=1017"], "residual": ["民法 §1030-1", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=B0000001&flno=1030-1"], "inherit": ["民法 §1148", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=B0000001&flno=1148"], "renounce": ["民法 §1174", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=B0000001&flno=1174"], "injurycost": ["民法 §193", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=B0000001&flno=193"], "objectcost": ["民法 §196", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=B0000001&flno=196"], "fault": ["民法 §217", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=B0000001&flno=217"], "hurt": ["刑法 §277", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=C0000001&flno=277"], "negligent": ["刑法 §284", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=C0000001&flno=284"], "complaint": ["刑法 §287", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=C0000001&flno=287"], "deadline": ["刑事訴訟法 §237", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=C0010001&flno=237"], "withdraw": ["刑事訴訟法 §238", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=C0010001&flno=238"], "medfees": ["醫療法 §22", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=L0020021&flno=22"], "medsafe": ["醫療法 §24", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=L0020021&flno=24"], "medconsent": ["醫療法 §63", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=L0020021&flno=63"], "medinvasive": ["醫療法 §64", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=L0020021&flno=64"], "medrecords": ["醫療法 §71", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=L0020021&flno=71"], "medsecret": ["醫療法 §72", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=L0020021&flno=72"], "medinform": ["醫療法 §81", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=L0020021&flno=81"], "medcare": ["醫療法 §82", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=L0020021&flno=82"], "foodads": ["食品安全衛生管理法 §28", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=L0040001&flno=28"], "healthapproval": ["健康食品管理法 §7", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=L0040012&flno=7"], "adpromise": ["消費者保護法 §22", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=J0170001&flno=22"], "reviewtime": ["消費者保護法 §11-1", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=J0170001&flno=11-1"], "fairterms": ["消費者保護法 §12", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=J0170001&flno=12"], "complain": ["消費者保護法 §43", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=J0170001&flno=43"], "defect": ["民法 §359", "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=B0000001&flno=359"]};
 const questions=[
   {
     "id": "consumer-1",
@@ -641,6 +641,262 @@ const questions=[
     "why": "§238允許告訴乃論案件於第一審辯論終結前撤回告訴，撤回後不得再行告訴。和解內容與程序表示要核對；非告訴乃論案件更不能靠私下和解保證終止追訴。",
     "source": "withdraw",
     "icon": "40"
+  },
+  {
+    "id": "medical-1",
+    "topic": "medical",
+    "title": "同意書，不是只要一個簽名",
+    "display": "手術卡：成年病人可自行理解與簽具，非緊急；院方只遞空白同意書，沒有說明手術。",
+    "prompt": "依法應補上哪個重要程序？",
+    "options": [
+      "說明手術原因、成功率或可能併發症及危險，取得同意並簽具手術與麻醉同意書",
+      "只要簽名字就不需任何說明",
+      "一律由陪同朋友代決定"
+    ],
+    "answer": 0,
+    "why": "醫療法§63要求說明、同意與同意書，緊急情形有例外；不能以簽名取代應有說明。成年人可自行簽具情境，不把親友在場理解為可任意代決定。",
+    "source": "medconsent",
+    "icon": "41"
+  },
+  {
+    "id": "medical-2",
+    "topic": "medical",
+    "title": "侵入性檢查也要看同意程序",
+    "display": "檢查卡：此項檢查明確屬中央主管機關規定的侵入性檢查，非緊急情形。",
+    "prompt": "院方可因不是手術，就完全跳過說明與書面同意嗎？",
+    "options": [
+      "不能，應依法說明、經同意並簽具同意書",
+      "可以，只有手術需要",
+      "付過掛號費就等於同意所有檢查"
+    ],
+    "answer": 0,
+    "why": "§64適用主管機關規定的侵入性檢查或治療，要求說明與書面同意；不是任何抽血或處置都自動套同一書面規定，本題已限定適用範圍。",
+    "source": "medinvasive",
+    "icon": "42"
+  },
+  {
+    "id": "medical-3",
+    "topic": "medical",
+    "title": "自己的病歷，可以申請複製本",
+    "display": "申請卡：病人向自己接受診治的醫療機構要求病歷複製本，願依規定負擔費用。",
+    "prompt": "院方可只說病歷是內部資料而無故拒絕嗎？",
+    "options": [
+      "不得無故拖延或拒絕，依法提供複製本",
+      "病人永遠沒有權利取得",
+      "一定要先提出刑事告訴才能拿"
+    ],
+    "answer": 0,
+    "why": "§71要求依診治病人請求提供病歷複製本，必要時提供中文摘要，費用由病人負擔。是申請複製本，不是任意拿走正本，也非一律免費。",
+    "source": "medrecords",
+    "icon": "43"
+  },
+  {
+    "id": "medical-4",
+    "topic": "medical",
+    "title": "自費，不代表不用收據",
+    "display": "費用卡：醫療機構收取一筆自費醫療費，聲稱自費項目不用列收費內容。",
+    "prompt": "醫療法§22的要求？",
+    "options": [
+      "應開具載明收費項目與金額的收據，不得超額或擅立項目",
+      "自費就能不開任何收據",
+      "只要口頭喊總價就一定合規"
+    ],
+    "answer": 0,
+    "why": "§22規定醫療費用收據及不得違反收費標準、超額或擅立項目。費用疑義可保留收據、明細並向所在地衛生主管機關確認；自費不等於任意收費，也不是一律不能收費。",
+    "source": "medfees",
+    "icon": "44"
+  },
+  {
+    "id": "medical-5",
+    "topic": "medical",
+    "title": "病情不是聊天素材",
+    "display": "隱私卡：醫療人員因業務知悉可識別病人的病情，沒有正當理由或法定依據，想放到公開社群當笑話。",
+    "prompt": "哪個觀念正確？",
+    "options": [
+      "不得無故洩漏因業務知悉的病情或健康資訊",
+      "病例有趣就能公開",
+      "刪掉姓名就一定完全不可識別"
+    ],
+    "answer": 0,
+    "why": "§72禁止無故洩漏病情或健康資訊並規範醫療隱私。姓名以外的影像、細節仍可能識別病人；不能把本題理解為合法通報或必要醫療利用全部禁止。",
+    "source": "medsecret",
+    "icon": "45"
+  },
+  {
+    "id": "medical-6",
+    "topic": "medical",
+    "title": "處方開好了，也要說明",
+    "display": "診療卡：病人詢問這次治療方針、處置、用藥及可能不良反應。",
+    "prompt": "院方可只說照吃就好、完全不用依法告知嗎？",
+    "options": [
+      "應依醫療法告知相關病情、治療、用藥與可能不良反應",
+      "用藥名稱是永遠不能告知的秘密",
+      "看診時間短就免除全部告知"
+    ],
+    "answer": 0,
+    "why": "§81列病情、治療方針、處置、用藥、預後及可能不良反應的告知義務。具體說明程度依實際情況，不把本題當作要求保證每個治療結果。",
+    "source": "medinform",
+    "icon": "46"
+  },
+  {
+    "id": "medical-7",
+    "topic": "medical",
+    "title": "醫美效果不滿意，就一定是過失？",
+    "display": "醫療卡：接受醫療機構的醫美手術後效果不如期待；是否違反注意義務、合理專業裁量及因果關係尚未查明。",
+    "prompt": "能只憑不滿意就認定醫事人員一定負過失賠償責任嗎？",
+    "options": [
+      "不能，須依醫療注意義務、合理專業裁量等要件與證據判斷",
+      "可以，沒達期待就一律有過失",
+      "簽同意書後任何違法過失都絕不負責"
+    ],
+    "answer": 0,
+    "why": "§82重視必要注意義務與合理臨床專業裁量，並依當時當地醫療常規等客觀情況判斷；醫療機構責任亦有規定。單憑結果不能下定論，同意書也不是一切責任的免責書；契約、說明等爭點另須確認。",
+    "source": "medcare",
+    "icon": "47"
+  },
+  {
+    "id": "medical-8",
+    "topic": "medical",
+    "title": "爭議要處理，不用威嚇換答案",
+    "display": "現場卡：病人對醫療費用或治療有爭議，想威脅現場人員並阻擋其他病人就醫。",
+    "prompt": "哪種處理較符合規定？",
+    "options": [
+      "保留病歷與收費證據，透過院方申訴及醫療爭議處理管道，不以非法方式妨礙醫療",
+      "只要認為自己有理就可恐嚇人員",
+      "拿不到立即賠償就可阻擋其他病人"
+    ],
+    "answer": 0,
+    "why": "§24保障就醫安全，禁止強暴、脅迫、恐嚇等非法方法妨礙醫療。合法詢問、申訴與求助並非被禁止；醫療爭議要向所在地衛生局等確認適用管道，不能直接假設一般購物退費規則全可套用。",
+    "source": "medsafe",
+    "icon": "48"
+  },
+  {
+    "id": "healthconsumer-1",
+    "topic": "healthconsumer",
+    "title": "保健食品不是藥",
+    "display": "廣告卡：一般食品廣告宣稱能治療糖尿病，要求消費者停用醫師處方藥。",
+    "prompt": "哪個觀念正確？",
+    "options": [
+      "食品不得宣傳醫療效能，不能把此廣告當作停藥依據",
+      "只要叫天然食品就能宣稱治病",
+      "消費者留言有效就免受規範"
+    ],
+    "answer": 0,
+    "why": "食安法§28禁止食品醫療效能宣傳，也禁止不實、誇張或易生誤解。這是廣告規範，不是診斷該商品成分或療效；不要自行依廣告停藥，治療調整應問醫療專業人員。",
+    "source": "foodads",
+    "icon": "49"
+  },
+  {
+    "id": "healthconsumer-2",
+    "topic": "healthconsumer",
+    "title": "保健品與法定健康食品不同",
+    "display": "包裝卡：商家把普通營養補充品口頭叫健康食品；尚未確認有依法取得健康食品許可。",
+    "prompt": "能只憑商家口頭說法，就當作已依法取得許可嗎？",
+    "options": [
+      "不能，應查核法定許可，不把一般保健品稱呼當成核准",
+      "可以，所有膠囊都有健康食品許可",
+      "價格高就是取得許可的證明"
+    ],
+    "answer": 0,
+    "why": "健康食品管理法§7規範製造、輸入健康食品的查驗登記與許可。一般保健品稱呼不等同法定核准；取得健康食品許可也不表示可當藥品或保證治療疾病。",
+    "source": "healthapproval",
+    "icon": "50"
+  },
+  {
+    "id": "healthconsumer-3",
+    "topic": "healthconsumer",
+    "title": "健檢廣告不是簽約後就消失",
+    "display": "方案卡：非爭議的廣告與契約證據已確認，企業健檢服務廣告列含某檢查項目，契約成立後卻稱那只是廣告不用提供。",
+    "prompt": "依消保法§22，較正確的觀念？",
+    "options": [
+      "企業應確保廣告真實，契約成立後應履行廣告內容",
+      "廣告永遠不會成為企業義務",
+      "只要寫僅供參考就必定全免責"
+    ],
+    "answer": 0,
+    "why": "§22要求廣告真實及履行，義務不得低於廣告內容。實際方案、適應性與醫療專業判斷仍須看具體事實；本題不是要求醫師執行不適合病人的檢查，也不代表所有退款金額已定。",
+    "source": "adpromise",
+    "icon": "51"
+  },
+  {
+    "id": "healthconsumer-4",
+    "topic": "healthconsumer",
+    "title": "美容課程，先看契約再簽",
+    "display": "契約卡：非醫療美容服務，企業拿出預先擬好的定型化契約，要求立即簽並放棄全部審閱權。",
+    "prompt": "哪個觀念正確？",
+    "options": [
+      "應有合理審閱期間，不能用條款使消費者拋棄此權利",
+      "所有契約都只准看十秒",
+      "所有行業一律固定三十天才能簽"
+    ],
+    "answer": 0,
+    "why": "§11-1要求三十日以內的合理審閱期間，特定行業另有公告；不是所有契約都固定三十天。審閱期是簽約前看條款，不等於所有服務簽後都有七日無條件解除。",
+    "source": "reviewtime",
+    "icon": "52"
+  },
+  {
+    "id": "healthconsumer-5",
+    "topic": "healthconsumer",
+    "title": "簽過名，不代表不公平條款必有效",
+    "display": "條款卡：非醫療美容服務的定型化條款，已確認違反誠信並對消費者顯失公平，卻寫簽名後任何情況都不得主張無效。",
+    "prompt": "簽名會讓這種條款當然有效嗎？",
+    "options": [
+      "不會，符合§12無效要件的條款不因簽名就當然有效",
+      "會，簽過就排除所有法律保護",
+      "全部美容服務都必定可全額退費"
+    ],
+    "answer": 0,
+    "why": "§12針對違反誠信且顯失公平的定型化條款規定無效。本題已給定要件；實際是否無效、能否終止與退費範圍仍須依契約、履行及行業規範認定，不保證一律全退。",
+    "source": "fairterms",
+    "icon": "53"
+  },
+  {
+    "id": "healthconsumer-6",
+    "topic": "healthconsumer",
+    "title": "課程退費爭議，有申訴程序",
+    "display": "申訴卡：一般非醫療健身課程消費爭議，消費者已向企業提出申訴。",
+    "prompt": "消保法§43規定企業應在多久內妥適處理？",
+    "options": [
+      "申訴日起十五日內妥適處理，並非保證十五日內全額退款",
+      "沒有任何處理期限",
+      "十五日內一定必須無條件退全款"
+    ],
+    "answer": 0,
+    "why": "§43列消費申訴管道及企業十五日內妥適處理義務；未妥適處理可向地方消保官申訴。不將這個程序期限混同請求權期限，也不直接套用所有醫療爭議程序。",
+    "source": "complain",
+    "icon": "54"
+  },
+  {
+    "id": "healthconsumer-7",
+    "topic": "healthconsumer",
+    "title": "網購補充品，不是所有食品都不能退",
+    "display": "訂單卡：向企業網購普通營養補充品，收貨第三天、未拆封；本題明確沒有通訊交易合理例外情事，解除資訊已提供。",
+    "prompt": "只是改變心意，原則可如何？",
+    "options": [
+      "在法定七日內退回商品或書面通知解除，不必說明理由",
+      "只要叫食品就一律排除法定解除權",
+      "所有食品不問例外都能無限期試吃後退"
+    ],
+    "answer": 0,
+    "why": "消保法§19須先確認交易型態及合理例外。本題排除例外才有原則七日解除；不是所有食品都不能退，也不是所有健康商品或醫療療程都自動適用。",
+    "source": "consumer",
+    "icon": "55"
+  },
+  {
+    "id": "healthconsumer-8",
+    "topic": "healthconsumer",
+    "title": "過了七天，瑕疵權利不一定消失",
+    "display": "商品卡：健康用品有瑕疵，已確認出賣人依法應負物之瑕疵擔保責任，且相關檢查通知與行使期間等要件均滿足。",
+    "prompt": "只因不在網購七日內，就一定不能主張任何瑕疵救濟嗎？",
+    "options": [
+      "不是，符合條件可依瑕疵擔保規定主張解除或減價等",
+      "是，所有商品權利一律七天消失",
+      "只要說不好用永遠可全額退款"
+    ],
+    "answer": 0,
+    "why": "民法§359的物之瑕疵擔保與消保法七日解除是不同制度；解除顯失公平時僅得減價。實際瑕疵、責任、通知與期限須另查，本題已明確給定要件。",
+    "source": "defect",
+    "icon": "56"
   }
 ];
 function shuffle(items){const a=[...items];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
