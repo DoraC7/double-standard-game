@@ -1,10 +1,20 @@
 # Dora playground
 
-四十四款免費、純前端小遊戲，從 `index.html` 入口進入。
+四十五款免費、純前端小遊戲，從 `index.html` 入口進入。
 
 ## 試玩
 
 GitHub Pages：<https://dorac7.github.io/double-standard-game/>。同一份遊戲也由現有伺服器提供：<http://bigmac.dorac7.com:5487/>。
+
+## 運動健身小學堂
+
+試玩：<https://dorac7.github.io/double-standard-game/fitness-school.html>，現有伺服器：<http://bigmac.dorac7.com:5487/fitness-school.html>。
+
+12 個原創任務、四種互動：活動／相對強度分類、暖身與緩和的依賴排序、阻力／高溫／警訊情境模擬，以及親手編輯的一週有氧與肌力安排。每週表分開顯示輕鬆、中等、較高強度、實際課表分鐘、有氧等效分鐘與肌力天數；肌力不偷算有氧，指南比較用「中等＋2×較高」，不當個人體能或熱量推估。新手起步關卡用故事中的小步約定，不強迫第一週就湊150分鐘；同肌群不連日為特定故事安排，不冒充所有運動的唯一規則。可接受不同有效課表與排序；高溫可延期，不以硬撐取得分數。
+
+以18–64歲虛構成人為例，不作診斷、個人運動處方、動作辨識或真實完成認證。無體重／熱量／步數排行榜，不需要當場運動、相機或穿戴裝置。警訊題練停止與緊急求助（台灣119），按鈕不會真撥電話。來源包含CDC成人活動、說話測試、熱相關風險，以及NHS暖身、運動傷害與胸痛說明；各題有來源與查核日。
+
+先操作再確認，分類需選完、無效分鐘不可驗收；確認後鎖定、重試保留首次與參考紀錄，完整回顧可下載。失焦／背景自動暫停，無倒數／必要聲音，不儲存或上傳任何健康資料，重新整理清空本輪。部署 `fitness-school.html/css/js/svg`、`fitness-school-engine.js`、共用 `digital-practice.css`、`arcade-fx.css/js`。測試 `node --test tests/fitness-school.test.cjs`，驗收見 `tests/fitness-school-qa.md`。
 
 ## GitHub／GitLab 協作學習中心
 
