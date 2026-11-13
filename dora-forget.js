@@ -21,7 +21,7 @@ const scenes = [
 const $=id=>document.getElementById(id);
 const shuffle=a=>a.map(v=>({v,n:Math.random()})).sort((a,b)=>a.n-b.n).map(x=>x.v);
 let queue=[],i=0,score=0,sparks=0,phase='home',selected=null,log=[],answer='';
-function button(text,fn){const b=document.createElement('button');b.textContent=text;b.onclick=fn;return b;}
+function button(text,fn){const b=document.createElement('button');b.type='button';b.textContent=text;b.onclick=fn;return b;}
 function heading(text){$('heading').textContent=text;$('heading').focus();}
 function clear(){selected=null;$('choices').replaceChildren();$('actions').replaceChildren();$('feedback').textContent='';$('content').replaceChildren();$('stage').className='stage';}
 function stats(){$('round').textContent=`第 ${i+1} / ${queue.length} 幕`;$('score').textContent=`記對 ${score}`;$('chaos').textContent=`荒謬火花 ${sparks}`;}
@@ -34,7 +34,33 @@ const moves=[
  ['🪐 找理由：宇宙版本不相容！','土星寄來更新通知：「已更新宇宙，記憶快取請自行清除。」',5,'83%',1],
  ['🧰 不甩鍋：查紀錄，自己補救','鍋子回廚房，多拉翻開紀錄補上下一步。龍蝦撒蔥花：這鍋終於能煮湯！',0,'50%',0]
 ];
-function responses(){phase='response';clear();heading('選一招，看看鍋子飛去哪！');const fact=document.createElement('p');fact.className='receipt';fact.textContent=queue[i].fact;$('content').append(fact);let fire=button('發射這一招 🍳',()=>{if(phase!=='response'||selected===null)return;const m=moves[selected];phase='result';sparks+=m[2];const effect=m[1]+' 本幕道具亮出標籤：「'+queue[i].cards[0][1]+'」。';Object.assign(log[i],{move:m[0],effect});[...$('choices').children].forEach(b=>b.disabled=true);fire.disabled=true;const stage=$('stage');stage.style.setProperty('--dx',`${m[4]*stage.clientWidth/3}px`);stage.style.setProperty('--target',m[3]);stage.classList.add(selected===3?'repair':'fired');$('bubble').textContent=effect;$('feedback').textContent=effect+`\n本幕 +${m[2]} 荒謬火花`;stats();$('actions').append(button(i===queue.length-1?'領取本局荒謬戰報':'下一幕 →',()=>{i++;i===queue.length?finish():showMemory();}));});fire.disabled=true;moves.forEach((m,k)=>{const b=button(m[0],()=>{if(phase!=='response')return;selected=k;[...$('choices').children].forEach((x,j)=>x.setAttribute('aria-pressed',String(j===k)));fire.disabled=false;$('bubble').textContent=k===3?'鍋子準備安全降落。':`瞄準${['鬧鐘','龍蝦','宇宙'][k]}……按發射才會出手！`;});b.setAttribute('aria-pressed','false');$('choices').append(b);});$('actions').append(fire);}
+function responses(){
+ phase='response';clear();heading('選一招，看看鍋子飛去哪！');
+ const fact=document.createElement('p');fact.className='receipt';fact.textContent=queue[i].fact;$('content').append(fact);
+ const status=document.createElement('p');status.id='move-status';status.className='move-status';status.tabIndex=-1;status.setAttribute('role','status');status.textContent='尚未選招：先點選下面其中一招，再按發射。';$('content').append(status);
+ const fire=button('發射這一招 🍳',()=>{
+  if(phase!=='response')return;
+  if(selected===null){status.textContent='還沒選擇招式喔！請先點選下面其中一招。';status.focus();return;}
+  const m=moves[selected];phase='result';sparks+=m[2];
+  const effect=m[1]+' 本幕道具亮出標籤：「'+queue[i].cards[0][1]+'」。';
+  Object.assign(log[i],{move:m[0],effect});[...$('choices').children].forEach(b=>b.disabled=true);fire.disabled=true;
+  status.textContent='已發射：'+m[0];
+  const stage=$('stage');stage.style.setProperty('--dx',`${m[4]*stage.clientWidth/3}px`);stage.style.setProperty('--target',m[3]);stage.classList.add(selected===3?'repair':'fired');
+  $('bubble').textContent=effect;$('feedback').textContent=effect+`\n本幕 +${m[2]} 荒謬火花`;stats();
+  $('actions').append(button(i===queue.length-1?'領取本局荒謬戰報':'下一幕 →',()=>{i++;i===queue.length?finish():showMemory();}));
+ });
+ fire.setAttribute('aria-describedby','move-status');
+ moves.forEach((m,k)=>{
+  const b=button(m[0],()=>{
+   if(phase!=='response')return;
+   selected=k;[...$('choices').children].forEach((x,j)=>x.setAttribute('aria-pressed',String(j===k)));
+   status.textContent='已選擇：'+m[0]+'。按「發射這一招」確認。';
+   $('bubble').textContent=k===3?'鍋子準備安全降落。':`瞄準${['鬧鐘','龍蝦','宇宙'][k]}……按發射才會出手！`;
+  });
+  b.setAttribute('aria-pressed','false');$('choices').append(b);
+ });
+ $('actions').append(fire);
+}
 function finish(){phase='done';clear();heading('本局荒謬戰報');$('round').textContent='全片殺青';$('bubble').textContent=sparks>=16?'本局鍋子已申請飛航許可！':'鍋子平安落地，今晚可以煮湯。';const summary=document.createElement('p');summary.textContent=`記憶連線 ${score} / ${queue.length}；荒謬火花 ${sparks}。火花只是喜劇效果，沒有標準答案。`;$('content').append(summary);log.forEach(r=>{const d=document.createElement('div');d.className='review';for(const text of [r.title,`${r.correct?'✓':'○'} 口供：${r.answer}`,r.fact,r.move,r.effect]){const p=document.createElement('p');p.textContent=text;d.append(p);}$('content').append(d);});$('actions').append(button('再拍 4 幕',()=>start(4)),button('完整 16 幕',()=>start(16)));}
 $('short').onclick=()=>start(4);$('full').onclick=()=>start(16);$('reset').onclick=()=>start(queue.length||4);$('motion').onclick=()=>{const off=document.body.classList.toggle('no-motion');$('motion').setAttribute('aria-pressed',String(off));$('motion').textContent='特效：'+(off?'關':'開');};
 document.addEventListener('keydown',e=>{if(e.repeat||e.altKey||e.ctrlKey||e.metaKey||e.target.closest('button,a'))return;if(['quiz','response'].includes(phase)&&/^[1-4]$/.test(e.key)){const b=$('choices').children[Number(e.key)-1];if(b){e.preventDefault();b.click();}}});
