@@ -1,10 +1,20 @@
 # Dora playground
 
-四十三款免費、純前端小遊戲，從 `index.html` 入口進入。
+四十四款免費、純前端小遊戲，從 `index.html` 入口進入。
 
 ## 試玩
 
 GitHub Pages：<https://dorac7.github.io/double-standard-game/>。同一份遊戲也由現有伺服器提供：<http://bigmac.dorac7.com:5487/>。
+
+## GitHub／GitLab 協作學習中心
+
+試玩：<https://dorac7.github.io/double-standard-game/git-platform.html>，現有伺服器：<http://bigmac.dorac7.com:5487/git-platform.html>。
+
+12 個原創狀態式任務，三區各 4 關：共同基本功（Fork／Clone、Issue 證據、Diff 範圍、私人分享）、GitHub（PR 方向、Review 與最新檢查、Actions 失敗紀錄、部署驗收）、GitLab（MR／Draft、Pipeline 與 manual job、最小角色權限、外洩示範憑證的撤銷與變數限制）。先展開實際資料包，再操作模擬專案；操作會改變狀態與回條，以結果驗收，允許不同有效順序。條件不足時不改狀態，並明示這是教學預檢，不代表真實平台會替你阻止所有錯誤。
+
+共同／GitHub／GitLab 分區可篩選與逐關前進；首次、重試與參考後成果分開，完整狀態與操作回顧可下載。可復原模擬操作，但不宣稱真實外洩或公開可復原。失焦／背景自動暫停，無倒數與必要音效。沒有帳號、storage、平台 API 或真正的 push／寄信／部署／憑證操作，重新整理清空；角色、保護規則與 CI 行為依方案及專案設定不同，本題規則皆明示。通關不證明真實帳號或正式部署已完成。
+
+與 Git 時光機互相連結，不重複實作整套 Git 指令。GitHub 官方文件／Skills 可作延伸；GitLab 文件站本輪403，另核對官方程式庫鏡像的 MR、Pipeline、Permissions 文件。部署 `git-platform.html/css/js/svg`、`git-platform-engine.js`、共用 `digital-practice.css` 與 `arcade-fx.css/js`。測試 `node --test tests/git-platform.test.cjs`；驗收紀錄 `tests/git-platform-qa.md`。
 
 ## 數位生活防詐練習場
 
