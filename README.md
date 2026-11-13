@@ -1,10 +1,18 @@
 # Dora playground
 
-四十五款免費、純前端小遊戲，從 `index.html` 入口進入。
+四十六款免費、純前端小遊戲，從 `index.html` 入口進入。
 
 ## 試玩
 
 GitHub Pages：<https://dorac7.github.io/double-standard-game/>。同一份遊戲也由現有伺服器提供：<http://bigmac.dorac7.com:5487/>。
+
+## 防失智大挑戰
+
+試玩：<https://dorac7.github.io/double-standard-game/brain-health.html>，現有伺服器：<http://bigmac.dorac7.com:5487/brain-health.html>。
+
+12關原創練習：自由觀看後蓋卡的購物清單／位置回想、注意力找不同、文字規則切換，以及8則WHO風險降低與照護情境。不是臨床量表、診斷或治療，不保證預防失智，不將疾病歸咎於不努力。各題有回饋，最後完整回顧；重看與重試標記參考，保留首次結果。不儲存／上傳資料、無倒數，失焦遮罩暫停；鍵盤與觸控皆可使用。
+
+部署 `brain-health.html/css/js/svg`、`brain-health-data.js` 及共用 `digital-practice.css`。來源與查核日在遊戲頁。
 
 ## 運動健身小學堂
 
