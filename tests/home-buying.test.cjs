@@ -1,0 +1,5 @@
+const{test}=require('node:test'),assert=require('node:assert/strict'),E=require('../home-buying-engine.js');
+test('月付計算涵蓋零利率、常見貸款與升息',()=>{assert.equal(E.monthly(120000,0,1),10000);assert.ok(Math.abs(E.monthly(8400000,2,30)-31048.03)<.1);assert.ok(E.monthly(8400000,3,30)>E.monthly(8400000,2,30));assert.ok(E.monthly(8400000,2,20)>E.monthly(8400000,2,30));});
+test('拒絕非有限本金、負利率與非整數年限',()=>{for(const args of [[NaN,2,30],[8400000,-1,30],[8400000,21,30],[8400000,2,0],[8400000,2,1.5]])assert.equal(E.monthly(...args),null);});
+test('現金與單價答案依不同基準正確，允許合理四捨五入',()=>{assert.equal(E.tasks[0].answer,1200-840+30+60+60);assert.equal(E.tasks[1].answer,960-840);assert.ok(E.check(E.tasks[2],String((1600-200)/(40-10))));assert.ok(!E.check(E.tasks[2],'40'));});
+test('空白與無效數字不得通關，所有任務都有來源和唯一答案',()=>{for(const value of ['', ' ', 'NaN','Infinity','-1','100001'])assert.ok(!E.validNumber(value));assert.equal(E.tasks.length,12);for(const t of E.tasks){assert.match(t.source,/^https:\/\//);assert.ok(t.why);if(t.options){assert.equal(new Set(t.options).size,t.options.length);t.options.forEach((_,i)=>assert.equal(E.check(t,i),i===t.answer));}}});

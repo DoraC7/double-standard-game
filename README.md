@@ -1,10 +1,18 @@
 # Dora playground
 
-四十六款免費、純前端小遊戲，從 `index.html` 入口進入。
+四十七款免費、純前端小遊戲，從 `index.html` 入口進入。
 
 ## 試玩
 
 GitHub Pages：<https://dorac7.github.io/double-standard-game/>。同一份遊戲也由現有伺服器提供：<http://bigmac.dorac7.com:5487/>。
+
+## 買房知識王
+
+試玩：<https://dorac7.github.io/double-standard-game/home-buying.html>，現有伺服器：<http://bigmac.dorac7.com:5487/home-buying.html>。
+
+12關台灣成屋入門：自備現金、核貸缺口、扣車位單價填答，可編輯本金／利率／年限的本息平均攤還試算，以及實價比較、登記權利、漏水、契約審閱、核貸不足、付款與點交情境。數字均為虛構，不是即時價格、核貸保證或稅率；試算無寬限期、不含費用、全期固定假設利率。契約內容依行政院成屋買賣規範（115年4月1日施行版本），不混同所有交易適用。不作物件鑑定、投資或個案法律／稅務建議。
+
+先填答再確認，確認後鎖定；重試保留首次、參考後與最近結果，12關完整回顧。不儲存／上傳資料，失焦自動暫停、無倒數。部署 `home-buying.html/css/js/svg`、`home-buying-engine.js`，共用 `digital-practice.css` 與 `arcade-fx.css/js`。
 
 ## 防失智大挑戰
 
