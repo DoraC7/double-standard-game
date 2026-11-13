@@ -1,10 +1,18 @@
 # Dora playground
 
-四十七款免費、純前端小遊戲，從 `index.html` 入口進入。
+四十八款免費、純前端小遊戲，從 `index.html` 入口進入。
 
 ## 試玩
 
 GitHub Pages：<https://dorac7.github.io/double-standard-game/>。同一份遊戲也由現有伺服器提供：<http://bigmac.dorac7.com:5487/>。
+
+## 貪食蛇・水果巡航
+
+試玩：<https://dorac7.github.io/double-standard-game/snake.html>，現有伺服器：<http://bigmac.dorac7.com:5487/snake.html>。
+
+經典16×16棋盤，吃水果加1分並長1格，撞牆／身體結束，填滿棋盤過關。可進入這一步會離開的尾格；禁止直接反向與同一步重複轉彎。慢／標準／快三種速度（每步240／160／100毫秒），只在開局前選。支援方向鍵、WASD、方向按鈕及棋盤滑動；空白鍵（棋盤焦點）或Esc暫停，失焦／背景自動暫停並清空待轉彎，手動繼續。重新開始回到準備畫面，不保留分數；無帳號、永久紀錄、上傳或必要音效。
+
+部署 `snake.html/css/js/svg`、`snake-engine.js`，共用 `digital-practice.css` 和 `arcade-fx.css/js`。測試 `node --test tests/snake.test.cjs`。
 
 ## 買房知識王
 
