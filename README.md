@@ -1,10 +1,36 @@
 # Dora playground
 
-四十一款免費、純前端小遊戲，從 `index.html` 入口進入。
+四十三款免費、純前端小遊戲，從 `index.html` 入口進入。
 
 ## 試玩
 
 GitHub Pages：<https://dorac7.github.io/double-standard-game/>。同一份遊戲也由現有伺服器提供：<http://bigmac.dorac7.com:5487/>。
+
+## 數位生活防詐練習場
+
+試玩：<https://dorac7.github.io/double-standard-game/digital-safety.html>，現有伺服器：<http://bigmac.dorac7.com:5487/digital-safety.html>。
+
+一般人視角的 12 則虛構訊息，含 4 則正常通知。可展開寄件資訊、檢查網址與附件要求，選擇從原本 App／官方入口、已知聯絡方式或直接回覆原訊息查證。不同管道揭露不同內容；判斷依玩家實際取得的證據，不要求使用未翻開的資訊。資料不足時可暫停查證；正常通知不以一律刪除過關。再依未操作、只點開、交密碼、交驗證碼、授權、付款等實際狀態選補救，不把刪信當撤銷交易或授權。
+
+先選再確認，確認後鎖定；重試清空已開資料，保留首次與最近結果及完整回顧。無倒數，失焦／背景自動暫停，Esc 切換暫停。所有網址只顯示示範文字、不提供掃碼、下載、登入、付款或真的寄信。沒有帳號、儲存與上傳；重新整理清空本輪。內容參考 CISA 與 165 防詐原則，虛構紀錄不冒充即時查詢。
+
+部署 `digital-safety.html/js/svg`、`digital-safety-data.js`、`digital-safety-engine.js`、`digital-practice.css`、共用 `arcade-fx.css/js`。
+
+## 筆記修復工坊
+
+試玩：<https://dorac7.github.io/double-standard-game/note-workshop.html>，現有伺服器：<http://bigmac.dorac7.com:5487/note-workshop.html>。
+
+12 個實作任務：Markdown 標題、巢狀清單、連結、引用、圍欄程式碼、表格、錯誤修復，以及筆記名稱／分類／日期／來源、搜尋有效說明、新舊版本標記、斷鏈修復與操作紀錄整合。實際編輯內容與中繼資料、即時預覽；搜尋已儲存的筆記，內部 note: 連結在虛構知識庫中切換。草稿與已儲存版本分開，未儲存不能沿用舊成功驗收；切換文件和關卡保留本輪草稿。自動核對語法樹、指定操作與實際連結目標，不用自由文字字數或關鍵字宣稱理解。
+
+首次、最近與參考後成果分開；可下載當前關卡的整組筆記（含未儲存草稿）。「儲存」只在分頁記憶體，無持久儲存／上傳，重新整理清空。無倒數，失焦／背景自動暫停。使用本機附帶的 markdown-it 14.1.0（MIT，見 `vendor/markdown-it/LICENSE`），無 CDN 執行依賴、無安裝步驟；停用原始 HTML、圖片網路載入與預覽連外，支援常用語法與表格，不宣稱支援所有 GitHub 擴充。官方說明A／B為虛構來源代號。
+
+部署 `note-workshop.html/js/svg`、`note-workshop-data.js`、`note-workshop-engine.js`、`digital-practice.css`、`vendor/markdown-it/markdown-it.min.js` 與授權、共用 `arcade-fx.css/js`。
+
+## 先停、再想、再做：既有遊戲補強
+
+過動大挑戰新增「先看規則」：16 拍、每 4 拍切換正常／反向，反向只交換左右箭頭操作，蓄力與紅燈停手規則不變；有持續可見的規則提示，不只靠顏色。原三模式與鍵盤／觸控、失焦暫停保留。選單另有 4 個不限時「保護主線」情境，練區分可延後通知與需獨立核對的安全風險，留下待辦或離開前交接，不強迫熬著做完。
+
+提問與下指令練習場新增 3 個「訊息先別急著送」情境，先核對原話範圍與目的，再選回覆；不同選擇呈現不同後續，不真的送出。兩種日常模式皆先選再確認、確認後鎖定、可重試並保留首次結果，完整回顧與重開本輪；不把遊戲表現當心理診斷或日常自制力改善的證據。新增檔案 `hyper-rules.js`、`impulse-practice.js/css`，沿用既有頁面。
 
 ## 程式邏輯新手村
 
