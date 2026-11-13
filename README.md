@@ -1,10 +1,20 @@
 # Dora playground
 
-四十款免費、純前端小遊戲，從 `index.html` 入口進入。
+四十一款免費、純前端小遊戲，從 `index.html` 入口進入。
 
 ## 試玩
 
 GitHub Pages：<https://dorac7.github.io/double-standard-game/>。同一份遊戲也由現有伺服器提供：<http://bigmac.dorac7.com:5487/>。
+
+## 程式邏輯新手村
+
+試玩：<https://dorac7.github.io/double-standard-game/logic-village.html>，現有伺服器：<http://bigmac.dorac7.com:5487/logic-village.html>。
+
+幫小龍蝦修復村莊：順序、變數、條件、迴圈、函式、除錯各 2 關，加 1 個補給機整合任務。點選指令卡、填入數值或變數，以按鈕上下排序及移除；無須拖曳或輸入真正的程式碼。每關先預測第一組結果，再執行所有預寫測試資料；可切換案例、單步前後查看狀態與目前指令，或自動播放。暫停、失焦及背景停止播放，須手動繼續。多種有效解法以最終狀態驗收，不以固定指令順序判分；180 步上限會攔下不停的迴圈。
+
+變數、分支與函式都由受限指令解譯器模擬，參數可用一次加減、比較及 AND／OR；不使用 eval 或執行真實程式。修改後舊結果立即失效，必須重新執行。首次驗收、重試完成、參考解法分開記錄；預測不計入驗收。可自由選關與重訪，13 關完成後有總回顧及終端機／Git 延伸入口。沒有倒數、必要音效、帳號、儲存或上傳；重新整理清空本輪。通關不代表已證明長期理解。
+
+部署 `logic-village.html/css/js/svg`、`logic-village-engine.js`。測試 `node --test tests/logic-village.test.cjs`；驗收紀錄見 `tests/logic-village-qa.md`。
 
 ## 無知大挑戰
 
