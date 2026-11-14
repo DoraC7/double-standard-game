@@ -1,0 +1,10 @@
+'use strict';
+const LoopCompanyEngine=(()=>{
+function initial(t){if(t.kind==='service')return{facts:{...t.known},log:[],loops:0,verdict:null};if(t.kind==='route')return{kept:t.steps.map(()=>true)};if(t.kind==='compress')return{kept:t.blocks.map(()=>true)};return{answers:t.cards.map(()=>null)};}
+function ask(t,s,index){if(t.kind!=='service'||!Number.isInteger(index)||!t.actions[index])return s;const n=JSON.parse(JSON.stringify(s)),a=t.actions[index];if(a.field)n.facts[a.field]=a.reply;else n.loops++;n.log.push({question:a.label,reply:a.reply});n.verdict=null;return n;}
+function route(t,s){const ids=s.kept.map((x,i)=>x?i:-1).filter(i=>i>=0),missing=t.required.filter(i=>!s.kept[i]),broken=[];for(let i=1;i<ids.length;i++)if(!t.edges.some(([a,b])=>a===ids[i-1]&&b===ids[i]))broken.push(t.steps[ids[i-1]].text+' → '+t.steps[ids[i]].text);const cost=ids.reduce((n,i)=>n+t.steps[i].cost,0);return{ids,missing,broken,cost};}
+function text(t,s){return t.blocks.filter((_,i)=>s.kept[i]).map(b=>b.text).join('');}
+function ready(t,s){if(t.kind==='service')return s.log.length>0&&typeof s.verdict==='boolean';if(t.kind==='classify')return s.answers.length===t.cards.length&&s.answers.every(x=>Number.isInteger(x)&&x>=0&&x<t.labels.length);return s.kept.length===(t.kind==='route'?t.steps.length:t.blocks.length)&&s.kept.some(Boolean);}
+function check(t,s){if(!ready(t,s))return false;if(t.kind==='service')return t.required.every(k=>!!s.facts[k])&&s.verdict===true;if(t.kind==='route'){const r=route(t,s);return !r.missing.length&&!r.broken.length&&r.cost<=t.limit;}if(t.kind==='compress')return t.required.every(i=>s.kept[i])&&text(t,s).length<=t.limit;return s.answers.every((x,i)=>x===t.answers[i]);}
+function sample(t){const s=initial(t);if(t.kind==='service'){let n=s;t.actions.forEach((a,i)=>{if(a.field)n=ask(t,n,i)});n.verdict=true;return n;}if(t.kind==='route'||t.kind==='compress')s.kept=s.kept.map((_,i)=>t.required.includes(i));else s.answers=[...t.answers];return s;}
+return{initial,ask,route,text,ready,check,sample};})();if(typeof module!=='undefined')module.exports=LoopCompanyEngine;

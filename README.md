@@ -1,10 +1,20 @@
 # Dora playground
 
-五十款免費、純前端小遊戲，從 `index.html` 入口進入。
+五十一款免費、純前端小遊戲，從 `index.html` 入口進入。
 
 ## 試玩
 
 GitHub Pages：<https://dorac7.github.io/double-standard-game/>。同一份遊戲也由現有伺服器提供：<http://bigmac.dorac7.com:5487/>。
+
+## 鬼打牆有限公司
+
+入口：<https://dorac7.github.io/double-standard-game/loop-company.html>，現有伺服器：<http://bigmac.dorac7.com:5487/loop-company.html>。
+
+原創虛構怪公司，四部門各3關：鬼打牆客服親手追問、取得分支回覆與補齊交接；繞遠路導航切換保留／刪除步驟，檢查通道、必要程序與成本；廢話濃縮工廠切換句段、即時看實際文字與長度，保留關鍵事實與限制；一席話鑑定所逐張分類新增資訊、同義繞圈與已知但有用的提醒。不把所有話都判成廢話，也不以刪掉所有程序拿分。客服與路線驗收看結果狀態，操作順序不設唯一解；濃縮可保留不超出字數的額外禮貌片段。
+
+先操作後確認、成果鎖定、重試保留首次。可帶著待修正結果前進，結算如實分開首次與最近通過數，不將巡迴結束當全數過關。12關完整回顧可下載TXT喜劇回條。不限時、失焦／背景自動暫停；無帳號、永久儲存、上傳或必要音效。不連接真人客服、AI或外部導航，不影射真人，不是人格／工作能力評鑑。
+
+部署 `loop-company.html/css/js/svg`、`loop-company-data.js`、`loop-company-engine.js`，共用 `digital-practice.css` 和 `arcade-fx.css/js`。
 
 ## 3C達人
 
