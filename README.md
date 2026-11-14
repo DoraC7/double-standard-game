@@ -1,10 +1,20 @@
 # Dora playground
 
-四十八款免費、純前端小遊戲，從 `index.html` 入口進入。
+四十九款免費、純前端小遊戲，從 `index.html` 入口進入。
 
 ## 試玩
 
 GitHub Pages：<https://dorac7.github.io/double-standard-game/>。同一份遊戲也由現有伺服器提供：<http://bigmac.dorac7.com:5487/>。
+
+## Vibe Coding 知識庫
+
+入口：<https://dorac7.github.io/double-standard-game/vibe-coding.html>，現有伺服器：<http://bigmac.dorac7.com:5487/vibe-coding.html>。
+
+12張原創白話知識卡，起步／改動／驗收／交付四階段，可搜尋全文、分類及展開例子、行動和陷阱。涵蓋可驗收需求、MVP、前後文、Diff、Git檢查點、除錯、測試、前端秘密與發布證據；不把AI產生程式視為正確、安全或已交付。各卡附MDN、GitHub或OWASP延伸來源，查核日2026-11-13；為實務整理，不是特定工具官方手冊。
+
+6個單選／複選／流程排序情境，先操作後確認、鎖定結果，重試保留首次與最近安排。閱讀不自動算學會，分數非能力認證。可下載全部卡片與任務模板為本機TXT；不儲存／上傳搜尋作答，不連接AI、真實Git或憑證。與既有提問、Git、協作及筆記中心相連。
+
+部署 `vibe-coding.html/css/js/svg`、`vibe-coding-data.js`、`vibe-coding-engine.js`，共用 `digital-practice.css` 和 `arcade-fx.css/js`。
 
 ## 貪食蛇・水果巡航
 
