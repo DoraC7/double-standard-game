@@ -1,10 +1,22 @@
 # Dora playground
 
-六十款免費、純前端小遊戲，從 `index.html` 入口進入。
+六十一款免費、純前端小遊戲，從 `index.html` 入口進入。
 
 ## 試玩
 
 GitHub Pages：<https://dorac7.github.io/double-standard-game/>。同一份遊戲也由現有伺服器提供：<http://bigmac.dorac7.com:5487/>。
+
+## 基隆探險
+
+入口：<https://dorac7.github.io/double-standard-game/keelung.html>，現有伺服器：<http://bigmac.dorac7.com:5487/keelung.html>。
+
+17張可搜尋分類的地方卡，其中9張為小吃、市場、商圈、商場與伴手禮：廟口、仁愛市場、孝三路、委託行、微風東岸、基隆港好食城、連珍、泉利米香、崁仔頂。另有海洋／國門廣場、正濱、和平島、海科館、情人湖、暖東峽谷與基隆塔，串起港史、山海與日常生活。
+
+12任務、四種玩法各3關：在12站抽象示意圖上切換步行／大眾運輸、實際移動並拜訪吃逛點；排序港都歷史、八斗子地景與虛構伴手禮保存流程；配對地方名片並顯示實際卡片；用規劃格安排雨天吃逛、伴手禮與新住民生活方案。接受不同有效路線與覆蓋需求的組合，不比較預定點選順序。完整12關、平衡快閃4關與單類3關，先操作再提交、鎖定首次、重試保留首次／最近與TXT護照。
+
+示意連線與格數不是真實路網、導航、比例、分鐘、距離、價格或班次，實遊需另查公告。不定位、不操作真實購物、不自動查即時路況；作答只在本頁，無永久儲存、上傳、帳號、必要音效或外部服務。失焦／背景暫停。查核日2026-11-14，來源與衝突處理見 [KEELUNG-SOURCES.md](KEELUNG-SOURCES.md)，保留基隆塔整修提醒，不把所有海科館展館當免費，不寫死店家營業或商品保存條件。
+
+部署 `keelung.html/css/js/svg`、`keelung-data.js`、`keelung-engine.js`、`KEELUNG-SOURCES.md`，共用 `digital-practice.css` 與 `arcade-fx.css/js`。
 
 ## 小改一下・需求膨脹大挑戰
 
