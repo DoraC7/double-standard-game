@@ -1,10 +1,18 @@
 # Dora playground
 
-四十九款免費、純前端小遊戲，從 `index.html` 入口進入。
+五十款免費、純前端小遊戲，從 `index.html` 入口進入。
 
 ## 試玩
 
 GitHub Pages：<https://dorac7.github.io/double-standard-game/>。同一份遊戲也由現有伺服器提供：<http://bigmac.dorac7.com:5487/>。
+
+## 3C達人
+
+試玩：<https://dorac7.github.io/double-standard-game/gadget-master.html>，現有伺服器：<http://bigmac.dorac7.com:5487/gadget-master.html>。
+
+12關原創虛構情境，3關預算／單位填答、可選不同有效筆電的需求篩選、可搭不同充電器與線材的PD配對，以及RAM／儲存、USB-C影像、Wi-Fi瓶頸、備份、更新與支援期判斷。規格配對即時列出需求符合情況，確認才計分；不以單一預寫操作序列判定。單位依NIST，PD參考USB-IF，更新與備份參考CISA。全部規格與價格為教學假設，不作真實報價、品牌排行或相容性認證，不存取裝置。
+
+先操作再驗收，無效數字或未選組合不能確認；鎖定、重試保留首次，完整12關回顧。不限時，失焦／背景暫停，不儲存或上傳作答。與既有電腦基礎中心連結。部署 `gadget-master.html/css/js/svg`、`gadget-master-engine.js`，共用 `digital-practice.css` 和 `arcade-fx.css/js`。
 
 ## Vibe Coding 知識庫
 
