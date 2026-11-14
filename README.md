@@ -1,10 +1,20 @@
 # Dora playground
 
-五十八款免費、純前端小遊戲，從 `index.html` 入口進入。
+五十九款免費、純前端小遊戲，從 `index.html` 入口進入。
 
 ## 試玩
 
 GitHub Pages：<https://dorac7.github.io/double-standard-game/>。同一份遊戲也由現有伺服器提供：<http://bigmac.dorac7.com:5487/>。
+
+## 記憶篡改大挑戰
+
+入口：<https://dorac7.github.io/double-standard-game/retelling.html>，現有伺服器：<http://bigmac.dorac7.com:5487/retelling.html>。
+
+12個虛構情境，四種操作各3關：逐句鑑定意思漂移／合理換句話說／原話未說、選欄位修復實際交接文字、逐棒傳遞自己選出的版本並追查最早偏離、先打開來源再選符合該份證據的結論。不是相同字詞比對；預寫的同義說法可以過關。轉述與原作者確認分開，足夠的證據也能支持明確結論。
+
+原話可隨時重看、不扣分，不是記憶能力或人格測驗，也不指認真人的意圖。完整12關、平衡快閃4關、單部門3關；先選再提交，完成後鎖定，可重試但保留首次與最近紀錄。最後可下載原始紀錄、實際作答、版本軌跡與選填自由筆記TXT；筆記不評分。
+
+無倒數、必要音效、AI服務、帳號、上傳或持久儲存。失焦／背景自動暫停。部署 `retelling.html/css/js/svg`、`retelling-data.js`、`retelling-engine.js`，共用 `digital-practice.css` 與 `arcade-fx.css/js`。
 
 ## 燃燒Token大挑戰
 
