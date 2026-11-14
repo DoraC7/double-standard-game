@@ -4,7 +4,8 @@ const E=DailyLaw,$=id=>document.getElementById(id);let state;
 const el=(tag,text,cls)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n;};
 function reference(q){const [label,url]=E.sources[q.source],a=el('a',label+' ↗');a.href=url;a.target='_blank';a.rel='noopener';return a;}
 function showIntro(){$('intro').hidden=false;$('play').hidden=true;$('result').hidden=true;state=null;$('start').focus();}
-function start(){state=E.create($('mode').value);$('intro').hidden=true;$('result').hidden=true;$('play').hidden=false;render();}
+function updatePool(){const total=$('mode').value==='random'?E.questions.length:E.questions.filter(q=>q.topic===$('mode').value).length;$('pool-hint').textContent=`所選題庫 ${total} 題，本輪${$('round-size').value==='all'?'全部 '+total+' 題':'隨機抽 10 題'}。`;}
+function start(){state=E.create($('mode').value,$('round-size').value==='all'?'all':10);$('intro').hidden=true;$('result').hidden=true;$('play').hidden=false;render();}
 function render(){
  const q=state.items[state.index];$('round').textContent=`第 ${state.index+1} / ${state.items.length} 題`;$('topic').textContent=E.topics[q.topic];$('question-title').textContent=q.title;$('prompt').textContent=q.prompt;
  $('progress').max=state.items.length;$('progress').value=state.results.length;$('score').textContent=`首次答對 ${state.results.filter(r=>r.first).length} 題`;
@@ -26,5 +27,7 @@ function finish(){
  state.items.forEach((q,i)=>{const r=state.results[i],d=el('details');d.append(el('summary',`${r.first?'✓':'○'} ${q.title}｜首次${r.first?'答對':'待複習'}`),el('p','最後作答：'+(r.value==='unsure'?'先看解析':q.options[r.value])),el('p','本題答案：'+q.options[q.answer]),el('p',q.why),reference(q));$('review').append(d);});$('result-title').focus();
 }
 for(const [key,label] of Object.entries(E.topics)){const option=el('option',label+' · '+E.questions.filter(q=>q.topic===key).length+' 題');option.value=key;$('mode').append(option);}
+$('mode').addEventListener('change',updatePool);$('round-size').addEventListener('change',updatePool);updatePool();
+window.DailyLawGame={snapshot:()=>state?JSON.parse(JSON.stringify(state)):null};
 $('start').addEventListener('click',start);$('confirm').addEventListener('click',()=>answer(state.selected));$('unsure').addEventListener('click',()=>answer('unsure'));$('retry').addEventListener('click',()=>{if(E.retry(state))render();});$('next').addEventListener('click',()=>{if(E.next(state)){if(state.done)finish();else render();}});$('leave').addEventListener('click',showIntro);$('restart').addEventListener('click',showIntro);
 })();
