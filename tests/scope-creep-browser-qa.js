@@ -1,0 +1,9 @@
+function scopeCreepQA(route=0,miss=false){
+ const $=id=>document.getElementById(id),T=ScopeCreepData,check=(v,m)=>{if(!v)throw Error(m)},snap=()=>ScopeCreepGame.snapshot();
+ const click=(a,v)=>{const b=[...document.querySelectorAll('#workspace button')].find(x=>x.dataset.action===a&&x.dataset.value===JSON.stringify(v));check(b&&!b.disabled,'控制可操作 '+a);b.click();};
+ const select=(a,i,v)=>{const n=document.querySelector(`select[data-action="${a}"][data-index="${i}"]`);check(n&&!n.disabled,'選單可操作');n.value=String(v);n.dispatchEvent(new Event('change',{bubbles:true}));};
+ function plan(t,bad){for(let k=0;k<3;k++)select('request',k,bad===0?'now':k===route?(route===2?'later':'now'):'decline');select('deal',0,route);if(bad===1)click('core',0);if(bad===2)click('move',['now','c2',-1]);$('run').click();}
+ $('start').click();for(let i=0;i<T.length;i++){check($('confirm').disabled&&$('run').disabled,'初始未選不能提交');check(document.documentElement.scrollWidth<=innerWidth,'不溢出');const bad=miss&&i<3?i:-1;plan(T[i],bad);check(!$('confirm').disabled,'模擬後可提交');check(snap().state.last.pass===(bad<0),'實際判分');if(i===3){select('deal',0,(route+1)%3);check($('confirm').disabled,'修改後停用舊結果');select('deal',0,route);check($('confirm').disabled,'還原仍須重跑');$('run').click();}
+ $('confirm').click();const old=JSON.stringify(snap().first);$('confirm').click();check(JSON.stringify(snap().first)===old,'鎖定首次');check([...document.querySelectorAll('#workspace button,#workspace select')].every(n=>n.disabled),'提交後鎖定');if(bad>=0){$('retry').click();check(snap().state.last===null,'重試清空結果');plan(T[i],-1);$('confirm').click();check(!snap().first[i].pass&&snap().latest[i].pass,'首次最近分開');}$('next').click();}
+ check(!$('result').hidden&&$('review').children.length===6,'完整回顧');check($('score').textContent===`首次通過 ${miss?3:6} / 6 案；最近通過 6 / 6 案。`,'分數正確');return {route,first:miss?3:6,latest:6};
+}

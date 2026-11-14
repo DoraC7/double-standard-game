@@ -1,10 +1,20 @@
 # Dora playground
 
-五十九款免費、純前端小遊戲，從 `index.html` 入口進入。
+六十款免費、純前端小遊戲，從 `index.html` 入口進入。
 
 ## 試玩
 
 GitHub Pages：<https://dorac7.github.io/double-standard-game/>。同一份遊戲也由現有伺服器提供：<http://bigmac.dorac7.com:5487/>。
+
+## 小改一下・需求膨脹大挑戰
+
+入口：<https://dorac7.github.io/double-standard-game/scope-creep.html>，現有伺服器：<http://bigmac.dorac7.com:5487/scope-creep.html>。
+
+六案專案模擬：保留原始交付、處理三項追加需求、選取首期／次期／不承接、協商資源、排序相依工作，最後跑本版首期與次期模擬。新增功能會展開前置與測試工作，真正在工期／預算表佔用容量；順序錯誤會留下未完成工作。可小改直接完成、協商延長、或另有資源協議的分期承接，不要求同一條標準操作序列。每案至少妥善承接一項新增需求，不能全部答應或全部拒絕當成萬用答案。
+
+方案改動即使保留舊結果，提交也會鎖住，必須重新模擬。首次／最近與實際執行軌跡分開，可重排和下載TXT。工作格、預算點與混亂值只是虛構遊戲單位，不是真實估價或人格評鑑。無倒數、上傳、持久儲存、外部服務或必要音效；失焦／背景暫停。
+
+部署 `scope-creep.html/css/js/svg`、`scope-creep-data.js`、`scope-creep-engine.js`，共用 `digital-practice.css` 與 `arcade-fx.css/js`。
 
 ## 記憶篡改大挑戰
 
