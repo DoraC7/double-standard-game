@@ -1,14 +1,18 @@
 const {test}=require('node:test');
 const assert=require('node:assert/strict');
+const fs=require('node:fs');
 const E=require('../allergy-school-engine.js');
 test('45個情境均有公開來源，三單元各15題',()=>{
  assert.equal(E.questions.length,45);assert.equal(new Set(E.questions.map(q=>q.id)).size,45);
  for(const t of Object.keys(E.topics))assert.equal(E.questions.filter(q=>q.topic===t).length,15);
  for(const q of E.questions){assert.ok(E.sources[q.source][1].startsWith('https://'));assert.ok(q.why&&q.prompt);assert.equal(q.options.length,3);}
 });
-test('短局每單元2題，單元可練15題，其他模式不重複，拒絕未知模式',()=>{
+test('短局每單元至少3題，單元可練15題，其他模式不重複，拒絕未知模式',()=>{
  for(let i=0;i<30;i++){const qs=E.queue();assert.equal(qs.length,10);assert.equal(new Set(qs.map(q=>q.id)).size,10);for(const t of Object.keys(E.topics))assert.ok(qs.filter(q=>q.topic===t).length>=3);}
  assert.equal(E.queue('all').length,45);for(const t of Object.keys(E.topics))assert.equal(E.queue(t).length,15);assert.throws(()=>E.queue('toString'));
+});
+test('頁面描述與實際題數一致',()=>{
+ assert.match(fs.readFileSync('allergy-school.html','utf8'),/45個日常情境/);
 });
 test('每種模式完整作答：第一次錯答、看解說與重練分開計算',()=>{
  for(const mode of ['short','all',...Object.keys(E.topics)]){
