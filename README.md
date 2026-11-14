@@ -1,10 +1,56 @@
 # Dora playground
 
-五十一款免費、純前端小遊戲，從 `index.html` 入口進入。
+五十七款免費、純前端小遊戲，從 `index.html` 入口進入。
 
 ## 試玩
 
 GitHub Pages：<https://dorac7.github.io/double-standard-game/>。同一份遊戲也由現有伺服器提供：<http://bigmac.dorac7.com:5487/>。
+
+## 六款喜劇新作
+
+六款獨立入口，不是同一套選擇題換皮；共用暫停、重開、首次／最近回顧與本機TXT下載。無帳號、永久儲存、上傳、必要音效或外部服務。全部為原創虛構玩具舞台，操作不影響真實人物、商品、餐點、新聞或設備。
+
+### 不要按那個按鈕
+
+[GitHub Pages](https://dorac7.github.io/double-standard-game/dont-press.html) · [現有伺服器](http://bigmac.dorac7.com:5487/dont-press.html)
+
+按紅鈕會產生真正不同的連鎖狀態。調查銘牌、停止授權、解散委員會再封存；也能一路按到地球變會議室。
+
+### 鵝作劇辦公室
+
+[GitHub Pages](https://dorac7.github.io/double-standard-game/office-goose.html) · [現有伺服器](http://bigmac.dorac7.com:5487/office-goose.html)
+
+回合制格子潛行：每次有效走路／行動，主管巡邏一步。叼走雷射筆放回巢、把文件放到紙鵝桌，再到出口裝沒事。
+
+### 包裝比商品大
+
+[GitHub Pages](https://dorac7.github.io/double-standard-game/oversize-package.html) · [現有伺服器](http://bigmac.dorac7.com:5487/oversize-package.html)
+
+三件玩具商品，選紙箱、緩衝厚度、填充物與標籤，再決定放哪台電梯。追求至少50倍包裝體積，仍得裝得下、進得去。
+
+### 電梯社交地獄
+
+[GitHub Pages](https://dorac7.github.io/double-standard-game/awkward-elevator.html) · [現有伺服器](http://bigmac.dorac7.com:5487/awkward-elevator.html)
+
+三層樓、六幕對話。先選站位再開口：認錯人、告別後同路、肚子叫假裝手機響，會改變下一幕的回覆與可用台詞。
+
+### 點餐越解釋越奇怪
+
+[GitHub Pages](https://dorac7.github.io/double-standard-game/weird-order.html) · [現有伺服器](http://bigmac.dorac7.com:5487/weird-order.html)
+
+三位虛構客人提出怪需求。先問意思與不能放什麼，再組麵體、湯、調味與口感；每個配料都會出現在碗裡。
+
+### 記者會答非所問
+
+[GitHub Pages](https://dorac7.github.io/double-standard-game/offtopic-press.html) · [現有伺服器](http://bigmac.dorac7.com:5487/offtopic-press.html)
+
+三場虛構記者會，每場最多五次發言。選轉話題卡、調戲劇效果、看恐龍圖表膨脹；記者追問會依你的發言改變。
+
+鵝為回合制，不是即時倒數：有效行動才推進主管巡邏，疑心5點被抓，完成雷射筆與文件任務後須空嘴在出口裝沒事。包裝3局檢查商品＋緩衝尺寸、體積至少50倍、朝向、電梯和標籤；環保標籤僅為本遊戲回收紙填充規則，不是環保認證。電梯三種收場均為喜劇結局，數值不作社交能力評分。
+
+怪餐每局需問明意思與排除項，猜中和問明後成功分開；有替代有效調味。記者會每場最多5次發言，實際追問、離題狀態、圖表與戲劇效果隨操作變化；必須有資料且回到原題才能答出事實，混亂8點變恐龍展。預覽不算已發言，跨場資料與手牌清空。
+
+六頁分別部署各自 `.html`、`.svg`，共用 `comedy-six.css`、`comedy-six-engine.js`、`comedy-six.js`、`digital-practice.css` 與 `arcade-fx.css/js`。沒有套件、CDN或後端依賴。重開整輪清空，重演單局保留首次結果；結束不自動等於有效完成。瀏覽器與分支驗收見 `tests/comedy-six-qa.md`。
 
 ## 鬼打牆有限公司
 
