@@ -208,9 +208,9 @@ GitHub Pages：<https://dorac7.github.io/double-standard-game/>。同一份遊�
 
 試玩：<https://dorac7.github.io/double-standard-game/ignorance-challenge.html>，現有伺服器：<http://bigmac.dorac7.com:5487/ignorance-challenge.html>。
 
-12 個原創虛構案例，四類各三案：畫面之外、因果別跳步、來源與原話、證據來了改判。每案三步：拆原話 → 三選一查證卡（確認後才揭露內容）→ 依實際翻開的資料更新結論。選到無關資料，後續答案也不會要求使用尚未取得的證據；證據足夠時則可以明確下結論，不鼓勵一律說不知道。
+60 個原創虛構案例，四類各15案：畫面之外、因果別跳步、來源與原話、證據來了改判。每案三步：拆原話 → 三選一查證卡（確認後才揭露內容）→ 依實際翻開的資料更新結論。選到無關資料，後續答案也不會要求使用尚未取得的證據；證據足夠時則可以明確下結論，不鼓勵一律說不知道。
 
-快問快查每類一案，共4案12步；完整挑戰12案36步。同輪不重複，案例與選項順序隨機。先選再確認，可先看解析、答錯重試，保留首次與最近結果；重新挑查證會換掉目前資料卡。結算可逐案複習、下載本輪文字紀錄。1–3選答案、Enter確認、P／Esc暫停；切換分頁或失焦自動暫停，手動繼續。不限時，不需音效，手機與鍵盤皆可操作。
+快問快查混合抽10案且每類至少2案，共30步；完整挑戰60案180步或單一主題15案45步。同輪不重複，案例與選項順序隨機。先選再確認，可先看解析、答錯重試，保留首次與最近結果；重新挑查證會換掉目前資料卡。結算可逐案複習、下載本輪文字紀錄。1–3選答案、Enter確認、P／Esc暫停；切換分頁或失焦自動暫停，手動繼續。不限時，不需音效，手機與鍵盤皆可操作。
 
 不影射真人，不連接AI；情境與查證資料皆預先編寫，不是真實事件報告。沒有帳號、儲存、上傳或外部依賴，重新整理即清空；分數不是智力、人格或道德評鑑。沿用原站純JavaScript與共用動畫，未引入另一套平台。部署 `ignorance-challenge.html/css/js/svg`、`ignorance-cases.js`、`ignorance-engine.js` 與 `arcade-fx.css/js`。測試：`node --test tests/ignorance.test.cjs`；驗收見 `tests/ignorance-qa.md`。
 
@@ -563,7 +563,7 @@ Linux 明確區分 GNOME／Files 與 KDE Plasma／Dolphin 預設；macOS 的 Ret
 
 現有伺服器：<http://bigmac.dorac7.com:5487/allergy-school.html>。GitHub Pages：<https://dorac7.github.io/double-standard-game/allergy-school.html>。
 
-12個原創情境，皮膚照護、居家過敏原、何時求助各4題。輕鬆局6題、完整12題或單元4題，題目和選項隨機。先選再確認；可先看解說或重練，首次結果不被覆蓋。結算逐題顯示首次選擇、建議與來源。不限時，原生按鈕支援觸控與鍵盤；沒有即時背景進程。
+45個原創情境，皮膚照護、居家過敏原、何時求助各15題。輕鬆局混合抽10題、完整45題或單元15題，題目和選項隨機。先選再確認；可先看解說或重練，首次結果不被覆蓋。結算逐題顯示首次選擇、建議與來源。不限時，原生按鈕支援觸控與鍵盤；沒有即時背景進程。
 
 依AAD與AAAAI公開衛教整理（2026-11-04），不是官方測驗、診斷或個人治療計畫，不提供劑量；緊急求助依台灣119。無帳號、儲存、上傳、外部套件或網路執行依賴。部署檔案：`allergy-school.html/css/js/svg`、`allergy-school-engine.js`，共用`road-safety-school.css`與`arcade-fx.css/js`。測試：`node --test tests/allergy-school.test.cjs`；驗收見`tests/allergy-school-qa.md`。
 
@@ -600,9 +600,9 @@ Linux 明確區分 GNOME／Files 與 KDE Plasma／Dolphin 預設；macOS 的 Ret
 
 ## 無知大聲公 🔉
 
-[開台](https://dorac7.github.io/double-standard-game/ignorance-megaphone.html)，現有伺服器：<http://bigmac.dorac7.com:5487/ignorance-megaphone.html>。12個原創虛構廣播情境，畫面與原話、因果、數字各4題。原始資料全程可讀，先選句子再調整擴音0～100、確認廣播；每級2人次、0不外播，是遊戲模型不是社群預測，也不改裝置實際音量。真假判定只依提供資料，不以音量或一律不確定拿分。
+[開台](https://dorac7.github.io/double-standard-game/ignorance-megaphone.html)，現有伺服器：<http://bigmac.dorac7.com:5487/ignorance-megaphone.html>。45個原創虛構廣播情境，畫面與原話、因果、數字各15題。原始資料全程可讀，先選句子再調整擴音0～100、確認廣播；每級2人次、0不外播，是遊戲模型不是社群預測，也不改裝置實際音量。真假判定只依提供資料，不以音量或一律不確定拿分。
 
-快閃6題（每類2）、完整12題或單類4題。選句與調音量不提前判分，確認後鎖定；修訂重播保留首次句子、音量與模擬誤傳人次，結算對照首次／最近。聲波視覺大小隨滑桿改變，無實際音效；裝飾動畫可關閉且尊重減少動態效果。無倒數、帳號、儲存、上傳或外部依賴。保留原「無知大挑戰」，不是改名取代。部署 `ignorance-megaphone.html/css/js/svg`、`ignorance-megaphone-engine.js`，共用 `brain-break.css` 和 `arcade-fx.css/js`。
+快閃10題（各類至少3）、完整45題或單類15題。選句與調音量不提前判分，確認後鎖定；修訂重播保留首次句子、音量與模擬誤傳人次，結算對照首次／最近。聲波視覺大小隨滑桿改變，無實際音效；裝飾動畫可關閉且尊重減少動態效果。無倒數、帳號、儲存、上傳或外部依賴。保留原「無知大挑戰」，不是改名取代。部署 `ignorance-megaphone.html/css/js/svg`、`ignorance-megaphone-engine.js`，共用 `brain-break.css` 和 `arcade-fx.css/js`。
 
 
 ## 開心傻笑瘋挑戰
@@ -644,9 +644,9 @@ Linux 明確區分 GNOME／Files 與 KDE Plasma／Dolphin 預設；macOS 的 Ret
 
 [帶著好奇心出發](https://dorac7.github.io/double-standard-game/biology-explorer.html)，現有伺服器：<http://bigmac.dorac7.com:5487/biology-explorer.html>。
 
-獨立於科學實驗室的生物觀察區，16個原創情境、四主題各4題：身體構造（蜘蛛、蝸牛、蝙蝠、鼠婦）、生命週期（蝴蝶、蛙、斑蚊、蝗蟲）、生態關係（授粉、真菌、蚯蚓、食物鏈）、友善觀察（樣本範圍、關聯與原因、控制變因、非侵入式紀錄）。參考OpenStax Biology 2e、CDC與Animal Diversity Web，每題解析與複習附對應連結；插圖只是示意，不是物種鑑定圖。
+獨立於科學實驗室的生物觀察區，60個原創情境、四主題各15題：身體構造（蜘蛛、蝸牛、蝙蝠、鼠婦）、生命週期（蝴蝶、蛙、斑蚊、蝗蟲）、生態關係（授粉、真菌、蚯蚓、食物鏈）、友善觀察（樣本範圍、關聯與原因、控制變因、非侵入式紀錄）。參考OpenStax Biology 2e、CDC與Animal Diversity Web，每題解析與複習附對應連結；插圖只是示意，不是物種鑑定圖。
 
-短輪8題、每類2題，完整16題或單元4題，同輪不重複；先選再確認，解析在確認後揭露。可先看解析、答錯重試，首次與最新結果分開；結算逐題回顧。無倒數，使用原生按鈕與鍵盤焦點，手機可操作。不捕捉、餵食或移放動物，不提供飼養或現場鑑定；非官方教材。無帳號、永久儲存、上傳或外部依賴，重新整理清空。
+短輪混合抽10題、完整60題或單元15題；四類各至少2題，同輪不重複；先選再確認，解析在確認後揭露。可先看解析、答錯重試，首次與最新結果分開；結算逐題回顧。無倒數，使用原生按鈕與鍵盤焦點，手機可操作。不捕捉、餵食或移放動物，不提供飼養或現場鑑定；非官方教材。無帳號、永久儲存、上傳或外部依賴，重新整理清空。
 
 部署 `biology-explorer.html/css/js/svg`、`biology-explorer-engine.js`、共用 `brain-break.css` 與 `arcade-fx.css/js`。
 

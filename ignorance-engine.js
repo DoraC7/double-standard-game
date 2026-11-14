@@ -5,7 +5,8 @@ const stages=['拆原話','挑查證','更新結論'];
 function shuffle(items,rng=Math.random){const a=[...items];for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 function create(mode='quick',rng=Math.random){
  if(!['quick','full'].includes(mode))throw new Error('不支援的模式');
- const items=mode==='quick'?shuffle(Object.keys(areas).map(a=>shuffle(cases.filter(c=>c.area===a),rng)[0]),rng):shuffle(cases,rng);
+ const topics=shuffle(Object.keys(areas),rng),picked=mode==='quick'?topics.flatMap((a,i)=>shuffle(cases.filter(c=>c.area===a),rng).slice(0,2+(i<2?1:0))):cases;
+ const items=shuffle(picked,rng);
  return {mode,items,index:0,stage:0,selected:null,opened:null,locked:false,paused:false,done:false,results:[]};
 }
 function question(s){

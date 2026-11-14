@@ -5,14 +5,14 @@ const E=require('../ignorance-engine.js');
 const one=c=>{const s=E.create('full');s.items=[c];return s;};
 function answer(s,value){assert.equal(E.select(s,value),true);const r=E.submit(s);assert.ok(r);return r;}
 function advance(s){assert.equal(E.next(s),true);}
-test('十二個虛構案例分成四類，資料卡有獨立內容與限定結論',()=>{
- assert.equal(E.cases.length,12);assert.equal(new Set(E.cases.map(c=>c.id)).size,12);
- for(const area of Object.keys(E.areas))assert.equal(E.cases.filter(c=>c.area===area).length,3);
+test('60個虛構案例分成四類各15案，資料卡有獨立內容與限定結論',()=>{
+ assert.equal(E.cases.length,60);assert.equal(new Set(E.cases.map(c=>c.id)).size,60);
+ for(const area of Object.keys(E.areas))assert.equal(E.cases.filter(c=>c.area===area).length,15);
  for(const c of E.cases){assert.equal(new Set(c.diagnosis).size,3);assert.ok(c.answer>=0&&c.answer<3);assert.equal(c.cards.length,3);assert.equal(new Set(c.cards.map(k=>k.title)).size,3);assert.ok(c.scene&&c.claim&&c.why&&c.checkWhy);for(const k of c.cards){assert.ok(k.text&&k.conclusion&&k.why);assert.equal(new Set([k.conclusion,...c.overclaims]).size,3);}}
 });
-test('快局每類一案、完整局每類三案；同輪不重複且拒絕無效模式',()=>{
- for(let n=0;n<30;n++){const s=E.create('quick');assert.equal(s.items.length,4);assert.equal(new Set(s.items.map(c=>c.id)).size,4);assert.deepEqual(new Set(s.items.map(c=>c.area)),new Set(Object.keys(E.areas)));}
- assert.equal(E.create('full').items.length,12);for(const mode of [null,'constructor','bad'])assert.throws(()=>E.create(mode));
+test('快局抽10案且每類至少2案、完整局每類15案；同輪不重複',()=>{
+ for(let n=0;n<30;n++){const s=E.create('quick');assert.equal(s.items.length,10);assert.equal(new Set(s.items.map(c=>c.id)).size,10);for(const area of Object.keys(E.areas))assert.ok(s.items.filter(c=>c.area===area).length>=2);}
+ assert.equal(E.create('full').items.length,60);for(const mode of [null,'constructor','bad'])assert.throws(()=>E.create(mode));
  assert.deepEqual(E.create('full',()=>.25).items,E.create('full',()=>.25).items);
 });
 test('選擇不計分、確認才能鎖定；不能略過未作答的步驟',()=>{
@@ -21,7 +21,7 @@ test('選擇不計分、確認才能鎖定；不能略過未作答的步驟',()=
  assert.equal(E.select(s,E.question(s).answer),true);assert.equal(s.results.length,0);assert.equal(s.opened,null);assert.equal(E.submit(s).first,true);
  const before=JSON.stringify(s.results);assert.equal(E.select(s,2),false);assert.equal(E.submit(s,'unsure'),null);assert.equal(JSON.stringify(s.results),before);assert.equal(E.retry(s),false);
 });
-test('十二案三十六種查證分支：後續選項必須依實際翻開的卡改變',()=>{
+test('六十案一百八十種查證分支：後續選項必須依實際翻開的卡改變',()=>{
  for(const c of E.cases)for(let card=0;card<3;card++){
   const s=one(c);answer(s,c.answer);advance(s);assert.equal(s.opened,null);assert.deepEqual(E.question(s).options,c.cards.map(k=>k.title));
   answer(s,card);assert.equal(s.opened,card);advance(s);const q=E.question(s);assert.equal(q.options[q.answer],c.cards[card].conclusion);assert.equal(q.why,c.cards[card].why);
@@ -48,7 +48,7 @@ test('足夠證據能得確定結論；不把一律懷疑當成較好的判斷',
  const rain=E.cases.find(c=>c.id==='rain');assert.match(rain.cards[rain.best].conclusion,/確實有降雨/);
 });
 test('匯出保留完整分母、每案原話與每步首次結果，沒有網路或儲存操作',()=>{
- const s=E.create('quick');while(!s.done){E.submit(s,'unsure');advance(s);}const text=E.exportText(s);assert.match(text,/已核對 12 \/ 12 步；首次答對 0 步/);for(const c of s.items)assert.ok(text.includes(c.claim));assert.equal((text.match(/首次待複習/g)||[]).length,12);assert.equal((text.match(/核對：/g)||[]).length,12);
+ const s=E.create('quick');while(!s.done){E.submit(s,'unsure');advance(s);}const text=E.exportText(s);assert.match(text,/已核對 30 \/ 30 步；首次答對 0 步/);for(const c of s.items)assert.ok(text.includes(c.claim));assert.equal((text.match(/首次待複習/g)||[]).length,30);assert.equal((text.match(/核對：/g)||[]).length,30);
  const js=fs.readFileSync('ignorance-challenge.js','utf8');assert.doesNotMatch(js,/innerHTML|localStorage|sessionStorage|fetch\(|XMLHttpRequest|sendBeacon/);assert.match(js,/visibilitychange/);assert.match(js,/blur/);assert.match(js,/text\/plain;charset=utf-8/);
  const html=fs.readFileSync('ignorance-challenge.html','utf8');for(const file of ['ignorance-cases.js','ignorance-engine.js','ignorance-challenge.js','ignorance-challenge.css','arcade-fx.js'])assert.ok(html.includes(file));assert.match(html,/disabled>確認判斷/);assert.match(html,/href="index.html"/);assert.match(fs.readFileSync('index.html','utf8'),/href="ignorance-challenge.html"/);
 });

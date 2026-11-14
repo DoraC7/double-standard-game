@@ -3,8 +3,8 @@ async function ignoranceMegaphoneQA(){
  function setVolume(v){$('volume').value=v;$('volume').dispatchEvent(new Event('input',{bubbles:true}));}
  function choose(n){document.querySelector('[data-choice="'+n+'"]').click();}
  function run(mode,branch){
-  $('mode').value=mode;$('start').click();const total=mode==='all'?12:mode==='short'?6:4;let count=0,first=0,misled=0,reached=0,seen=new Set(),snapshots=[];
-  while(!$('play').hidden&&count<13){
+  $('mode').value=mode;$('start').click();const total=mode==='all'?45:mode==='short'?10:15;let count=0,first=0,misled=0,reached=0,seen=new Set(),snapshots=[];
+  while(!$('play').hidden&&count<50){
    const q=E.cases.find(q=>q.title===$('title').textContent);check(q&&!seen.has(q.id),'同輪不重複');seen.add(q.id);
    check($('source').textContent===q.source,'完整資料已顯示');check($('confirm').disabled&&$('feedback').hidden&&$('volume').value==='40','新題狀態清空');
    const vol=[0,40,100][count%3],ok=branch===q.answer;

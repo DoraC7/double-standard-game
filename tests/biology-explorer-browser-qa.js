@@ -3,7 +3,7 @@ async function biologyExplorerQA(){
  const check=(ok,label)=>{if(!ok)throw Error(label)};
  const run=(mode,skipAll=false)=>{
   $('mode').value=mode;$('start').click();let n=0,seen=new Set(),overflows=[];
-  while(!$('play').hidden&&n<30){
+  while(!$('play').hidden&&n<70){
    const q=E.questions.find(q=>q.title===$('question-title').textContent);check(q,'題目存在');check(!seen.has(q.id),'同輪不重複');seen.add(q.id);
    check($('confirm').disabled,'尚未選擇不能確認');check($('feedback').hidden,'答案先隱藏');
    if(document.documentElement.scrollWidth>innerWidth)overflows.push(q.id);
@@ -18,6 +18,7 @@ async function biologyExplorerQA(){
    $('next').click();n++;
   }
   check(!$('result').hidden,'完成結算');check($('review').children.length===n,'完整回顧');check(!overflows.length,'無水平溢出');
+  if(mode==='short')for(const topic of Object.keys(E.topics))check([...seen].filter(id=>E.questions.find(q=>q.id===id).topic===topic).length>=2,'混合短輪每類至少2題');
   const expected=skipAll?0:n-2,latest=skipAll?0:n-1;
   check($('summary').textContent===`完成 ${n} 題，首次答對 ${expected} 題；重試後目前答對 ${latest} 題。`,'首次與最新分數');
   const summary=$('summary').textContent;$('restart').click();check(!$('intro').hidden,'重開回選單');return {mode,n,summary,overflows};
