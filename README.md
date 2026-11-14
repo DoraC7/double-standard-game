@@ -559,6 +559,8 @@ Linux 明確區分 GNOME／Files 與 KDE Plasma／Dolphin 預設；macOS 的 Ret
 
 ## 搞事小學堂
 
+新增[搗蛋大挑戰9幕](https://dorac7.github.io/double-standard-game/mischief-school.html#prank-challenge)，原版12幕保留。三組各3幕：選玩具位置、排觸發順序並逐步演出連鎖機關；對指定問題演出C跑題→B紙卡→A對題並收回紙卡；重現跳針、接錯線、延遲一題故障，再用不同問題驗收修復。機器沒停，掃完彩帶仍會再出現。B是虛構紙卡，不是真實飲品；聲音以文字模擬。可暫停、切背景自動暫停、重演保留首次／最近紀錄及下載本輪TXT。切換原版會結束目前這輪。另需部署 `mischief-challenge-engine.js`、`mischief-challenge.js`、`mischief-challenge.css/svg`。
+
 [開搞](https://dorac7.github.io/double-standard-game/mischief-school.html)，現有伺服器：<http://bigmac.dorac7.com:5487/mischief-school.html>。12幕卡通惡作劇、三個片場各4幕。每幕挑道具確認後，舞台與文字呈現該道具的實際結果，再依該結果選收尾；不是把錯選道具偷換成標準答案。36個道具分支可走完，笑點與收尾各1點。
 
 快閃6幕、完整12幕或單片場4幕；同輪不重複，幕序與選項隨機。可重演本幕，清除舞台和選擇但保留首次紀錄；結算可對照首次與最近道具、實際結果與收尾。全為虛構卡通及玩具舞台，無真實設備、帳號、倒數、儲存、上傳或外部依賴。裝飾動畫可關閉且尊重減少動態效果。部署 `mischief-school.html/css/js/svg`、`mischief-school-engine.js`，沿用 `brain-break.css` 和 `arcade-fx.css/js`。
