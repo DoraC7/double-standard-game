@@ -1,10 +1,22 @@
 # Dora playground
 
-五十七款免費、純前端小遊戲，從 `index.html` 入口進入。
+五十八款免費、純前端小遊戲，從 `index.html` 入口進入。
 
 ## 試玩
 
 GitHub Pages：<https://dorac7.github.io/double-standard-game/>。同一份遊戲也由現有伺服器提供：<http://bigmac.dorac7.com:5487/>。
+
+## 燃燒Token大挑戰
+
+入口：<https://dorac7.github.io/double-standard-game/token-value.html>，現有伺服器：<http://bigmac.dorac7.com:5487/token-value.html>。
+
+12個同任務對照情境、四種互動：媒介與證據選擇（文字／示意圖／逐格時間序列／長片摘要）、組輸入並重問、組回覆及格式／順序、依版本跑模擬驗收並收尾。同資訊重送不自動新增證據，補條件後再問合理；回覆修改後不可拿舊模擬結果驗收。截圖與時間序列各有必要案例，不能一律選最便宜，也不把必要的細節／測試當浪費。
+
+任務是否完成、投入是否合理分開回報。預寫不良示範與自己的首次／最近策略逐關對照；重演保留首次，探索累計另外計算，不將重演前的投入當消失。最後選一項下次行動，另有不評分的自由筆記與本機TXT下載；不宣稱通關等於真實習慣已改變。
+
+燃料格是本頁各情境預設的虛構成本，不是實際Token、帳單、媒介倍率或供應商比較。字元數不等於Token；概念參考Hugging Face分詞／多模態文件與MDN除錯教學，查核日2026-11-14。回覆、媒體、程式、發布與還原全是本頁預寫／自製模擬，不呼叫AI、不上傳、不讀取或操作真實裝置／檔案，也不要求金鑰。
+
+不限時、失焦／背景暫停。作答與筆記只在本頁記憶體，重新整理清空，不永久儲存／上傳。部署 `token-value.html/css/js/svg`、`token-value-data.js`、`token-value-engine.js`，共用 `digital-practice.css` 與 `arcade-fx.css/js`。與提問、Vibe Coding及鬼打牆中心相連。
 
 ## 六款喜劇新作
 
