@@ -41,5 +41,32 @@ const KeelungData=(()=>{
  {kind:'plan',title:'如果住在基隆：日常探勘',goal:'替虛構新住民安排通勤、坡地與生活服務查核；最多4規劃格。不能只看夜景就決定生活品質。',needs:['通勤','地形','生活服務'],limit:4,options:[
  ['查臺鐵起訖站與班次，安排實際試乘',['通勤'],1],['查公車路線、末班與轉乘，安排試走',['通勤'],1],['實走住家周邊坡度、雨天與步行銜接',['地形'],1],['查市府教育、醫療、托育與市場服務入口',['生活服務'],1],['實走住家到站牌／車站並核對坡度',['通勤','地形'],2],['住在基隆任何地方，走路都一樣近',[],1,true]],refs:[sources.geo,sources.city,sources.bus,sources.rail],why:'全市有中正、信義、仁愛、中山、安樂、暖暖、七堵七區，山、海、河、港的環境不同。通勤與生活機能要依實際住址、目的地和需求查核，不保證房價、時間或設施適用性。'}
  ];
+ sources.library='https://kllib.klcg.gov.tw/';
+ sources.culture='https://klctb.klcg.gov.tw/Default.aspx';
+ sources.libraries='https://klctb.klcg.gov.tw/cp.aspx?n=7491';
+ sources.education='https://www.klcg.gov.tw/tw/education';
+ sources.schools='https://12basic.kl.edu.tw/';
+ sources.lifelong='https://lifelearn.kl.edu.tw/sites/1';
+ sources.arts=tour(391,7834);
+ const civicPlaces=[
+ ['library','基隆公共圖書館與分館','全市各區','生活教育','各區的公共圖書館不只借閱，也有閱讀推廣、兒少活動、講座與影片討論。百福、暖暖、仁愛等分館，把閱讀接回不同街區。','先查所需館藏、分館位置與開放，再依官方借閱規則或詢問館員；活動、臨時休館另看當期公告。',sources.library],
+ ['education','教育與適性升學資源','全市查詢','生活教育','可從教育處與十二年國教資訊網認識基隆女中、基隆商工、中山高中、海大附中等在地學校，查特色、群科與適性入學。認識選擇不等於替學校排高低。','依學生需求查當年度課程、招生或學區資料，不因距離近就保證能入學，也不使用過期簡章。',sources.schools],
+ ['lifelong','社區與終身學習','跨街區學習','生活教育','終身學習網介紹基隆社區大學等資源，將成人學習、在地文化與公共參與連在一起；學習不只發生在學齡階段。','課程、校區、名額、費用與報名資格以當期公告為準，不在遊戲內代報名或付費。',sources.lifelong],
+ ['services','日常照顧與市民服務','全市查詢','生活教育','市府服務入口可找教育、托育、健康醫療、零售市場等資訊，讓城市認識包含日常需求，不只景點與採買。','依家庭與實際住址查適用條件；入口有服務不代表每人都有名額或符合資格。',sources.city],
+ ['memory','八斗子居民與產業記憶','八斗子','人文故事','海科館區域探索館談漁寮、家庭分工、海女採石花、煤礦與北火，也讓社區物件、影像與生活故事共同參與展示。','把居民視為故事主體，不只拍照背景；個人回憶與可查史料各有價值，要保留其來源與範圍。',sources.region],
+ ['arts','沙灣老屋與音樂展演','中正區','人文故事','必應創造展演空間 B’IN LIVE SPACE–KEELUNG 前身為舊公車處，整修後於2024年7月開放，連結老建築、展覽、音樂與文化創意。','老屋再利用不等於宗教場所；實際節目、開放區域與票務請查場館當期資訊。',sources.arts]
+ ];
+ for(const [id,name,district,category,text,note,url] of civicPlaces){const p={id,name,district,category,text,note,url};places.push(p);byId[id]=p;}
+ missions.push(
+ {kind:'plan',section:'生活教育',title:'圖書館不只是進去坐一下',goal:'替虛構讀者找一本需要的書，補齊館藏查詢、分館開放與借閱條件；最多4規劃格，不實際查個人借閱紀錄。',needs:['查館藏','確認分館','借閱條件'],limit:4,examples:[[0,1,2],[3,2]],options:[
+ ['從公共圖書館入口或詢問館員查所需館藏',['查館藏'],1],['確認分館位置、開放與臨時休館',['確認分館'],1],['依官方規則確認借閱方式與所需條件',['借閱條件'],1],['查書在哪個分館，再核對該館開放',['查館藏','確認分館'],2],['只看建築照片，就假設每館都有這本書',[],1,true]],refs:[sources.library,sources.libraries],why:'閱讀資源分布在不同街區；館藏、所在館與開放要各自核對，不能把某一間圖書館當全市。'},
+ {kind:'match',section:'生活教育',title:'想學什麼，先找對資源',goal:'把學習需求連到對的基隆資訊入口；不是替學校、課程或讀者排名。',slots:[['教育公告、在地高中職與適性入學','education'],['成人持續學習、社區大學與公共參與','lifelong'],['閱讀、館藏與分館活動','library']],options:['library','services','lifelong','education'],refs:[sources.education,sources.schools,sources.lifelong,sources.library],why:'學校教育、成人學習與圖書館閱讀互補，不是同一套招生或借閱規則；條件與課程查當期公告。'},
+ {kind:'plan',section:'生活教育',title:'親子日常：學習之外還要能生活',goal:'為虛構家庭連結學習資源、照顧服務與實際動線；最多4規劃格，不假設每家都有相同需求。',needs:['學習資源','照顧服務','實走動線'],limit:4,examples:[[0,2,3],[1,2,3]],options:[
+ ['從圖書館找適合的閱讀或兒少活動',['學習資源'],1],['依孩子需求查教育處與在地學習資訊',['學習資源'],1],['由市府入口查托育、健康與適用服務',['照顧服務'],1],['實走住家、學習場所與站牌銜接',['實走動線'],1],['生活需求確認後再安排市場採買',[],1],['以一次商場遊逛代替所有教育與照顧安排',[],1,true]],refs:[sources.library,sources.education,sources.city,sources.bus],why:'吃逛可以是日常的一部分，但不能代替學習、照顧與能不能到達的查核。這是情境規劃，不保證任何設施名額或服務資格。'},
+ {kind:'match',section:'人文故事',title:'港都的人，不只是打卡背景',goal:'把勞動、老屋展演與商業記憶配到對的地方。這裡的人文以居民、產業與文化生活為主題。',slots:[['漁寮、家庭分工、海女與社區生活物件','memory'],['舊公車處轉為音樂展演與文化創意空間','arts'],['舶來品寄賣、商業記憶與地方創生','commission']],options:['arts','renai','memory','commission'],refs:[sources.region,sources.arts,byId.commission.url],why:'人文包括如何工作、生活、學習與創作；不能用宗教景點替代所有居民與城市文化故事。'},
+ {kind:'sort',section:'人文故事',title:'老建築的新一頁：沙灣展演空間',goal:'依官方介紹，重建這棟建築「原用途→整修→新用途」的先後，不考尚未提供的細節。',items:[['原用途','基隆舊公車處的建築。'],['轉變','空間經過整修，準備承接新的文化用途。'],['2024年7月','以必應創造展演空間開放，連結音樂、展覽與文化創意。']],order:[2,0,1],refs:[sources.arts],why:'老屋價值也在於新的公共與創作用途，不只建築外觀；特定活動與可進入區域仍以場館公告為準。'},
+ {kind:'plan',section:'人文故事',title:'走讀一個有居民的街區',goal:'規劃有來源、會查活動且尊重居民的非宗教主題走讀；最多4規劃格。',needs:['查活動','理解產業','尊重居民'],limit:4,examples:[[0,1,2],[3,2]],options:[
+ ['查沙灣音樂／展覽的當期場館活動',['查活動'],1],['先讀八斗子居民、漁寮與產業故事',['理解產業'],1],['拍攝或訪談先徵詢同意，不擋居民與工作動線',['尊重居民'],1],['查委託行當期走讀，連同舶來品產業背景閱讀',['查活動','理解產業'],2],['直接替陌生居民編故事，當成全社區的共同說法',[],1,true]],refs:[sources.region,sources.arts,byId.commission.url,sources.library],why:'官方展覽介紹、社區敘事與個人口述要保留來源；徵詢同意與不干擾工作是本遊戲的走讀協作準則，不是替任何居民預先發言。'}
+ );
  return {sources,places,byId,points,mapIds,edges,missions};
 })();if(typeof module!=='undefined')module.exports=KeelungData;
