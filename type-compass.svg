@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 420" role="img" aria-labelledby="title desc">
+  <title id="title">16 型偏好探索指南針</title>
+  <desc id="desc">小龍蝦偵探站在四條連續刻度前，觀察不同偏好而不被固定分類。</desc>
+  <defs><linearGradient id="wash" x2="1" y2="1"><stop stop-color="#eee7f4"/><stop offset="1" stop-color="#f6e7d8"/></linearGradient></defs>
+  <rect x="22" y="20" width="516" height="380" rx="48" fill="url(#wash)"/>
+  <circle cx="278" cy="198" r="139" fill="#fffdf6" stroke="#6d5a8b" stroke-width="7"/>
+  <circle cx="278" cy="198" r="110" fill="none" stroke="#d6d0df" stroke-width="2" stroke-dasharray="5 8"/>
+  <path d="M278 60v30m0 216v30M140 198h30m216 0h30" stroke="#53614c" stroke-width="5" stroke-linecap="round"/>
+  <path d="m278 112 22 86-22 86-22-86z" fill="#a6513e" stroke="#443756" stroke-width="5"/>
+  <circle cx="278" cy="198" r="13" fill="#f2c75c" stroke="#443756" stroke-width="4"/>
+  <g fill="#4c4167" font-family="system-ui,sans-serif" font-weight="900" text-anchor="middle">
+    <text x="278" y="51" font-size="22">E</text><text x="278" y="370" font-size="22">I</text>
+    <text x="99" y="205" font-size="22">S</text><text x="457" y="205" font-size="22">N</text>
+    <text x="278" y="393" font-size="14">T　F　J　P：方向，不是高低</text>
+  </g>
+  <g transform="translate(238 167)">
+    <path d="M17 44c-24-7-22-30-5-38 11-16 34-11 42 2 19 2 25 25 12 39 4 18-16 30-31 22-15 11-33 1-30-15-8-3-2-10 12-10Z" fill="#de795f" stroke="#75444a" stroke-width="4"/>
+    <path d="M8 17-2 4m12 22-16-2m21 27-10 13m61-47L78 4m-12 22 16-2M62 51l10 13" stroke="#75444a" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="26" cy="27" r="3"/><circle cx="49" cy="27" r="3"/><path d="M30 40q8 6 16 0" fill="none" stroke="#392f42" stroke-width="3" stroke-linecap="round"/>
+  </g>
+  <path d="m119 94 27 11m279 199 27 11m-315-21-18 19m319-217 18 19" stroke="#b98d64" stroke-width="5" stroke-linecap="round"/>
+</svg>

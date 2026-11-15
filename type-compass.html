@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#eef0e6">
+  <meta name="description" content="用原創情境題探索 16 型偏好向度；作答與分析只留在目前分頁。">
+  <title>16 型偏好探索｜Dora playground</title>
+  <link rel="stylesheet" href="digital-practice.css">
+  <link rel="stylesheet" href="type-compass.css">
+  <link rel="stylesheet" href="arcade-fx.css?v=20261028-1">
+  <script src="arcade-fx.js?v=20261028-1" defer></script>
+  <script src="type-compass-data.js" defer></script>
+  <script src="type-compass-engine.js" defer></script>
+  <script src="type-compass.js" defer></script>
+</head>
+<body>
+  <main class="tc-shell">
+    <header class="tc-top"><a href="index.html">← 回龍蝦遊戲間</a><span>自我探索・不貼標籤</span></header>
+    <section id="intro" class="tc-panel tc-hero">
+      <div class="tc-hero-copy">
+        <p class="tc-kicker">TYPE COMPASS / 了解偏好，不把人裝進盒子</p>
+        <h1>16 型偏好<br><em>探索指南</em></h1>
+        <p class="tc-lead">用生活情境看看你通常怎麼充電、接收資訊、做決定和安排事情。不是「你就是哪一型」的宣判，是一張可以回頭修正的偏好地圖。</p>
+        <div class="tc-facts"><span>🧭 四個向度</span><span>📝 完整 40 題</span><span>🔒 本機作答</span></div>
+        <div class="tc-modes">
+          <button id="quick-start" class="primary" type="button">平衡快測・20 題</button>
+          <button id="full-start" type="button">完整探索・40 題</button>
+        </div>
+      </div>
+      <img class="tc-art" src="type-compass.svg" alt="小龍蝦用指南針探索不同偏好方向" width="560" height="420">
+      <div class="tc-caveat">
+        <strong>先說清楚準確範圍</strong>
+        <p>這是原創的 MBTI 16 型框架自我反思工具，不是官方 MBTI® 評量、未經心理計量驗證，也不是心理健康診斷。四個向度是連續偏好，不是能力高低；接近中間時會標出，不硬說你一定屬於某一型。結果只根據這次自我描述，不能代替專業評估或重大決策。</p>
+      </div>
+    </section>
+
+    <section id="play" class="tc-panel tc-play" hidden aria-labelledby="question-title">
+      <div class="tc-play-head">
+        <div><p id="mode-label" class="tc-kicker"></p><h2 id="question-title" tabindex="-1"></h2></div>
+        <button id="exit" type="button" class="tc-quiet">離開本輪</button>
+      </div>
+      <div class="tc-progress-label"><span id="progress-label"></span><span>沒有倒數</span></div>
+      <progress id="progress" max="20" value="0" aria-label="作答進度"></progress>
+      <article class="tc-question">
+        <p class="tc-axis-tag" id="axis-tag"></p>
+        <p class="tc-prompt" id="prompt"></p>
+        <div class="tc-pair">
+          <div><span>左側描述</span><p id="left-copy"></p></div>
+          <div><span>右側描述</span><p id="right-copy"></p></div>
+        </div>
+        <fieldset class="tc-response">
+          <legend>平常的你比較像哪邊？選「看情況」也完全可以</legend>
+          <div id="response-options" class="tc-response-options"></div>
+        </fieldset>
+        <p id="answer-status" class="tc-answer-status" role="status" aria-live="polite">尚未作答；不確定時選看情況。</p>
+        <div class="tc-actions"><button id="back" type="button">← 上一題</button><button id="next" class="primary" type="button" disabled>下一題 →</button></div>
+      </article>
+      <p class="tc-note">沒有好壞答案。請依「多數時候的自己」作答，不必選看起來比較理想的選項。答案只在目前分頁記憶體中；重新整理會清除。</p>
+    </section>
+
+    <section id="result" class="tc-panel tc-result" hidden aria-labelledby="result-title" data-fx="finish">
+      <p class="tc-kicker">YOUR CURRENT MAP / 這次的偏好地圖</p>
+      <h2 id="result-title" tabindex="-1"></h2>
+      <p id="summary" class="tc-lead"></p>
+      <p id="type-code" class="tc-type-code"></p>
+      <section class="tc-axis-results" aria-labelledby="axis-heading"><h3 id="axis-heading">四個向度分開看</h3><div id="axis-cards"></div></section>
+      <section class="tc-profile panel"><h3>把組合放回日常</h3><p id="blend"></p><h4>可以試的一個小實驗</h4><p id="experiment"></p></section>
+      <section class="tc-reflect panel"><h3>自我核對，不用迎合結果</h3><ul id="reflect-prompts"></ul></section>
+      <p class="tc-note">這份結果不是固定身份、能力評價或健康診斷。回答方式可能因角色、壓力、熟悉度與時間而不同；若某個字母和經驗不符，可以回去改答案，也可以只看四條向度、不採用類型標籤。</p>
+      <div class="tc-actions tc-result-actions"><button id="edit" class="primary" type="button">回去修改答案</button><button id="download" type="button">下載本機文字報告</button><button id="restart" type="button">重新開始</button></div>
+    </section>
+
+    <details class="tc-sources"><summary>📚 框架、研究與限制</summary>
+      <p>此頁只借用四組偏好向度與 16 字母組合的通用描述框架；題目、計分及解讀均為本專案原創，並非官方 MBTI® 題目或付費評量。</p>
+      <ul>
+        <li><a href="https://www.myersbriggs.org/my-mbti-personality-type/myers-briggs-overview/" target="_blank" rel="noopener noreferrer">Myers &amp; Briggs Foundation：Myers-Briggs® Overview</a>（框架提供方對偏好概念的說明；非本工具背書）</li>
+        <li><a href="https://doi.org/10.1111/j.1467-6494.1989.tb00759.x" target="_blank" rel="noopener noreferrer">McCrae &amp; Costa (1989), Reinterpreting the MBTI from the perspective of the five-factor model</a>（人格特質向度與類別切分的研究討論）</li>
+        <li><a href="https://doi.org/10.1016/0191-8869(96)83453-2" target="_blank" rel="noopener noreferrer">Corr (1996), The Myers-Briggs Type Indicator: A critical review and practical guide</a>（對評量方法與解讀的批判性回顧）</li>
+      </ul>
+      <p>查核日：2026-11-15。分數只是把你本次選項加總，不是信度、效度、常模或機率；本工具未做心理計量驗證。</p>
+    </details>
+    <footer>不登入・本機計算・不儲存・不追蹤；文字報告只在你主動下載時建立。</footer>
+  </main>
+</body>
+</html>

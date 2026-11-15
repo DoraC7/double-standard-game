@@ -1,6 +1,6 @@
 # Dora playground
 
-六十二款免費、純前端小遊戲，從 `index.html` 入口進入。
+六十三款免費、純前端小遊戲，從 `index.html` 入口進入。
 
 ## 試玩
 
@@ -572,6 +572,12 @@ Linux 明確區分 GNOME／Files 與 KDE Plasma／Dolphin 預設；macOS 的 Ret
 [開始闖關](https://dorac7.github.io/double-standard-game/skincare-lab.html)，快閃12題或完整34題。從定妝噴霧用途辨識、洗臉與防曬，到維他命 C／B3／E／B5、A 醇、補骨脂酚、AHA／BHA／PHA、胜肽、SOD、洋甘菊／沒藥醇、積雪草、尿囊素、蘆薈、輔酶 Q10、阿魏酸、壬二酸、傳明酸、熊果素、玻尿酸、神經醯胺、尿素、甘油、泛醇與角鯊烷，練習分清常見用途、產品宣稱和不能保證的事。每題答完才揭露解析；可跳過、看完整回顧、重練並保留首輪結果，亦可下載文字紀錄。
 
 成分用途依配方、使用方式與耐受度而變，不構成個人產品推薦、診斷或治療建議；不提供濃度或混搭處方。補骨脂酚、SOD、植萃與美白成分的題目會明確標示研究限制，不把「天然」當安全或有效保證。依皮膚科衛教與同儕審查文獻整理，來源與編輯原則見 `SKINCARE-SOURCES.md`。全程本機、不儲存、不上傳。部署 `skincare-lab.html/css/js/data.js/engine.js/svg`；測試 `node --test tests/skincare-lab.test.cjs`。
+
+## 16 型偏好探索
+
+[開始探索](https://dorac7.github.io/double-standard-game/type-compass.html)，原創20題平衡快測或40題完整題組，涵蓋互動與精力、資訊偏好、決策考量、安排方式四向度。結果顯示各軸位置與近中線提醒，並提供組合速寫、可嘗試的小實驗和反思問題；可回頭改答案或主動下載本機報告。
+
+不是官方 MBTI® 評量，未經心理計量驗證，不是人格定論、能力評分或心理診斷。題目與解讀為原創；分數只整理本次自述，近中線不硬判。作答僅在分頁記憶體，不儲存、不上傳、不追蹤。來源及限制見 `TYPE-COMPASS-SOURCES.md`。部署 `type-compass.html/css/js/data.js/engine.js/svg`；測試 `node --test tests/type-compass.test.cjs`。
 
 
 ## 2026-11-04 生活與汽車題庫擴充
