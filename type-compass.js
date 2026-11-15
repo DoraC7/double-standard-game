@@ -3,13 +3,13 @@
   const D=window.TypeCompassData,E=window.TypeCompassEngine,$=id=>document.getElementById(id);
   const intro=$('intro'),play=$('play'),result=$('result');
   let mode='full',set=[],answers={},index=0;
-  const responseLabels=['很像左側','比較像左側','看情況／都像','比較像右側','很像右側'];
-  const responseHints=['明顯比較像左側','有一點比較像左側','兩邊都像或要看情境','有一點比較像右側','明顯比較像右側'];
+  const responseLabels=['很像左側','比較像左側','兩側相近／依情境切換','比較像右側','很像右側'];
+  const responseHints=['明顯比較像左側','有一點比較像左側','兩側相近，或知道自己會依情境切換','有一點比較像右側','明顯比較像右側'];
   function show(section){intro.hidden=section!==intro;play.hidden=section!==play;result.hidden=section!==result;window.scrollTo(0,0);}
   function question(){return set[index];}
   function render(){
     const q=question(),axis=D.axes.find(x=>x.id===q.axis);
-    $('mode-label').textContent=mode==='quick'?'平衡快測 / 每個向度各 5 題':'完整探索 / 每個向度各 10 題';
+    $('mode-label').textContent=mode==='quick'?'固定快測 / 每個向度各 5 題':'完整探索 / 每個向度各 20 題';
     $('question-title').textContent=`${index+1}．${axis.first} / ${axis.second}`;
     $('progress-label').textContent=`第 ${index+1} / ${set.length} 題`;
     $('progress').max=set.length;$('progress').value=index;
@@ -24,17 +24,21 @@
       b.setAttribute('aria-label',`${responseHints[i]}。${responseLabels[i]}`);
       b.addEventListener('click',()=>select(value));options.append(b);
     });
-    $('answer-status').textContent=Number.isInteger(chosen)?`已選：${responseHints[E.ANSWER_VALUES.indexOf(chosen)]}`:'尚未作答；不確定時選看情況。';
-    $('back').disabled=index===0;$('next').disabled=!Number.isInteger(chosen);
+    const skip=document.createElement('button');skip.type='button';skip.textContent='無法判斷／不適用（不計分）';skip.setAttribute('aria-pressed',String(chosen===null));skip.addEventListener('click',()=>select(null));options.append(skip);
+    $('answer-status').textContent=chosen===null?'已選：無法判斷／不適用，不計分。':Number.isInteger(chosen)?`已選：${responseHints[E.ANSWER_VALUES.indexOf(chosen)]}`:'尚未作答；無法判斷時請選不計分選項。';
+    $('back').disabled=index===0;$('next').disabled=!(Number.isInteger(chosen)||chosen===null);
     $('next').textContent=index===set.length-1?'看我的分析 →':'下一題 →';
   }
   function select(value){answers[question().id]=value;render();$('response-options').querySelector(`[aria-pressed="true"]`)?.focus();}
   function move(delta){index=Math.max(0,Math.min(set.length-1,index+delta));render();$('question-title').focus();}
   function polarityText(axisResult){
+    if(!axisResult.sufficient)return '有效作答不足，暫不解讀方向；這不表示你的偏好居中。';
     if(Math.abs(axisResult.position)<=0.15)return axisResult.middleText;
     return axisResult.score>0?axisResult.firstText:axisResult.secondText;
   }
-  function experimentFor(id,letter){
+  function experimentFor(id,letter,sufficient){
+    if(!sufficient)return '此向度有效作答不足：先檢查題目是否適用，無須勉強選答案。';
+    if(letter==='?')return '這個向度本輪接近中線：留意自己在不同角色、熟悉度與壓力下何時偏向哪一側，不必刻意練某個方向。';
     const first=letter===D.axes.find(a=>a.id===id).first;
     const ideas={
       EI:first?'重要想法先留幾分鐘寫下來，再找人交換意見。':'找一位信任的人口頭講一遍，觀察自己是否因此更容易整理想法。',
@@ -46,24 +50,24 @@
   }
   function showResult(){
     const r=E.calculate(D,set,answers);
-    $('result-title').textContent=`${r.type}｜${r.name}（本輪暫定）`;
-    $('summary').textContent=`你完成 ${r.answered} 題。這個組合只是把本輪偏好方向濃縮成一個好讀的索引；每個字母都要回頭看分軸結果，尤其接近中線時。`;
-    $('type-code').textContent=`暫定組合：${r.type}　｜　非官方評量結果`;
+    $('result-title').textContent=`${r.type}｜${r.name}（本輪方向索引）`;
+    $('summary').textContent=`有效作答 ${r.answered}/${r.total} 題（版本 ${r.version}）。這個索引只濃縮本輪偏好方向；「?」表示該軸接近中線或有效作答不足，不強行分類。題數較多能增加情境涵蓋，但未經試測，不能因此宣稱更準。`;
+    $('type-code').textContent=`本輪方向索引：${r.type}　｜　非官方、未驗證的自我反思結果`;
     const cards=$('axis-cards');cards.replaceChildren();
     for(const a of r.axes){
       const card=document.createElement('article');card.className='tc-axis-card';
-      const h=document.createElement('h4');h.textContent=`${a.name}：${a.letter} ${a.letter===a.first?a.firstName:a.secondName}`;
+      const h=document.createElement('h4');h.textContent=`${a.name}：${a.decisive?`${a.letter} ${a.letter===a.first?a.firstName:a.secondName}`:a.sufficient?'接近中線（不分側）':'有效作答不足（不分側）'}`;
       const copy=document.createElement('p');copy.className='tc-axis-copy';copy.textContent=polarityText(a);
       const scale=document.createElement('div');scale.className='tc-axis-scale';
       const left=document.createElement('span');left.textContent=`${a.first} ${a.firstName}`;
       const right=document.createElement('span');right.textContent=`${a.second} ${a.secondName}`;scale.append(left,right);
-      const track=document.createElement('div');track.className='tc-axis-track';track.setAttribute('role','img');track.setAttribute('aria-label',`${a.name}，本次回答位置：${a.letter} 方向；${a.level}`);
-      const marker=document.createElement('span');marker.className='tc-axis-marker';marker.style.left=`${a.barPercent}%`;track.append(marker);
+      const track=document.createElement('div');track.className='tc-axis-track';track.setAttribute('role','img');track.setAttribute('aria-label',`${a.name}，本次回答位置：${!a.sufficient?'有效作答不足':a.displayLetter==='?'?'接近中線':`${a.letter} 方向`}；${a.level}`);
+      const marker=document.createElement('span');marker.className='tc-axis-marker';marker.hidden=!a.sufficient;marker.style.left=`${a.barPercent}%`;track.append(marker);
       const score=document.createElement('p');score.className='tc-axis-score';score.textContent=`${a.level}｜本題組 ${a.answered}/${a.total} 題有效作答`;
       card.append(h,copy,scale,track,score);cards.append(card);
     }
     $('blend').textContent=r.axes.map(a=>`${a.name}：${polarityText(a)}`).join(' ');
-    $('experiment').textContent=r.axes.map(a=>experimentFor(a.id,a.letter)).join(' ');
+    $('experiment').textContent=r.axes.map(a=>experimentFor(a.id,a.displayLetter,a.sufficient)).join(' ');
     const reflections=[
       '哪幾題最像平常的你？哪幾題會因工作、家人或朋友等角色而改變？',
       '你選的是感到自在的偏好，還是目前環境要求你採取的做法？',
@@ -77,7 +81,7 @@
   $('full-start').addEventListener('click',()=>start('full'));
   function start(which){mode=which;set=E.createSet(D,mode);answers={};index=0;show(play);render();$('question-title').focus();}
   $('back').addEventListener('click',()=>move(-1));
-  $('next').addEventListener('click',()=>{if(!Number.isInteger(answers[question().id]))return;if(index<set.length-1)move(1);else showResult();});
+  $('next').addEventListener('click',()=>{if(!(Number.isInteger(answers[question().id])||answers[question().id]===null))return;if(index<set.length-1)move(1);else showResult();});
   $('exit').addEventListener('click',restart);
   $('edit').addEventListener('click',()=>{index=0;show(play);render();$('question-title').focus();});
   $('restart').addEventListener('click',restart);

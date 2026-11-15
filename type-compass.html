@@ -22,16 +22,16 @@
         <p class="tc-kicker">TYPE COMPASS / 了解偏好，不把人裝進盒子</p>
         <h1>16 型偏好<br><em>探索指南</em></h1>
         <p class="tc-lead">用生活情境看看你通常怎麼充電、接收資訊、做決定和安排事情。不是「你就是哪一型」的宣判，是一張可以回頭修正的偏好地圖。</p>
-        <div class="tc-facts"><span>🧭 四個向度</span><span>📝 完整 40 題</span><span>🔒 本機作答</span></div>
+        <div class="tc-facts"><span>🧭 四個向度</span><span>📝 完整 80 題・每軸 20 題</span><span>🔒 本機作答</span></div>
         <div class="tc-modes">
-          <button id="quick-start" class="primary" type="button">平衡快測・20 題</button>
-          <button id="full-start" type="button">完整探索・40 題</button>
+          <button id="quick-start" class="primary" type="button">固定快測・20 題</button>
+          <button id="full-start" type="button">完整探索・80 題</button>
         </div>
       </div>
       <img class="tc-art" src="type-compass.svg" alt="小龍蝦用指南針探索不同偏好方向" width="560" height="420">
       <div class="tc-caveat">
         <strong>先說清楚準確範圍</strong>
-        <p>這是原創的 MBTI 16 型框架自我反思工具，不是官方 MBTI® 評量、未經心理計量驗證，也不是心理健康診斷。四個向度是連續偏好，不是能力高低；接近中間時會標出，不硬說你一定屬於某一型。結果只根據這次自我描述，不能代替專業評估或重大決策。</p>
+        <p>這是原創的 MBTI 16 型框架自我反思工具，不是官方 MBTI® 評量，也未經心理計量驗證。完整題組增加到每軸 20 題，目的是擴大生活情境涵蓋；題數增加本身不代表更準。四個向度是連續偏好，不是能力高低；接近中線會以「?」呈現，不硬分到某一型。結果只整理這次自我描述，不能代替專業評估或重大決策。</p>
       </div>
     </section>
 
@@ -50,10 +50,10 @@
           <div><span>右側描述</span><p id="right-copy"></p></div>
         </div>
         <fieldset class="tc-response">
-          <legend>平常的你比較像哪邊？選「看情況」也完全可以</legend>
+          <legend>平常的你比較像哪邊？無法判斷與兩側相近請分開選</legend>
           <div id="response-options" class="tc-response-options"></div>
         </fieldset>
-        <p id="answer-status" class="tc-answer-status" role="status" aria-live="polite">尚未作答；不確定時選看情況。</p>
+        <p id="answer-status" class="tc-answer-status" role="status" aria-live="polite">尚未作答；無法判斷時請選不計分選項。</p>
         <div class="tc-actions"><button id="back" type="button">← 上一題</button><button id="next" class="primary" type="button" disabled>下一題 →</button></div>
       </article>
       <p class="tc-note">沒有好壞答案。請依「多數時候的自己」作答，不必選看起來比較理想的選項。答案只在目前分頁記憶體中；重新整理會清除。</p>
@@ -67,7 +67,7 @@
       <section class="tc-axis-results" aria-labelledby="axis-heading"><h3 id="axis-heading">四個向度分開看</h3><div id="axis-cards"></div></section>
       <section class="tc-profile panel"><h3>把組合放回日常</h3><p id="blend"></p><h4>可以試的一個小實驗</h4><p id="experiment"></p></section>
       <section class="tc-reflect panel"><h3>自我核對，不用迎合結果</h3><ul id="reflect-prompts"></ul></section>
-      <p class="tc-note">這份結果不是固定身份、能力評價或健康診斷。回答方式可能因角色、壓力、熟悉度與時間而不同；若某個字母和經驗不符，可以回去改答案，也可以只看四條向度、不採用類型標籤。</p>
+      <p class="tc-note">這份結果不是固定身份、能力評價或健康診斷。「?」代表接近中線或有效作答不足；每軸至少 80% 題目有效作答才顯示方向，門檻是暫定產品規則，並未經資料校準。介面使用的切分範圍只是避免過度斷言的提示，並非統計信賴區間。回答方式可能因角色、壓力、熟悉度與時間而不同；也可以只看四條向度、不採用類型標籤。</p>
       <div class="tc-actions tc-result-actions"><button id="edit" class="primary" type="button">回去修改答案</button><button id="download" type="button">下載本機文字報告</button><button id="restart" type="button">重新開始</button></div>
     </section>
 
@@ -78,7 +78,8 @@
         <li><a href="https://doi.org/10.1111/j.1467-6494.1989.tb00759.x" target="_blank" rel="noopener noreferrer">McCrae &amp; Costa (1989), Reinterpreting the MBTI from the perspective of the five-factor model</a>（人格特質向度與類別切分的研究討論）</li>
         <li><a href="https://doi.org/10.1016/0191-8869(96)83453-2" target="_blank" rel="noopener noreferrer">Corr (1996), The Myers-Briggs Type Indicator: A critical review and practical guide</a>（對評量方法與解讀的批判性回顧）</li>
       </ul>
-      <p>查核日：2026-11-15。分數只是把你本次選項加總，不是信度、效度、常模或機率；本工具未做心理計量驗證。</p>
+      <p><a href="TYPE-COMPASS-RESEARCH.md">研究整理與改進依據</a>：區分未知與居中，缺答不當成中間分數；快測使用固定題組，不宣稱與完整題組等值。</p>
+      <p>查核日：2026-11-15。80 題比原版多涵蓋一些情境，但題數不等於準確度；分數只是把你本次選項加總，不是信度、效度、常模或機率。本工具未經代表性樣本試測、重測或心理計量驗證，尚不能宣稱結果穩定或更準。</p>
     </details>
     <footer>不登入・本機計算・不儲存・不追蹤；文字報告只在你主動下載時建立。</footer>
   </main>
