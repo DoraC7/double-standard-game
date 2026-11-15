@@ -78,7 +78,7 @@ test('未知不當居中；低覆蓋不分型且不計入分母',()=>{
   assert.equal(r.axes[0].displayLetter,'E');assert.equal(r.axes[0].maxScore,8);
   const report=game.exportText(r,set,answers);
   assert.match(report,/有效 4\/5 題/);assert.match(report,/無法判斷／不適用（不計分）/);
-  assert.match(report,/版本：2026-11-15.4/);
+  assert.match(report,/版本：2026-11-15.5/);
 });
 
 test('固定快測選題不受種子改變，但題序會變；非法答案不算有效',()=>{
@@ -128,4 +128,43 @@ test('平均相同但作答分布不同，結果與匯出保留差別及選項�
   assert.match(game.exportText(b,qs,mixed),/很像左側/);
   mixed[qs[0].id]=-1;
   assert.match(game.exportText(game.calculate(data,qs,mixed),qs,mixed),/比較像左側/);
+});
+
+
+test('結果指標由左至右對應第一極、中線、第二極，三種題數一致',()=>{
+  for(const mode of ['quick','standard','full']){
+    const qs=game.createSet(data,mode,()=>0.37);
+    for(const [strength,percent,type] of [[2,0,'ESTJ'],[1,25,'ESTJ'],[0,50,'????'],[-1,75,'INFP'],[-2,100,'INFP']]){
+      const answers=Object.fromEntries(qs.map(q=>[q.id,-strength*q.direction]));
+      const result=game.calculate(data,qs,answers);
+      assert.equal(result.type,type,mode);
+      for(const axis of result.axes){
+        assert.equal(axis.barPercent,percent,`${mode} ${axis.id} ${strength}`);
+        assert.equal(axis.position,strength/2);
+      }
+    }
+  }
+});
+
+
+test('依逐題語意審查的左右答案鍵驗證80題，不借用題目的direction產生預期答案',()=>{
+  // 人工核對原文：每軸01–05、11–15的左選項是第一極，其餘是第二極。
+  // 例如ei01左「先說出初步想法」為E，ei06右「直接聊一聊」為E；
+  // jp08右「主要行程先訂好」為J，tf18右「是否偏離原則」為T。
+  const firstOnLeft=new Set([1,2,3,4,5,11,12,13,14,15]);
+  for(const q of data.questions){
+    const axis=data.axes.find(a=>a.id===q.axis);
+    const value=firstOnLeft.has(Number(q.id.slice(2)))?-2:2;
+    const qs=data.questions.filter(x=>x.axis===q.axis);
+    for(const sign of [1,-1]){
+      const answers=Object.fromEntries(qs.map(x=>[x.id,0]));
+      answers[q.id]=value*sign;
+      const a=game.calculate(data,qs,answers).axes.find(a=>a.id===q.axis);
+      assert.equal(a.score,2*sign,q.id);
+      assert.equal(a.letter,sign===1?axis.first:axis.second,q.id);
+      assert.equal(a.firstCount,sign===1?1:0,q.id);
+      assert.equal(a.secondCount,sign===-1?1:0,q.id);
+      assert.equal(a.barPercent,50-2*sign/(qs.length*2)*50,q.id);
+    }
+  }
 });

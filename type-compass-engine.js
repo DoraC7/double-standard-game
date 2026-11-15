@@ -1,7 +1,7 @@
 (function(root){
   'use strict';
   const ANSWER_VALUES=[-2,-1,0,1,2];
-  const VERSION='2026-11-15.4';
+  const VERSION='2026-11-15.5';
   const MIN_COVERAGE=0.8; // 暫定產品門檻，不是統計信賴程度。
   function shuffle(items,random=Math.random){
     const out=items.slice();
@@ -33,11 +33,12 @@
       const maxScore=answered.length*2;
       const coverage=items.length?answered.length/items.length:0;
       const sufficient=answered.length>0&&coverage>=MIN_COVERAGE;
+      // 正分偏第一極（圖左側）；CSS left 百分比必須隨正分降低。
       const position=maxScore?score/maxScore:0;
       const abs=Math.abs(position);
       const letter=score>=0?axis.first:axis.second;
       const level=!sufficient?'有效作答不足':abs<=0.15?'接近中線':abs<=0.4?'微幅偏向':abs<=0.7?'這輪較常偏向':'這輪多數回答偏向';
-      return {id:axis.id,name:axis.name,first:axis.first,second:axis.second,firstName:axis.firstName,secondName:axis.secondName,firstText:axis.firstText,secondText:axis.secondText,middleText:axis.middleText,firstCount,secondCount,neutralCount,coveredFacets,facetTotal,score,maxScore,position,barPercent:50+position*50,letter,coverage,sufficient,displayLetter:!sufficient||abs<=0.15?'?':letter,decisive:sufficient&&abs>0.15,level,answered:answered.length,total:items.length};
+      return {id:axis.id,name:axis.name,first:axis.first,second:axis.second,firstName:axis.firstName,secondName:axis.secondName,firstText:axis.firstText,secondText:axis.secondText,middleText:axis.middleText,firstCount,secondCount,neutralCount,coveredFacets,facetTotal,score,maxScore,position,barPercent:50-position*50,letter,coverage,sufficient,displayLetter:!sufficient||abs<=0.15?'?':letter,decisive:sufficient&&abs>0.15,level,answered:answered.length,total:items.length};
     });
     const type=axisResults.map(axis=>axis.displayLetter).join('');
     return {version:VERSION,type,name:type.includes('?')?'部分向度未分類':'本輪偏好方向',axes:axisResults,answered:axisResults.reduce((n,a)=>n+a.answered,0),total:questions.length};
