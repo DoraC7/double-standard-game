@@ -78,7 +78,7 @@ test('未知不當居中；低覆蓋不分型且不計入分母',()=>{
   assert.equal(r.axes[0].displayLetter,'E');assert.equal(r.axes[0].maxScore,8);
   const report=game.exportText(r,set,answers);
   assert.match(report,/有效 4\/5 題/);assert.match(report,/無法判斷／不適用（不計分）/);
-  assert.match(report,/版本：2026-11-15.2/);
+  assert.match(report,/版本：2026-11-15.3/);
 });
 
 test('固定快測不受隨機種子改變；非法答案不算有效',()=>{
@@ -86,4 +86,16 @@ test('固定快測不受隨機種子改變；非法答案不算有效',()=>{
   const set=game.createSet(data,'quick');
   const r=game.calculate(data,set,Object.fromEntries(set.map((q,i)=>[q.id,[3,-3,'0',undefined][i%4]])));
   assert.equal(r.answered,0);assert.equal(r.type,'????');
+});
+
+test('審查發現的十題左右順序與軸方向相符',()=>{
+  const firstDescriptions={sn08:'沿用證明可行的步驟',sn20:'先找實際例子',tf18:'是否偏離原則',jp06:'先評估變動成本',jp07:'把題目拆小',jp08:'主要行程先訂好',jp09:'整理成明確的下一步',jp10:'早點開始',jp19:'先判斷是否值得變更',jp20:'保留幾個階段檢查點'};
+  for(const [id,phrase] of Object.entries(firstDescriptions)){
+    const q=data.questions.find(q=>q.id===id);
+    assert.ok((q.direction===1?q.left:q.right).includes(phrase),id);
+    const set=data.questions.filter(x=>x.axis===q.axis);
+    const answers=Object.fromEntries(set.map(x=>[x.id,0]));
+    answers[id]=-2*q.direction;
+    assert.equal(game.calculate(data,set,answers).axes.find(a=>a.id===q.axis).score,2,id);
+  }
 });

@@ -1,7 +1,7 @@
 (function(root){
   'use strict';
   const ANSWER_VALUES=[-2,-1,0,1,2];
-  const VERSION='2026-11-15.2';
+  const VERSION='2026-11-15.3';
   const MIN_COVERAGE=0.8; // 暫定產品門檻，不是統計信賴程度。
   const QUICK_NUMBERS=[1,2,5,8,10];
   function shuffle(items,random=Math.random){
