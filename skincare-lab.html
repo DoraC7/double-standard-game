@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6eee5">
+  <meta name="description" content="用趣味闖關認識臉部保養常見成分、用途與限制。">
+  <title>臉部保養品成分偵探｜Dora playground</title>
+  <link rel="stylesheet" href="skincare-lab.css">
+  <script src="skincare-lab-data.js" defer></script>
+  <script src="skincare-lab-engine.js" defer></script>
+  <script src="skincare-lab.js" defer></script>
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar"><a href="./">← 回龍蝦遊戲間</a><span>🧴 保養配方偵探社</span></header>
+
+    <section id="home" class="panel hero" aria-labelledby="page-title">
+      <div class="hero-copy">
+        <p class="eyebrow">🕵️‍♀️ 成分有線索，廣告有時很會演</p>
+        <h1 id="page-title">臉部保養品<br><em>成分偵探</em></h1>
+        <p class="lead">從定妝噴霧查到 A 醇、酸、胜肽和保濕隊友。猜功效，也要抓出「不能因此保證什麼」。</p>
+        <div class="brief-grid" aria-label="遊戲特色">
+          <span>🧪 20 題成分線索</span><span>🎲 快閃 10 題或完整挑戰</span><span>⏱ 不限時，答完看解析</span>
+        </div>
+        <div class="mode-buttons">
+          <button class="primary" id="quick-start" type="button">快閃闖關・10 題 →</button>
+          <button class="secondary" id="full-start" type="button">完整成分巡查・20 題</button>
+        </div>
+      </div>
+      <img class="hero-art" src="skincare-lab.svg" alt="小龍蝦偵探檢查保養瓶罐的插圖" width="640" height="440">
+      <p class="fineprint">這是一般保養知識遊戲，不替個人膚況診斷或推薦療程；實際產品請看完整標示。答錯可以修正，別讓瓶罐話術蒙混過關。</p>
+    </section>
+
+    <section id="play" class="panel play" hidden aria-labelledby="question-title">
+      <div class="play-head">
+        <div><p class="eyebrow" id="round-label">成分巡查</p><h2 id="question-title">題目</h2></div>
+        <button id="leave-round" class="quiet" type="button">離開本輪</button>
+      </div>
+      <div class="progress-row"><span id="progress-text">第 1 / 10 題</span><span id="score-text">答對 0 題</span></div>
+      <progress id="progress" max="10" value="0" aria-label="作答進度"></progress>
+      <div class="question-card">
+        <div class="badge-row"><span id="category" class="category">保養知識</span><span id="badge" class="badge">小線索</span></div>
+        <p id="prompt" class="prompt"></p>
+        <div id="choices" class="choices" role="group" aria-label="選擇一個答案"></div>
+        <div class="action-row">
+          <button id="confirm" class="primary" type="button" disabled>確認答案</button>
+          <button id="skip" class="secondary" type="button">先跳過</button>
+        </div>
+        <div id="feedback" class="feedback" role="status" aria-live="polite" hidden>
+          <strong id="feedback-title"></strong><p id="explanation"></p>
+          <button id="next" class="primary" type="button">下一題 →</button>
+        </div>
+      </div>
+      <p class="keyboard-note">鍵盤可用 Tab 選項、Enter 確認；不限時。離開或重新整理不會保存本輪答案。</p>
+    </section>
+
+    <section id="result" class="panel result" hidden aria-labelledby="result-title">
+      <p class="eyebrow">🧾 檢驗報告出爐</p>
+      <h2 id="result-title">本輪完成！</h2>
+      <p id="result-summary" class="lead"></p>
+      <div id="result-stats" class="result-stats"></div>
+      <div id="review" class="review"></div>
+      <div class="result-actions">
+        <button id="retry" class="primary" type="button">重練這組（保留首輪紀錄）</button>
+        <button id="new-round" class="secondary" type="button">換一組新題</button>
+        <button id="export" class="quiet" type="button">下載本輪文字紀錄</button>
+      </div>
+      <p class="fineprint">分數只是這輪題目的答對數，不是皮膚知識認證；重新整理會清除紀錄。</p>
+    </section>
+
+    <footer class="sources">
+      <details>
+        <summary>📚 成分資料來源與遊戲範圍</summary>
+        <p>題目整理常見保養用途與研究限制；成分用途不等於整瓶產品的效果保證。參考皮膚科衛教與同儕審查文獻：</p>
+        <ul>
+          <li><a href="https://dermnetnz.org/topics/topical-vitamin-c" target="_blank" rel="noreferrer">DermNet：Topical vitamin C</a></li>
+          <li><a href="https://dermnetnz.org/topics/topical-retinoids" target="_blank" rel="noreferrer">DermNet：Topical retinoids</a> · <a href="https://www.aad.org/public/everyday-care/skin-care-secrets/anti-aging/retinoid-retinol" target="_blank" rel="noreferrer">AAD：Retinoid or retinol?</a></li>
+          <li><a href="https://dermnetnz.org/topics/chemical-peels" target="_blank" rel="noreferrer">DermNet：Chemical peels</a></li>
+          <li><a href="https://dermnetnz.org/topics/emollients-and-moisturisers" target="_blank" rel="noreferrer">DermNet：Emollients and moisturisers</a></li>
+          <li><a href="https://pubmed.ncbi.nlm.nih.gov/34439563/" target="_blank" rel="noreferrer">Nicotinamide (niacinamide): mechanisms and clinical evidence (2021)</a></li>
+          <li><a href="https://pubmed.ncbi.nlm.nih.gov/27451932/" target="_blank" rel="noreferrer">Topical peptides as cosmeceuticals (2016)</a></li>
+          <li><a href="https://pubmed.ncbi.nlm.nih.gov/36200921/" target="_blank" rel="noreferrer">Topical hyaluronic acid: literature review and clinical evidence (2022)</a></li>
+          <li><a href="https://pubmed.ncbi.nlm.nih.gov/14572299/" target="_blank" rel="noreferrer">Topical emollients and moisturizers for dry skin barrier disorders (2003)</a></li>
+          <li><a href="https://pubmed.ncbi.nlm.nih.gov/15002656/" target="_blank" rel="noreferrer">Polyhydroxy acids in photoaged skin (2004)</a></li>
+        </ul>
+        <p>來源查核日：2026-11-15。內容為一般教育資訊，不是個人醫療建議；孕期、皮膚疾病或持續不適請向醫師／藥師確認。</p>
+      </details>
+    </footer>
+  </main>
+</body>
+</html>

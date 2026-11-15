@@ -1,6 +1,6 @@
 # Dora playground
 
-六十一款免費、純前端小遊戲，從 `index.html` 入口進入。
+六十二款免費、純前端小遊戲，從 `index.html` 入口進入。
 
 ## 試玩
 
@@ -566,6 +566,12 @@ Linux 明確區分 GNOME／Files 與 KDE Plasma／Dolphin 預設；macOS 的 Ret
 45個原創情境，皮膚照護、居家過敏原、何時求助各15題。輕鬆局混合抽10題、完整45題或單元15題，題目和選項隨機。先選再確認；可先看解說或重練，首次結果不被覆蓋。結算逐題顯示首次選擇、建議與來源。不限時，原生按鈕支援觸控與鍵盤；沒有即時背景進程。
 
 依AAD與AAAAI公開衛教整理（2026-11-04），不是官方測驗、診斷或個人治療計畫，不提供劑量；緊急求助依台灣119。無帳號、儲存、上傳、外部套件或網路執行依賴。部署檔案：`allergy-school.html/css/js/svg`、`allergy-school-engine.js`，共用`road-safety-school.css`與`arcade-fx.css/js`。測試：`node --test tests/allergy-school.test.cjs`；驗收見`tests/allergy-school-qa.md`。
+
+## 臉部保養品成分偵探
+
+[開始闖關](https://dorac7.github.io/double-standard-game/skincare-lab.html)，快閃10題或完整20題。從定妝噴霧用途辨識、洗臉與防曬，到維他命 C／B3／E、A 醇、AHA／BHA／PHA、胜肽、玻尿酸、神經醯胺、甘油、泛醇與角鯊烷，練習分清常見用途、產品宣稱和不能保證的事。每題答完才揭露解析；可跳過、看完整回顧、重練並保留首輪結果，亦可下載文字紀錄。
+
+成分用途依配方、使用方式與耐受度而變，不構成個人產品推薦、診斷或治療建議；不提供濃度或混搭處方。依皮膚科衛教與同儕審查文獻整理，來源與編輯原則見 `SKINCARE-SOURCES.md`。全程本機、不儲存、不上傳。部署 `skincare-lab.html/css/js/data.js/engine.js/svg`；測試 `node --test tests/skincare-lab.test.cjs`。
 
 
 ## 2026-11-04 生活與汽車題庫擴充
