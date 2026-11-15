@@ -2,14 +2,14 @@
   'use strict';
   const D=window.TypeCompassData,E=window.TypeCompassEngine,$=id=>document.getElementById(id);
   const intro=$('intro'),play=$('play'),result=$('result');
-  let mode='full',set=[],answers={},index=0;
+  let mode='standard',set=[],answers={},index=0;
   const responseLabels=['很像左側','比較像左側','兩側相近／依情境切換','比較像右側','很像右側'];
   const responseHints=['明顯比較像左側','有一點比較像左側','兩側相近，或知道自己會依情境切換','有一點比較像右側','明顯比較像右側'];
   function show(section){intro.hidden=section!==intro;play.hidden=section!==play;result.hidden=section!==result;window.scrollTo(0,0);}
   function question(){return set[index];}
   function render(){
     const q=question(),axis=D.axes.find(x=>x.id===q.axis);
-    $('mode-label').textContent=mode==='quick'?'固定快測 / 每個向度各 5 題':'完整探索 / 每個向度各 20 題';
+    $('mode-label').textContent={quick:'快測 / 每軸 5 題',standard:'標準探索 / 每軸 10 題',full:'完整探索 / 每軸 20 題'}[mode];
     $('question-title').textContent=`${index+1}．${axis.first} / ${axis.second}`;
     $('progress-label').textContent=`第 ${index+1} / ${set.length} 題`;
     $('progress').max=set.length;$('progress').value=index;
@@ -33,7 +33,7 @@
   function move(delta){index=Math.max(0,Math.min(set.length-1,index+delta));render();$('question-title').focus();}
   function polarityText(axisResult){
     if(!axisResult.sufficient)return '有效作答不足，暫不解讀方向；這不表示你的偏好居中。';
-    if(Math.abs(axisResult.position)<=0.15)return axisResult.middleText;
+    if(Math.abs(axisResult.position)<=0.15)return axisResult.middleText+' 平均居中也可能是不同情境方向互相抵銷，不表示每題都居中；請核對下方分布與下載明細。';
     return axisResult.score>0?axisResult.firstText:axisResult.secondText;
   }
   function experimentFor(id,letter,sufficient){
@@ -63,7 +63,7 @@
       const right=document.createElement('span');right.textContent=`${a.second} ${a.secondName}`;scale.append(left,right);
       const track=document.createElement('div');track.className='tc-axis-track';track.setAttribute('role','img');track.setAttribute('aria-label',`${a.name}，本次回答位置：${!a.sufficient?'有效作答不足':a.displayLetter==='?'?'接近中線':`${a.letter} 方向`}；${a.level}`);
       const marker=document.createElement('span');marker.className='tc-axis-marker';marker.hidden=!a.sufficient;marker.style.left=`${a.barPercent}%`;track.append(marker);
-      const score=document.createElement('p');score.className='tc-axis-score';score.textContent=`${a.level}｜本題組 ${a.answered}/${a.total} 題有效作答`;
+      const score=document.createElement('p');score.className='tc-axis-score';score.textContent=`${a.level}｜本題組 ${a.answered}/${a.total} 題有效作答｜情境涵蓋 ${a.coveredFacets}/${a.facetTotal} 類（編輯分類，非子量表）｜${a.first} 側 ${a.firstCount}／${a.second} 側 ${a.secondCount}／居中 ${a.neutralCount}`;
       card.append(h,copy,scale,track,score);cards.append(card);
     }
     $('blend').textContent=r.axes.map(a=>`${a.name}：${polarityText(a)}`).join(' ');
@@ -76,7 +76,8 @@
     $('reflect-prompts').replaceChildren(...reflections.map(text=>{const li=document.createElement('li');li.textContent=text;return li;}));
     show(result);$('result-title').focus();
   }
-  function restart(){mode='full';set=[];answers={};index=0;show(intro);$('full-start').focus();}
+  function restart(){mode='standard';set=[];answers={};index=0;show(intro);$('standard-start').focus();}
+  $('standard-start').addEventListener('click',()=>start('standard'));
   $('quick-start').addEventListener('click',()=>start('quick'));
   $('full-start').addEventListener('click',()=>start('full'));
   function start(which){mode=which;set=E.createSet(D,mode);answers={};index=0;show(play);render();$('question-title').focus();}

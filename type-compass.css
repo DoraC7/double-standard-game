@@ -4,3 +4,5 @@ body{background:radial-gradient(circle at 85% 12%,#ddd8ee 0,transparent 30%),var
 @media(max-width:760px){.tc-hero{grid-template-columns:1fr}.tc-art{display:none}.tc-pair{grid-template-columns:1fr}.tc-response-options{grid-template-columns:1fr}.tc-response-options button{min-height:48px;text-align:left;padding-left:14px}.tc-actions button{flex:1;min-width:0}.tc-sources{padding:14px}}
 @media(max-width:420px){.tc-play-head{align-items:center}.tc-quiet{padding:8px 10px;min-height:42px}.tc-progress-label{font-size:12px}.tc-question{padding:16px}.tc-result-actions button{width:100%}}
 @media(prefers-reduced-motion:reduce){.tc-shell{scroll-behavior:auto}}
+
+.tc-response-options button:last-child{grid-column:1/-1}

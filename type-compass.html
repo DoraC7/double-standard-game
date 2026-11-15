@@ -24,9 +24,11 @@
         <p class="tc-lead">用生活情境看看你通常怎麼充電、接收資訊、做決定和安排事情。不是「你就是哪一型」的宣判，是一張可以回頭修正的偏好地圖。</p>
         <div class="tc-facts"><span>🧭 四個向度</span><span>📝 完整 80 題・每軸 20 題</span><span>🔒 本機作答</span></div>
         <div class="tc-modes">
-          <button id="quick-start" class="primary" type="button">固定快測・20 題</button>
+          <button id="standard-start" class="primary" type="button">標準探索・40 題（推薦）</button>
+          <button id="quick-start" type="button">快測・20 題</button>
           <button id="full-start" type="button">完整探索・80 題</button>
         </div>
+        <p class="tc-note">20／40 題固定選題、每輪隨機排序；80 題全部呈現、隨機排序。短版依五類情境選題，不代表三種長度已經驗證等值。</p>
       </div>
       <img class="tc-art" src="type-compass.svg" alt="小龍蝦用指南針探索不同偏好方向" width="560" height="420">
       <div class="tc-caveat">
@@ -56,7 +58,7 @@
         <p id="answer-status" class="tc-answer-status" role="status" aria-live="polite">尚未作答；無法判斷時請選不計分選項。</p>
         <div class="tc-actions"><button id="back" type="button">← 上一題</button><button id="next" class="primary" type="button" disabled>下一題 →</button></div>
       </article>
-      <p class="tc-note">沒有好壞答案。請依「多數時候的自己」作答，不必選看起來比較理想的選項。答案只在目前分頁記憶體中；重新整理會清除。</p>
+      <p class="tc-note">沒有好壞答案。請以近三個月、一般且有選擇空間的生活情境為共同參照；若只能依職務要求、臨時壓力或沒有相關經驗回答，可選不適用。請依「多數時候的自己」作答，不必選看起來比較理想的選項。答案只在目前分頁記憶體中；重新整理會清除。</p>
     </section>
 
     <section id="result" class="tc-panel tc-result" hidden aria-labelledby="result-title" data-fx="finish">
@@ -78,7 +80,7 @@
         <li><a href="https://doi.org/10.1111/j.1467-6494.1989.tb00759.x" target="_blank" rel="noopener noreferrer">McCrae &amp; Costa (1989), Reinterpreting the MBTI from the perspective of the five-factor model</a>（人格特質向度與類別切分的研究討論）</li>
         <li><a href="https://doi.org/10.1016/0191-8869(96)83453-2" target="_blank" rel="noopener noreferrer">Corr (1996), The Myers-Briggs Type Indicator: A critical review and practical guide</a>（對評量方法與解讀的批判性回顧）</li>
       </ul>
-      <p><a href="TYPE-COMPASS-RESEARCH.md">研究整理與改進依據</a>：區分未知與居中，缺答不當成中間分數；快測使用固定題組，不宣稱與完整題組等值。</p>
+      <p><a href="TYPE-COMPASS-RESEARCH.md">研究整理與改進依據</a>：區分未知與居中，缺答不當成中間分數；20／40題使用依情境分層的固定題組、只隨機題序，不宣稱與完整題組等值。</p>
       <p>查核日：2026-11-15。80 題比原版多涵蓋一些情境，但題數不等於準確度；分數只是把你本次選項加總，不是信度、效度、常模或機率。本工具未經代表性樣本試測、重測或心理計量驗證，尚不能宣稱結果穩定或更準。</p>
     </details>
     <footer>不登入・本機計算・不儲存・不追蹤；文字報告只在你主動下載時建立。</footer>
