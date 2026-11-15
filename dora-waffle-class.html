@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f7edda">
+<title>多拉廢話體小教室｜Dora Playground</title>
+<style>
+:root{--ink:#24344a;--paper:#fffdf6;--red:#bb5948;--gold:#e8b754;--green:#42765f;--line:#d6d0c0}*{box-sizing:border-box}body{margin:0;background:#f7edda;color:var(--ink);font:16px/1.7 system-ui,-apple-system,"Noto Sans TC",sans-serif}main{width:min(720px,100% - 28px);margin:28px auto}.top{display:flex;justify-content:space-between;gap:12px;color:#627286;font-weight:750;font-size:14px}.card{margin-top:16px;padding:clamp(20px,5vw,36px);background:var(--paper);border:2px solid var(--line);border-radius:22px;box-shadow:0 7px 0 #dfd5bf}.tag{color:var(--red);font-weight:850;letter-spacing:.08em}h1{font-size:clamp(30px,8vw,52px);line-height:1.18;margin:8px 0}h2{line-height:1.35}.lead{font-size:18px}.muted{color:#657386;font-size:14px}.quote{padding:17px;background:#edf1e6;border-radius:15px;font-size:19px;font-weight:750;margin:18px 0}.choices{display:grid;gap:10px;margin:16px 0}button{font:inherit;color:inherit;cursor:pointer;border:2px solid #c9c8bd;border-radius:14px;background:#fff;padding:12px 15px;text-align:left;min-height:52px}button:hover{border-color:var(--green);background:#f0f6ed}button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}.primary{display:block;width:100%;background:#263f59;color:white;border-color:#263f59;text-align:center;font-weight:800}.hidden{display:none!important}.feedback{padding:15px;border-left:5px solid var(--green);background:#eef3e9;border-radius:10px;margin:16px 0}.feedback.bad{border-color:var(--red);background:#f9ece6}.progress{height:9px;background:#e4dfd1;border-radius:8px;overflow:hidden}.progress i{display:block;height:100%;width:0;background:var(--gold);transition:width .2s}.pill{display:inline-block;border-radius:99px;padding:3px 10px;background:#f5e7bf;font-weight:750}.result{text-align:center}.footer{text-align:center;padding:20px;color:#667487}.footer a{color:inherit}@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<main>
+  <div class="top"><span>DORA PLAYGROUND / 對話練習</span><span id="round">小教室</span></div>
+  <section class="card" id="intro">
+    <div class="tag">先回答，再加一點點霧</div>
+    <h1>多拉廢話體<br>小教室</h1>
+    <p class="lead">練習把「有回答」和「聽起來很有道理」分開：先選一個真正回答問題的句子，再替它加上一句似是而非的收尾。</p>
+    <div class="quote">課堂守則：廢話只能放句尾，不能整句都是廢話。</div>
+    <p class="muted">4 個情境・不限時・純文字練習。只是玩笑風格練習，不是對任何人的評價。</p>
+    <button class="primary" id="start">開始上課 →</button>
+  </section>
+  <section class="card hidden" id="lesson">
+    <div class="progress"><i id="fill"></i></div>
+    <p class="tag" id="scene"></p>
+    <h2 id="question"></h2>
+    <p><span class="pill">第一步</span> 先挑一句有回答的話</p>
+    <div class="choices" id="answers"></div>
+    <div class="feedback hidden" id="feedback" aria-live="polite"></div>
+    <div id="tailBlock" class="hidden">
+      <p><span class="pill">第二步</span> 加一句似是而非的句尾</p>
+      <div class="choices" id="tails"></div>
+    </div>
+    <button class="primary hidden" id="next">下一題 →</button>
+  </section>
+  <section class="card result hidden" id="result">
+    <div style="font-size:52px" id="medal"></div>
+    <h2 id="title"></h2>
+    <p id="summary"></p>
+    <div class="feedback" id="best"></div>
+    <button class="primary" id="again">再練一輪</button>
+  </section>
+  <p class="footer"><a href="waffle-master.html">去玩廢話大師</a> · <a href="index.html">回 Dora Playground</a> · 不記錄作答、不連線</p>
+</main>
+<script>
+(()=>{'use strict';
+const lessons=[
+ {scene:'家庭群組',q:'「晚餐要不要訂披薩？」',a:['好啊，幫我點夏威夷。','吃飯一直都是很重要的事情。','披薩口味真的很多。'],ok:0,explain:'第一句有明確表態和選擇；另外兩句雖然相關，卻沒回答要不要。',tails:['畢竟晚餐也是一天中的一餐。','不同的人對晚餐會有不同想法。','這件事我們可以之後再觀察。']},
+ {scene:'工作訊息',q:'「你今天五點前能交檔案嗎？」',a:['可以，我四點半前寄給你。','時間安排要看整體狀況。','檔案格式有很多種。'],ok:0,explain:'第一句回答了能不能和具體時間；清楚資訊要先放前面。',tails:['畢竟五點也是今天的一個時間。','交付這件事本來就很值得重視。','每個人對準時都有自己的理解。']},
+ {scene:'朋友邀約',q:'「週六要不要一起看電影？」',a:['好啊，我有空。','週末通常適合安排活動。','電影選擇很多，可以慢慢想。'],ok:0,explain:'「好啊，我有空」已經回答邀約；後面再加一句空泛評論，就是本課練習。',tails:['畢竟週六也是週末的一部分。','看電影時，電影通常會出現在螢幕上。','安排活動需要考量各種安排。']},
+ {scene:'行程確認',q:'「你有收到地址嗎？」',a:['有，收到了，謝謝。','訊息送達會受到網路狀況影響。','地址通常會包含地點資訊。'],ok:0,explain:'簡單的是非題，用簡單明確的回答最省力。廢話可以當笑點，但別把必要資訊藏掉。',tails:['收到訊息，代表訊息有被收到。','地址的功能是幫助人找到地方。','確認這件事本身也需要被確認。']}
+];
+let index=0,tailCount=0;const $=id=>document.getElementById(id);function start(){index=0;tailCount=0;$('intro').classList.add('hidden');$('result').classList.add('hidden');$('lesson').classList.remove('hidden');render()}
+function render(){const x=lessons[index];$('round').textContent=`第 ${index+1} / ${lessons.length} 課`;$('fill').style.width=`${index/lessons.length*100}%`;$('scene').textContent=x.scene;$('question').textContent=x.q;$('feedback').className='feedback hidden';$('tailBlock').classList.add('hidden');$('next').classList.add('hidden');$('answers').replaceChildren(...x.a.map((t,i)=>button(t,()=>answer(i))));$('tails').replaceChildren()}
+function button(label,fn){const b=document.createElement('button');b.textContent=label;b.addEventListener('click',fn);return b}
+function answer(i){const x=lessons[index],good=i===x.ok;$('answers').replaceChildren(...x.a.map((t,j)=>{const b=button(t,()=>{});b.disabled=true;if(j===x.ok)b.style.borderColor='var(--green)';return b}));$('feedback').className='feedback'+(good?'':' bad');$('feedback').textContent=(good?'答對：':'小提醒：')+x.explain;$('tailBlock').classList.remove('hidden');$('tails').replaceChildren(...x.tails.map((t,j)=>button(t,()=>chooseTail(j))))}
+function chooseTail(){tailCount++;const x=lessons[index];$('tails').replaceChildren(...x.tails.map((t,j)=>{const b=button(t,()=>{});b.disabled=true;return b}));$('feedback').className='feedback';$('feedback').textContent='練習完成：先把答案說清楚，再用句尾製造一點「好像有說什麼」的效果。實際溝通時，記得把笑點和重要資訊分開。';$('next').classList.remove('hidden');$('next').textContent=index===lessons.length-1?'看結業證書 →':'下一課 →'}
+function finish(){$('lesson').classList.add('hidden');$('result').classList.remove('hidden');$('round').textContent='結業';$('fill').style.width='100%';$('medal').textContent='🎓';$('title').textContent='句尾霧化練習生';$('summary').textContent=`完成 ${lessons.length} 個情境，練習了「先回答，再加梗」。`;$('best').textContent='結業提醒：如果對方真的需要資訊，給明確答案；如果大家只是在玩梗，句尾才是廢話的安全位置。'}
+$('start').addEventListener('click',start);$('again').addEventListener('click',start);$('next').addEventListener('click',()=>{if(index===lessons.length-1)finish();else{index++;render()}});
+})();
+</script>
+</body>
+</html>
