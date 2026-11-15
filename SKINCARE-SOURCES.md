@@ -23,5 +23,15 @@
 9. Loden M. [Role of topical emollients and moisturizers in the treatment of dry skin barrier disorders](https://pubmed.ncbi.nlm.nih.gov/14572299/). Am J Clin Dermatol. 2003;4(11):771–788.
 10. Green BA, et al. [The use of polyhydroxy acids (PHAs) in photoaged skin](https://pubmed.ncbi.nlm.nih.gov/15002656/). Cutis. 2004;73(2 Suppl):3–13.
 11. Draelos ZD, et al. [Cosmeceuticals vitamins](https://pubmed.ncbi.nlm.nih.gov/19695478/). Dermatol Ther. 2009;22(4):289–301.
+12. Dhaliwal S, et al. [Human Clinical Trials Using Topical Bakuchiol Formulations for the Treatment of Skin Disorders: A Systematic Review](https://pubmed.ncbi.nlm.nih.gov/38564402/). J Drugs Dermatol. 2024;23(4):239–243. 人體試驗數量與設計有限、異質性高；不支持把它說成與 retinol 完全等同。
+13. [The basis of topical superoxide dismutase antipruritic activity](https://pubmed.ncbi.nlm.nih.gov/19386213/). Acta Dermatovenerol Croat. 2009;17(1):25–39. 僅作 SOD 外用研究方向背景；不將其推廣為已確立的抗老或治療效果。
+14. DermNet NZ, [Compositae (Asteraceae) allergy](https://dermnetnz.org/topics/compositae-allergy)：菊科接觸過敏背景；洋甘菊萃取／沒藥醇產品並不因此保證零過敏。
+15. [Topical Application of Centella asiatica in Wound Healing: Recent Insights into Mechanisms and Clinical Efficacy](https://pubmed.ncbi.nlm.nih.gov/39458583/). Pharmaceutics. 2024;16(10):1252. 研究材料和載體差異大；不能直接推論一般化妝品可治療傷口。
+16. [Topical urea in skincare: A review](https://pubmed.ncbi.nlm.nih.gov/30378232/). Dermatol Ther. 2018;31(6):e12690. 描述不同尿素比例的保濕或角質軟化用途。
+17. [The Role of Coenzyme Q10 in Skin Aging and Opportunities for Topical Intervention: A Review](https://pubmed.ncbi.nlm.nih.gov/39148958/). 2024. 抗氧化與外用研究方向，不把生化角色直譯成產品必然功效。
+18. [Emerging topical therapies to treat pigmentary disorders: an evidence-based approach](https://pubmed.ncbi.nlm.nih.gov/34114938/). 2021. 包含熊果素等外用提亮成分，並比較不同成分的人體證據強弱。
+19. [Topical and Systemic Therapies in Melasma: A Systematic Review](https://pubmed.ncbi.nlm.nih.gov/38099013/). 供傳明酸等複合治療文獻背景；外用化妝品不可等同口服治療。
+20. [Ferulic Acid Use for Skin Applications: A Systematic Review](https://pubmed.ncbi.nlm.nih.gov/40538529/). J Clin Aesthet Dermatol. 2025. 支持將阿魏酸放在抗氧化配方脈絡，而非看到「酸」字就判斷為去角質酸。
+21. [A Comprehensive Review of Azelaic Acid Pharmacological Properties, Clinical Applications, and Innovative Topical Formulations](https://pubmed.ncbi.nlm.nih.gov/41011144/). 供壬二酸用途背景；藥品濃度／適應症與一般化妝品需分清。
 
 遊戲檔案：`skincare-lab.html/css/js/data.js/engine.js/svg`；沿用純前端、無帳號、無追蹤、不儲存與不上傳的現有網站架構。

@@ -4,24 +4,24 @@ const {questions}=require('../skincare-lab-data.js');
 const game=require('../skincare-lab-engine.js');
 
 test('題庫涵蓋常見用途辨識、維他命、胜肽、酸類及保濕成分',()=>{
-  assert.equal(questions.length,20);
+  assert.equal(questions.length,34);
   assert.equal(new Set(questions.map(q=>q.id)).size,questions.length);
   for(const q of questions){
     assert.ok(q.title&&q.prompt&&q.explanation);
     assert.equal(q.options.length,3);
     assert.ok(q.answer>=0&&q.answer<q.options.length);
   }
-  for(const term of ['定妝噴霧','維他命 C','維他命 E','菸鹼醯胺','A 醇','AHA','BHA','PHA','胜肽','玻尿酸','神經醯胺','甘油']){
+  for(const term of ['定妝噴霧','維他命 C','維他命 E','菸鹼醯胺','維他命 B5','A 醇','AHA','BHA','PHA','胜肽','玻尿酸','神經醯胺','甘油','洋甘菊','SOD','補骨脂酚','壬二酸','傳明酸','熊果素','尿素','氧化鋅']){
     assert.ok(questions.some(q=>q.title.includes(term)||q.prompt.includes(term)),`missing ${term}`);
   }
 });
 
-test('快閃題涵蓋所有知識類別，完整模式收齊20題',()=>{
+test('快閃題涵蓋所有知識類別，完整模式收齊34題',()=>{
   const quick=game.createRound(questions,'quick',()=>0.37);
-  assert.equal(quick.questions.length,10);
+  assert.equal(quick.questions.length,12);
   assert.deepEqual(new Set(quick.questions.map(q=>q.category)),new Set(questions.map(q=>q.category)));
   const full=game.createRound(questions,'full',()=>0.42);
-  assert.equal(full.questions.length,20);
+  assert.equal(full.questions.length,34);
   assert.deepEqual(new Set(full.questions.map(q=>q.id)),new Set(questions.map(q=>q.id)));
 });
 

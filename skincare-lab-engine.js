@@ -1,7 +1,7 @@
 (function (root) {
   'use strict';
 
-  const QUICK_COUNT = 10;
+  const QUICK_COUNT = 12;
   function shuffled(items, random = Math.random) {
     const result = items.slice();
     for (let i = result.length - 1; i > 0; i--) {
@@ -107,7 +107,7 @@
     const latest = round.latestAttempt || snapshot(round);
     const lines = [
       '臉部保養品成分偵探｜本機文字紀錄',
-      `模式：${latest.mode === 'full' ? '完整 20 題' : `快閃 ${latest.total} 題`}`,
+      `模式：${latest.mode === 'full' ? `完整 ${latest.total} 題` : `快閃 ${latest.total} 題`}`,
       `本次：答對 ${latest.correct}/${latest.total}；跳過 ${latest.skipped} 題`,
       ''
     ];

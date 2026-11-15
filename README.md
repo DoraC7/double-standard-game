@@ -569,9 +569,9 @@ Linux 明確區分 GNOME／Files 與 KDE Plasma／Dolphin 預設；macOS 的 Ret
 
 ## 臉部保養品成分偵探
 
-[開始闖關](https://dorac7.github.io/double-standard-game/skincare-lab.html)，快閃10題或完整20題。從定妝噴霧用途辨識、洗臉與防曬，到維他命 C／B3／E、A 醇、AHA／BHA／PHA、胜肽、玻尿酸、神經醯胺、甘油、泛醇與角鯊烷，練習分清常見用途、產品宣稱和不能保證的事。每題答完才揭露解析；可跳過、看完整回顧、重練並保留首輪結果，亦可下載文字紀錄。
+[開始闖關](https://dorac7.github.io/double-standard-game/skincare-lab.html)，快閃12題或完整34題。從定妝噴霧用途辨識、洗臉與防曬，到維他命 C／B3／E／B5、A 醇、補骨脂酚、AHA／BHA／PHA、胜肽、SOD、洋甘菊／沒藥醇、積雪草、尿囊素、蘆薈、輔酶 Q10、阿魏酸、壬二酸、傳明酸、熊果素、玻尿酸、神經醯胺、尿素、甘油、泛醇與角鯊烷，練習分清常見用途、產品宣稱和不能保證的事。每題答完才揭露解析；可跳過、看完整回顧、重練並保留首輪結果，亦可下載文字紀錄。
 
-成分用途依配方、使用方式與耐受度而變，不構成個人產品推薦、診斷或治療建議；不提供濃度或混搭處方。依皮膚科衛教與同儕審查文獻整理，來源與編輯原則見 `SKINCARE-SOURCES.md`。全程本機、不儲存、不上傳。部署 `skincare-lab.html/css/js/data.js/engine.js/svg`；測試 `node --test tests/skincare-lab.test.cjs`。
+成分用途依配方、使用方式與耐受度而變，不構成個人產品推薦、診斷或治療建議；不提供濃度或混搭處方。補骨脂酚、SOD、植萃與美白成分的題目會明確標示研究限制，不把「天然」當安全或有效保證。依皮膚科衛教與同儕審查文獻整理，來源與編輯原則見 `SKINCARE-SOURCES.md`。全程本機、不儲存、不上傳。部署 `skincare-lab.html/css/js/data.js/engine.js/svg`；測試 `node --test tests/skincare-lab.test.cjs`。
 
 
 ## 2026-11-04 生活與汽車題庫擴充
