@@ -19,3 +19,5 @@ test('吃、玩、休息會完整現身但不灌水進度；喊累與小做一�
 
 test('部分驗收後追加需求會使已做驗收失效，新增工作完成後必須重新驗收',()=>{const q=D.scenes.find(q=>q.title==='驗收不是片尾彩蛋'),s=E.create(q);E.deadlineDay(s,'work',0);E.deadlineDay(s,'work',1);E.deadlineEdit(s,'extend');E.deadlineDay(s,'work',2);assert.equal(s.tasks[2].done,2);E.deadlineEdit(s,'scope');assert.equal(s.tasks[2].done,0);assert.equal(s.tasks[1].need,4);assert.equal(E.deadlineDay(s,'work',2),null);E.deadlineDay(s,'work',1);E.deadlineDay(s,'work',2);assert.equal(s.status,'playing');E.deadlineDay(s,'work',2);assert.equal(s.status,'won');assert.equal(s.day-1,s.due);});
 test('預留一天吃玩或休息仍可交付，不把休息本身定為失敗',()=>{for(const a of ['snack','play','rest']){const s=E.create(D.scenes.find(q=>q.title==='週五才想起星期一'));E.deadlineDay(s,a);while(s.status==='playing')E.deadlineDay(s,'work',s.tasks.findIndex(t=>t.done<t.need));assert.equal(s.status,'won');assert.equal(s.day-1,5);}});
+
+test('特效使用共用單一開關並顯示系統減少動態效果狀態',()=>{const h=fs.readFileSync('dora-vanish.html','utf8'),js=fs.readFileSync('dora-vanish.js','utf8');assert.match(h,/id="motion-toggle"/);assert.doesNotMatch(h,/id="motion"/);assert.match(js,/特效：依系統關閉/);assert.match(js,/motionSetting.matches/);});
