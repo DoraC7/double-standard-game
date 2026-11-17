@@ -1,0 +1,18 @@
+async () => {
+ const frame=document.getElementById('candidate-preview');const d=frame?frame.contentDocument:document,w=d.defaultView;
+ const $=id=>d.getElementById(id),assert=(v,m)=>{if(!v)throw Error(m);};let samples=0;
+ function fit(){samples++;assert(d.documentElement.scrollWidth<=w.innerWidth,'horizontal overflow');}
+ function click(id){const n=$(id);assert(!n.disabled&&!n.hidden,'unavailable '+id);n.focus();n.click();fit();}
+ function act(key){const n=d.querySelector('[data-action="'+key+'"]');assert(n&&!n.disabled,'disabled '+key);n.focus();n.click();fit();}
+ $('mode').value='all';click('start');assert(d.querySelector('[data-action="agree"]').disabled,'agree before proposal');assert(d.querySelector('[data-action="work"]').disabled,'work before plan');
+ click('pause');const before=$('turn').textContent;d.querySelector('[data-action="detour"]').click();assert($('turn').textContent===before,'pause changed state');click('resume');await new Promise(r=>w.requestAnimationFrame(()=>w.requestAnimationFrame(r)));assert(!$('pause-dialog').open&&d.activeElement===$('pause'),'pause focus');
+ click('reset');click('cancel-reset');assert($('turn').textContent===before,'cancel reset changed state');
+ for(let n=0;n<9;n++)act('detour');assert(!$('outcome').hidden,'failure missing');assert(d.querySelector('[data-action="detour"]').disabled,'answer not locked');click('retry');assert($('turn').textContent==='0／9回合','retry not fresh');
+ for(const k of ['inspect','A','work','B','A','work','work','deliver'])act(k);assert($('outcome-title').textContent.includes('成功'),'round1');assert($('budget').textContent==='2／12枚','cancel proposal charged money');assert($('wasted').textContent==='0格','cancel erased work');click('next');
+ for(const k of ['inspect','A','deliver'])act(k);assert($('bubble').textContent.includes('還缺3格'),'premature acceptance');for(const k of ['vent','work','work','work','deliver'])act(k);assert($('outcome-title').textContent.includes('成功'),'round2');click('next');
+ assert(d.querySelector('[data-action="report"]').disabled,'report unlocked too soon');for(const k of ['inspect','A','work','report','B','agree','ask','work','work','deliver'])act(k);assert($('outcome-title').textContent.includes('成功'),'round3');assert($('wasted').textContent==='1格','rework lost');click('next');assert(!$('results').hidden,'results missing');assert($('summary').textContent.includes('首次驗收 2／3；最近驗收 3／3'),'first record overwritten');assert($('review').children.length===3,'missing review');assert($('review').textContent.includes('共演2次'),'retry history missing');
+ // Verify literal TXT data without triggering a filesystem download.
+ let captured=null;const old=w.URL.createObjectURL,oldClick=w.HTMLAnchorElement.prototype.click;w.URL.createObjectURL=b=>{captured=b;return 'blob:qa';};w.HTMLAnchorElement.prototype.click=function(){};try{click('download');assert((await captured.text()).includes('第2次：通過'),'TXT history incomplete');}finally{w.URL.createObjectURL=old;w.HTMLAnchorElement.prototype.click=oldClick;}
+ const summary=$('summary').textContent;click('again');assert(!$('intro').hidden,'restart missing');click('start');w.dispatchEvent(new w.Event('blur'));assert($('pause-dialog').open,'blur pause');click('resume');click('reset');click('confirm-reset');assert($('turn').textContent==='0／9回合','reset not fresh');fit();
+ return {width:w.innerWidth,height:w.innerHeight,samples,summary,checks:'full three-case flow, failure/retry/lock, proposal cancellation, missing-work rejection, evidence, rework, pause/focus, blur, reset, TXT',preview:frame?'unpublished DOM preview':'HTTP page'};
+}
