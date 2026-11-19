@@ -1,6 +1,6 @@
 # Dora playground
 
-六十七款免費、純前端小遊戲，從 `index.html` 入口進入。
+六十八款免費、純前端小遊戲，從 `index.html` 入口進入。
 
 ## 找事大挑戰・你的市長多拉洋
 
@@ -717,3 +717,14 @@ Linux 明確區分 GNOME／Files 與 KDE Plasma／Dolphin 預設；macOS 的 Ret
 新增吃飯／點心、出去玩、休息放鬆的秒上線變奏。專案片場可演「還沒開始先喊累」「做一小格卻宣布超忙」；做一小格確實增加1格，但台詞的忙碌不會灌水實際進度。吃、玩、休息有完整角色登場與獨立台詞，專案進度不因此自動增加，預留休息與實作仍可正常交付。
 
 文案以訊號、緩衝、背景執行與雲端漫遊暗示角色狀態；保留原網址 `dora-vanish.html` 與全部玩法，不破壞舊分享。版本2026-11-17.2。
+
+
+## 多拉談判練習室
+
+[進入練習室](https://dorac7.github.io/double-standard-game/negotiation-room.html)｜[現有伺服器](http://bigmac.dorac7.com:5487/negotiation-room.html)。8個原創虛構案例：點心、家事、出遊、追加需求、場地、多方案插畫、安全界線、展覽雨備。從利益與立場、同理提問、BATNA、條件交換、客觀標準，到MESO與條件式協議。
+
+開場會影響回應，失誤須先修復。逐問取得需求，再親手組合方案。成本與對方需要分開判定；第6關起可同時提A／B方案，對方選符合需要的第一個，不宣稱模擬真實人格。可接受反建議、重談或採用備案；第7關刻意沒有可接受協議區，不以成交為唯一目標。最後練具體交接；首次與最近收尾分開，附已取得線索、逐次提案及自選筆記的TXT下載。自由文字不評分。
+
+參考 Fisher、Ury、Patton《Getting to Yes》及 [Harvard PON公開教學](https://www.pon.harvard.edu/daily/negotiation-skills-daily/six-guidelines-for-getting-to-yes/)（2026-11-19查閱）。所有台詞、價格與工量為自製情境，不是真人引言、真實行情、官方課程或能力測驗。GitHub公開搜尋 `negotiation game education` 未找到可直接沿用的專案，沿用現有原生HTML遊戲間，不增加框架、後端或付費AI。
+
+不限時，支援鍵盤、觸控、失焦暫停；無帳號、網路執行依賴、永久儲存或上傳。部署 `negotiation-room.html/css/js/svg`、`negotiation-data.js`、`negotiation-engine.js`。測試與操作驗證見 `tests/negotiation-room.test.cjs`、`tests/negotiation-room-qa.md`。
