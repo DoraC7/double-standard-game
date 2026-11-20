@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-Hant">
+<html lang="zh-Hant-TW">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>思考偵探社｜Dora playground</title>
@@ -8,12 +8,13 @@
 <script defer src="thinking-cases.js"></script><script defer src="thinking-lab.js"></script>
 <link rel="stylesheet" href="arcade-fx.css?v=20261028-1">
 <script src="arcade-fx.js?v=20261028-1" defer></script>
+<link rel="stylesheet" href="game-ui.css?v=20261120-1">
 </head>
 <body data-arcade-page="thinking-lab">
-<header class="top"><a href="index.html">← 遊戲間</a><span>DORA PLAYGROUND / FIELD NOTES 01</span><button id="tools" aria-expanded="false" aria-controls="toolbox">偵探小抄 ＋</button></header>
+<header class="top"><a href="index.html" data-lobby-link>← 回遊戲間</a><span>DORA PLAYGROUND / FIELD NOTES 01</span><button id="tools" aria-expanded="false" aria-controls="toolbox">偵探小抄 ＋</button></header>
 <main>
 <section class="intro" id="intro">
-<div><p class="eyebrow">不急著答對，先找出憑什麼。</p><h1>思考<br><em>偵探社</em><span class="title-dot">✳</span></h1><p class="lead">多拉，今天換妳辦案。<br>每個故事都少了一點線索，也多了一點腦補。<br>把它們分開，讓結論跟著證據走。</p><div class="chips"><span>12 個虛構案件</span><span>每案 4 步</span><span>不限時・可重練</span></div><div class="actions"><button class="primary" id="start">接下第一個案件 ↗</button><button id="random">隨機辦一案</button></div></div>
+<div><p class="eyebrow">不急著答對，先找出憑什麼。</p><h1>思考<br><em>偵探社</em><span class="title-dot">✳</span></h1><p class="lead">多拉，今天換妳辦案。先問自己看到了什麼，再選要查的兩條線索。</p><div class="chips"><span>12 個虛構案件</span><span>每案 4 步</span><span>不限時・可重練</span></div><div class="actions"><button class="primary" id="start">接下第一個案件 ↗</button><button id="random">隨機辦一案</button></div></div>
 <div class="cover" aria-hidden="true"><div class="folder"><span>CASE FILE / 001</span><div class="lens">?</div><p>看見 ≠ 猜到<br>可能 ≠ 確定</p><b>KEEP ASKING WHY</b></div><span class="seal">證據<br>優先</span></div>
 </section>
 <section class="panel save-panel" aria-labelledby="save-title"><h2 id="save-title">進度與隱私</h2><p id="save-status" class="small" aria-live="polite">目前只記在這個分頁，關閉或重新整理會清空。</p><div class="actions"><button id="session-only">本次練習，不儲存</button><button id="remember-progress">記住我的進度</button><button id="clear-saved" hidden>清除所有本機紀錄</button></div><label class="save-notes" id="save-notes-label" hidden><input type="checkbox" id="save-notes"> 也在這個瀏覽器儲存自由文字筆記</label><p class="small">進度只存在此裝置的瀏覽器，不會由此功能上傳；換裝置不會同步，清除網站資料可能遺失。共用裝置建議選「本次練習」。</p></section>

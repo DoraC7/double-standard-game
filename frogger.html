@@ -1,16 +1,17 @@
 <!doctype html>
-<html lang="zh-Hant">
+<html lang="zh-Hant-TW">
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#17463f">
   <title>青蛙過街・遊戲間</title><link rel="stylesheet" href="frogger.css">
 <link rel="stylesheet" href="arcade-fx.css?v=20261028-1">
 <script src="arcade-fx.js?v=20261028-1" defer></script>
+<link rel="stylesheet" href="game-ui.css?v=20261120-1">
 </head>
 <body data-arcade-page="frogger"><main>
-  <header><a href="./">← 遊戲間</a><b>青蛙過街</b><span>經典街機・安全過馬路</span></header>
+  <header><a href="./" data-lobby-link>← 回遊戲間</a><b>青蛙過街</b><span>經典街機・安全過馬路</span></header>
   <section id="intro">
     <p class="eyebrow">HOP · HOP · HOME</p><h1>青蛙過街</h1>
-    <p class="lead">躲開車車、搭上浮木，把五隻小青蛙平安送回家！</p>
+    <p class="lead">先躲過車流，再踩著浮木和烏龜過河，把五隻青蛙送回家。</p>
     <div class="preview" aria-hidden="true"><div class="river"><i></i><i></i><i></i></div><div class="road"><i></i><i></i></div><img src="frogger.svg" alt=""></div>
     <button id="start" class="primary">開始過街</button>
     <details><summary>怎麼玩？</summary><p>用方向鍵或 WASD 移動；手機可按畫面上的方向鍵，或直接點選遊戲格子。避開車流，在河上踩浮木和烏龜前進。五個家都住進青蛙就過關。撞到車或掉進水裡會回到起點，還有三次機會。</p></details>

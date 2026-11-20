@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-Hant">
+<html lang="zh-Hant-TW">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,13 +22,14 @@
   </style>
 <link rel="stylesheet" href="arcade-fx.css?v=20261028-1">
 <script src="arcade-fx.js?v=20261028-1" defer></script>
+<link rel="stylesheet" href="game-ui.css?v=20261120-1">
 </head>
-<body data-arcade-page="three-second-forget"><a href="./" style="display:block;text-align:center;padding:10px;color:#ffe27b">← Dora playground</a>
+<body data-arcade-page="three-second-forget"><a href="./" style="color:#ffe27b" data-lobby-link>← 回遊戲間</a>
 <main>
   <header><div class="brand">🧠 三秒就忘記</div><div class="tag">記憶搬家・獨立試玩版</div></header>
   <section id="intro" class="screen center">
     <h1 class="hero">三秒就忘記</h1>
-    <p class="lead">東西才剛放好，一轉頭就忘了在哪。你的任務：把架上的物品，原封不動放回原位。</p>
+    <p class="lead">看一眼架上的物品。架子清空後，從桌面找出剛才看過的東西，放回原位。</p>
     <div class="panel intro"><div class="big-icon" aria-hidden="true">🗃️</div><div class="steps"><span>👀 看一眼</span><span>🫥 架子清空</span><span>👆 點選物品放回去</span></div><p class="note">18 種場景，每局重抽物品和位置；部分挑戰關會先提示「鏡像擺放」。點選已放的格子可以拿回，作答沒有倒數。純粹玩記憶，不是能力測驗。</p><div class="actions"><button id="easy" class="btn ghost">輕鬆：6 秒・4 關</button><button id="start" class="btn primary">挑戰：3 秒・8 關 →</button><button id="marathon" class="btn secondary">魔王：3 秒・12 關 👑</button></div></div>
   </section>
   <section id="game" class="screen" hidden>

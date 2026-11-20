@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-Hant">
+<html lang="zh-Hant-TW">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -12,12 +12,13 @@
   <script src="terminal-quest.js" defer></script>
 <link rel="stylesheet" href="arcade-fx.css?v=20261028-1">
 <script src="arcade-fx.js?v=20261028-1" defer></script>
+<link rel="stylesheet" href="game-ui.css?v=20261120-1">
 </head>
 <body data-arcade-page="terminal-quest">
 <main>
-  <header class="topbar"><a href="index.html">← 回 Dora playground</a><span>🦞 Dora playground</span></header>
+  <header class="topbar"><a href="index.html" data-lobby-link>← 回遊戲間</a><span>🦞 Dora playground</span></header>
   <section class="hero">
-    <div><p class="eyebrow">SHELL ISLAND / 給剛起步的探險家</p><h1>龍蝦終端機<em>探險</em><span aria-hidden="true">_</span></h1><p class="lead">不怕打錯，先試一行。<br>從「我在哪裡？」到親手整理檔案，每一步都看得見。</p></div>
+    <div><p class="eyebrow">SHELL ISLAND / 給剛起步的探險家</p><h1>龍蝦終端機<em>探險</em><span aria-hidden="true">_</span></h1><p class="lead">先輸入 pwd 確認位置。接下來在模擬終端機整理檔案，再用指令檢查結果。</p></div>
     <img class="hero-art" src="terminal.svg" width="200" height="170" alt="小龍蝦在終端機前找到一顆貝殼">
   </section>
   <div class="toolbar"><div class="modes" role="group" aria-label="練習模式"><button id="lesson-mode" aria-pressed="true" type="button">🧭 關卡探險</button><button id="sandbox-mode" aria-pressed="false" type="button">🏝 自由沙盒</button></div><p>瀏覽器內的模擬環境・不會動到你的電腦檔案</p></div>
@@ -49,6 +50,6 @@
   <footer>不限時・不用登入・無外部套件・指令與筆記不儲存、不上傳，關閉或重新整理會重設。</footer>
 </main>
 <dialog id="record-dialog" aria-labelledby="record-title"><div class="record-inner"><div class="record-heading"><h2 id="record-title">文字紀錄，不用截圖</h2><button id="close-record" type="button" aria-label="關閉文字紀錄">×</button></div><p>包含實際輸入、輸出、關卡證據與你自己寫的筆記；clear 不會清掉這份紀錄。</p><label class="sr-only" for="record-text">可複製的文字紀錄</label><textarea id="record-text" rows="14" readonly></textarea><div class="record-actions"><button class="primary" id="copy-record" type="button">複製文字</button><button id="download-record" type="button">下載 .txt</button></div><p id="copy-status" role="status"></p></div></dialog>
-<noscript><p class="noscript">請開啟 JavaScript 才能執行虛擬終端機。<a href="index.html">回遊戲間</a></p></noscript>
+<noscript><p class="noscript">請開啟 JavaScript 才能執行虛擬終端機。<a href="index.html" data-lobby-link>← 回遊戲間</a></p></noscript>
 </body>
 </html>

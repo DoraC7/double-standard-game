@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-Hant">
+<html lang="zh-Hant-TW">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -13,15 +13,16 @@
   <script src="type-compass-data.js" defer></script>
   <script src="type-compass-engine.js" defer></script>
   <script src="type-compass.js" defer></script>
+<link rel="stylesheet" href="game-ui.css?v=20261120-1">
 </head>
 <body>
   <main class="tc-shell">
-    <header class="tc-top"><a href="index.html">← 回龍蝦遊戲間</a><span>自我探索・不貼標籤</span></header>
+    <header class="tc-top"><a href="index.html" data-lobby-link>← 回遊戲間</a><span>自我探索・不貼標籤</span></header>
     <section id="intro" class="tc-panel tc-hero">
       <div class="tc-hero-copy">
         <p class="tc-kicker">TYPE COMPASS / 了解偏好，不把人裝進盒子</p>
         <h1>16 型偏好<br><em>探索指南</em></h1>
-        <p class="tc-lead">用生活情境看看你通常怎麼充電、接收資訊、做決定和安排事情。不是「你就是哪一型」的宣判，是一張可以回頭修正的偏好地圖。</p>
+        <p class="tc-lead">從生活情境看你習慣怎麼充電、接收資訊、做決定和安排事情。結果是偏好，不是對你的定型。</p>
         <div class="tc-facts"><span>🧭 四個向度</span><span>📝 完整 80 題・每軸 20 題</span><span>🔒 本機作答</span></div>
         <div class="tc-modes">
           <button id="standard-start" class="primary" type="button">標準探索・40 題（推薦）</button>
@@ -69,7 +70,7 @@
       <section class="tc-axis-results" aria-labelledby="axis-heading"><h3 id="axis-heading">四個向度分開看</h3><div id="axis-cards"></div></section>
       <section class="tc-profile panel"><h3>把組合放回日常</h3><p id="blend"></p><h4>可以試的一個小實驗</h4><p id="experiment"></p></section>
       <section class="tc-reflect panel"><h3>自我核對，不用迎合結果</h3><ul id="reflect-prompts"></ul></section>
-      <p class="tc-note">這份結果不是固定身份、能力評價或健康診斷。「?」代表接近中線或有效作答不足；每軸至少 80% 題目有效作答才顯示方向，門檻是暫定產品規則，並未經資料校準。介面使用的切分範圍只是避免過度斷言的提示，並非統計信賴區間。回答方式可能因角色、壓力、熟悉度與時間而不同；也可以只看四條向度、不採用類型標籤。</p>
+      <p class="tc-note">這份結果不是固定身分、能力評價或健康診斷。「?」代表接近中線或有效作答不足；每軸至少 80% 題目有效作答才顯示方向，門檻是暫定產品規則，並未經資料校準。介面使用的切分範圍只是避免過度斷言的提示，並非統計信賴區間。回答方式可能因角色、壓力、熟悉度與時間而不同；也可以只看四條向度、不採用類型標籤。</p>
       <div class="tc-actions tc-result-actions"><button id="edit" class="primary" type="button">回去修改答案</button><button id="download" type="button">下載本機文字報告</button><button id="restart" type="button">重新開始</button></div>
     </section>
 
